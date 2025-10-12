@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: 'https://media.oracleboxing.com/Website/favicon.png',
   },
   openGraph: {
     title: "Oracle Boxing Courses | Premium Boxing Training",
