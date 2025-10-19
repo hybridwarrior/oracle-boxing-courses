@@ -1,60 +1,133 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { Course } from '@/lib/courses'
+import { Product } from '@/lib/types'
+import { useCart } from '@/contexts/CartContext'
+import { BookOpen, Dumbbell, FileText } from 'lucide-react'
 
 interface CourseCardProps {
-  course: Course
-  onClick: () => void
+  product: Product
 }
 
-export function CourseCard({ course, onClick }: CourseCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
+export function CourseCard({ product }: CourseCardProps) {
+  const [isLoading, setIsLoading] = useState(false)
+  const { addItem, clearCart } = useCart()
+  const router = useRouter()
+
+  // Map product IDs to course detail pages
+  const courseDetailPages: Record<string, string> = {
+    'bffp': '/courses/bffp',
+    'roadmap': '/courses/roadmap',
+    'vault': '/courses/vault',
+    'bundle': '/courses/bundle'
+  }
+
+  const handleBuyNow = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (isLoading) return
+
+    setIsLoading(true)
+    clearCart()
+    addItem(product)
+    router.push('/checkout')
+  }
 
   return (
-    <motion.div
-      className="group cursor-pointer"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
-      onClick={onClick}
-    >
-      <div className="relative rounded-lg overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-[#F25C05] transition-all duration-300">
-        {/* Hover glow effect */}
-        {isHovered && (
-          <div className="absolute inset-0 bg-[#F25C05] opacity-10 z-0" />
-        )}
+    <div className="group h-full">
+      {/* Card Container - flexible height */}
+      <div className="relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-lg flex flex-col h-full">
 
-        {/* Course Image */}
-        <div className="relative aspect-video w-full overflow-hidden">
+        {/* Course Image - Fixed aspect ratio */}
+        <div className="relative w-full aspect-[9/6] overflow-hidden bg-gray-100 flex-shrink-0">
           <Image
-            src={course.image}
-            alt={course.title}
+            src={product.image}
+            alt={product.title}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           />
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-4">
-          <div>
-            <h3 className="text-xl font-bold text-white mb-2">
-              {course.title}
-            </h3>
-            <p className="text-2xl font-bold text-[#F25C05]">
-              ${course.price}
+        <div className="p-4 flex flex-col flex-1">
+          {/* Course Name */}
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+            {product.title}
+          </h3>
+
+          {/* Short Description */}
+          <p className="text-sm sm:text-base text-gray-600 mb-2 line-clamp-2">
+            {product.shortDescription || product.description.split('\n')[0]}
+          </p>
+
+          {/* Divider */}
+          <div className="border-t border-gray-200 my-2"></div>
+
+          {/* Perfect For */}
+          {product.perfectFor && (
+            <div className="mb-3">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-0.5">
+                Perfect For:
+              </p>
+              <p className="text-sm sm:text-base text-gray-700 line-clamp-2">
+                {product.perfectFor}
+              </p>
+            </div>
+          )}
+
+          {/* Stats Row */}
+          <div className="flex items-center gap-2 mb-3 text-xs flex-wrap">
+            {product.lessonCount && (
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-gray-50 to-white border border-gray-300 rounded-full">
+                <BookOpen className="w-3.5 h-3.5 text-red-800 flex-shrink-0" />
+                <span className="font-semibold text-gray-900">{product.lessonCount}</span>
+                <span className="text-gray-600">lessons</span>
+              </div>
+            )}
+
+            {product.workoutCount && (
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-gray-50 to-white border border-gray-300 rounded-full">
+                <Dumbbell className="w-3.5 h-3.5 text-red-800 flex-shrink-0" />
+                <span className="font-semibold text-gray-900">{product.workoutCount}</span>
+                <span className="text-gray-600">workouts</span>
+              </div>
+            )}
+
+            {product.resourceCount && (
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-gray-50 to-white border border-gray-300 rounded-full">
+                <FileText className="w-3.5 h-3.5 text-red-800 flex-shrink-0" />
+                <span className="font-semibold text-gray-900">{product.resourceCount}</span>
+                <span className="text-gray-600">resources</span>
+              </div>
+            )}
+          </div>
+
+          {/* Spacer to push price and button to bottom */}
+          <div className="flex-1"></div>
+
+          {/* Price */}
+          <div className="mb-3">
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900">
+              ${product.price}
             </p>
           </div>
 
-          <button className="w-full py-3 px-6 bg-[#F25C05] hover:bg-[#FF6B1A] text-white font-semibold rounded-full transition-colors duration-200">
-            View Course
-          </button>
+          {/* Learn More Button */}
+          {courseDetailPages[product.id] && (
+            <Link
+              href={courseDetailPages[product.id]}
+              className="w-full py-3 px-4 text-sm font-black bg-red-800 text-white rounded-lg shadow-lg uppercase tracking-wide transition-none text-center block flex-shrink-0"
+            >
+              Learn More
+            </Link>
+          )}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
