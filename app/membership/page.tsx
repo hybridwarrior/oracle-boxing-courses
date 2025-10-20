@@ -138,7 +138,7 @@ export default function MembershipsPage() {
               {/* CTA Button */}
               <a
                 href="#pricing"
-                className="inline-block py-4 px-8 bg-red-800 text-white font-black text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
+                className="inline-block py-4 px-8 bg-[#26304a] text-white font-black text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
               >
                 LET'S GET TO WORK
               </a>
@@ -213,7 +213,7 @@ export default function MembershipsPage() {
 
               <a
                 href="#pricing"
-                className="inline-block py-4 px-8 bg-red-800 text-white font-black text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
+                className="inline-block py-4 px-8 bg-[#26304a] text-white font-black text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
               >
                 START TODAY
               </a>
@@ -285,7 +285,7 @@ export default function MembershipsPage() {
             {/* Annual - Left */}
             <div className="relative">
               {/* Best Value Badge - On the border line */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-2 bg-red-800 text-white text-sm font-black uppercase rounded-full z-10 whitespace-nowrap shadow-md">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-2 bg-[#26304a] text-white text-sm font-black uppercase rounded-full z-10 whitespace-nowrap shadow-md">
                 Best Value
               </div>
 
@@ -293,7 +293,7 @@ export default function MembershipsPage() {
                 onClick={() => setSelectedPlan('membership-annual')}
                 className={`cursor-pointer rounded-xl border-2 transition-all ${
                   selectedPlan === 'membership-annual'
-                    ? 'border-red-800 shadow-lg'
+                    ? 'border-[#26304a] shadow-lg'
                     : 'border-gray-300 hover:border-gray-400'
                 }`}
               >
@@ -301,7 +301,7 @@ export default function MembershipsPage() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedPlan === 'membership-annual' ? 'border-red-800 bg-red-800' : 'border-gray-300 bg-white'
+                      selectedPlan === 'membership-annual' ? 'border-[#26304a] bg-[#26304a]' : 'border-gray-300 bg-white'
                     }`}>
                       {selectedPlan === 'membership-annual' && (
                         <div className="w-3 h-3 bg-white rounded-full"></div>
@@ -346,7 +346,7 @@ export default function MembershipsPage() {
                 onClick={() => setSelectedPlan('membership-6month')}
                 className={`cursor-pointer rounded-xl border-2 transition-all ${
                   selectedPlan === 'membership-6month'
-                    ? 'border-red-800 shadow-lg'
+                    ? 'border-[#26304a] shadow-lg'
                     : 'border-gray-300 hover:border-gray-400'
                 }`}
               >
@@ -354,7 +354,7 @@ export default function MembershipsPage() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedPlan === 'membership-6month' ? 'border-red-800 bg-red-800' : 'border-gray-300 bg-white'
+                      selectedPlan === 'membership-6month' ? 'border-[#26304a] bg-[#26304a]' : 'border-gray-300 bg-white'
                     }`}>
                       {selectedPlan === 'membership-6month' && (
                         <div className="w-3 h-3 bg-white rounded-full"></div>
@@ -399,7 +399,7 @@ export default function MembershipsPage() {
                 onClick={() => setSelectedPlan('membership-monthly')}
                 className={`cursor-pointer rounded-xl border-2 transition-all ${
                   selectedPlan === 'membership-monthly'
-                    ? 'border-red-800 shadow-lg'
+                    ? 'border-[#26304a] shadow-lg'
                     : 'border-gray-300 hover:border-gray-400'
                 }`}
               >
@@ -407,7 +407,7 @@ export default function MembershipsPage() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedPlan === 'membership-monthly' ? 'border-red-800 bg-red-800' : 'border-gray-300 bg-white'
+                      selectedPlan === 'membership-monthly' ? 'border-[#26304a] bg-[#26304a]' : 'border-gray-300 bg-white'
                     }`}>
                       {selectedPlan === 'membership-monthly' && (
                         <div className="w-3 h-3 bg-white rounded-full"></div>
@@ -451,7 +451,7 @@ export default function MembershipsPage() {
           <div className="text-center mb-20">
             <button
               onClick={handleJoinNow}
-              className="py-5 px-12 bg-red-800 text-white font-black text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none"
+              className="py-5 px-12 bg-[#26304a] text-white font-black text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none"
             >
               JOIN NOW
             </button>

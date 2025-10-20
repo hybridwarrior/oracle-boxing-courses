@@ -45,7 +45,7 @@ export function Header() {
               <button
                 className={`text-sm font-semibold transition-colors flex items-center gap-1 ${
                   isActive('/courses')
-                    ? 'text-white border-b-2 border-red-800'
+                    ? 'text-white border-b-2 border-[#26304a]'
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -89,7 +89,7 @@ export function Header() {
               href="/membership"
               className={`text-sm font-semibold transition-colors ${
                 isActive('/membership')
-                  ? 'text-white border-b-2 border-red-800'
+                  ? 'text-white border-b-2 border-[#26304a]'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
@@ -97,7 +97,7 @@ export function Header() {
             </Link>
             <Link
               href="/membership#pricing"
-              className="px-4 py-2 bg-red-800 text-white text-sm font-black rounded-lg uppercase tracking-wide transition-none"
+              className="px-4 py-2 border-2 border-red-800 text-white text-sm font-black rounded-lg uppercase tracking-wide hover:bg-red-800 transition-colors"
             >
               6-WEEK CHALLENGE
             </Link>
@@ -137,7 +137,7 @@ export function Header() {
                       onClick={closeMobileMenu}
                       className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors ${
                         pathname === '/courses/bffp'
-                          ? 'text-white bg-red-800'
+                          ? 'text-white bg-[#26304a]'
                           : 'text-gray-300 hover:text-white hover:bg-gray-900'
                       }`}
                     >
@@ -148,7 +148,7 @@ export function Header() {
                       onClick={closeMobileMenu}
                       className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors ${
                         pathname === '/courses/roadmap'
-                          ? 'text-white bg-red-800'
+                          ? 'text-white bg-[#26304a]'
                           : 'text-gray-300 hover:text-white hover:bg-gray-900'
                       }`}
                     >
@@ -159,7 +159,7 @@ export function Header() {
                       onClick={closeMobileMenu}
                       className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors ${
                         pathname === '/courses/vault'
-                          ? 'text-white bg-red-800'
+                          ? 'text-white bg-[#26304a]'
                           : 'text-gray-300 hover:text-white hover:bg-gray-900'
                       }`}
                     >
@@ -170,7 +170,7 @@ export function Header() {
                       onClick={closeMobileMenu}
                       className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors border-t border-gray-800 ${
                         pathname === '/courses/bundle'
-                          ? 'text-white bg-red-800'
+                          ? 'text-white bg-[#26304a]'
                           : 'text-gray-300 hover:text-white hover:bg-gray-900'
                       }`}
                     >
@@ -185,7 +185,7 @@ export function Header() {
                 onClick={closeMobileMenu}
                 className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors ${
                   isActive('/membership')
-                    ? 'text-white bg-red-800'
+                    ? 'text-white bg-[#26304a]'
                     : 'text-gray-300 hover:text-white hover:bg-gray-900'
                 }`}
               >
@@ -194,7 +194,7 @@ export function Header() {
               <Link
                 href="/membership#pricing"
                 onClick={closeMobileMenu}
-                className="px-4 py-3 bg-red-800 text-white text-sm font-black rounded-lg uppercase tracking-wide transition-none text-center"
+                className="px-4 py-3 border-2 border-red-800 text-white text-sm font-black rounded-lg uppercase tracking-wide hover:bg-red-800 transition-colors text-center"
               >
                 6-WEEK CHALLENGE
               </Link>

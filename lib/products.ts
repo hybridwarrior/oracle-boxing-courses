@@ -10,10 +10,12 @@ export const products: Product[] = [
     stripe_product_id: 'prod_TFmod6ppCFTAeK',
     stripe_price_id: 'price_1SJHEYQNEdHwdojXKabKx7Co',
     image: 'https://media.oracleboxing.com/Website/bundle_tn3.png',
-    shortDescription: 'Complete access to all Oracle Boxing courses: BFFP, Roadmap, and Coaching Replays. Save $144.',
-    perfectFor: 'Dedicated students who want the complete Oracle Boxing education system',
-    lessonCount: 335,
-    workoutCount: 77,
+    shortDescription: 'Every Course, Every Call, Every System, All in One Bundle.',
+    perfectFor: 'Serious boxers who want to master everything, fast',
+    moduleCount: 5,
+    lessonCount: 225,
+    lessonCountPrefix: '+',
+    workoutCount: 100,
     description: `**Get everything. Master boxing from first principles to real application.**
 
 **This bundle includes:**
@@ -34,11 +36,12 @@ Complete access to the entire Oracle Boxing system — theory, technique, tactic
     type: 'course',
     stripe_product_id: 'prod_TFmlgAWSWoZNd1',
     stripe_price_id: 'price_1SJHC1QNEdHwdojX9XpMqAIg',
-    image: 'https://media.oracleboxing.com/Website/bffp_tn4.png',
-    shortDescription: 'Master the complete science of boxing through five comprehensive modules: mind, anatomy, movement, tactics, and conditioning.',
-    perfectFor: 'Serious boxers seeking deep understanding of the principles behind elite performance',
-    lessonCount: 127,
-    workoutCount: 45,
+    image: 'https://media.oracleboxing.com/Website/bffp_tn5.png',
+    shortDescription: 'The Science of Boxing, Made Simple.',
+    perfectFor: 'Beginners who crave a deep understanding',
+    moduleCount: 5,
+    lessonCount: 26,
+    hours: 13,
     description: `**SENTIENCE — The Mind of the Fighter**
 Learn how to think, feel, and perform like a boxer. Shift your paradigm for success, build mental clarity, and access flow on command.
 
@@ -61,11 +64,11 @@ Build the engine that powers it all. Train breathing, conditioning, nervous syst
     type: 'course',
     stripe_product_id: 'prod_TFmmyK5gaHYbao',
     stripe_price_id: 'price_1SJHCjQNEdHwdojX2so8c1bC',
-    image: 'https://media.oracleboxing.com/Website/phase1.webp',
-    shortDescription: 'Complete 5-phase training system taking you from fundamentals to mastery with structured progression.',
-    perfectFor: 'Beginners and intermediates who want a clear path from basics to advanced technique',
-    lessonCount: 68,
-    workoutCount: 32,
+    image: 'https://media.oracleboxing.com/Website/tbrtn5hq.png',
+    shortDescription: 'Your Full 5-Month Boxing Curriculum: Technique, Drills, and Workouts.',
+    perfectFor: 'Beginners who want structure from first punch to sparring',
+    weeks: 20,
+    workoutCount: 100,
     description: `Complete 5-phase boxing training system from fundamentals to mastery.
 
 **Phase I** — Fundamentals & Form
@@ -83,11 +86,12 @@ Master every aspect of boxing technique through structured progression.`
     type: 'course',
     stripe_product_id: 'prod_TFmnqbbE3RFuDJ',
     stripe_price_id: 'price_1SJHDaQNEdHwdojXizOuxB5G',
-    image: 'https://media.oracleboxing.com/Website/final_real_coaching.webp',
-    shortDescription: '140+ weekly coaching call replays covering every aspect of the Oracle Boxing system, updated monthly.',
-    perfectFor: 'Active learners who want ongoing insights and real-world application examples',
-    lessonCount: 140,
-    resourceCount: 85,
+    image: 'https://media.oracleboxing.com/Website/boxing_clinic.png',
+    shortDescription: 'Your Full Library of Real Coaching Calls, Uncut and Organized.',
+    perfectFor: 'Fighters who learn best by watching real coaching in action',
+    lessonCount: 100,
+    lessonCountPrefix: '+',
+    updatedMonthly: true,
     description: `💬 140+ Replay Sessions
 
 Weekly calls with Oliver & Toni, covering every layer of the Oracle Boxing system — from jab mechanics and flow drills to kinetic linkage, counterpunching, and footwork integration.

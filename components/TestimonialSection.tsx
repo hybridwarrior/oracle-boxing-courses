@@ -60,7 +60,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-red-900 px-4 py-3 rounded-lg shadow-md flex-shrink-0 w-[85vw]"
+              className="bg-[#26304a] px-4 py-3 rounded-lg shadow-md flex-shrink-0 w-[85vw]"
             >
               {/* Rating */}
               <div className="flex gap-1 mb-2">
@@ -88,7 +88,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
           {/* Left Column */}
           <div className="flex flex-col gap-4 sm:gap-5">
             {leftColumn.map((testimonial, index) => (
-              <div key={index * 2} className="bg-red-900 px-4 sm:px-5 py-3 sm:py-4 rounded-lg shadow-md">
+              <div key={index * 2} className="bg-[#26304a] px-4 sm:px-5 py-3 sm:py-4 rounded-lg shadow-md">
                 {/* Rating */}
                 <div className="flex gap-1 mb-2">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -112,7 +112,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
           {/* Right Column */}
           <div className="flex flex-col gap-4 sm:gap-5">
             {rightColumn.map((testimonial, index) => (
-              <div key={index * 2 + 1} className="bg-red-900 px-4 sm:px-5 py-3 sm:py-4 rounded-lg shadow-md">
+              <div key={index * 2 + 1} className="bg-[#26304a] px-4 sm:px-5 py-3 sm:py-4 rounded-lg shadow-md">
                 {/* Rating */}
                 <div className="flex gap-1 mb-2">
                   {[...Array(testimonial.rating)].map((_, i) => (

@@ -1,3 +1,5 @@
+'use client'
+
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { VideoPlayer } from '@/components/VideoPlayer'
@@ -12,12 +14,20 @@ import { getProductById } from '@/lib/products'
 import { getRandomTestimonials } from '@/lib/testimonials'
 import { Check } from 'lucide-react'
 
-export const metadata = {
-  title: 'Ultimate Boxing Bundle | Oracle Boxing Shop',
-  description: 'Get everything. Master boxing from first principles to real application. Complete bundle with BFFP, Roadmap, and Coaching Call Replays.',
-}
-
 export default function BundlePage() {
+  const scrollToPricing = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const element = document.getElementById('pricing')
+    if (element) {
+      const offset = 80
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - offset
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
   const product = getProductById('bundle')!
 
   const personas = [
@@ -62,7 +72,7 @@ export default function BundlePage() {
   const faqs = [
     {
       question: "What exactly is included in the bundle?",
-      answer: "You get complete lifetime access to all three courses: Boxing from First Principles (150 lessons, $297 value), Boxing Roadmap (75 lessons, $147 value), and Coaching Call Replays (140+ sessions, $97 value). Total value $541 for just $397—you save $144."
+      answer: "You get complete lifetime access to all three courses: Boxing from First Principles (150 lessons, $297 value), Boxing Roadmap (75 lessons, $147 value), and Coaching Call Replays (140+ sessions, $97 value). Total value $541 for just $397,you save $144."
     },
     {
       question: "Can I access all courses immediately?",
@@ -70,11 +80,11 @@ export default function BundlePage() {
     },
     {
       question: "Which course should I start with?",
-      answer: "Most students start with BFFP to build the conceptual foundation, then move to Roadmap for practical drills, while using the Vault to supplement both. But you can start anywhere—they all work together."
+      answer: "Most students start with BFFP to build the conceptual foundation, then move to Roadmap for practical drills, while using the Vault to supplement both. But you can start anywhere,they all work together."
     },
     {
       question: "Is this better value than buying individually?",
-      answer: "Absolutely. Buying all three separately costs $541. The bundle is $397—saving you $144. Plus, you get everything integrated from the start instead of piecing it together later."
+      answer: "Absolutely. Buying all three separately costs $541. The bundle is $397,saving you $144. Plus, you get everything integrated from the start instead of piecing it together later."
     },
     {
       question: "Do I still get updates to all courses?",
@@ -111,7 +121,7 @@ export default function BundlePage() {
           {/* Course Title with Pill Border - Smaller */}
           <div className="inline-block mx-auto mb-6 sm:mb-8 w-full text-center">
             <div className="inline-block border-2 border-black rounded-full px-4 sm:px-6 py-1.5 sm:py-2">
-              <h1 className="text-sm sm:text-base md:text-lg text-gray-900 uppercase tracking-wide font-light" style={{ fontFamily: "var(--font-satoshi)" }}>
+              <h1 className="text-sm sm:text-base md:text-lg text-gray-900 uppercase tracking-wide font-medium" style={{ fontFamily: "var(--font-satoshi)" }}>
                 Oracle Course Bundle
               </h1>
             </div>
@@ -124,7 +134,7 @@ export default function BundlePage() {
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-2 leading-relaxed">
-            The complete Oracle Boxing system—theory, technique, tactics, and live coaching insights. Save $144.
+            The complete Oracle Boxing system,theory, technique, tactics, and live coaching insights. Save $144.
           </p>
 
           {/* Video Sales Letter */}
@@ -167,7 +177,8 @@ export default function BundlePage() {
           <div className="text-center mb-6 sm:mb-8">
             <a
               href="#pricing"
-              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-red-800 text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              onClick={scrollToPricing}
+              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
             >
               I WANT ACCESS
             </a>
@@ -179,8 +190,9 @@ export default function BundlePage() {
       <section className="pt-6 pb-12 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <CourseStats
-            lessonCount={365}
-            purchaseCount="200+"
+            lessonCount={176}
+            weeksCount={20}
+            workoutsCount={100}
             hasLifetimeAccess={true}
           />
         </div>

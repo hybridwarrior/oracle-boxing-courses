@@ -23,9 +23,16 @@ export interface Product {
   // Course-specific metadata
   shortDescription?: string
   perfectFor?: string
+  moduleCount?: number
   lessonCount?: number
   workoutCount?: number
   resourceCount?: number
+  hours?: number
+  weeks?: number
+  hasStructuredProgression?: boolean
+  workoutPlans?: number
+  updatedMonthly?: boolean
+  lessonCountPrefix?: string
 }
 
 export interface CartItem {

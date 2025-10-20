@@ -1,3 +1,5 @@
+'use client'
+
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { VideoPlayer } from '@/components/VideoPlayer'
@@ -12,76 +14,88 @@ import { CourseNavigation } from '@/components/CourseNavigation'
 import { getProductById } from '@/lib/products'
 import { getRandomTestimonials } from '@/lib/testimonials'
 
-export const metadata = {
-  title: 'Boxing from First Principles | Oracle Boxing Shop',
-  description: 'Master boxing from the ground up with the complete BFFP system. Learn mind, body, mechanics, tactics, and conditioning.',
-}
-
 export default function BFFPPage() {
+  const scrollToPricing = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const element = document.getElementById('pricing')
+    if (element) {
+      const offset = 80
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - offset
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
   const product = getProductById('bffp')!
 
   const personas = [
     {
-      emoji: '🎯',
-      title: 'Serious Beginners',
-      subtitle: 'Build a rock-solid foundation from day one with proper fundamentals'
-    },
-    {
-      emoji: '📈',
-      title: 'Advancing Boxers',
-      subtitle: 'Fill gaps in understanding and elevate your technical knowledge'
-    },
-    {
       emoji: '🧠',
-      title: 'Tactical Learners',
-      subtitle: 'Understand the "why" behind every movement and strategy'
+      title: 'You question everything and crave understanding.',
+      subtitle: 'You break things down until they make sense and won\'t settle for half-truths.'
+    },
+    {
+      emoji: '⚡',
+      title: 'If you\'re going to do something, you might as well be the best.',
+      subtitle: 'You push past good enough and chase mastery in every detail.'
+    },
+    {
+      emoji: '🥊',
+      title: 'You believe real boxing starts with what never breaks: solid fundamentals.',
+      subtitle: 'You build skill layer by layer, knowing that mastery comes from doing the simple things better than anyone else.'
     }
   ]
 
   const learningCards = [
     {
       emoji: '🧘',
-      text: 'Develop mental clarity, emotional control, and access flow states on command'
+      text: 'Stay calm under pressure and control emotion.',
+      imageUrl: 'https://media.oracleboxing.com/Website/ob_fight3.png'
     },
     {
       emoji: '⚡',
-      text: 'Master nervous system, fascia, and body mechanics for efficient power'
+      text: 'Use biomechanics for effortless, natural power.',
+      imageUrl: 'https://media.oracleboxing.com/Website/bffp_tn4.png'
     },
     {
       emoji: '🥊',
-      text: 'Build fundamental shapes, stances, and movements of high-level boxing'
+      text: 'See patterns, read opponents, and think one step ahead.',
+      imageUrl: 'https://media.oracleboxing.com/Website/bffp_course3.png'
     },
     {
       emoji: '♟️',
-      text: 'Think tactically and outmaneuver opponents through positioning and deception'
+      text: 'Build endurance and relaxation that last through every round.',
+      imageUrl: 'https://media.oracleboxing.com/Website/bbffp_course4.png'
     }
   ]
 
   const modules = [
     {
-      title: "SENTIENCE — The Mind of the Fighter",
-      description: "Learn how to think, feel, and perform like a boxer. Shift your paradigm for success, build mental clarity, and access flow on command.\n\nFocus: Identity · Flow State · Presence · Mental Resilience\nOutcome: Calm, focused, and emotionally stable under pressure.",
-      lessons: 28
+      title: "SENTIENCE, The Mind of the Fighter",
+      description: "Learn how to think like a real boxer. You'll build focus, manage emotions, and learn to perform at your best without overthinking. This is where you master flow state.\n\nLessons:\n• Shifting Your Paradigm For Success\n• Spoon Bending 101\n• Accessing The Flow State\n\nFocus: Identity · Awareness · Flow · Calm under pressure\nOutcome: A clear, stable mindset that keeps you composed and present in every moment.",
+      lessons: 4
     },
     {
-      title: "ANATOMY — The Wiring of Performance",
-      description: "Understand how your body truly works beneath the surface. Study the nervous system, fascia, and energy transfer through the body.\n\nFocus: Nervous System · Fascia · Energy Flow\nOutcome: Efficient movement and natural connection between mind and body.",
-      lessons: 32
+      title: "ANATOMY, How Power Moves Through You",
+      description: "See what really makes your body fast and powerful. You'll learn how the brain, nerves, and fascia connect every punch and step so energy moves through you instead of against you.\n\nLessons:\n• The Nervous System\n• Fascia\n\nFocus: Nervous System · Fascia · Kinetic Chain · Energy Flow\nOutcome: Effortless speed and natural power through biomechanical alignment.",
+      lessons: 3
     },
     {
-      title: "FORMIS — The Language of Movement",
-      description: "Master the mechanics of boxing. Develop shape, stance, striking, defence, distance control, and the flow of movement.\n\nFocus: Shape · Stance · Flow · Default Mode\nOutcome: Technical precision and fluid, intelligent movement.",
-      lessons: 45
+      title: "FORMIS, The Art of Technique",
+      description: "Build the shape and form of great boxing. You'll learn how to stand, move, and throw with balance, turning good technique into natural instinct.\n\nLessons:\n• What Is Formis\n• State And Repositioning\n• Striking\n• Defence\n• The Flow Of Boxing\n• Default Mode\n• Feints And Draws\n• Distance\n\nFocus: Shape · Stance · Defence · Striking\nOutcome: Smooth, balanced movement that stays sharp and efficient in every exchange.",
+      lessons: 8
     },
     {
-      title: "GAMBIT — The Science of Tactics",
-      description: "Learn to think like a strategist in the ring. Understand pattern recognition, positioning, deception, and guard manipulation.\n\nFocus: Positioning · Deception · Guard Control · Tactical Awareness\nOutcome: Ability to outthink and outmaneuver opponents.",
-      lessons: 25
+      title: "GAMBIT, The Strategy of Boxing",
+      description: "Boxing is a game of moves and responses. Here you'll learn how to control range, find timing, and make your opponent react to you instead of the other way around.\n\nLessons:\n• What Is Gambit\n• Positioning\n• Pattern Recognition\n• Comfort Deception\n• Guard Manipulation\n\nFocus: Positioning · Timing · Deception · Tactical Awareness\nOutcome: Smarter decision-making and the ability to control every exchange.",
+      lessons: 6
     },
     {
-      title: "ENGINE — The Physiology of Fighting",
-      description: "Build the engine that powers it all. Train breathing, conditioning, nervous system strength, and recovery.\n\nFocus: Conditioning · Breathing · Relaxation · Health Optimization\nOutcome: High performance under fatigue with resilience and longevity.",
-      lessons: 20
+      title: "ENGINE, Your Inner System",
+      description: "This is where strength meets control. Learn how to use breath, recovery, and relaxation to stay calm and sharp even when tired. You'll finish stronger than you started.\n\nLessons:\n• What Is Engine\n• Relaxation\n• Energy Systems\n• Breathing And Breathe Holds\n• Diet And Health\n\nFocus: Conditioning · Breathing · Relaxation · Recovery\nOutcome: Long-lasting performance, fast recovery, and composure under fatigue.",
+      lessons: 5
     }
   ]
 
@@ -89,38 +103,34 @@ export default function BFFPPage() {
 
   const faqs = [
     {
-      question: "Is this course suitable for complete beginners?",
-      answer: "Absolutely! BFFP is designed to build your boxing knowledge from the ground up. We start with fundamental concepts and progress systematically. Many beginners prefer starting here because it prevents bad habits from forming."
+      question: "Is this for beginners?",
+      answer: "Yes. It's designed to build your understanding from zero,no background needed."
     },
     {
-      question: "How is BFFP different from the Boxing Roadmap?",
-      answer: "BFFP focuses on the conceptual framework, theory, and 'why' behind boxing—covering mind, body mechanics, tactics, and conditioning. The Roadmap is the practical 'how-to' with specific drills and progressions. They complement each other perfectly (which is why we offer them in a bundle)."
+      question: "How is it different from the Boxing Roadmap?",
+      answer: "The Roadmap shows what to train week to week. This course explains why it all works. Together, they give you both structure and understanding."
     },
     {
-      question: "How long does it take to complete?",
-      answer: "The course contains 150 lessons. Most students take 3-6 months working through it at their own pace. However, you have lifetime access, so you can revisit concepts as you progress."
+      question: "Will it help with sparring?",
+      answer: "Absolutely. You'll learn how to stay calm, think clearly, and make smarter choices under pressure."
     },
     {
-      question: "Do I need any equipment?",
-      answer: "For the theory sections, no equipment is needed. For practice, basic equipment like gloves and a heavy bag is recommended but not required to understand the concepts."
+      question: "How long will it take?",
+      answer: "Most students finish in three to six months, but you can take it at your own pace."
     },
     {
-      question: "Can I get a refund if it's not for me?",
-      answer: "Yes! We offer a 30-day money-back guarantee. If you're not satisfied with the course for any reason, just email us for a full refund."
+      question: "What do I need?",
+      answer: "Nothing to start. Gloves and a bag help for practice, but all the learning comes from understanding first principles."
     },
     {
-      question: "Is this course updated with new content?",
-      answer: "The core BFFP system is complete, but we occasionally add supplementary content and updates based on student feedback. All updates are free for existing students."
-    },
-    {
-      question: "Will this help me in sparring?",
-      answer: "Yes! BFFP gives you the mental framework, tactical understanding, and technical foundation that translates directly to sparring. Many students report significant improvements in their ring IQ and decision-making."
+      question: "Is there a refund policy?",
+      answer: "Yes. Try it for 30 days. If it's not for you, get a full refund."
     }
   ]
 
   const priceFeatures = [
-    "150 comprehensive lessons covering all 5 modules",
-    "Lifetime access to all course materials",
+    "26 comprehensive lessons covering all 5 modules",
+    "Instant lifetime access to all course materials",
     "Theory, mechanics, tactics, and conditioning",
     "Mental framework for peak performance"
   ]
@@ -136,7 +146,7 @@ export default function BFFPPage() {
           {/* Course Title with Pill Border - Smaller & Thinner */}
           <div className="inline-block mx-auto mb-6 sm:mb-8 w-full text-center">
             <div className="inline-block border-2 border-black rounded-full px-4 sm:px-6 py-1.5 sm:py-2">
-              <h1 className="text-sm sm:text-base md:text-lg text-gray-900 uppercase tracking-wide font-light" style={{ fontFamily: "var(--font-satoshi)" }}>
+              <h1 className="text-sm sm:text-base md:text-lg text-gray-900 uppercase tracking-wide font-medium" style={{ fontFamily: "var(--font-satoshi)" }}>
                 Boxing from First Principles
               </h1>
             </div>
@@ -144,12 +154,12 @@ export default function BFFPPage() {
 
           {/* Headline - Bigger */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 text-center mb-3 sm:mb-4 px-2">
-            Master Boxing From The Ground Up
+            The Science of Boxing, Made Simple.
           </h2>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-2 leading-relaxed">
-            The complete system for understanding the mind, body, mechanics, tactics, and conditioning of elite boxing performance
+            The deepest truths of the sweet science,boiled down to their simplest form.
           </p>
 
           {/* Video Sales Letter */}
@@ -164,9 +174,10 @@ export default function BFFPPage() {
           <div className="text-center mb-6 sm:mb-8">
             <a
               href="#pricing"
-              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-red-800 text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              onClick={scrollToPricing}
+              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
             >
-              ACCESS THE COURSE
+              START LEARNING
             </a>
           </div>
         </div>
@@ -176,8 +187,8 @@ export default function BFFPPage() {
       <section id="overview" className="pt-6 pb-12 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <CourseStats
-            lessonCount={150}
-            purchaseCount="500+"
+            lessonCount={26}
+            purchaseLabel="#1"
             hasLifetimeAccess={true}
           />
         </div>
@@ -191,9 +202,10 @@ export default function BFFPPage() {
         <div className="text-center">
           <a
             href="#pricing"
-            className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-red-800 text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+            onClick={scrollToPricing}
+            className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
           >
-            I'M READY
+            ACCESS THE SYSTEM
           </a>
         </div>
       </section>
@@ -206,9 +218,10 @@ export default function BFFPPage() {
         <div className="text-center">
           <a
             href="#pricing"
-            className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-red-800 text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+            onClick={scrollToPricing}
+            className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
           >
-            I WANT ACCESS
+            JOIN NOW
           </a>
         </div>
       </section>
@@ -217,7 +230,7 @@ export default function BFFPPage() {
       <div id="lessons">
         <CourseModules
           modules={modules}
-          headerImage="https://placehold.co/1200x400/e5e5e5/666666?text=BFFP+Course+Overview"
+          headerImage={product.image}
         />
       </div>
 

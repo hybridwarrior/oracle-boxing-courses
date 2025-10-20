@@ -39,7 +39,7 @@ export function HoodieBump() {
             Add Oracle Boxing Hoodie (£49)
           </h4>
           <p className="text-sm text-gray-600 mb-3">
-            Premium quality hoodie — Limited stock
+            Premium quality hoodie , Limited stock
           </p>
 
           {/* Size Selector */}

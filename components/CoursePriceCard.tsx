@@ -34,7 +34,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
   return (
     <section className="py-16 sm:py-20 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-red-900 rounded-3xl p-10 sm:p-16 shadow-2xl text-white">
+        <div className="bg-[#26304a] rounded-3xl p-10 sm:p-16 shadow-2xl text-white">
           {/* Logo */}
           <div className="flex justify-center mb-6 sm:mb-10">
             <img
@@ -49,7 +49,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
           </div>
 
           {/* Heading */}
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-light text-center mb-6 sm:mb-10 uppercase" style={{ fontFamily: "var(--font-satoshi)" }}>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-medium text-center mb-6 sm:mb-10 uppercase" style={{ fontFamily: "var(--font-satoshi)" }}>
             {getCourseHeading()}
           </h3>
 
@@ -64,7 +64,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
           {/* CTA Button - White with Red Text */}
           <button
             onClick={handleEnroll}
-            className="w-full py-5 sm:py-6 px-8 sm:px-12 bg-white text-red-900 font-black text-xl sm:text-2xl rounded-xl mb-6 sm:mb-10 uppercase tracking-wide min-h-[44px] transition-none shadow-lg"
+            className="w-full py-5 sm:py-6 px-8 sm:px-12 bg-white text-[#26304a] font-black text-xl sm:text-2xl rounded-xl mb-6 sm:mb-10 uppercase tracking-wide min-h-[44px] transition-none shadow-lg"
           >
             ACCESS NOW
           </button>

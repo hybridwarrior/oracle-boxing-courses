@@ -10,7 +10,7 @@ interface CourseCurriculumProps {
 }
 
 export function CourseCurriculum({
-  title = "This Course Will Show You How To...",
+  title = "This Course Will Teach You...",
   learningCards
 }: CourseCurriculumProps) {
   return (

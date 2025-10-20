@@ -1,9 +1,11 @@
 'use client'
 
+import { useState } from 'react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { CourseCard } from '@/components/CourseCard'
 import { TestimonialSection } from '@/components/TestimonialSection'
+import { NotifyMeModal } from '@/components/NotifyMeModal'
 import { getCourses } from '@/lib/products'
 import { getRandomTestimonials } from '@/lib/testimonials'
 import Image from 'next/image'
@@ -13,6 +15,7 @@ import { Users, Video } from 'lucide-react'
 export default function HomePage() {
   const courses = getCourses()
   const testimonials = getRandomTestimonials(6)
+  const [isNotifyModalOpen, setIsNotifyModalOpen] = useState(false)
 
   const scrollToCourses = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -33,68 +36,31 @@ export default function HomePage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="w-full bg-gray-50 py-0 sm:py-16">
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          {/* Hero Card - Clickable */}
-          <div onClick={scrollToCourses} className="block relative cursor-pointer">
-            <div className="bg-gray-100 rounded-2xl overflow-visible sm:pt-12">
-              {/* Mobile: Stacked with overlay */}
-              <div className="lg:hidden relative">
-                {/* Background Image - Fixed size, always right aligned, spilling over top */}
-                <div className="relative ml-auto w-full max-w-[500px] h-[420px]">
-                  <Image
-                    src="https://media.oracleboxing.com/Website/ob_punching3.png"
-                    alt="Oracle Boxing Training"
-                    fill
-                    className="object-contain object-right-bottom"
-                    sizes="400px"
-                    priority
-                  />
-                </div>
+      <section className="relative w-full h-[600px] sm:h-[700px] lg:h-[800px] overflow-hidden">
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover object-[70%] sm:object-center"
+        >
+          <source src="https://media.oracleboxing.com/Website/hero-section.mp4" type="video/mp4" />
+        </video>
 
-                {/* Text Overlay with transparent white box - aligned to bottom */}
-                <div className="relative -mt-[180px] px-4 pb-6">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 max-w-md">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-                      Boxing for Beginners & Late Starters
-                    </h1>
-                    <p className="text-base sm:text-lg text-gray-700 mb-4 leading-relaxed">
-                      Learn the art and science of boxing through a complete system of courses, coaching, and community.
-                    </p>
-                    <div className="inline-block py-3 px-6 bg-red-800 text-white font-black text-base rounded-lg shadow-lg uppercase tracking-wide">
-                      EXPLORE COURSES
-                    </div>
-                  </div>
-                </div>
-              </div>
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
-              {/* Desktop: Two columns */}
-              <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center px-6 sm:px-8 pb-4 sm:pb-6">
-                {/* Left Column - Text Content */}
-                <div>
-                  <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-gray-900 mb-4">
-                    Boxing for Beginners & Late Starters
-                  </h1>
-                  <p className="text-lg sm:text-xl text-gray-700 mb-6 leading-relaxed">
-                    Learn the art and science of boxing through a complete system of courses, coaching, and community.
-                  </p>
-                  <div className="inline-block py-4 px-8 bg-red-800 text-white font-black text-lg rounded-lg shadow-lg uppercase tracking-wide">
-                    EXPLORE COURSES
-                  </div>
-                </div>
-
-                {/* Right Column - Image (spilling over top) */}
-                <div className="relative h-[420px] sm:h-[480px] lg:h-[500px] -mt-12 lg:-mt-16">
-                  <Image
-                    src="https://media.oracleboxing.com/Website/ob_punching3.png"
-                    alt="Oracle Boxing Training"
-                    fill
-                    className="object-contain object-bottom"
-                    sizes="50vw"
-                    priority
-                  />
-                </div>
-              </div>
+        {/* Content */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="max-w-3xl">
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 uppercase drop-shadow-lg leading-normal sm:leading-relaxed lg:leading-relaxed">
+                BOXING EDUCATION FOR <span className="bg-yellow-300/80 text-black px-2">BEGINNERS</span> & <span className="bg-yellow-300/80 text-black px-2">LATE STARTERS</span>
+              </h1>
+              <p className="text-xl sm:text-2xl lg:text-3xl text-white leading-relaxed drop-shadow-md font-medium">
+                Learn the art and science of boxing through a complete system of courses, coaching, and community.
+              </p>
             </div>
           </div>
         </div>
@@ -128,13 +94,13 @@ export default function HomePage() {
               {/* Content */}
               <div className="p-4 flex flex-col flex-1">
                 {/* Title */}
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 uppercase underline">
                   Full Access Membership
                 </h3>
 
                 {/* Short Description */}
-                <p className="text-sm sm:text-base text-gray-600 mb-2 line-clamp-2">
-                  Live coaching, community support, and complete access to all courses
+                <p className="text-sm sm:text-base text-gray-900 font-medium mb-2 line-clamp-2">
+                  Go Beyond Courses, Train Live With Us Every Day.
                 </p>
 
                 {/* Divider */}
@@ -142,11 +108,8 @@ export default function HomePage() {
 
                 {/* Perfect For */}
                 <div className="mb-3">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-0.5">
-                    Perfect For:
-                  </p>
-                  <p className="text-sm sm:text-base text-gray-700 line-clamp-2">
-                    Boxers who want ongoing coaching and community support
+                  <p className="text-sm sm:text-base text-gray-900 font-medium line-clamp-2">
+                    <span className="font-bold">Perfect For:</span> Boxers who want real-time feedback and faster growth
                   </p>
                 </div>
 
@@ -171,14 +134,14 @@ export default function HomePage() {
                 <div className="mb-3">
                   <p className="text-xs text-gray-600 mb-1">Starting from just</p>
                   <p className="text-2xl sm:text-3xl font-bold text-gray-900">
-                    $74.75<span className="text-base font-normal text-gray-600">/mo</span>
+                    $74.75<span className="text-base font-medium text-gray-600">/mo</span>
                   </p>
                 </div>
 
                 {/* Learn More Button */}
                 <Link
                   href="/membership"
-                  className="w-full py-3 px-4 text-sm font-black bg-red-800 text-white rounded-lg shadow-lg uppercase tracking-wide transition-none text-center block flex-shrink-0"
+                  className="w-full py-3 px-4 text-sm font-black bg-[#26304a] text-white rounded-lg shadow-lg uppercase tracking-wide hover:bg-[#1e293b] transition-colors text-center block flex-shrink-0"
                 >
                   Learn More
                 </Link>
@@ -219,51 +182,33 @@ export default function HomePage() {
 
           {/* Single Apparel Card */}
           <div className="max-w-md mx-auto">
-            <div className="rounded-xl overflow-hidden bg-white border border-gray-200 shadow-lg flex flex-col h-full">
+            <div className="rounded overflow-hidden bg-white border-2 border-gray-900 shadow-lg flex flex-col h-full">
               {/* Image Placeholder - Fixed aspect ratio */}
-              <div className="relative w-full aspect-[9/6] overflow-hidden bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 flex-shrink-0 flex items-center justify-center">
-                <div className="text-center px-6">
-                  <div className="inline-block px-6 py-3 bg-red-800 text-white text-xl sm:text-2xl font-black rounded-lg uppercase tracking-wide mb-3">
-                    Coming Soon
-                  </div>
-                  <p className="text-sm text-white/80">
-                    Premium apparel for boxers
-                  </p>
-                </div>
+              <div className="relative w-full aspect-[9/6] overflow-hidden bg-black flex-shrink-0 flex items-center justify-center">
+                <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-wide">
+                  Coming Soon...
+                </h3>
               </div>
 
               {/* Content */}
-              <div className="p-4 flex flex-col flex-1">
+              <div className="p-6 flex flex-col flex-1">
                 {/* Title */}
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 uppercase">
                   Oracle Boxing Apparel
                 </h3>
 
                 {/* Short Description */}
-                <p className="text-sm sm:text-base text-gray-600 mb-2 line-clamp-2">
+                <p className="text-base sm:text-lg text-gray-900 font-medium mb-4">
                   Premium apparel designed for boxers. Stay tuned for the launch.
                 </p>
-
-                {/* Divider */}
-                <div className="border-t border-gray-200 my-2"></div>
-
-                {/* Perfect For */}
-                <div className="mb-3">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-0.5">
-                    Coming Soon:
-                  </p>
-                  <p className="text-sm sm:text-base text-gray-700 line-clamp-2">
-                    High-quality training gear and lifestyle apparel
-                  </p>
-                </div>
 
                 {/* Spacer to push button to bottom */}
                 <div className="flex-1"></div>
 
-                {/* Notify Me Button (disabled state) */}
+                {/* Notify Me Button */}
                 <button
-                  disabled
-                  className="w-full py-3 px-4 text-sm font-black bg-gray-400 text-white rounded-lg shadow-lg uppercase tracking-wide cursor-not-allowed text-center block flex-shrink-0"
+                  onClick={() => setIsNotifyModalOpen(true)}
+                  className="w-full py-4 px-6 text-base font-black bg-black text-white rounded shadow-lg uppercase tracking-wide hover:bg-gray-900 transition-colors text-center block flex-shrink-0"
                 >
                   Notify Me
                 </button>
@@ -277,6 +222,12 @@ export default function HomePage() {
       <TestimonialSection testimonials={testimonials} />
 
       <Footer />
+
+      {/* Notify Me Modal */}
+      <NotifyMeModal
+        isOpen={isNotifyModalOpen}
+        onClose={() => setIsNotifyModalOpen(false)}
+      />
     </div>
   )
 }

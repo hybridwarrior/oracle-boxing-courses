@@ -1,3 +1,5 @@
+'use client'
+
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { VideoPlayer } from '@/components/VideoPlayer'
@@ -12,12 +14,20 @@ import { CourseNavigation } from '@/components/CourseNavigation'
 import { getProductById } from '@/lib/products'
 import { getRandomTestimonials } from '@/lib/testimonials'
 
-export const metadata = {
-  title: 'Boxing Clinic | Oracle Boxing Shop',
-  description: '140+ replay sessions from weekly coaching calls. Learn from real Q&A with Oliver & Toni covering every aspect of boxing.',
-}
-
 export default function VaultPage() {
+  const scrollToPricing = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const element = document.getElementById('pricing')
+    if (element) {
+      const offset = 80
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - offset
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
   const product = getProductById('vault')!
 
   const personas = [
@@ -80,7 +90,7 @@ export default function VaultPage() {
     },
     {
       title: "Flow & Integration",
-      description: "Putting it all together—seamless boxing integration.\n\nCovers: Combining offense and defence, flow drills, kinetic linkage, rhythm and timing, shadow sparring, sparring preparation.\n\nTransition from learning techniques to performing them fluidly.",
+      description: "Putting it all together,seamless boxing integration.\n\nCovers: Combining offense and defence, flow drills, kinetic linkage, rhythm and timing, shadow sparring, sparring preparation.\n\nTransition from learning techniques to performing them fluidly.",
       lessons: 18
     },
     {
@@ -137,12 +147,12 @@ export default function VaultPage() {
       <CourseNavigation />
 
       {/* Hero Section */}
-      <section id="overview" className="pt-12 sm:pt-16 pb-6 sm:pb-8 bg-gradient-to-b from-gray-50 to-white">
+      <section className="pt-12 sm:pt-16 pb-6 sm:pb-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Course Title with Pill Border - Smaller */}
           <div className="inline-block mx-auto mb-6 sm:mb-8 w-full text-center">
             <div className="inline-block border-2 border-black rounded-full px-4 sm:px-6 py-1.5 sm:py-2">
-              <h1 className="text-sm sm:text-base md:text-lg text-gray-900 uppercase tracking-wide font-light" style={{ fontFamily: "var(--font-satoshi)" }}>
+              <h1 className="text-sm sm:text-base md:text-lg text-gray-900 uppercase tracking-wide font-medium" style={{ fontFamily: "var(--font-satoshi)" }}>
                 Coaching Call Replays
               </h1>
             </div>
@@ -155,7 +165,7 @@ export default function VaultPage() {
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-2 leading-relaxed">
-            Watch Oliver & Toni answer real student questions covering every aspect of the Oracle Boxing system—updated monthly
+            Watch Oliver & Toni answer real student questions covering every aspect of the Oracle Boxing system,updated monthly
           </p>
 
           {/* Video Sales Letter */}
@@ -170,7 +180,8 @@ export default function VaultPage() {
           <div className="text-center mb-6 sm:mb-8">
             <a
               href="#pricing"
-              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-red-800 text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              onClick={scrollToPricing}
+              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
             >
               I WANT ACCESS
             </a>
@@ -179,7 +190,7 @@ export default function VaultPage() {
       </section>
 
       {/* Stats */}
-      <section className="pt-6 pb-12 bg-white">
+      <section id="overview" className="pt-6 pb-12 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <CourseStats
             lessonCount={140}
@@ -199,7 +210,7 @@ export default function VaultPage() {
       <section id="lessons">
         <CourseModules
           modules={modules}
-          headerImage="https://placehold.co/1200x400/e5e5e5/666666?text=Coaching+Call+Archive"
+          headerImage={product.image}
         />
       </section>
 
