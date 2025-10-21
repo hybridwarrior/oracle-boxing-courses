@@ -73,27 +73,27 @@ export default function RoadmapPage() {
 
   const modules = [
     {
-      title: "PHASE I: Fundamentals & Form",
+      title: "Phase I (Fundamentals)",
       description: "Learn your stance, balance, and the true mechanics of each punch. Build relaxation and flow before speed or power.\n\nFocus: Shape · Rotation · Relaxation · Linking punches\nOutcome: Clean, efficient movement that feels natural and powerful.",
       lessons: 15
     },
     {
-      title: "PHASE II: Defence, Range & Sparring Basics",
+      title: "Phase II (Defence & Range)",
       description: "Add movement, defence, and awareness. Learn to slip, roll, control range, and integrate punches with footwork.\n\nFocus: Range · Defence · Pendulum Steps · Flow\nOutcome: Confidence in distance, rhythm, and reactive defence.",
       lessons: 18
     },
     {
-      title: "PHASE III: Dynamic Footwork & Balance",
+      title: "Phase III (Footwork)",
       description: "Learn how to shift, pivot, and move with balance and intent. Connect the power of your legs to every punch.\n\nFocus: Shifting · Drop Steps · Balance · Rotation\nOutcome: Dynamic footwork that drives both speed and control.",
       lessons: 14
     },
     {
-      title: "PHASE IV: Defensive Mastery & Feints",
+      title: "Phase IV (Advanced Defence)",
       description: "Combine head, hand, and foot defences seamlessly. Learn to use feints to control reactions and create openings.\n\nFocus: Pulls · Weaves · Lay Back · Feints\nOutcome: Fluid defensive reactions and deceptive offence.",
       lessons: 16
     },
     {
-      title: "PHASE V: Precision & Application",
+      title: "Phase V (Integration)",
       description: "Perfect your technique under motion. Master the mechanics of each punch, then add steps, slips, and rolls to make it ring-ready.\n\nFocus: Punch Mastery · Stepping · Slipping · Rolling\nOutcome: Complete, integrated skill that holds up in sparring.",
       lessons: 12
     }

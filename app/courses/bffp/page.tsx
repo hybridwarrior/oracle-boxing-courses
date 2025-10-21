@@ -73,27 +73,27 @@ export default function BFFPPage() {
 
   const modules = [
     {
-      title: "SENTIENCE, The Mind of the Fighter",
+      title: "Sentience (Mind)",
       description: "Learn how to think like a real boxer. You'll build focus, manage emotions, and learn to perform at your best without overthinking. This is where you master flow state.\n\nLessons:\n• Shifting Your Paradigm For Success\n• Spoon Bending 101\n• Accessing The Flow State\n\nFocus: Identity · Awareness · Flow · Calm under pressure\nOutcome: A clear, stable mindset that keeps you composed and present in every moment.",
       lessons: 4
     },
     {
-      title: "ANATOMY, How Power Moves Through You",
+      title: "Anatomy (Body)",
       description: "See what really makes your body fast and powerful. You'll learn how the brain, nerves, and fascia connect every punch and step so energy moves through you instead of against you.\n\nLessons:\n• The Nervous System\n• Fascia\n\nFocus: Nervous System · Fascia · Kinetic Chain · Energy Flow\nOutcome: Effortless speed and natural power through biomechanical alignment.",
       lessons: 3
     },
     {
-      title: "FORMIS, The Art of Technique",
+      title: "Formis (Movement)",
       description: "Build the shape and form of great boxing. You'll learn how to stand, move, and throw with balance, turning good technique into natural instinct.\n\nLessons:\n• What Is Formis\n• State And Repositioning\n• Striking\n• Defence\n• The Flow Of Boxing\n• Default Mode\n• Feints And Draws\n• Distance\n\nFocus: Shape · Stance · Defence · Striking\nOutcome: Smooth, balanced movement that stays sharp and efficient in every exchange.",
       lessons: 8
     },
     {
-      title: "GAMBIT, The Strategy of Boxing",
+      title: "Gambit (Tactics)",
       description: "Boxing is a game of moves and responses. Here you'll learn how to control range, find timing, and make your opponent react to you instead of the other way around.\n\nLessons:\n• What Is Gambit\n• Positioning\n• Pattern Recognition\n• Comfort Deception\n• Guard Manipulation\n\nFocus: Positioning · Timing · Deception · Tactical Awareness\nOutcome: Smarter decision-making and the ability to control every exchange.",
       lessons: 6
     },
     {
-      title: "ENGINE, Your Inner System",
+      title: "Engine (Conditioning)",
       description: "This is where strength meets control. Learn how to use breath, recovery, and relaxation to stay calm and sharp even when tired. You'll finish stronger than you started.\n\nLessons:\n• What Is Engine\n• Relaxation\n• Energy Systems\n• Breathing And Breathe Holds\n• Diet And Health\n\nFocus: Conditioning · Breathing · Relaxation · Recovery\nOutcome: Long-lasting performance, fast recovery, and composure under fatigue.",
       lessons: 5
     }

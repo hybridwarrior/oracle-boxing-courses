@@ -4,12 +4,12 @@ export const products: Product[] = [
   // COURSES
   {
     id: 'bundle',
-    title: 'Ultimate Boxing Bundle',
+    title: 'The Oracle Boxing Method',
     price: 397,
     type: 'course',
     stripe_product_id: 'prod_TFmod6ppCFTAeK',
     stripe_price_id: 'price_1SJHEYQNEdHwdojXKabKx7Co',
-    image: 'https://media.oracleboxing.com/Website/bundle_tn3.png',
+    image: 'https://media.oracleboxing.com/Website/obm_tn.png',
     shortDescription: 'Every Course, Every Call, Every System, All in One Bundle.',
     perfectFor: 'Serious boxers who want to master everything, fast',
     moduleCount: 5,
@@ -81,7 +81,7 @@ Master every aspect of boxing technique through structured progression.`
   },
   {
     id: 'vault',
-    title: 'Boxing Clinic',
+    title: 'Boxing Clinic Replays',
     price: 97,
     type: 'course',
     stripe_product_id: 'prod_TFmnqbbE3RFuDJ',

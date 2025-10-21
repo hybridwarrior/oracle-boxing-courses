@@ -25,8 +25,8 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
     const headings: Record<string, string> = {
       'bffp': 'Boxing from First Principles',
       'roadmap': 'The Boxing Roadmap',
-      'vault': 'Boxing Clinic',
-      'bundle': 'Ultimate Boxing Bundle'
+      'vault': 'Boxing Clinic Replays',
+      'bundle': 'The Oracle Boxing Method'
     }
     return headings[product.id] || product.title
   }
@@ -55,6 +55,9 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
 
           {/* Price */}
           <div className="text-center mb-6 sm:mb-10">
+            {product.id === 'bundle' && (
+              <div className="text-3xl sm:text-4xl font-bold opacity-60 line-through mb-2">$541</div>
+            )}
             <div className="text-6xl sm:text-7xl md:text-8xl font-black mb-3">${product.price}</div>
             {product.recurring && (
               <div className="text-xl sm:text-2xl font-bold opacity-90">per {product.interval}</div>

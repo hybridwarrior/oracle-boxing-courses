@@ -1,0 +1,177 @@
+'use client'
+
+import Image from 'next/image'
+import { Timeline } from '@/components/ui/timeline'
+
+export function BundleTimelineProcess() {
+  const data = [
+    {
+      title: 'Understand the Principles',
+      content: (
+        <div>
+          <p className="text-gray-800 text-sm md:text-base font-normal mb-8">
+            Start with Boxing from First Principles to build a deep understanding of the conceptual framework, mechanics, tactics, and mental game that underpin elite boxing.
+          </p>
+          <div className="mb-8 space-y-2">
+            <div className="flex items-start gap-3">
+              <span className="text-gray-700 flex-shrink-0">•</span>
+              <p className="text-gray-700 text-sm md:text-base">Understand the mental framework and flow state that keeps you calm under pressure</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-gray-700 flex-shrink-0">•</span>
+              <p className="text-gray-700 text-sm md:text-base">Learn the biomechanics and fascia mechanics behind natural, effortless power</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-gray-700 flex-shrink-0">•</span>
+              <p className="text-gray-700 text-sm md:text-base">Master tactical positioning, pattern recognition, and the strategic side of boxing</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Image
+              src="https://media.oracleboxing.com/Website/ob_fight3.png"
+              alt="Stay calm under pressure"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <Image
+              src="https://media.oracleboxing.com/Website/bffp_tn4.png"
+              alt="Biomechanics"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <Image
+              src="https://media.oracleboxing.com/Website/bffp_course3.png"
+              alt="Pattern recognition"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <Image
+              src="https://media.oracleboxing.com/Website/bbffp_course4.png"
+              alt="Endurance and relaxation"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: 'Apply the Structure',
+      content: (
+        <div>
+          <p className="text-gray-800 text-sm md:text-base font-normal mb-8">
+            Follow the Boxing Roadmap&apos;s 5-phase progression system to transform theoretical knowledge into practical skill through structured drills and techniques.
+          </p>
+          <div className="mb-8 space-y-2">
+            <div className="flex items-start gap-3">
+              <span className="text-gray-700 flex-shrink-0">•</span>
+              <p className="text-gray-700 text-sm md:text-base">Progress through fundamentals, defence, and footwork with clear phase-by-phase structure</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-gray-700 flex-shrink-0">•</span>
+              <p className="text-gray-700 text-sm md:text-base">Build technical form and mechanics systematically with drills for each phase</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-gray-700 flex-shrink-0">•</span>
+              <p className="text-gray-700 text-sm md:text-base">Develop ring-ready skill with clear progression markers from beginner to sparring-ready</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Image
+              src="https://media.oracleboxing.com/Website/tbr_course1.png"
+              alt="Technical form and mechanics"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <Image
+              src="https://media.oracleboxing.com/Website/tbr_course2.png"
+              alt="Defence and movement"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <Image
+              src="https://media.oracleboxing.com/Website/tbr_course22.png"
+              alt="Explosive footwork"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <Image
+              src="https://media.oracleboxing.com/Website/tbr_course4.png"
+              alt="Flowing style integration"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: 'Refine with Real Coaching',
+      content: (
+        <div>
+          <p className="text-gray-800 text-sm md:text-base font-normal mb-8">
+            Use the Boxing Clinic replays to see concepts applied in real-time and troubleshoot common issues with live coaching from Oliver & Toni.
+          </p>
+          <div className="mb-8 space-y-2">
+            <div className="flex items-start gap-3">
+              <span className="text-gray-700 flex-shrink-0">•</span>
+              <p className="text-gray-700 text-sm md:text-base">Watch real technique corrections and see how coaching solves common problems</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-gray-700 flex-shrink-0">•</span>
+              <p className="text-gray-700 text-sm md:text-base">Learn from mistakes and refinements happening in real time with live students</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-gray-700 flex-shrink-0">•</span>
+              <p className="text-gray-700 text-sm md:text-base">See high-level tactics, defensive flow, and advanced concepts demonstrated live</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Image
+              src="https://media.oracleboxing.com/Website/bcr_course6.png"
+              alt="Real coaching solutions"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <Image
+              src="https://media.oracleboxing.com/Website/bcr_course2.png"
+              alt="Movement refinement"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <Image
+              src="https://media.oracleboxing.com/Website/bcr_course4.png"
+              alt="High-level tactics"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <Image
+              src="https://media.oracleboxing.com/Website/bcr_course1.png"
+              alt="Think like a coach"
+              width={500}
+              height={500}
+              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+          </div>
+        </div>
+      ),
+    },
+  ]
+
+  return (
+    <div className="min-h-screen w-full bg-gray-50 overflow-hidden">
+      <Timeline data={data} />
+    </div>
+  )
+}

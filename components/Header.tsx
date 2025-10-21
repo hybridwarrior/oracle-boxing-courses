@@ -72,13 +72,13 @@ export function Header() {
                     href="/courses/vault"
                     className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-900 transition-colors"
                   >
-                    <div className="font-semibold">Boxing Clinic</div>
+                    <div className="font-semibold">Boxing Clinic Replays</div>
                   </Link>
                     <Link
                       href="/courses/bundle"
                       className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-900 transition-colors border-t border-gray-800"
                     >
-                      <div className="font-semibold">Ultimate Boxing Bundle</div>
+                      <div className="font-semibold">The Oracle Boxing Method</div>
                     </Link>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export function Header() {
                           : 'text-gray-300 hover:text-white hover:bg-gray-900'
                       }`}
                     >
-                      Boxing Clinic
+                      Boxing Clinic Replays
                     </Link>
                     <Link
                       href="/courses/bundle"
@@ -174,7 +174,7 @@ export function Header() {
                           : 'text-gray-300 hover:text-white hover:bg-gray-900'
                       }`}
                     >
-                      Ultimate Boxing Bundle
+                      The Oracle Boxing Method
                     </Link>
                   </div>
                 )}

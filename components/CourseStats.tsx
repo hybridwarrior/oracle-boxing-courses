@@ -10,6 +10,8 @@ interface CourseStatsProps {
   hasLifetimeAccess?: boolean
   weeksCount?: number
   workoutsCount?: number
+  avgDuration?: string
+  updatedMonthly?: boolean
 }
 
 function CountingNumber({ target, suffix = '' }: { target: number; suffix?: string }) {
@@ -59,21 +61,45 @@ function CountingNumber({ target, suffix = '' }: { target: number; suffix?: stri
   )
 }
 
-export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchaseLabelText, hasLifetimeAccess = true, weeksCount, workoutsCount }: CourseStatsProps) {
+export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchaseLabelText, hasLifetimeAccess = true, weeksCount, workoutsCount, avgDuration, updatedMonthly }: CourseStatsProps) {
   // Parse purchaseCount to extract number and suffix (e.g., "500+" -> 500 and "+")
   const numericPurchases = purchaseCount ? parseInt(purchaseCount.replace(/\D/g, '')) : null
   const purchaseSuffix = purchaseCount ? purchaseCount.replace(/\d/g, '') : ''
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0 py-12">
-      {/* Lessons */}
+      {/* Lessons/Recordings */}
       <div className="text-center px-8">
         <CountingNumber target={lessonCount} suffix={lessonCount > 150 ? '+' : ''} />
-        <div className="text-base text-gray-700">Lessons</div>
+        <div className="text-base text-gray-700">{avgDuration ? 'Recordings' : 'Lessons'}</div>
       </div>
 
       {/* Separator - hidden on mobile */}
       <div className="hidden md:block w-px h-20 bg-gray-300"></div>
+
+      {/* Average Duration */}
+      {avgDuration && (
+        <>
+          <div className="text-center px-8">
+            <div className="text-5xl md:text-6xl font-semibold text-black mb-2">{avgDuration}</div>
+            <div className="text-base text-gray-700">Minutes Each</div>
+          </div>
+          {/* Separator - hidden on mobile */}
+          <div className="hidden md:block w-px h-20 bg-gray-300"></div>
+        </>
+      )}
+
+      {/* Updated Monthly */}
+      {updatedMonthly && (
+        <>
+          <div className="text-center px-8">
+            <div className="text-5xl md:text-6xl font-semibold text-black mb-2">📅</div>
+            <div className="text-base text-gray-700">Updated Monthly</div>
+          </div>
+          {/* Separator - hidden on mobile */}
+          <div className="hidden md:block w-px h-20 bg-gray-300"></div>
+        </>
+      )}
 
       {/* Weeks Count */}
       {weeksCount && (
@@ -99,8 +125,8 @@ export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchas
         </>
       )}
 
-      {/* Purchases or Custom Label - Only show if no weeks/workouts */}
-      {!weeksCount && !workoutsCount && (
+      {/* Purchases or Custom Label - Only show if no weeks/workouts/duration */}
+      {!weeksCount && !workoutsCount && !avgDuration && (
         <>
           <div className="text-center px-8">
             {purchaseLabel ? (

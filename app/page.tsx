@@ -1,21 +1,27 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { CourseCard } from '@/components/CourseCard'
 import { TestimonialSection } from '@/components/TestimonialSection'
 import { NotifyMeModal } from '@/components/NotifyMeModal'
 import { getCourses } from '@/lib/products'
-import { getRandomTestimonials } from '@/lib/testimonials'
+import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Users, Video } from 'lucide-react'
 
 export default function HomePage() {
   const courses = getCourses()
-  const testimonials = getRandomTestimonials(6)
+  // Use stable testimonials for SSR, then randomize on client
+  const [testimonials, setTestimonials] = useState(globalTestimonials.slice(0, 6))
   const [isNotifyModalOpen, setIsNotifyModalOpen] = useState(false)
+
+  // Randomize testimonials after hydration to avoid mismatch
+  useEffect(() => {
+    setTestimonials(getRandomTestimonials(6))
+  }, [])
 
   const scrollToCourses = (e: React.MouseEvent) => {
     e.preventDefault()
