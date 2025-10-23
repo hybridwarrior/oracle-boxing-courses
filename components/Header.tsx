@@ -71,12 +71,6 @@ export function Header() {
                   >
                     <div className="font-semibold">Boxing Roadmap</div>
                   </Link>
-                  <Link
-                    href="/courses/vault"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-900 transition-colors"
-                  >
-                    <div className="font-semibold">Boxing Clinic Replays</div>
-                  </Link>
                   </div>
                 </div>
               )}
@@ -161,17 +155,6 @@ export function Header() {
                       }`}
                     >
                       Boxing Roadmap
-                    </Link>
-                    <Link
-                      href="/courses/vault"
-                      onClick={closeMobileMenu}
-                      className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors ${
-                        pathname === '/courses/vault'
-                          ? 'text-white bg-[#26304a]'
-                          : 'text-gray-300 hover:text-white hover:bg-gray-900'
-                      }`}
-                    >
-                      Boxing Clinic Replays
                     </Link>
                   </div>
                 )}
