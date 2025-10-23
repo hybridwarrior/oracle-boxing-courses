@@ -25,6 +25,14 @@ interface CreateCheckoutSessionParams {
   cancelUrl: string
   customerInfo?: CustomerInfo
   currency?: Currency
+  trackingParams?: {
+    referrer: string
+    utm_source?: string
+    utm_medium?: string
+    utm_campaign?: string
+    utm_term?: string
+    utm_content?: string
+  }
 }
 
 export async function createCheckoutSession({
@@ -34,6 +42,7 @@ export async function createCheckoutSession({
   cancelUrl,
   customerInfo,
   currency = 'USD',
+  trackingParams,
 }: CreateCheckoutSessionParams): Promise<Stripe.Checkout.Session> {
   // Convert cart items to Stripe line items, using correct price ID for currency
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(item => {
@@ -122,6 +131,16 @@ export async function createCheckoutSession({
   // Update success URL with correct path
   sessionParams.success_url = `${successUrl.split('/success/')[0]}${successPath}?session_id={CHECKOUT_SESSION_ID}`
 
+  // Determine the purchase type based on main product
+  let purchaseType = 'course' // Default
+  if (mainProduct?.id === '6wc') {
+    purchaseType = '6wc'
+  } else if (mainProduct?.type === 'membership') {
+    purchaseType = 'membership'
+  } else if (mainProduct?.type === 'course') {
+    purchaseType = 'course'
+  }
+
   sessionParams.metadata = {
     // Customer info
     customer_first_name: customerInfo?.firstName || '',
@@ -130,6 +149,7 @@ export async function createCheckoutSession({
 
     // Funnel tracking
     funnel_type: funnelType,
+    type: purchaseType, // Add type metadata: course, membership, 6wc
     entry_product: mainProduct?.metadata || mainProduct?.id || '',
     add_ons_included: addOns,
 
@@ -143,6 +163,14 @@ export async function createCheckoutSession({
       quantity: i.quantity,
       price: i.product.price,
     }))),
+
+    // Tracking params (referrer and UTM)
+    referrer: trackingParams?.referrer || 'direct',
+    utm_source: trackingParams?.utm_source || '',
+    utm_medium: trackingParams?.utm_medium || '',
+    utm_campaign: trackingParams?.utm_campaign || '',
+    utm_term: trackingParams?.utm_term || '',
+    utm_content: trackingParams?.utm_content || '',
   }
 
   // Add cross-sell recommendations using Stripe's adjustable quantity feature
@@ -203,7 +231,66 @@ export async function createCheckoutSession({
     sessionParams.payment_intent_data = {
       setup_future_usage: 'off_session',
       metadata: {
+        // Copy all metadata to payment intent for charge.succeeded webhook
+        customer_first_name: customerInfo?.firstName || '',
+        customer_last_name: customerInfo?.lastName || '',
+        customer_email: customerInfo?.email || '',
+        customer_phone: customerInfo?.phone || '',
+
+        // Funnel tracking
+        funnel_type: funnelType,
+        type: purchaseType,
+        entry_product: mainProduct?.metadata || mainProduct?.id || '',
+        add_ons_included: addOns,
+
+        // Product details
+        product_name: mainProduct?.title || '',
+        product_id: mainProduct?.id || '',
+
+        // Cart summary
         cart_items: JSON.stringify(items.map(i => ({ id: i.product.id, qty: i.quantity }))),
+
+        // Tracking params (referrer and UTM)
+        referrer: trackingParams?.referrer || 'direct',
+        utm_source: trackingParams?.utm_source || '',
+        utm_medium: trackingParams?.utm_medium || '',
+        utm_campaign: trackingParams?.utm_campaign || '',
+        utm_term: trackingParams?.utm_term || '',
+        utm_content: trackingParams?.utm_content || '',
+      },
+    }
+  }
+
+  // Add subscription data for membership purchases
+  if (mode === 'subscription') {
+    sessionParams.subscription_data = {
+      metadata: {
+        // Copy all metadata to subscription for invoice.payment_succeeded webhook
+        customer_first_name: customerInfo?.firstName || '',
+        customer_last_name: customerInfo?.lastName || '',
+        customer_email: customerInfo?.email || '',
+        customer_phone: customerInfo?.phone || '',
+
+        // Funnel tracking
+        funnel_type: funnelType,
+        type: purchaseType,
+        entry_product: mainProduct?.metadata || mainProduct?.id || '',
+        add_ons_included: addOns,
+
+        // Product details
+        product_name: mainProduct?.title || '',
+        product_id: mainProduct?.id || '',
+
+        // Cart summary
+        cart_items: JSON.stringify(items.map(i => ({ id: i.product.id, qty: i.quantity }))),
+
+        // Tracking params (referrer and UTM)
+        referrer: trackingParams?.referrer || 'direct',
+        utm_source: trackingParams?.utm_source || '',
+        utm_medium: trackingParams?.utm_medium || '',
+        utm_campaign: trackingParams?.utm_campaign || '',
+        utm_term: trackingParams?.utm_term || '',
+        utm_content: trackingParams?.utm_content || '',
       },
     }
   }

@@ -53,6 +53,16 @@ export async function GET(req: NextRequest) {
       funnel: session.metadata?.funnel_type || 'course'
     };
 
+    // Extract tracking params from metadata
+    const trackingParams = {
+      referrer: session.metadata?.referrer || 'direct',
+      utm_source: session.metadata?.utm_source || undefined,
+      utm_medium: session.metadata?.utm_medium || undefined,
+      utm_campaign: session.metadata?.utm_campaign || undefined,
+      utm_term: session.metadata?.utm_term || undefined,
+      utm_content: session.metadata?.utm_content || undefined,
+    };
+
     return NextResponse.json({
       customerName,
       customerEmail,
@@ -62,6 +72,7 @@ export async function GET(req: NextRequest) {
       funnelType,
       sessionId,
       productMetadata,
+      trackingParams,
     });
   } catch (error: any) {
     console.error('Session retrieval error:', error);

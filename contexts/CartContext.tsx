@@ -10,7 +10,6 @@ interface CartContextType {
   hasPhysicalItems: boolean
   addItem: (product: Product, variant?: MerchVariant) => void
   removeItem: (productId: string, variantSku?: string) => void
-  updateQuantity: (productId: string, quantity: number, variantSku?: string) => void
   clearCart: () => void
 }
 
@@ -79,15 +78,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       })
 
       if (existingIndex > -1) {
-        // For courses and memberships, don't increase quantity (max 1)
-        if (product.type === 'course' || product.type === 'membership') {
-          return updatedItems
-        }
-        // For merch, update quantity
-        updatedItems[existingIndex] = {
-          ...updatedItems[existingIndex],
-          quantity: updatedItems[existingIndex].quantity + 1
-        }
+        // All products have max quantity of 1 - don't increase
         return updatedItems
       }
 
@@ -115,26 +106,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
     )
   }
 
-  const updateQuantity = (productId: string, quantity: number, variantSku?: string) => {
-    if (quantity <= 0) {
-      removeItem(productId, variantSku)
-      return
-    }
-
-    setItems(currentItems =>
-      currentItems.map(item => {
-        if (variantSku && item.variant) {
-          if (item.product.id === productId && item.variant.sku === variantSku) {
-            return { ...item, quantity }
-          }
-        } else if (item.product.id === productId && !item.variant) {
-          return { ...item, quantity }
-        }
-        return item
-      })
-    )
-  }
-
   const clearCart = () => {
     setItems([])
     localStorage.removeItem(CART_STORAGE_KEY)
@@ -149,7 +120,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
         hasPhysicalItems,
         addItem,
         removeItem,
-        updateQuantity,
         clearCart,
       }}
     >

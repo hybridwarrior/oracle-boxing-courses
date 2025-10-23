@@ -6,9 +6,9 @@ export async function POST(req: NextRequest) {
   console.log('🔍 UPSELL: Request received')
   try {
     const body = await req.json()
-    const { session_id, price_id, product_id } = body
+    const { session_id, price_id, product_id, trackingParams } = body
 
-    console.log('🔍 UPSELL: Body parsed:', { session_id, price_id, product_id })
+    console.log('🔍 UPSELL: Body parsed:', { session_id, price_id, product_id, trackingParams })
 
     // Validate inputs
     if (!session_id || !price_id || !product_id) {
@@ -172,9 +172,17 @@ export async function POST(req: NextRequest) {
         confirm: true,
         metadata: {
           source: 'upsell',
+          type: 'coaching', // Add type metadata for coaching upsell
           original_session_id: session_id,
           product_id: product_id,
           price_id: price_id,
+          // Include tracking params from original purchase
+          referrer: trackingParams?.referrer || 'direct',
+          utm_source: trackingParams?.utm_source || '',
+          utm_medium: trackingParams?.utm_medium || '',
+          utm_campaign: trackingParams?.utm_campaign || '',
+          utm_term: trackingParams?.utm_term || '',
+          utm_content: trackingParams?.utm_content || '',
         },
       })
 

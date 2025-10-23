@@ -6,7 +6,19 @@ import { Currency } from '@/lib/currency'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { items, customerInfo, currency }: { items: CartItem[], customerInfo?: any, currency?: Currency } = body
+    const { items, customerInfo, currency, trackingParams }: {
+      items: CartItem[],
+      customerInfo?: any,
+      currency?: Currency,
+      trackingParams?: {
+        referrer: string
+        utm_source?: string
+        utm_medium?: string
+        utm_campaign?: string
+        utm_term?: string
+        utm_content?: string
+      }
+    } = body
 
     // Debug logging
     console.log('🔍 DEBUG: Stripe Secret Key loaded:', !!process.env.STRIPE_SECRET_KEY)
@@ -45,6 +57,7 @@ export async function POST(req: NextRequest) {
       cancelUrl: `${baseUrl}/`, // Changed to home page instead of /checkout
       customerInfo,
       currency: currency || 'USD',
+      trackingParams,
     })
 
     return NextResponse.json({ url: session.url })

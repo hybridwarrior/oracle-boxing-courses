@@ -93,6 +93,8 @@ export const SuccessUpsellPage: React.FC<SuccessUpsellPageProps> = ({ isMembersh
           session_id: sessionId,
           price_id: priceId,
           product_id: 'prod_THuQf0h3DatQUL',
+          // Pass through tracking params from original session
+          trackingParams: orderData.trackingParams,
         }),
       });
 

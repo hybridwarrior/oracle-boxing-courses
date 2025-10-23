@@ -14,6 +14,16 @@ export default function CheckoutPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [productParam, setProductParam] = useState<string | null>(null)
   const [sourceParam, setSourceParam] = useState<string | null>(null)
+  const [trackingParams, setTrackingParams] = useState<{
+    referrer: string
+    utm_source?: string
+    utm_medium?: string
+    utm_campaign?: string
+    utm_term?: string
+    utm_content?: string
+  }>({
+    referrer: ''
+  })
 
   // Customer info form state
   const [customerInfo, setCustomerInfo] = useState({
@@ -21,7 +31,7 @@ export default function CheckoutPage() {
     email: '',
   })
 
-  // Detect product parameter from URL
+  // Detect product parameter from URL and capture tracking params
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search)
@@ -30,6 +40,25 @@ export default function CheckoutPage() {
 
       setProductParam(product)
       setSourceParam(source)
+
+      // Capture referrer
+      const referrer = document.referrer || 'direct'
+
+      // Capture UTM parameters
+      const utm_source = params.get('utm_source') || undefined
+      const utm_medium = params.get('utm_medium') || undefined
+      const utm_campaign = params.get('utm_campaign') || undefined
+      const utm_term = params.get('utm_term') || undefined
+      const utm_content = params.get('utm_content') || undefined
+
+      setTrackingParams({
+        referrer,
+        utm_source,
+        utm_medium,
+        utm_campaign,
+        utm_term,
+        utm_content,
+      })
 
       console.log('🏷️ Checkout page loaded')
       console.log('🏷️ Product:', product, '| Source:', source)
@@ -94,6 +123,15 @@ export default function CheckoutPage() {
         orderBumpsUrl.searchParams.set('funnel', '6wc')
         orderBumpsUrl.searchParams.set('currency', currency)
         if (sourceParam) orderBumpsUrl.searchParams.set('source', sourceParam)
+
+        // Pass tracking params
+        orderBumpsUrl.searchParams.set('referrer', trackingParams.referrer)
+        if (trackingParams.utm_source) orderBumpsUrl.searchParams.set('utm_source', trackingParams.utm_source)
+        if (trackingParams.utm_medium) orderBumpsUrl.searchParams.set('utm_medium', trackingParams.utm_medium)
+        if (trackingParams.utm_campaign) orderBumpsUrl.searchParams.set('utm_campaign', trackingParams.utm_campaign)
+        if (trackingParams.utm_term) orderBumpsUrl.searchParams.set('utm_term', trackingParams.utm_term)
+        if (trackingParams.utm_content) orderBumpsUrl.searchParams.set('utm_content', trackingParams.utm_content)
+
         router.push(orderBumpsUrl.pathname + orderBumpsUrl.search)
         return
       }
@@ -108,6 +146,15 @@ export default function CheckoutPage() {
         orderBumpsUrl.searchParams.set('course', productParam)
         orderBumpsUrl.searchParams.set('currency', currency)
         if (sourceParam) orderBumpsUrl.searchParams.set('source', sourceParam)
+
+        // Pass tracking params
+        orderBumpsUrl.searchParams.set('referrer', trackingParams.referrer)
+        if (trackingParams.utm_source) orderBumpsUrl.searchParams.set('utm_source', trackingParams.utm_source)
+        if (trackingParams.utm_medium) orderBumpsUrl.searchParams.set('utm_medium', trackingParams.utm_medium)
+        if (trackingParams.utm_campaign) orderBumpsUrl.searchParams.set('utm_campaign', trackingParams.utm_campaign)
+        if (trackingParams.utm_term) orderBumpsUrl.searchParams.set('utm_term', trackingParams.utm_term)
+        if (trackingParams.utm_content) orderBumpsUrl.searchParams.set('utm_content', trackingParams.utm_content)
+
         router.push(orderBumpsUrl.pathname + orderBumpsUrl.search)
         return
       }
@@ -149,6 +196,7 @@ export default function CheckoutPage() {
                 country: 'US',
               },
             },
+            trackingParams: trackingParams,
           }),
         })
 

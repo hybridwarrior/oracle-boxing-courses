@@ -26,6 +26,16 @@ export default function OrderBumpsPage() {
   const [expandedBump, setExpandedBump] = useState<string | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [showAll, setShowAll] = useState(false)
+  const [trackingParams, setTrackingParams] = useState<{
+    referrer: string
+    utm_source?: string
+    utm_medium?: string
+    utm_campaign?: string
+    utm_term?: string
+    utm_content?: string
+  }>({
+    referrer: 'direct'
+  })
 
   useEffect(() => {
     // Get customer info from URL params
@@ -42,6 +52,23 @@ export default function OrderBumpsPage() {
     setEmail(emailParam)
     setName(nameParam)
     setFunnelType(funnelParam)
+
+    // Capture tracking params from URL
+    const referrer = searchParams.get('referrer') || 'direct'
+    const utm_source = searchParams.get('utm_source') || undefined
+    const utm_medium = searchParams.get('utm_medium') || undefined
+    const utm_campaign = searchParams.get('utm_campaign') || undefined
+    const utm_term = searchParams.get('utm_term') || undefined
+    const utm_content = searchParams.get('utm_content') || undefined
+
+    setTrackingParams({
+      referrer,
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_term,
+      utm_content,
+    })
 
     // Load appropriate add-ons based on funnel type
     if (funnelParam === 'course') {
@@ -161,6 +188,7 @@ export default function OrderBumpsPage() {
               country: 'US',
             },
           },
+          trackingParams: trackingParams,
         }),
       })
 
