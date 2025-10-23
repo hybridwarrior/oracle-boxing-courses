@@ -23,15 +23,14 @@ export const products: Product[] = [
     description: `**Get everything. Master boxing from first principles to real application.**
 
 **This bundle includes:**
-• Boxing Clinic Replays ($97)
 • Boxing from First Principles ($297)
 • Boxing Roadmap ($147)
 
-**Total value: $541**
+**Total value: $444**
 **Bundle price: $397**
-**You save: $144**
+**You save: $47**
 
-Complete access to the entire Oracle Boxing system — theory, technique, tactics, and live coaching insights.`,
+Complete access to the entire Oracle Boxing system — theory, technique, and tactics.`,
   },
   {
     id: 'bffp',
@@ -87,35 +86,6 @@ Develop discipline, leadership, and long-term mastery mindset.`,
 **Phase V** — Precision & Application
 
 Master every aspect of boxing technique through structured progression.`,
-  },
-  {
-    id: 'vault',
-    title: 'Boxing Clinic Replays',
-    price: 97,
-    type: 'course',
-    metadata: 'clnc',
-    stripe_product_id: 'prod_THso4C0K2pcDZe',
-    stripe_price_id: 'price_1SLLQNQNEdHwdojXR5ubxHB4',
-    image: 'https://media.oracleboxing.com/Website/boxing_clinic.png',
-    shortDescription: 'Your Full Library of Real Coaching Calls, Uncut and Organized.',
-    perfectFor: 'Fighters who learn best by watching real coaching in action',
-    lessonCount: 100,
-    lessonCountPrefix: '+',
-    updatedMonthly: true,
-    description: `💬 140+ Replay Sessions
-
-Weekly calls with Oliver & Toni, covering every layer of the Oracle Boxing system — from jab mechanics and flow drills to kinetic linkage, counterpunching, and footwork integration.
-
-Watch how each concept is applied live. Updated monthly.
-
-**Recent topics (Oct 2025):**
-• Liver Shot Setups
-• Flow of Boxing
-• Kinetic Linkage
-• Shifting Mechanics
-• Defence + Counter Flow
-
-**Includes:** All 2024–2025 replays (Jan → Oct) + archives from the Boxing Clinic category.`,
   },
 
   // MEMBERSHIPS

@@ -137,7 +137,7 @@ export default function CheckoutPage() {
       }
 
       // Individual Course → Order bumps
-      if (['bffp', 'roadmap', 'vault'].includes(productParam)) {
+      if (['bffp', 'roadmap'].includes(productParam)) {
         console.log('→ Routing to course order-bumps')
         const orderBumpsUrl = new URL('/checkout/order-bumps', window.location.origin)
         orderBumpsUrl.searchParams.set('email', email)
