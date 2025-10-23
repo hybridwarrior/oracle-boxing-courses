@@ -130,7 +130,7 @@ export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchas
         <>
           <div className="text-center px-8">
             {purchaseLabel ? (
-              <div className="text-4xl md:text-5xl font-semibold text-black mb-2">{purchaseLabel}</div>
+              <div className="text-5xl md:text-6xl font-semibold text-black mb-2">{purchaseLabel}</div>
             ) : numericPurchases !== null ? (
               <CountingNumber target={numericPurchases} suffix={purchaseSuffix} />
             ) : null}

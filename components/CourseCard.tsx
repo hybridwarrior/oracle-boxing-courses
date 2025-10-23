@@ -56,7 +56,7 @@ export function CourseCard({ product }: CourseCardProps) {
         {/* Content */}
         <div className="p-4 flex flex-col flex-1">
           {/* Course Name */}
-          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 uppercase underline">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 capitalize">
             {product.title}
           </h3>
 

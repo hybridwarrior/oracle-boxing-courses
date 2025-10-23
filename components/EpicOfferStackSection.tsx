@@ -1,0 +1,118 @@
+'use client'
+
+import {
+  Trophy,
+  Users,
+  BookOpen,
+  Video,
+  Phone,
+  Award,
+  Shield,
+  Star
+} from "lucide-react"
+import { ScrollToTopLink as Link } from '@/components/ScrollToTopLink'
+import { EpicCTAButton } from '@/components/EpicCTAButton'
+import { ChallengePrice, ValuePrice } from '@/components/AdaptivePrice'
+interface EpicOfferStackSectionProps {
+  onCTAClick?: () => void;
+}
+
+export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSectionProps) {
+
+  // Benefits to display with checkmarks
+  const benefits = [
+    "Learn step-by-step with live coaching and feedback.",
+    "Structured 6-week system with progress tracking and community support.",
+    "Finish the challenge, prove your commitment, and get a full refund.",
+  ]
+
+  const totalValue = 297 + 97 + 97 + 147 // $638
+
+  return (
+    <section id="pricing" className="py-16 sm:py-20 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#26304a] rounded-3xl p-10 sm:p-16 shadow-2xl text-white">
+          {/* Logo */}
+          <div className="flex justify-center mb-6 sm:mb-10">
+            <img
+              src="https://media.oracleboxing.com/Website/long_white.png"
+              alt="Oracle Boxing"
+              className="h-4 sm:h-5"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none'
+              }}
+            />
+          </div>
+
+          {/* Heading */}
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-10 uppercase" style={{ fontFamily: "var(--font-satoshi)" }}>
+            6-WEEK CHALLENGE
+          </h3>
+
+          {/* Price Section */}
+          <div className="text-center mb-6 sm:mb-10">
+            <div className="text-3xl sm:text-4xl font-bold opacity-60 line-through mb-2">${totalValue}</div>
+            <div className="text-6xl sm:text-7xl md:text-8xl font-black mb-3"><ChallengePrice /></div>
+          </div>
+
+          {/* CTA Button - White with Navy Text */}
+          <a
+            href="/checkout?product=6wc"
+            className="w-full py-5 sm:py-6 px-8 sm:px-12 bg-white text-[#26304a] font-black text-xl sm:text-2xl rounded-xl mb-6 sm:mb-10 uppercase tracking-wide min-h-[64px] sm:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200 flex items-center justify-center"
+            style={{ cursor: 'pointer' }}
+          >
+            START CHALLENGE
+          </a>
+
+          {/* Benefits List with Checkmarks */}
+          <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-10">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <svg
+                  className="w-6 h-6 flex-shrink-0 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="text-base sm:text-lg font-medium leading-relaxed">{benefit}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Payment Methods */}
+          <div className="payment_icons-group">
+            <img
+              loading="lazy"
+              alt=""
+              src="https://media.oracleboxing.com/Website/payment1.svg"
+              className="image-55"
+            />
+            <img
+              loading="lazy"
+              alt=""
+              src="https://media.oracleboxing.com/Website/payment2.svg"
+              className="image-55 second"
+            />
+            <img
+              loading="lazy"
+              alt=""
+              src="https://media.oracleboxing.com/Website/paypal2.svg"
+              className="image-55 bigger"
+            />
+            <img
+              loading="lazy"
+              src="https://media.oracleboxing.com/Website/klarna.svg"
+              alt=""
+              className="image-55 bigger-mobile"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

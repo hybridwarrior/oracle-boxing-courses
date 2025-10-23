@@ -1,0 +1,178 @@
+'use client'
+
+import React, { useMemo, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { fbInitiateCheckout } from "@/lib/fbpixel";
+import { initiateCheckout } from "@/lib/gtag";
+import { getCheckoutUrl } from "@/lib/checkout";
+import { getOrInitTrackingData, updateTrackingData, generateEventId } from "@/lib/tracking-cookies";
+import { useAnalytics } from "@/hooks/useAnalytics";
+
+interface EpicCTAButtonProps {
+  children: React.ReactNode;
+  className?: string;
+  size?: "sm" | "md" | "lg";
+  href?: string;
+  onClick?: () => void;
+  asChild?: boolean;
+  trackingName?: string; // For Vercel Analytics tracking
+}
+
+export function EpicCTAButton({ 
+  children, 
+  className, 
+  size = "md",
+  href,
+  onClick,
+  asChild = false,
+  trackingName
+}: EpicCTAButtonProps) {
+  const { trackInitiateCheckout } = useAnalytics();
+  
+  // Debug logging
+  useEffect(() => {
+    if (typeof window !== 'undefined' && trackingName) {
+      console.log(`Button ${trackingName} - href:`, href);
+    }
+  }, [href, trackingName]);
+  
+  // Generate checkout URL with UTM parameters and event_id if this is a checkout button
+  const finalHref = useMemo(() => {
+    // Only process checkout URLs on client side
+    if (typeof window === 'undefined') {
+      return href;
+    }
+    
+    if (href && (href.includes('checkout.oracleboxing.com') || href.includes('buy.stripe.com'))) {
+      // Get tracking data to add event_id to URL
+      const trackingData = getOrInitTrackingData();
+      let url = getCheckoutUrl(trackingName);
+      
+      // Add event_id to the URL
+      if (trackingData.event_id) {
+        const urlObj = new URL(url);
+        urlObj.searchParams.set('event_id', trackingData.event_id);
+        url = urlObj.toString();
+      }
+      
+      console.log(`Generated URL for ${trackingName}:`, url);
+      return url;
+    }
+    return href;
+  }, [href, trackingName]);
+  
+  // Check if this is a checkout button
+  const isCheckoutButton = useMemo(() => {
+    return trackingName && (href?.includes('buy.stripe.com') || href?.includes('checkout.oracleboxing.com'));
+  }, [trackingName, href]);
+  
+  const handleClick = (e?: React.MouseEvent) => {
+    // Track add_to_cart event when CTA button is clicked
+    if (trackingName) {
+      // GA4 Tracking
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'add_to_cart', {
+          currency: 'USD',
+          value: 197,
+          items: [{
+            item_id: '6WC',
+            item_name: '6-Week Challenge',
+            price: 197,
+            quantity: 1,
+            item_category: 'Training Program'
+          }]
+        });
+      }
+
+      // Facebook Pixel Tracking - Use AddToCart for CTA button clicks
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'AddToCart', {
+          content_ids: ['6WC'],
+          content_name: '6-Week Challenge',
+          content_type: 'product',
+          value: 197,
+          currency: 'USD',
+          button_location: trackingName
+        });
+      }
+
+      // Vercel Analytics
+      if (typeof window !== 'undefined' && (window as any).va) {
+        (window as any).va('track', 'add_to_cart', {
+          product: '6WC',
+          value: 197,
+          location: trackingName
+        });
+      }
+
+      console.log('Tracking AddToCart (Epic CTA):', {
+        value: 197,
+        location: trackingName
+      });
+    }
+
+    // Scroll to pricing section with smooth animation
+    if (typeof window !== 'undefined') {
+      const pricingSection = document.getElementById('pricing');
+      if (pricingSection) {
+        pricingSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Call onClick callback if provided
+    if (onClick) {
+      onClick();
+    }
+  };
+  const sizeClasses = {
+    sm: "min-h-9 px-5 text-sm py-2",
+    md: "min-h-10 px-6 text-sm py-2",
+    lg: "min-h-12 px-8 text-lg py-4"
+  };
+
+  const buttonContent = (
+    <>
+      <span className="font-bold">{children}</span>
+    </>
+  );
+
+  const buttonClasses = cn(
+    "inline-flex items-center justify-center",
+    "bg-[#26304a] hover:bg-[#1e293b]",
+    "text-white font-bold",
+    "rounded-lg",
+    "transition-all duration-200 ease-out",
+    "transform hover:scale-[1.02]",
+    "shadow-md hover:shadow-lg",
+    "cursor-pointer",
+    sizeClasses[size],
+    className
+  );
+
+  const buttonStyle = {
+    fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    cursor: 'pointer'
+  };
+
+  if (asChild) {
+    return (
+      <div className={buttonClasses} style={buttonStyle} onClick={handleClick}>
+        {buttonContent}
+      </div>
+    );
+  }
+
+  if (href) {
+    return (
+      <a href={finalHref} className={buttonClasses} style={buttonStyle} onClick={handleClick}>
+        {buttonContent}
+      </a>
+    );
+  }
+
+  return (
+    <button className={buttonClasses} style={buttonStyle} onClick={handleClick}>
+      {buttonContent}
+    </button>
+  );
+}

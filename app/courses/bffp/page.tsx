@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { VideoPlayer } from '@/components/VideoPlayer'
@@ -9,10 +10,10 @@ import { CourseCurriculum } from '@/components/CourseCurriculum'
 import { CourseModules } from '@/components/CourseModules'
 import { TestimonialSection } from '@/components/TestimonialSection'
 import { CoursePriceCard } from '@/components/CoursePriceCard'
-import { FAQSection } from '@/components/FAQSection'
+import { CourseFAQ } from '@/components/CourseFAQ'
 import { CourseNavigation } from '@/components/CourseNavigation'
 import { getProductById } from '@/lib/products'
-import { getRandomTestimonials } from '@/lib/testimonials'
+import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
 
 export default function BFFPPage() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -99,7 +100,13 @@ export default function BFFPPage() {
     }
   ]
 
-  const testimonials = getRandomTestimonials(6)
+  // Use stable testimonials for SSR, then randomize on client
+  const [testimonials, setTestimonials] = useState(globalTestimonials.slice(0, 6))
+
+  // Randomize testimonials after hydration to avoid mismatch
+  useEffect(() => {
+    setTestimonials(getRandomTestimonials(6))
+  }, [])
 
   const faqs = [
     {
@@ -211,20 +218,12 @@ export default function BFFPPage() {
       </section>
 
       {/* Learning Outcomes */}
-      <CourseCurriculum learningCards={learningCards} />
-
-      {/* CTA 3 */}
-      <section className="py-8 bg-gray-50">
-        <div className="text-center">
-          <a
-            href="#pricing"
-            onClick={scrollToPricing}
-            className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
-          >
-            JOIN NOW
-          </a>
-        </div>
-      </section>
+      <CourseCurriculum
+        learningCards={learningCards}
+        showButton={true}
+        buttonText="JOIN NOW"
+        onButtonClick={scrollToPricing}
+      />
 
       {/* Course Modules */}
       <div id="lessons">
@@ -245,7 +244,7 @@ export default function BFFPPage() {
       </div>
 
       {/* FAQ */}
-      <FAQSection faqs={faqs} />
+      <CourseFAQ />
 
       <Footer />
     </div>

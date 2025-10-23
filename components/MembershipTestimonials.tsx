@@ -21,7 +21,7 @@ export function MembershipTestimonials({ testimonials }: MembershipTestimonialsP
     <section className="py-12 sm:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-12 text-center">
-          Driven by results
+          Engineered for results
         </h2>
 
         {/* Mobile: Horizontal scrolling carousel */}

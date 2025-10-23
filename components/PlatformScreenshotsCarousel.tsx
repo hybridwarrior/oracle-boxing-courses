@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import { EpicCTAButton } from '@/components/EpicCTAButton'
 
 interface Screenshot {
   image: string
@@ -121,8 +122,7 @@ export function PlatformScreenshotsCarousel() {
             {screenshots.map((screenshot, index) => (
               <div
                 key={index}
-                className="snap-center"
-                style={{ width: '360px', maxWidth: '90vw' }}
+                className="snap-center w-[360px] md:w-[500px] lg:w-[600px] max-w-[90vw]"
               >
                 {/* Card Container */}
                 <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg flex flex-col h-full">
@@ -133,7 +133,7 @@ export function PlatformScreenshotsCarousel() {
                       alt={screenshot.title}
                       fill
                       className="object-cover"
-                      sizes="360px"
+                      sizes="(max-width: 768px) 360px, (max-width: 1024px) 500px, 600px"
                     />
                   </div>
 
@@ -150,6 +150,17 @@ export function PlatformScreenshotsCarousel() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* CTA Button */}
+        <div className="text-center mt-8">
+          <EpicCTAButton
+            size="lg"
+            className="min-h-[72px]"
+            trackingName="platform-screenshots"
+          >
+            <span className="text-lg sm:text-xl font-bold">Start the 6-Week Challenge →</span>
+          </EpicCTAButton>
         </div>
       </div>
 

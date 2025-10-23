@@ -1,7 +1,6 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useCart } from '@/contexts/CartContext'
 import { Product } from '@/lib/types'
 import { Check } from 'lucide-react'
 
@@ -12,12 +11,10 @@ interface CoursePriceCardProps {
 
 export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps) {
   const router = useRouter()
-  const { clearCart, addItem } = useCart()
 
   const handleEnroll = () => {
-    clearCart()
-    addItem(product)
-    router.push('/checkout')
+    // Direct URL routing - no cart needed
+    router.push(`/checkout?product=${product.id}&source=course-price-card`)
   }
 
   // Dynamic course name heading
@@ -38,9 +35,9 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
           {/* Logo */}
           <div className="flex justify-center mb-6 sm:mb-10">
             <img
-              src="https://media.oracleboxing.com/webp/Website/logo_site_white.webp"
+              src="https://media.oracleboxing.com/Website/long_white.png"
               alt="Oracle Boxing"
-              className="h-14 sm:h-20"
+              className="h-6 sm:h-8"
               onError={(e) => {
                 // Fallback if logo doesn't load
                 e.currentTarget.style.display = 'none'
@@ -67,7 +64,8 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
           {/* CTA Button - White with Red Text */}
           <button
             onClick={handleEnroll}
-            className="w-full py-5 sm:py-6 px-8 sm:px-12 bg-white text-[#26304a] font-black text-xl sm:text-2xl rounded-xl mb-6 sm:mb-10 uppercase tracking-wide min-h-[44px] transition-none shadow-lg"
+            className="w-full py-5 sm:py-6 px-8 sm:px-12 bg-white text-[#26304a] font-black text-xl sm:text-2xl rounded-xl mb-6 sm:mb-10 uppercase tracking-wide min-h-[44px] shadow-lg hover:bg-gray-50 transition-all duration-200"
+            style={{ cursor: 'pointer' }}
           >
             ACCESS NOW
           </button>

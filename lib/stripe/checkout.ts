@@ -1,5 +1,6 @@
 import { stripe } from './client'
 import { CartItem } from '@/lib/types'
+import { Currency, getStripePriceId } from '@/lib/currency'
 import Stripe from 'stripe'
 
 interface CustomerInfo {
@@ -23,6 +24,7 @@ interface CreateCheckoutSessionParams {
   successUrl: string
   cancelUrl: string
   customerInfo?: CustomerInfo
+  currency?: Currency
 }
 
 export async function createCheckoutSession({
@@ -31,12 +33,18 @@ export async function createCheckoutSession({
   successUrl,
   cancelUrl,
   customerInfo,
+  currency = 'USD',
 }: CreateCheckoutSessionParams): Promise<Stripe.Checkout.Session> {
-  // Convert cart items to Stripe line items
-  const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(item => ({
-    price: item.price_id,
-    quantity: item.quantity,
-  }))
+  // Convert cart items to Stripe line items, using correct price ID for currency
+  const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(item => {
+    // Get the correct Stripe price ID based on currency
+    const priceId = getStripePriceId(item.product, currency);
+
+    return {
+      price: priceId,
+      quantity: item.quantity,
+    };
+  })
 
   // Determine if this is a subscription or one-time payment
   const hasSubscription = items.some(item => item.product.recurring)
@@ -61,6 +69,13 @@ export async function createCheckoutSession({
     console.log('✅ Created Stripe Customer:', customerId)
   }
 
+  // ===================================================================
+  // CROSS-SELL LOGIC: Disabled - handled in order-bumps page
+  // ===================================================================
+  // Bundle upgrades are now handled in the order-bumps page before checkout
+  // This prevents duplicate bundle items and gives users clearer upgrade flow
+  const recommendedProducts: string[] = []
+
   // Base session params
   const sessionParams: Stripe.Checkout.SessionCreateParams = {
     mode,
@@ -83,12 +98,74 @@ export async function createCheckoutSession({
     },
   }
 
-  // Store customer info in metadata
-  if (customerInfo) {
-    sessionParams.metadata = {
-      customer_first_name: customerInfo.firstName || '',
-      customer_last_name: customerInfo.lastName || '',
-      customer_phone: customerInfo.phone || '',
+  // ===================================================================
+  // METADATA: Store customer info, funnel tracking, and recommended products
+  // ===================================================================
+  const mainProduct = items[0]?.product
+  const addOns = items.slice(1).map(i => i.product.metadata || i.product.id).join(',')
+
+  // Determine funnel type based on main product
+  let funnelType = 'course' // Default
+  let successPath = '/success/course'
+
+  if (mainProduct?.id === '6wc' || mainProduct?.metadata === '6wc') {
+    funnelType = '6wc'
+    successPath = '/success/6wc'
+  } else if (mainProduct?.id === 'bundle') {
+    funnelType = 'bundle'
+    successPath = '/success/course' // Bundle uses course success
+  } else if (mainProduct?.type === 'membership') {
+    funnelType = 'membership'
+    successPath = '/success/membership'
+  }
+
+  // Update success URL with correct path
+  sessionParams.success_url = `${successUrl.split('/success/')[0]}${successPath}?session_id={CHECKOUT_SESSION_ID}`
+
+  sessionParams.metadata = {
+    // Customer info
+    customer_first_name: customerInfo?.firstName || '',
+    customer_last_name: customerInfo?.lastName || '',
+    customer_phone: customerInfo?.phone || '',
+
+    // Funnel tracking
+    funnel_type: funnelType,
+    entry_product: mainProduct?.metadata || mainProduct?.id || '',
+    add_ons_included: addOns,
+
+    // Cross-sell tracking
+    recommended_products: recommendedProducts.join(','),
+
+    // Cart summary
+    cart_items: JSON.stringify(items.map(i => ({
+      id: i.product.id,
+      metadata: i.product.metadata,
+      quantity: i.quantity,
+      price: i.product.price,
+    }))),
+  }
+
+  // Add cross-sell recommendations using Stripe's adjustable quantity feature
+  if (recommendedProducts.length > 0 && mode === 'payment') {
+    // Add each recommended product as an adjustable quantity line item
+    const crossSellLineItems = recommendedProducts.map(priceId => ({
+      price: priceId,
+      adjustable_quantity: {
+        enabled: true,
+        minimum: 0,
+        maximum: 2,
+      },
+      quantity: 1, // Start at 1, customer can adjust (remove or keep)
+    }))
+
+    // Append cross-sell items to existing line items
+    sessionParams.line_items = [...line_items, ...crossSellLineItems]
+
+    // Add custom text to explain the optional bundle upgrade
+    sessionParams.custom_text = {
+      submit: {
+        message: 'Save $144 by upgrading to the complete system - or remove it to continue with your current selection'
+      }
     }
   }
 
@@ -136,3 +213,72 @@ export async function createCheckoutSession({
 
   return session
 }
+
+// ===================================================================
+// POST-PURCHASE UPSELL LOGIC (To be implemented in success page)
+// ===================================================================
+/*
+  After successful checkout, trigger upsells based on purchased products:
+
+  1. 6-WEEK CHALLENGE → No upsells (maintain refund clarity)
+
+  2. MEMBERSHIPS → Upsell: 1-Month 1-on-1 Coaching
+     - Use USD-only price: price_1SLLX4QNEdHwdojXfZImwLss
+     - Product ID: prod_THuQf0h3DatQUL
+     - Reason: Members are typically USD-based
+
+  3. COURSES (BFFP, Roadmap, Clinic) → Upsell: 1-Month 1-on-1 Coaching
+     - Use multi-currency price: price_1SLLY7QNEdHwdojXVriclpjV
+     - Product ID: prod_THuQf0h3DatQUL
+     - Downsell if declined: 6-Week Membership (price_1SLLTqQNEdHwdojXsQKz5qSZ)
+
+  4. BUNDLE → Upsell: 1-Month 1-on-1 Coaching
+     - Use multi-currency price: price_1SLLY7QNEdHwdojXVriclpjV
+     - Product ID: prod_THuQf0h3DatQUL
+     - No downsell (bundle already comprehensive)
+
+  Example implementation:
+
+  ```typescript
+  import { getProductByMetadata } from '@/lib/products'
+
+  async function showPostPurchaseUpsell(purchasedItems: CartItem[]) {
+    const mainProduct = purchasedItems[0].product
+    const coaching = getProductByMetadata('coach1')
+
+    // Determine which price ID to use
+    let coachingPriceId: string
+    let showDownsell = false
+
+    if (mainProduct.type === 'membership') {
+      // Use USD-only for membership upsells
+      coachingPriceId = coaching.price_ids.usd_membership_upsell
+    } else if (['bffp', 'roadmap', 'vault'].includes(mainProduct.id)) {
+      // Use multi-currency for course upsells
+      coachingPriceId = coaching.price_ids.multicurrency
+      showDownsell = true // Show 6-week membership if declined
+    } else if (mainProduct.id === 'bundle') {
+      // Use multi-currency for bundle upsells
+      coachingPriceId = coaching.price_ids.multicurrency
+    } else {
+      // 6WC or unknown - no upsell
+      return
+    }
+
+    // Show upsell modal/page
+    const accepted = await showUpsellModal({
+      product: coaching,
+      priceId: coachingPriceId,
+    })
+
+    // If declined and downsell applicable, show 6-week membership
+    if (!accepted && showDownsell) {
+      const sixWeekMembership = getProductByMetadata('6wm')
+      await showDownsellModal({
+        product: sixWeekMembership,
+        priceId: sixWeekMembership.stripe_price_id,
+      })
+    }
+  }
+  ```
+*/

@@ -5,6 +5,12 @@ import { Product } from '@/lib/types'
 import { CheckCircle, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
+// Helper function to convert markdown bold to HTML and clean up
+function formatDescription(text: string) {
+  // Convert **text** to <strong>text</strong>
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+}
+
 interface UpsellProps {
   product: Product
   sessionId: string
@@ -88,7 +94,7 @@ export function Upsell({ product, sessionId }: UpsellProps) {
           {product.description.split('\n').slice(0, 3).map((line, i) => (
             <p key={i} className="flex items-start gap-2">
               <span className="text-red-600">✓</span>
-              <span>{line}</span>
+              <span dangerouslySetInnerHTML={{ __html: formatDescription(line) }} />
             </p>
           ))}
         </div>

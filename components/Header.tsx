@@ -24,13 +24,10 @@ export function Header() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <Image
-              src="https://media.oracleboxing.com/webp/Website/logo_site_white.webp"
+            <img
+              src="https://media.oracleboxing.com/Website/long_white.png"
               alt="Oracle Boxing"
-              width={150}
-              height={50}
-              className="h-8 sm:h-12 w-auto"
-              priority
+              className="h-3 sm:h-5 w-auto"
             />
           </Link>
 
@@ -56,6 +53,12 @@ export function Header() {
               {coursesDropdownOpen && (
                 <div className="absolute top-full left-0 pt-2 w-64 z-50">
                   <div className="bg-black border border-gray-800 rounded-lg shadow-xl py-2">
+                    <Link
+                      href="/courses/bundle"
+                      className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-900 transition-colors border-2 border-white rounded mx-2 mb-2"
+                    >
+                      <div className="font-semibold">The Oracle Boxing Method</div>
+                    </Link>
                   <Link
                     href="/courses/bffp"
                     className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-900 transition-colors"
@@ -74,12 +77,6 @@ export function Header() {
                   >
                     <div className="font-semibold">Boxing Clinic Replays</div>
                   </Link>
-                    <Link
-                      href="/courses/bundle"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-900 transition-colors border-t border-gray-800"
-                    >
-                      <div className="font-semibold">The Oracle Boxing Method</div>
-                    </Link>
                   </div>
                 </div>
               )}
@@ -96,7 +93,7 @@ export function Header() {
               MEMBERSHIP
             </Link>
             <Link
-              href="/membership#pricing"
+              href="/6wc"
               className="px-4 py-2 border-2 border-red-800 text-white text-sm font-black rounded-lg uppercase tracking-wide hover:bg-red-800 transition-colors"
             >
               6-WEEK CHALLENGE
@@ -133,6 +130,17 @@ export function Header() {
                 {coursesDropdownOpen && (
                   <div className="mt-2 ml-4 flex flex-col space-y-2">
                     <Link
+                      href="/courses/bundle"
+                      onClick={closeMobileMenu}
+                      className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors border-2 border-white ${
+                        pathname === '/courses/bundle'
+                          ? 'text-white bg-[#26304a]'
+                          : 'text-gray-300 hover:text-white hover:bg-gray-900'
+                      }`}
+                    >
+                      The Oracle Boxing Method
+                    </Link>
+                    <Link
                       href="/courses/bffp"
                       onClick={closeMobileMenu}
                       className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors ${
@@ -165,17 +173,6 @@ export function Header() {
                     >
                       Boxing Clinic Replays
                     </Link>
-                    <Link
-                      href="/courses/bundle"
-                      onClick={closeMobileMenu}
-                      className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors border-t border-gray-800 ${
-                        pathname === '/courses/bundle'
-                          ? 'text-white bg-[#26304a]'
-                          : 'text-gray-300 hover:text-white hover:bg-gray-900'
-                      }`}
-                    >
-                      The Oracle Boxing Method
-                    </Link>
                   </div>
                 )}
               </div>
@@ -192,7 +189,7 @@ export function Header() {
                 MEMBERSHIP
               </Link>
               <Link
-                href="/membership#pricing"
+                href="/6wc"
                 onClick={closeMobileMenu}
                 className="px-4 py-3 border-2 border-red-800 text-white text-sm font-black rounded-lg uppercase tracking-wide hover:bg-red-800 transition-colors text-center"
               >

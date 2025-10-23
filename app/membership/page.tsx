@@ -6,75 +6,70 @@ import { Footer } from '@/components/Footer'
 import { MembershipTestimonials } from '@/components/MembershipTestimonials'
 import { getMemberships } from '@/lib/products'
 import { useRouter } from 'next/navigation'
-import { useCart } from '@/contexts/CartContext'
 import Image from 'next/image'
-import { Video, Users, Clock, BookOpen, Award, Target, TrendingUp, Heart, CheckCircle } from 'lucide-react'
+import { Video, Users, Clock, BookOpen, Award, Target, TrendingUp, Heart, CheckCircle, CreditCard, Smartphone, TrendingUp as Progress, ChevronDown } from 'lucide-react'
 
 export default function MembershipsPage() {
   const router = useRouter()
-  const { clearCart, addItem } = useCart()
   const memberships = getMemberships()
   const [selectedPlan, setSelectedPlan] = useState('membership-annual')
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   // Membership testimonials with profile pictures
   const testimonials = [
     {
-      name: "Rod Keher",
+      name: "Torey Goodall",
       role: "Community Member",
       content: "Doing pad work yesterday and multiple times the coach asked me what I've been doing as my balance and therefore power was noticeably improved - 100% down to applying all the learning here!",
-      image: "https://media.oracleboxing.com/Website/bffp_tn.webp"
+      image: "https://media.oracleboxing.com/Website/torey.jpg"
     },
     {
-      name: "Bev M",
+      name: "Harvey Swift",
       role: "Community Member",
       content: "The training here is excellent! I wasn't expecting so much high-level of observation and precise, personal guidance from the coaches. I'm already noticing how making a few subtle changes can produce big results.",
-      image: "https://media.oracleboxing.com/Website/phase1.webp"
+      image: "https://media.oracleboxing.com/Website/harvey.jpg"
     },
     {
       name: "Myles Suehiro",
       role: "Community Member",
       content: "Being part of this community has been an incredibly transformative experience for me. The guidance, encouragement, and camaraderie I've experienced here has made all the difference in my development as a boxer.",
-      image: "https://media.oracleboxing.com/Website/boxing_clinic.webp"
+      image: "https://media.oracleboxing.com/Website/luacs.jpg"
     },
     {
       name: "Charlie Snider",
       role: "Community Member",
       content: "You need to find a passion that you truly love and that you can truly set and reach goals for. For me it was boxing. Work tirelessly for those goals and become obsessed with hitting them.",
-      image: "https://media.oracleboxing.com/Website/bffp_tn.webp"
+      image: "https://media.oracleboxing.com/Website/charlie.jpg"
     },
     {
-      name: "Balid Hanif",
+      name: "Balal Hanif",
       role: "Community Member",
       content: "Just finished 2nd kinetic chain with Toni. The analysis, insight and explanation was amazing. I've been around boxing for over 50 years and have never had this experience.",
-      image: "https://media.oracleboxing.com/Website/phase1.webp"
+      image: "https://media.oracleboxing.com/Website/balal.jpg"
     },
     {
       name: "Sam Oliver",
       role: "Community Member",
       content: "A great presentation, well presented - nice work! I'm in the process of shifting my current paradigm and this really helps by adding an additional layer of confluence for me.",
-      image: "https://media.oracleboxing.com/Website/boxing_clinic.webp"
+      image: "https://media.oracleboxing.com/Website/niko.jpg"
     },
     {
       name: "Niclas Laux",
       role: "Community Member",
       content: "I think you saved my life! I am not sure right now how many things will change, but my mind completely changed for better! I was sure that I will learn here how to box, and that's for sure!",
-      image: "https://media.oracleboxing.com/Website/bffp_tn.webp"
+      image: "https://media.oracleboxing.com/Website/niclas.jpeg"
     },
     {
       name: "Bernardo D",
       role: "Community Member",
       content: "The Nervous System module was excellent. Control your breathing to control your central nervous system. Being relaxed allows you to perform better since relaxation removes tension.",
-      image: "https://media.oracleboxing.com/Website/phase1.webp"
+      image: "https://media.oracleboxing.com/Website/bernardo.jpeg"
     }
   ]
 
   const handleJoinNow = () => {
-    const selected = memberships.find(m => m.id === selectedPlan)
-    if (selected) {
-      clearCart()
-      addItem(selected)
-      router.push('/checkout')
-    }
+    // Direct URL routing - no cart needed
+    router.push(`/checkout?product=${selectedPlan}`)
   }
 
   const benefits = [
@@ -106,39 +101,102 @@ export default function MembershipsPage() {
     'Start progressing faster than you could have imagined'
   ]
 
+  const faqs = [
+    {
+      question: "What is the Full Access Membership?",
+      answer: "The Full Access Membership is Oracle Boxing's ongoing coaching and community program. It's where boxers train live with the coaches every week, get feedback on their clips, and continue building their skill after completing any of the courses or the 6-Week Challenge."
+    },
+    {
+      question: "What do I get with my membership?",
+      answer: "Live coaching calls twice per week with Oliver, Toni, and the team. Video feedback on your uploaded clips. Access to all call replays through the Recordings Vault. Community support via our private Skool group. Progress tracking and accountability tools."
+    },
+    {
+      question: "How much does it cost?",
+      answer: "Quarterly: $297 every 3 months\n6-Month: $497 every 6 months (save ~15%)\nAnnual: $897/year (save ~25%)\n\nAll prices are in USD and automatically renew unless cancelled. You can switch to monthly billing at $97/month after purchase."
+    },
+    {
+      question: "Can I cancel anytime?",
+      answer: "Yes. You can cancel your membership anytime from your account settings or by emailing team@oracleboxing.com. Your access will continue until the end of your current billing period."
+    },
+    {
+      question: "What happens if I cancel?",
+      answer: "You'll lose access to live calls, feedback, and the private community at the end of your billing cycle. However, any courses you've purchased separately remain in your account permanently."
+    },
+    {
+      question: "Is there a refund policy?",
+      answer: "Membership payments are non-refundable since they include live access and coaching time. You can, however, cancel future renewals anytime."
+    },
+    {
+      question: "What's the difference between membership and the 6-Week Challenge?",
+      answer: "The 6-Week Challenge is a short-term structured program with a refund guarantee if completed. The Membership is an ongoing coaching ecosystem where you continue to level up, refine your skills, and get direct feedback long-term."
+    },
+    {
+      question: "What's the difference between membership and the courses?",
+      answer: "Courses (like BFFP and The Oracle Boxing Method) teach the system — membership is where you train the system under live guidance and feedback."
+    },
+    {
+      question: "What are the membership tiers?",
+      answer: "Quarterly: Flexibility and short-term access.\nBi-Annual: Best for consistent improvement; includes discounted pricing.\nAnnual: Best overall value and bonuses like extended vault access."
+    },
+    {
+      question: "What are the optional add-ons?",
+      answer: "Lifetime Access (All Courses): $197 keep every course forever.\n1-Month 1-on-1 Coaching: $397 — four weeks of private Zoom coaching and custom training feedback."
+    },
+    {
+      question: "How do I join the calls?",
+      answer: "Once subscribed, you'll receive the Zoom links and calendar invites in your member dashboard and email each week. You can join from any device."
+    },
+    {
+      question: "What if I miss a call?",
+      answer: "All sessions are recorded and uploaded to the Recordings Vault, which is included in your membership. You can rewatch anytime."
+    },
+    {
+      question: "Who are the coaches?",
+      answer: "Your primary coaches are Oliver Betts, Coach Toni, and Coach Charlie."
+    },
+    {
+      question: "How do I get help with billing or access?",
+      answer: "Email team@oracleboxing.com for any support requests. Replies usually arrive within 24 hours (Mon–Fri)."
+    }
+  ]
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
 
       {/* Hero Section - Two Column */}
-      <section className="pt-16 sm:pt-24 pb-12 sm:pb-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="pt-12 sm:pt-16 lg:pt-24 pb-8 sm:pb-12 lg:pb-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             {/* Left Column - Text & CTA */}
             <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6">
                 Old School Boxing, New School System
               </h1>
-              <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-6 lg:mb-8 leading-relaxed">
                 Master the timeless fundamentals of boxing through modern coaching methods, cutting-edge movement science, and a supportive global community.
               </p>
 
               {/* Stats Badges */}
-              <div className="flex flex-wrap items-center gap-3 mb-6 sm:mb-8">
-                <div className="flex items-center gap-2 px-4 py-2 bg-red-50 border-2 border-red-600 rounded-full">
-                  <Award className="w-5 h-5 text-red-600" />
-                  <span className="font-bold text-gray-900">#1 Online Coaching Program</span>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6 lg:mb-8">
+                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-red-50 border-2 border-red-600 rounded-full">
+                  <Award className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
+                  <span className="text-xs sm:text-sm lg:text-base font-bold text-gray-900">#1 Online Coaching Program</span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 border-2 border-gray-300 rounded-full">
-                  <Users className="w-5 h-5 text-gray-700" />
-                  <span className="font-bold text-gray-900">300+ Members</span>
+                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-100 border-2 border-gray-300 rounded-full">
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+                  <span className="text-xs sm:text-sm lg:text-base font-bold text-gray-900">300+ Members</span>
                 </div>
               </div>
 
               {/* CTA Button */}
               <a
                 href="#pricing"
-                className="inline-block py-4 px-8 bg-[#26304a] text-white font-black text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-[#26304a] text-white font-black text-base sm:text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
               >
                 LET'S GET TO WORK
               </a>
@@ -146,19 +204,16 @@ export default function MembershipsPage() {
 
             {/* Right Column - Video */}
             <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-[300px] aspect-[9/16] bg-gray-900 rounded-3xl overflow-hidden shadow-2xl border-8 border-gray-800">
-                <Image
-                  src="https://media.oracleboxing.com/Website/bffp_tn.webp"
-                  alt="Oracle Boxing App Demo"
-                  fill
-                  className="object-cover"
-                  sizes="300px"
-                />
-                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                    <div className="w-0 h-0 border-l-[20px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1"></div>
-                  </div>
-                </div>
+              <div className="relative w-full max-w-[300px] aspect-[9/16] rounded-3xl overflow-hidden">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                >
+                  <source src="https://media.oracleboxing.com/Website/membership_hero.mp4" type="video/mp4" />
+                </video>
               </div>
             </div>
           </div>
@@ -166,25 +221,25 @@ export default function MembershipsPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-12 sm:py-16 bg-white">
+      <section className="py-8 sm:py-12 lg:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 text-center">
             Master boxing anytime, anywhere
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12">
+          <p className="text-sm sm:text-base lg:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-12">
             Everything you need to transform your boxing, accessible from any device
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon
               return (
-                <div key={index} className="text-center p-6 rounded-xl bg-gray-50 border border-gray-200">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-                    <Icon className="w-8 h-8 text-red-600" />
+                <div key={index} className="text-center p-4 sm:p-5 lg:p-6 rounded-xl bg-gray-50 border border-gray-200">
+                  <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#26304a]/10 rounded-full mb-3 sm:mb-4">
+                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-[#26304a]" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{benefit.title}</h3>
-                  <p className="text-gray-600">{benefit.description}</p>
+                  <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-1 sm:mb-2">{benefit.title}</h3>
+                  <p className="text-xs sm:text-sm lg:text-base text-gray-600">{benefit.description}</p>
                 </div>
               )
             })}
@@ -193,42 +248,57 @@ export default function MembershipsPage() {
       </section>
 
       {/* 6-Week Challenge Section */}
-      <section className="py-12 sm:py-16 bg-gray-50">
+      <section className="py-8 sm:py-12 lg:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             {/* Left Column - Text */}
             <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Transform in 6 Weeks
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6">
+                Try the 6-Week Challenge
               </h2>
-              <p className="text-lg text-gray-700 mb-4">
-                Join our intensive 6-week boxing challenge designed to dramatically improve your technique, conditioning, and ring IQ.
+              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 sm:mb-3 lg:mb-4">
+                Our 6-Week Challenge is designed to transform your boxing fundamentals with daily coaching, structured progression, and a supportive community.
               </p>
-              <p className="text-lg text-gray-700 mb-4">
-                This structured program combines daily coaching, progressive skill development, and community accountability to ensure you make real, measurable progress.
+              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 sm:mb-3 lg:mb-4">
+                We're so confident you'll see results that we offer a money-back guarantee. Complete the requirements and if you're not satisfied, we'll refund your investment—no questions asked.
               </p>
-              <p className="text-lg text-gray-700 mb-6">
-                Whether you're preparing for your first sparring session or looking to refine advanced techniques, this challenge will push you to new levels of boxing excellence.
+              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-4 sm:mb-5 lg:mb-6">
+                Join hundreds of boxers who've already transformed their skills and confidence in just 6 weeks.
               </p>
 
               <a
-                href="#pricing"
-                className="inline-block py-4 px-8 bg-[#26304a] text-white font-black text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
+                href="/6wc"
+                className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-[#26304a] text-white font-black text-base sm:text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
               >
                 START TODAY
               </a>
             </div>
 
-            {/* Right Column - Image */}
+            {/* Right Column - Bruno Testimonial */}
             <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full aspect-[16/9] bg-gray-900 rounded-xl overflow-hidden shadow-2xl">
-                <Image
-                  src="https://media.oracleboxing.com/Website/boxing_clinic.webp"
-                  alt="6-Week Challenge"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+              <div className="bg-gray-50 rounded-xl p-6 w-full max-w-md">
+                <div className="space-y-4">
+                  <div className="relative">
+                    <div className="text-orange-400 text-6xl font-serif absolute -left-4 -top-2">"</div>
+                    <blockquote className="text-base sm:text-lg text-gray-700 leading-relaxed px-8">
+                      I can genuinely SEE and FEEL the shift happening — and it's all been sparked by being part of Oracle Boxing. The value that Oliver, Jordan, and Toni bring is WAY BEYOND what I ever expected when I joined this challenge.
+                    </blockquote>
+                    <div className="text-orange-400 text-6xl font-serif absolute -right-4 -bottom-8">"</div>
+                  </div>
+                  <div className="flex items-center gap-4 mt-4">
+                    <img
+                      src="https://media.oracleboxing.com/Website/bruno.jpg"
+                      alt="Bruno Martins"
+                      className="w-16 h-16 rounded-full object-cover border-2 border-orange-500/30"
+                    />
+                    <div>
+                      <h4 className="text-gray-900 font-semibold text-base">Bruno Martins</h4>
+                      <p className="text-gray-400 text-sm leading-relaxed">
+                        6-Week Challenge Graduate
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -236,32 +306,49 @@ export default function MembershipsPage() {
       </section>
 
       {/* Results Section */}
-      <section className="py-12 sm:py-16 bg-white">
+      <section className="py-8 sm:py-12 lg:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 text-center">
             4 out of 5 members see incredible progress
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12">
+          <p className="text-sm sm:text-base lg:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-12">
             Real transformations from members who committed to the process
           </p>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            {[1, 2, 3, 4].map((index) => (
-              <div key={index} className="relative aspect-[9/16] bg-gray-900 rounded-xl overflow-hidden shadow-lg">
-                <Image
-                  src="https://media.oracleboxing.com/Website/bffp_tn.webp"
-                  alt={`Member transformation ${index}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                    <div className="w-0 h-0 border-l-[16px] border-l-white border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent ml-1"></div>
-                  </div>
-                </div>
+          {/* Desktop: Grid layout */}
+          <div className="hidden lg:grid lg:grid-cols-4 gap-6">
+            {['t_andre.mp4', 'sha-lyn.mp4', 't_keli.mp4', 't_charlie.mp4'].map((video, index) => (
+              <div key={index} className="relative aspect-[9/16] rounded-xl overflow-hidden">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                >
+                  <source src={`https://media.oracleboxing.com/Website/${video}`} type="video/mp4" />
+                </video>
               </div>
             ))}
+          </div>
+
+          {/* Mobile: Scrollable carousel */}
+          <div className="lg:hidden overflow-x-auto scrollbar-hide -mx-4 px-4">
+            <div className="flex gap-4 pb-4">
+              {['t_andre.mp4', 'sha-lyn.mp4', 't_keli.mp4', 't_charlie.mp4'].map((video, index) => (
+                <div key={index} className="relative flex-shrink-0 w-[280px] aspect-[9/16] rounded-xl overflow-hidden">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  >
+                    <source src={`https://media.oracleboxing.com/Website/${video}`} type="video/mp4" />
+                  </video>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -270,13 +357,13 @@ export default function MembershipsPage() {
       <MembershipTestimonials testimonials={testimonials} />
 
       {/* Pricing & How It Works Section - Combined */}
-      <section id="pricing" className="py-16 sm:py-20 bg-gray-50">
+      <section id="pricing" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Pricing Title */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 text-center">
             Join Oracle Boxing for as little as $2.46 per day!
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12">
+          <p className="text-sm sm:text-base lg:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-12">
             Choose the plan that fits your commitment level
           </p>
 
@@ -417,14 +504,14 @@ export default function MembershipsPage() {
 
                   {/* Mobile: 3 lines total */}
                   <div className="block sm:hidden">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Monthly</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Quarterly</h3>
                     <div className="flex items-center justify-between gap-4 mb-3">
                       <div>
-                        <div className="text-4xl font-black text-gray-900">$97</div>
-                        <div className="text-sm text-gray-600">Billed every month</div>
+                        <div className="text-4xl font-black text-gray-900">$297</div>
+                        <div className="text-sm text-gray-600">Billed every 3 months</div>
                       </div>
                       <div className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-center flex-shrink-0">
-                        <div className="text-xl font-bold text-gray-900">$97</div>
+                        <div className="text-xl font-bold text-gray-900">$99</div>
                         <div className="text-xs text-gray-600 whitespace-nowrap">per month</div>
                       </div>
                     </div>
@@ -433,12 +520,12 @@ export default function MembershipsPage() {
                   {/* Desktop: Same layout */}
                   <div className="hidden sm:block">
                     <div className="flex items-baseline justify-between gap-4 mb-3">
-                      <h3 className="text-2xl font-bold text-gray-900">Monthly</h3>
-                      <div className="text-4xl font-black text-gray-900">$97</div>
+                      <h3 className="text-2xl font-bold text-gray-900">Quarterly</h3>
+                      <div className="text-4xl font-black text-gray-900">$297</div>
                     </div>
-                    <div className="text-gray-600 mb-4">Billed every month</div>
+                    <div className="text-gray-600 mb-4">Billed every 3 months</div>
                     <div className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-center">
-                      <div className="text-2xl font-bold text-gray-900">$97</div>
+                      <div className="text-2xl font-bold text-gray-900">$99</div>
                       <div className="text-sm text-gray-600">per month</div>
                     </div>
                   </div>
@@ -448,18 +535,23 @@ export default function MembershipsPage() {
           </div>
 
           {/* Join Now Button */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-6 sm:mb-8">
             <button
               onClick={handleJoinNow}
-              className="py-5 px-12 bg-[#26304a] text-white font-black text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none"
+              className="py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#26304a] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
               JOIN NOW
             </button>
           </div>
 
+          {/* Monthly billing note */}
+          <p className="text-center text-gray-600 text-xs sm:text-sm mb-12 sm:mb-16 lg:mb-20">
+            You can switch to monthly billing at $97/month after purchase
+          </p>
+
           {/* How It Works Section */}
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-10 lg:mb-12 text-center">
               How it works
             </h2>
 
@@ -467,14 +559,10 @@ export default function MembershipsPage() {
             <div className="hidden md:grid md:grid-cols-3 gap-8 items-start relative">
               {/* Step 1 */}
               <div className="text-center">
-                <div className="relative w-full aspect-square mb-6 rounded-xl overflow-hidden bg-gray-200">
-                  <Image
-                    src="https://media.oracleboxing.com/Website/bffp_tn.webp"
-                    alt="Choose your subscription"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
+                <div className="flex justify-center mb-6">
+                  <div className="w-32 h-32 bg-[#26304a]/10 rounded-full flex items-center justify-center">
+                    <CreditCard className="w-16 h-16 text-[#26304a]" strokeWidth={1.5} />
+                  </div>
                 </div>
                 <p className="text-lg text-gray-900 font-semibold">
                   Choose your subscription and complete your purchase
@@ -482,23 +570,19 @@ export default function MembershipsPage() {
               </div>
 
               {/* Arrow 1 */}
-              <div className="absolute top-[25%] left-[30%] w-[15%] flex items-center justify-center">
+              <div className="absolute top-[15%] left-[33%] w-[10%] flex items-center justify-center">
                 <svg className="w-full h-8" viewBox="0 0 100 40" preserveAspectRatio="none">
-                  <path d="M 0 20 Q 50 20 100 20" stroke="#9CA3AF" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
-                  <polygon points="95,15 100,20 95,25" fill="#9CA3AF"/>
+                  <path d="M 0 20 Q 50 20 100 20" stroke="#000000" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
+                  <polygon points="95,15 100,20 95,25" fill="#000000"/>
                 </svg>
               </div>
 
               {/* Step 2 */}
               <div className="text-center">
-                <div className="relative w-full aspect-square mb-6 rounded-xl overflow-hidden bg-gray-200">
-                  <Image
-                    src="https://media.oracleboxing.com/Website/phase1.webp"
-                    alt="Login to portal"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
+                <div className="flex justify-center mb-6">
+                  <div className="w-32 h-32 bg-[#26304a]/10 rounded-full flex items-center justify-center">
+                    <Smartphone className="w-16 h-16 text-[#26304a]" strokeWidth={1.5} />
+                  </div>
                 </div>
                 <p className="text-lg text-gray-900 font-semibold">
                   Login to the portal and download the app
@@ -506,23 +590,19 @@ export default function MembershipsPage() {
               </div>
 
               {/* Arrow 2 */}
-              <div className="absolute top-[25%] left-[63%] w-[15%] flex items-center justify-center">
+              <div className="absolute top-[15%] left-[57%] w-[10%] flex items-center justify-center">
                 <svg className="w-full h-8" viewBox="0 0 100 40" preserveAspectRatio="none">
-                  <path d="M 0 20 Q 50 20 100 20" stroke="#9CA3AF" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
-                  <polygon points="95,15 100,20 95,25" fill="#9CA3AF"/>
+                  <path d="M 0 20 Q 50 20 100 20" stroke="#000000" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
+                  <polygon points="95,15 100,20 95,25" fill="#000000"/>
                 </svg>
               </div>
 
               {/* Step 3 */}
               <div className="text-center">
-                <div className="relative w-full aspect-square mb-6 rounded-xl overflow-hidden bg-gray-200">
-                  <Image
-                    src="https://media.oracleboxing.com/Website/boxing_clinic.webp"
-                    alt="Start progressing"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
+                <div className="flex justify-center mb-6">
+                  <div className="w-32 h-32 bg-[#26304a]/10 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-16 h-16 text-[#26304a]" strokeWidth={1.5} />
+                  </div>
                 </div>
                 <p className="text-lg text-gray-900 font-semibold">
                   Start progressing faster than you could have imagined
@@ -534,14 +614,10 @@ export default function MembershipsPage() {
             <div className="md:hidden space-y-8">
               {/* Step 1 */}
               <div className="text-center">
-                <div className="relative w-full aspect-square mb-4 rounded-xl overflow-hidden bg-gray-200">
-                  <Image
-                    src="https://media.oracleboxing.com/Website/bffp_tn.webp"
-                    alt="Choose your subscription"
-                    fill
-                    className="object-cover"
-                    sizes="100vw"
-                  />
+                <div className="flex justify-center mb-4">
+                  <div className="w-24 h-24 bg-[#26304a]/10 rounded-full flex items-center justify-center">
+                    <CreditCard className="w-12 h-12 text-[#26304a]" strokeWidth={1.5} />
+                  </div>
                 </div>
                 <p className="text-base text-gray-900 font-semibold">
                   Choose your subscription and complete your purchase
@@ -550,22 +626,18 @@ export default function MembershipsPage() {
 
               {/* Vertical Arrow */}
               <div className="flex justify-center">
-                <svg className="w-8 h-12" viewBox="0 0 40 100" preserveAspectRatio="none">
-                  <path d="M 20 0 Q 20 50 20 100" stroke="#9CA3AF" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
-                  <polygon points="15,95 20,100 25,95" fill="#9CA3AF"/>
+                <svg className="w-8 h-8" viewBox="0 0 40 100" preserveAspectRatio="none">
+                  <path d="M 20 0 Q 20 50 20 100" stroke="#000000" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
+                  <polygon points="15,95 20,100 25,95" fill="#000000"/>
                 </svg>
               </div>
 
               {/* Step 2 */}
               <div className="text-center">
-                <div className="relative w-full aspect-square mb-4 rounded-xl overflow-hidden bg-gray-200">
-                  <Image
-                    src="https://media.oracleboxing.com/Website/phase1.webp"
-                    alt="Login to portal"
-                    fill
-                    className="object-cover"
-                    sizes="100vw"
-                  />
+                <div className="flex justify-center mb-4">
+                  <div className="w-24 h-24 bg-[#26304a]/10 rounded-full flex items-center justify-center">
+                    <Smartphone className="w-12 h-12 text-[#26304a]" strokeWidth={1.5} />
+                  </div>
                 </div>
                 <p className="text-base text-gray-900 font-semibold">
                   Login to the portal and download the app
@@ -574,28 +646,60 @@ export default function MembershipsPage() {
 
               {/* Vertical Arrow */}
               <div className="flex justify-center">
-                <svg className="w-8 h-12" viewBox="0 0 40 100" preserveAspectRatio="none">
-                  <path d="M 20 0 Q 20 50 20 100" stroke="#9CA3AF" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
-                  <polygon points="15,95 20,100 25,95" fill="#9CA3AF"/>
+                <svg className="w-8 h-8" viewBox="0 0 40 100" preserveAspectRatio="none">
+                  <path d="M 20 0 Q 20 50 20 100" stroke="#000000" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
+                  <polygon points="15,95 20,100 25,95" fill="#000000"/>
                 </svg>
               </div>
 
               {/* Step 3 */}
               <div className="text-center">
-                <div className="relative w-full aspect-square mb-4 rounded-xl overflow-hidden bg-gray-200">
-                  <Image
-                    src="https://media.oracleboxing.com/Website/boxing_clinic.webp"
-                    alt="Start progressing"
-                    fill
-                    className="object-cover"
-                    sizes="100vw"
-                  />
+                <div className="flex justify-center mb-4">
+                  <div className="w-24 h-24 bg-[#26304a]/10 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-12 h-12 text-[#26304a]" strokeWidth={1.5} />
+                  </div>
                 </div>
                 <p className="text-base text-gray-900 font-semibold">
                   Start progressing faster than you could have imagined
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 sm:mb-8 lg:mb-12 text-center">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-3 sm:space-y-4">
+            {faqs.map((faq, index) => (
+              <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full flex items-center justify-between p-4 sm:p-5 lg:p-6 text-left bg-white hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 pr-4 sm:pr-6 lg:pr-8">
+                    {faq.question}
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 sm:w-5 sm:h-5 text-gray-500 flex-shrink-0 transition-transform ${
+                      openFaq === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {openFaq === index && (
+                  <div className="px-4 sm:px-5 lg:px-6 pb-4 sm:pb-5 lg:pb-6 bg-gray-50">
+                    <p className="text-xs sm:text-sm lg:text-base text-gray-700 whitespace-pre-line leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>

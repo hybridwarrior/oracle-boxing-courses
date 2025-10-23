@@ -1,86 +1,48 @@
 "use client";
-import {
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-  motion,
-} from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
 interface TimelineEntry {
   title: string;
   content: React.ReactNode;
 }
 
-export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
+interface TimelineProps {
+  data: TimelineEntry[];
+  cta?: React.ReactNode;
+}
 
-  useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height);
-    }
-  }, [ref]);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 10%", "end 50%"],
-  });
-
-  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+export const Timeline = ({ data, cta }: TimelineProps) => {
+  const fontFamily = 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
   return (
-    <div
-      className="w-full bg-white font-sans md:px-10 overflow-hidden"
-      ref={containerRef}
-    >
-      <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-900 text-center max-w-4xl mx-auto">
-          Three courses working together to take you from beginner to seriously good boxer.
+    <div className="w-full bg-gray-50 md:px-10 overflow-hidden" style={{ fontFamily }}>
+      <div className="max-w-4xl mx-auto pt-20 pb-8 px-4 md:px-8 lg:px-10">
+        <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-900 text-center" style={{ fontFamily }}>
+          Three courses working together to take you <span className="bg-yellow-200/80 text-black px-2 py-0.5">from beginner to seriously good boxer.</span>
         </h2>
       </div>
 
-      <div ref={ref} className="relative max-w-7xl mx-auto pb-20 px-4 md:px-8">
+      <div className="relative max-w-4xl mx-auto pb-12 px-4 md:px-8">
         {data.map((item, index) => (
           <div
             key={index}
-            className="flex justify-start pt-10 md:pt-40 md:gap-10"
+            className="mb-16 md:mb-24"
           >
-            <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full flex-shrink-0">
-              <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white flex items-center justify-center">
-                <div className="h-4 w-4 rounded-full bg-[#26304a] border border-[#26304a] p-2" />
-              </div>
-              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-gray-500">
-                {item.title}
-              </h3>
-            </div>
-
-            <div className="relative pl-20 pr-4 md:pl-4 w-full min-w-0">
-              <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-gray-500">
-                {item.title}
-              </h3>
-              {item.content}{" "}
+            <h3 className="text-xl md:text-3xl font-bold text-black mb-6 md:mb-8 text-left underline" style={{ fontFamily }}>
+              {item.title}
+            </h3>
+            <div className="text-base md:text-lg font-medium text-black" style={{ fontFamily }}>
+              {item.content}
             </div>
           </div>
         ))}
-        <div
-          style={{
-            height: height + "px",
-          }}
-          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-gray-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
-        >
-          <motion.div
-            style={{
-              height: heightTransform,
-              opacity: opacityTransform,
-            }}
-            className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-[#26304a] via-[#26304a] to-transparent from-[0%] via-[10%] rounded-full"
-          />
-        </div>
       </div>
+
+      {cta && (
+        <div className="text-center pb-20 px-4">
+          {cta}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,16 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createCheckoutSession } from '@/lib/stripe/checkout'
 import { CartItem } from '@/lib/types'
+import { Currency } from '@/lib/currency'
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { items, customerInfo }: { items: CartItem[], customerInfo?: any } = body
+    const { items, customerInfo, currency }: { items: CartItem[], customerInfo?: any, currency?: Currency } = body
 
     // Debug logging
     console.log('🔍 DEBUG: Stripe Secret Key loaded:', !!process.env.STRIPE_SECRET_KEY)
     console.log('🔍 DEBUG: Number of items in cart:', items?.length)
     console.log('🔍 DEBUG: Customer info provided:', !!customerInfo)
+    console.log('🔍 DEBUG: Currency:', currency || 'USD (default)')
 
     // Validate cart
     if (!items || items.length === 0) {
@@ -40,8 +42,9 @@ export async function POST(req: NextRequest) {
       items,
       hasPhysicalItems,
       successUrl: `${baseUrl}/success/{CHECKOUT_SESSION_ID}`,
-      cancelUrl: `${baseUrl}/checkout`,
+      cancelUrl: `${baseUrl}/`, // Changed to home page instead of /checkout
       customerInfo,
+      currency: currency || 'USD',
     })
 
     return NextResponse.json({ url: session.url })

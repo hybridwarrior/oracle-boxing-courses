@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { VideoPlayer } from '@/components/VideoPlayer'
@@ -7,13 +8,13 @@ import { CourseStats } from '@/components/CourseStats'
 import { WhoThisIsFor } from '@/components/WhoThisIsFor'
 import { TestimonialSection } from '@/components/TestimonialSection'
 import { CoursePriceCard } from '@/components/CoursePriceCard'
-import { FAQSection } from '@/components/FAQSection'
+import { CourseFAQ } from '@/components/CourseFAQ'
 import { CourseNavigation } from '@/components/CourseNavigation'
 import { BundleCourseCarousel } from '@/components/BundleCourseCarousel'
 import { BundleTimelineProcess } from '@/components/BundleTimelineProcess'
 import { PlatformScreenshotsCarousel } from '@/components/PlatformScreenshotsCarousel'
 import { getProductById } from '@/lib/products'
-import { getRandomTestimonials } from '@/lib/testimonials'
+import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
 
 export default function BundlePage() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -49,7 +50,13 @@ export default function BundlePage() {
     }
   ]
 
-  const testimonials = getRandomTestimonials(6)
+  // Use stable testimonials for SSR, then randomize on client
+  const [testimonials, setTestimonials] = useState(globalTestimonials.slice(0, 6))
+
+  // Randomize testimonials after hydration to avoid mismatch
+  useEffect(() => {
+    setTestimonials(getRandomTestimonials(6))
+  }, [])
 
   const faqs = [
     {
@@ -152,6 +159,9 @@ export default function BundlePage() {
         <TestimonialSection testimonials={testimonials} />
       </section>
 
+      {/* Who This Is For */}
+      <WhoThisIsFor courseName="The Oracle Boxing Method" personas={personas} />
+
       {/* Course Cards Carousel */}
       <section id="lessons">
         <BundleCourseCarousel />
@@ -170,25 +180,19 @@ export default function BundlePage() {
         </div>
       </section>
 
-      {/* Who This Is For */}
-      <WhoThisIsFor courseName="The Oracle Boxing Method" personas={personas} />
-
       {/* Timeline Process */}
       <section id="overview">
-        <BundleTimelineProcess />
-      </section>
-
-      {/* CTA After Timeline */}
-      <section className="py-8 bg-gray-50">
-        <div className="text-center">
-          <a
-            href="#pricing"
-            onClick={scrollToPricing}
-            className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
-          >
-            I WANT ACCESS
-          </a>
-        </div>
+        <BundleTimelineProcess
+          cta={
+            <a
+              href="#pricing"
+              onClick={scrollToPricing}
+              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+            >
+              I WANT ACCESS
+            </a>
+          }
+        />
       </section>
 
       {/* Platform Screenshots Carousel */}
@@ -200,7 +204,7 @@ export default function BundlePage() {
       </div>
 
       {/* FAQ */}
-      <FAQSection faqs={faqs} />
+      <CourseFAQ courseType="bundle" />
 
       <Footer />
     </div>

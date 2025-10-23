@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { VideoPlayer } from '@/components/VideoPlayer'
@@ -9,10 +10,10 @@ import { CourseCurriculum } from '@/components/CourseCurriculum'
 import { CourseModules } from '@/components/CourseModules'
 import { TestimonialSection } from '@/components/TestimonialSection'
 import { CoursePriceCard } from '@/components/CoursePriceCard'
-import { FAQSection } from '@/components/FAQSection'
+import { CourseFAQ } from '@/components/CourseFAQ'
 import { CourseNavigation } from '@/components/CourseNavigation'
 import { getProductById } from '@/lib/products'
-import { getRandomTestimonials } from '@/lib/testimonials'
+import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
 
 export default function RoadmapPage() {
   const scrollToPricing = (e: React.MouseEvent) => {
@@ -99,7 +100,13 @@ export default function RoadmapPage() {
     }
   ]
 
-  const testimonials = getRandomTestimonials(6)
+  // Use stable testimonials for SSR, then randomize on client
+  const [testimonials, setTestimonials] = useState(globalTestimonials.slice(0, 6))
+
+  // Randomize testimonials after hydration to avoid mismatch
+  useEffect(() => {
+    setTestimonials(getRandomTestimonials(6))
+  }, [])
 
   const faqs = [
     {
@@ -203,7 +210,12 @@ export default function RoadmapPage() {
       <WhoThisIsFor courseName="Boxing Roadmap" personas={personas} />
 
       {/* Learning Outcomes */}
-      <CourseCurriculum learningCards={learningCards} />
+      <CourseCurriculum
+        learningCards={learningCards}
+        showButton={true}
+        buttonText="JOIN NOW"
+        onButtonClick={scrollToPricing}
+      />
 
       {/* Course Modules */}
       <section id="lessons">
@@ -224,7 +236,7 @@ export default function RoadmapPage() {
       </div>
 
       {/* FAQ */}
-      <FAQSection faqs={faqs} />
+      <CourseFAQ courseType="roadmap" />
 
       <Footer />
     </div>

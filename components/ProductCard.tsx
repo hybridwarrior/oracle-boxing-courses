@@ -6,6 +6,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Product, MerchVariant } from '@/lib/types'
 import { useCart } from '@/contexts/CartContext'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getProductPrice, formatPrice, isMembershipProduct } from '@/lib/currency'
 import { toast } from 'sonner'
 
 interface ProductCardProps {
@@ -18,7 +20,15 @@ export function ProductCard({ product }: ProductCardProps) {
     product.variants?.[0]
   )
   const { addItem, clearCart } = useCart()
+  const { currency } = useCurrency()
   const router = useRouter()
+
+  // Get price in selected currency
+  const isMembership = isMembershipProduct(product.metadata)
+  const convertedPrice = isMembership
+    ? product.price
+    : getProductPrice(product.metadata, currency) || product.price
+  const displayCurrency = isMembership ? 'USD' : currency
 
   // Map product IDs to course detail pages
   const courseDetailPages: Record<string, string> = {
@@ -73,8 +83,11 @@ export function ProductCard({ product }: ProductCardProps) {
               {product.title}
             </h3>
             <p className="text-2xl font-bold text-red-600">
-              ${product.price}
+              {formatPrice(convertedPrice, displayCurrency)}
               {product.recurring && <span className="text-sm">/{product.interval}</span>}
+              {isMembership && currency !== 'USD' && (
+                <span className="text-xs text-gray-500 block mt-1">USD only</span>
+              )}
             </p>
           </div>
 

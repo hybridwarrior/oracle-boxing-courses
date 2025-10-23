@@ -22,9 +22,13 @@ export async function POST(req: NextRequest) {
     // Get the original checkout session
     console.log('🔍 UPSELL: Retrieving session:', session_id)
     const session = await stripe.checkout.sessions.retrieve(session_id, {
-      expand: ['payment_intent', 'subscription']
+      expand: ['payment_intent', 'subscription', 'payment_intent.latest_charge']
     })
     console.log('🔍 UPSELL: Session retrieved successfully')
+
+    // Get the original currency from the session
+    const originalCurrency = session.currency || 'usd'
+    console.log('🔍 UPSELL: Original purchase currency:', originalCurrency)
 
     console.log('🔍 Session retrieved:', {
       id: session.id,
@@ -85,23 +89,22 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Get product details
-    const product = products.find(p => p.id === product_id)
-    if (!product) {
-      return NextResponse.json(
-        { error: 'Product not found' },
-        { status: 404 }
-      )
-    }
+    // Get the price from Stripe to determine if it's recurring
+    console.log('🔍 UPSELL: Retrieving price from Stripe:', price_id)
+    const priceObj = await stripe.prices.retrieve(price_id)
+    const isRecurring = priceObj.type === 'recurring'
 
-    console.log('🔍 UPSELL: Product details:', {
-      id: product.id,
-      recurring: product.recurring,
-      interval: product.interval,
+    console.log('🔍 UPSELL: Price details:', {
+      price_id,
+      priceCurrency: priceObj.currency,
+      originalCurrency,
+      isRecurring,
+      type: priceObj.type,
+      currency_options: priceObj.currency_options ? Object.keys(priceObj.currency_options) : []
     })
 
     // Check if this is a subscription (recurring) product
-    if (product.recurring) {
+    if (isRecurring) {
       // Create a subscription for recurring products
       console.log('🔍 UPSELL: Creating subscription')
 
@@ -137,12 +140,32 @@ export async function POST(req: NextRequest) {
         status: subscription.status,
       })
     } else {
-      // Create a one-time payment for non-recurring products
-      console.log('🔍 UPSELL: Creating one-time payment')
+      // Create a one-time payment for non-recurring products using multi-currency price
+      console.log('🔍 UPSELL: Creating one-time payment with multi-currency price')
+
+      // Currency-specific pricing (in cents)
+      const currencyPricing: Record<string, number> = {
+        'usd': 39700,  // $397.00
+        'gbp': 31700,  // £317.00
+        'eur': 36500,  // €365.00
+        'cad': 53800,  // CA$538.00
+        'aud': 59500,  // A$595.00
+        'aed': 146500, // AED 1,465.00
+      };
+
+      const lowerCurrency = originalCurrency.toLowerCase();
+      const amount = currencyPricing[lowerCurrency] || 39700; // Default to USD if currency not found
+
+      console.log('🔍 UPSELL: Final charge details:', {
+        amount,
+        currency: originalCurrency,
+        customer: customerId,
+        amountInMajorUnit: (amount / 100).toFixed(2)
+      });
 
       const upsellPaymentIntent = await stripe.paymentIntents.create({
-        amount: product.price * 100, // Convert to cents
-        currency: 'usd',
+        amount: amount,
+        currency: originalCurrency,
         customer: customerId,
         payment_method: paymentMethodId,
         off_session: true,
@@ -151,6 +174,7 @@ export async function POST(req: NextRequest) {
           source: 'upsell',
           original_session_id: session_id,
           product_id: product_id,
+          price_id: price_id,
         },
       })
 

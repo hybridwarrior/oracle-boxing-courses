@@ -143,7 +143,7 @@ export function BundleCourseCarousel() {
         </h2>
 
         {/* Subtitle */}
-        <p className="text-lg sm:text-xl text-gray-600 mb-12 text-center max-w-4xl mx-auto leading-relaxed">
+        <p className="text-lg sm:text-xl text-black mb-12 text-center max-w-4xl mx-auto leading-relaxed">
           Combining the theoretical mastery of Boxing from First Principles, the structured progression of the Boxing Roadmap, and the practical wisdom of the Boxing Clinic, this bundle creates a complete toolkit for becoming a seriously good boxer.
         </p>
 

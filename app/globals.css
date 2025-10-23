@@ -56,6 +56,52 @@
   font-display: swap;
 }
 
+/* ClashDisplay Font Family */
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Variable.woff2') format('woff2-variations'),
+       url('/fonts/ClashDisplay/ClashDisplay-Variable.woff') format('woff');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Regular.woff2') format('woff2'),
+       url('/fonts/ClashDisplay/ClashDisplay-Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Medium.woff2') format('woff2'),
+       url('/fonts/ClashDisplay/ClashDisplay-Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Semibold.woff2') format('woff2'),
+       url('/fonts/ClashDisplay/ClashDisplay-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Bold.woff2') format('woff2'),
+       url('/fonts/ClashDisplay/ClashDisplay-Bold.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
 /* Apply Satoshi to all elements */
 * {
   font-family: 'Satoshi', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
