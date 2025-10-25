@@ -18,7 +18,7 @@ export interface Product {
   stripe_product_id: string
   image: string
   recurring?: boolean
-  interval?: 'month' | 'year' | '6 months'
+  interval?: 'month' | 'year' | '6 months' | '3 months'
   variants?: MerchVariant[]
   // Metadata for tracking and funnel logic
   metadata?: string // Short identifier (e.g., 'bffp', '6wc', 'obm')
@@ -30,6 +30,7 @@ export interface Product {
     aud?: string
     cad?: string
     aed?: string
+    [key: string]: string | undefined // Allow additional keys for special cases
   }
   // Multi-currency prices (optional - for display purposes)
   prices?: {

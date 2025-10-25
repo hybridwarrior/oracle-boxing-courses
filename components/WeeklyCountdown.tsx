@@ -32,7 +32,7 @@ export function WeeklyCountdown() {
       
       // Create target time in Eastern timezone
       // Using ISO string format with Eastern timezone offset
-      const isDST = (targetDate) => {
+      const isDST = (targetDate: Date): boolean => {
         const jan = new Date(targetDate.getFullYear(), 0, 1).getTimezoneOffset()
         const jul = new Date(targetDate.getFullYear(), 6, 1).getTimezoneOffset()
         return Math.max(jan, jul) !== targetDate.getTimezoneOffset()

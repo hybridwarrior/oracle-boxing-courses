@@ -53,7 +53,8 @@ export const PRODUCT_PRICES: Record<string, Record<Currency, number>> = {
 // Membership products (USD only)
 export const MEMBERSHIP_PRODUCTS = ['memm', 'mem6', 'mema', 'ltall_297', 'ltall_197'];
 
-export const isMembershipProduct = (metadata: string): boolean => {
+export const isMembershipProduct = (metadata?: string): boolean => {
+  if (!metadata) return false;
   return MEMBERSHIP_PRODUCTS.includes(metadata);
 };
 
@@ -80,7 +81,12 @@ export const formatPrice = (
   return `${config.symbol}${formattedAmount}`;
 };
 
-export const getProductPrice = (metadata: string, currency: Currency): number | null => {
+export const getProductPrice = (metadata?: string, currency: Currency = 'USD'): number | null => {
+  // Return null if no metadata provided
+  if (!metadata) {
+    return null;
+  }
+
   // Membership products are always USD only
   if (isMembershipProduct(metadata)) {
     return null;
