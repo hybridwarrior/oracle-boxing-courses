@@ -5,6 +5,7 @@ import { Currency, detectUserCurrency } from '@/lib/currency';
 
 interface CurrencyContextType {
   currency: Currency;
+  setCurrency: (currency: Currency) => void;
   isLoading: boolean;
 }
 
@@ -44,7 +45,7 @@ export const CurrencyProvider: React.FC<CurrencyProviderProps> = ({ children }) 
   }, []);
 
   return (
-    <CurrencyContext.Provider value={{ currency, isLoading }}>
+    <CurrencyContext.Provider value={{ currency, setCurrency: setCurrencyState, isLoading }}>
       {children}
     </CurrencyContext.Provider>
   );
