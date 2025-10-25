@@ -53,22 +53,22 @@ export default function RoadmapPage() {
     {
       emoji: '📐',
       text: 'Build technical form, clean mechanics, and control from the ground up.',
-      imageUrl: 'https://media.oracleboxing.com/Website/tbr_course1.png'
+      imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/tbr_course1.webp'
     },
     {
       emoji: '🛡️',
       text: 'Master defence and movement that keep you safe while staying sharp.',
-      imageUrl: 'https://media.oracleboxing.com/Website/tbr_course2.png'
+      imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/tbr_course2.webp'
     },
     {
       emoji: '👟',
       text: 'Develop explosive footwork that connects balance with power.',
-      imageUrl: 'https://media.oracleboxing.com/Website/tbr_course22.png'
+      imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/tbr_course22.webp'
     },
     {
       emoji: '🎭',
       text: 'Blend attack, defence, and rhythm into one flowing style.',
-      imageUrl: 'https://media.oracleboxing.com/Website/tbr_course4.png'
+      imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/tbr_course4.webp'
     }
   ]
 

@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Confetti } from '@/components/Confetti';
+import Confetti from '@/components/Confetti';
 import { CheckCircle, Mail, Users } from 'lucide-react';
 
 export default function ChallengeSuccessPage() {

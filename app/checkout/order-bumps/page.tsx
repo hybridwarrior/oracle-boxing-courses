@@ -236,7 +236,7 @@ export default function OrderBumpsPage() {
         {/* Logo */}
         <div className="flex justify-center mb-4">
           <img
-            src="https://media.oracleboxing.com/Website/long_black.png"
+            src="https://media.oracleboxing.com/Website/optimized/logos/long_black-large.webp"
             alt="Oracle Boxing"
             className="h-4"
           />

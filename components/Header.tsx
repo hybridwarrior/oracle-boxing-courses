@@ -25,7 +25,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <img
-              src="https://media.oracleboxing.com/Website/long_white.png"
+              src="https://media.oracleboxing.com/Website/optimized/logos/long_white-large.webp"
               alt="Oracle Boxing"
               className="h-3 sm:h-5 w-auto"
             />

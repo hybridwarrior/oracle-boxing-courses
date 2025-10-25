@@ -45,7 +45,7 @@ All 2024–2025 replays (Jan → Oct) + archives from the Boxing Clinic category
     id: 'boxing-from-first-principles',
     title: 'Boxing from First Principles',
     price: 297,
-    image: 'https://media.oracleboxing.com/Website/bffp_tn.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn.webp',
     description: `**SENTIENCE — The Mind of the Fighter**
 Learn how to think, feel, and perform like a boxer. Shift your paradigm for success, build mental clarity, and access flow on command. Understand emotional control, meditation, and how to enter the zone during performance.
 *Focus: Identity · Flow State · Presence · Mental Resilience*
@@ -76,7 +76,7 @@ Build the engine that powers it all. Train breathing, conditioning, nervous syst
     id: 'boxing-roadmap',
     title: 'Boxing Roadmap',
     price: 147,
-    image: 'https://media.oracleboxing.com/Website/phase1.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/phase1.webp',
     description: 'Complete 5-phase boxing training system from fundamentals to mastery.',
     isRoadmap: true,
     stripeUrl: 'https://checkout.oracleboxing.com/b/dRm3cw5NK78v5K33RjgQE2c'
@@ -85,7 +85,7 @@ Build the engine that powers it all. Train breathing, conditioning, nervous syst
     id: 'complete-bundle',
     title: 'Complete Bundle',
     price: 397,
-    image: 'https://media.oracleboxing.com/Website/bffp_tn.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn.webp',
     description: `**Get everything. Master boxing from first principles to real application.**
 
 **This bundle includes:**
@@ -107,7 +107,7 @@ export const roadmapPhases: Phase[] = [
   {
     id: 1,
     title: 'PHASE I — Fundamentals & Form',
-    image: 'https://media.oracleboxing.com/Website/phase1.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/phase1.webp',
     focus: 'Shape · Rotation · Relaxation · Linking punches',
     outcome: 'Technically clean movement and form.',
     description: `**Build your base.**
@@ -117,7 +117,7 @@ By the end, you'll move smoothly, punch correctly, and link basic combos with fl
   {
     id: 2,
     title: 'PHASE II — Defence, Range & Sparring Basics',
-    image: 'https://media.oracleboxing.com/Website/phase2.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/phase2.webp',
     focus: 'Range · Defence · Pendulum Steps · Flow',
     outcome: 'Confidence in distance, rhythm, and reactive defence.',
     description: `**Add movement and defence.**
@@ -127,7 +127,7 @@ Start shadow sparring and understand the flow of boxing.`
   {
     id: 3,
     title: 'PHASE III — Dynamic Footwork & Balance',
-    image: 'https://media.oracleboxing.com/Website/phase3.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/phase3.webp',
     focus: 'Shifting · Drop Steps · Balance · Rotation',
     outcome: 'Mobility and power without losing form.',
     description: `**Learn how to pivot, shift, and plant power with balance.**
@@ -137,7 +137,7 @@ Begin connecting power and flow through the feet.`
   {
     id: 4,
     title: 'PHASE IV — Defensive Mastery & Feints',
-    image: 'https://media.oracleboxing.com/Website/phase4.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/phase4.webp',
     focus: 'Pulls · Weaves · Lay Back · Feints',
     outcome: 'Fluid defensive reactions and deceptive offence.',
     description: `**Layer your defence.**
@@ -147,7 +147,7 @@ Learn feints to disguise intent and create openings.`
   {
     id: 5,
     title: 'PHASE V — Precision & Application',
-    image: 'https://media.oracleboxing.com/Website/phase5.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/phase5.webp',
     focus: 'Punch Mastery · Stepping · Slipping · Rolling',
     outcome: 'Fully integrated technique ready for sparring and refinement.',
     description: `**Perfect every punch and apply movement to them.**

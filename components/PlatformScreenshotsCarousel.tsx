@@ -12,27 +12,27 @@ interface Screenshot {
 
 const screenshots: Screenshot[] = [
   {
-    image: 'https://media.oracleboxing.com/Website/inside1.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside1.webp',
     title: 'All Your Courses in One Place',
     subtitle: 'Access all three courses from a single organized dashboard'
   },
   {
-    image: 'https://media.oracleboxing.com/Website/inside2.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside2.webp',
     title: 'Deep-Dive Video Lessons',
     subtitle: 'Follow structured modules with detailed video demonstrations and theory'
   },
   {
-    image: 'https://media.oracleboxing.com/Website/inside3.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside3.webp',
     title: 'Follow-Along Workouts',
     subtitle: 'Train with phase-by-phase drills and structured workout progressions'
   },
   {
-    image: 'https://media.oracleboxing.com/Website/inside4.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside4.webp',
     title: 'Powerful Search Feature',
     subtitle: 'Find any technique, concept, or drill instantly across all courses'
   },
   {
-    image: 'https://media.oracleboxing.com/Website/phone_mockup1.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/screenshots/phone_mockup1.webp',
     title: 'Train Anywhere, Anytime',
     subtitle: 'Full mobile access means you can learn and train from any device'
   }
@@ -159,7 +159,7 @@ export function PlatformScreenshotsCarousel() {
             className="min-h-[72px]"
             trackingName="platform-screenshots"
           >
-            <span className="text-lg sm:text-xl font-bold">Start the 6-Week Challenge →</span>
+            <span className="text-lg sm:text-xl font-bold">I WANT ACCESS</span>
           </EpicCTAButton>
         </div>
       </div>

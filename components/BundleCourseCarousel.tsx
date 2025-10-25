@@ -24,7 +24,7 @@ const courses: BundleCourse[] = [
     id: 'bffp',
     title: 'Boxing from First Principles',
     value: '$297 Value',
-    image: 'https://media.oracleboxing.com/Website/bffp_tn5.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp',
     description: 'The science of boxing, made simple. Master the conceptual framework of boxing through mind, body mechanics, tactics, and conditioning.',
     modules: [
       {
@@ -58,7 +58,7 @@ const courses: BundleCourse[] = [
     id: 'roadmap',
     title: 'Boxing Roadmap',
     value: '$147 Value',
-    image: 'https://media.oracleboxing.com/Website/tbrtn5hq.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/tbrtn5hq-large.webp',
     description: 'Your complete 5-phase training system. Follow structured progressions from fundamentals to mastery with clear drills and techniques.',
     modules: [
       {
@@ -92,7 +92,7 @@ const courses: BundleCourse[] = [
     id: 'clinic',
     title: 'Boxing Clinic Replays',
     value: '$97 Value',
-    image: 'https://media.oracleboxing.com/Website/boxing_clinic.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: 'Learn from live coaching Q&A. Watch Oliver & Toni answer real student questions covering every aspect of boxing. Updated monthly.',
     modules: [
       {

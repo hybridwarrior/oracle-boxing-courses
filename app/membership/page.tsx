@@ -21,49 +21,49 @@ export default function MembershipsPage() {
       name: "Torey Goodall",
       role: "Community Member",
       content: "Doing pad work yesterday and multiple times the coach asked me what I've been doing as my balance and therefore power was noticeably improved - 100% down to applying all the learning here!",
-      image: "https://media.oracleboxing.com/Website/torey.jpg"
+      image: "https://media.oracleboxing.com/Website/optimized/profiles/torey-256.webp"
     },
     {
       name: "Harvey Swift",
       role: "Community Member",
       content: "The training here is excellent! I wasn't expecting so much high-level of observation and precise, personal guidance from the coaches. I'm already noticing how making a few subtle changes can produce big results.",
-      image: "https://media.oracleboxing.com/Website/harvey.jpg"
+      image: "https://media.oracleboxing.com/Website/optimized/profiles/harvey-256.webp"
     },
     {
       name: "Myles Suehiro",
       role: "Community Member",
       content: "Being part of this community has been an incredibly transformative experience for me. The guidance, encouragement, and camaraderie I've experienced here has made all the difference in my development as a boxer.",
-      image: "https://media.oracleboxing.com/Website/luacs.jpg"
+      image: "https://media.oracleboxing.com/Website/optimized/profiles/luacs-256.webp"
     },
     {
       name: "Charlie Snider",
       role: "Community Member",
       content: "You need to find a passion that you truly love and that you can truly set and reach goals for. For me it was boxing. Work tirelessly for those goals and become obsessed with hitting them.",
-      image: "https://media.oracleboxing.com/Website/charlie.jpg"
+      image: "https://media.oracleboxing.com/Website/optimized/profiles/charlie-256.webp"
     },
     {
       name: "Balal Hanif",
       role: "Community Member",
       content: "Just finished 2nd kinetic chain with Toni. The analysis, insight and explanation was amazing. I've been around boxing for over 50 years and have never had this experience.",
-      image: "https://media.oracleboxing.com/Website/balal.jpg"
+      image: "https://media.oracleboxing.com/Website/optimized/profiles/balal-256.webp"
     },
     {
       name: "Sam Oliver",
       role: "Community Member",
       content: "A great presentation, well presented - nice work! I'm in the process of shifting my current paradigm and this really helps by adding an additional layer of confluence for me.",
-      image: "https://media.oracleboxing.com/Website/niko.jpg"
+      image: "https://media.oracleboxing.com/Website/optimized/profiles/niko-256.webp"
     },
     {
       name: "Niclas Laux",
       role: "Community Member",
       content: "I think you saved my life! I am not sure right now how many things will change, but my mind completely changed for better! I was sure that I will learn here how to box, and that's for sure!",
-      image: "https://media.oracleboxing.com/Website/niclas.jpeg"
+      image: "https://media.oracleboxing.com/Website/optimized/profiles/niclas-256.webp"
     },
     {
       name: "Bernardo D",
       role: "Community Member",
       content: "The Nervous System module was excellent. Control your breathing to control your central nervous system. Being relaxed allows you to perform better since relaxation removes tension.",
-      image: "https://media.oracleboxing.com/Website/bernardo.jpeg"
+      image: "https://media.oracleboxing.com/Website/optimized/profiles/bernardo-256.webp"
     }
   ]
 
@@ -287,7 +287,7 @@ export default function MembershipsPage() {
                   </div>
                   <div className="flex items-center gap-4 mt-4">
                     <img
-                      src="https://media.oracleboxing.com/Website/bruno.jpg"
+                      src="https://media.oracleboxing.com/Website/optimized/profiles/bruno-256.webp"
                       alt="Bruno Martins"
                       className="w-16 h-16 rounded-full object-cover border-2 border-orange-500/30"
                     />

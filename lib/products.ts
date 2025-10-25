@@ -13,7 +13,7 @@ export const products: Product[] = [
     metadata: 'obm',
     stripe_product_id: 'prod_THsui65fQm9N6o',
     stripe_price_id: 'price_1SLLSAQNEdHwdojXPF01j36I',
-    image: 'https://media.oracleboxing.com/Website/obm_tn.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/obm_tn-large.webp',
     shortDescription: 'Every Course, Every Call, Every System, All in One Bundle.',
     perfectFor: 'Serious boxers who want to master everything, fast',
     moduleCount: 5,
@@ -40,7 +40,7 @@ Complete access to the entire Oracle Boxing system — theory, technique, and ta
     metadata: 'bffp',
     stripe_product_id: 'prod_THsl9Np6lVlAPp',
     stripe_price_id: 'price_1SLLMGQNEdHwdojXcJB9yqAt',
-    image: 'https://media.oracleboxing.com/Website/bffp_tn5.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp',
     shortDescription: 'The Science of Boxing, Made Simple.',
     perfectFor: 'Beginners who crave a deep understanding',
     moduleCount: 5,
@@ -72,7 +72,7 @@ Develop discipline, leadership, and long-term mastery mindset.`,
     metadata: 'brdmp',
     stripe_product_id: 'prod_THsnVY468QZZqW',
     stripe_price_id: 'price_1SLLNdQNEdHwdojXYN9j0mFy',
-    image: 'https://media.oracleboxing.com/Website/tbrtn5hq.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/tbrtn5hq-large.webp',
     shortDescription: 'Your Full 5-Month Boxing Curriculum: Technique, Drills, and Workouts.',
     perfectFor: 'Beginners who want structure from first punch to sparring',
     weeks: 20,
@@ -99,7 +99,7 @@ Master every aspect of boxing technique through structured progression.`,
     interval: '3 months',
     stripe_product_id: 'prod_THsviAkmOBiKx4',
     stripe_price_id: 'price_1SLJ9jQNEdHwdojXeX6HtBU3',
-    image: 'https://media.oracleboxing.com/Website/boxing_clinic.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: `**Quarterly access to live coaching, community, and all courses**
 
 ✓ Weekly live coaching calls with Oliver & Toni
@@ -122,7 +122,7 @@ Transform your boxing with ongoing expert guidance.`,
     interval: '6 months',
     stripe_product_id: 'prod_THsviAkmOBiKx4',
     stripe_price_id: 'price_1SLMIWQNEdHwdojXMLLS6yhP',
-    image: 'https://media.oracleboxing.com/Website/boxing_clinic.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: `**6 months of access — save vs quarterly**
 
 ✓ Everything in Quarterly Membership
@@ -144,7 +144,7 @@ Best for dedicated students ready to transform their boxing.`,
     interval: 'year',
     stripe_product_id: 'prod_THsviAkmOBiKx4',
     stripe_price_id: 'price_1SLMJzQNEdHwdojXPJkBIhBN',
-    image: 'https://media.oracleboxing.com/Website/boxing_clinic.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: `**Annual membership — best value**
 
 ✓ Everything in Quarterly Membership
@@ -203,7 +203,7 @@ Perfect for beginners or boxers who want rapid improvement with accountability.`
     metadata: 'rcv',
     stripe_product_id: 'prod_THtRqY17sSwQJJ',
     stripe_price_id: 'price_1SLLIKQNEdHwdojXkxUeIDwA',
-    image: 'https://media.oracleboxing.com/Website/boxing_clinic.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: `**Access to All Group + 1-on-1 Coaching Call Replays**
 
 Complete archive of all live coaching sessions, updated weekly.
@@ -232,7 +232,7 @@ Perfect for:
     metadata: 'ltbffp',
     stripe_product_id: 'prod_THtTT54jtb1l9c',
     stripe_price_id: 'price_1SLLJlQNEdHwdojXKgVggogM',
-    image: 'https://media.oracleboxing.com/Website/bffp_tn5.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp',
     description: `**Keep Full Access to Boxing from First Principles Forever**
 
 After the 6-Week Challenge ends, keep permanent access to the full BFFP course.
@@ -258,7 +258,7 @@ After the 6-Week Challenge ends, keep permanent access to the full BFFP course.
     metadata: 'ltall_297',
     stripe_product_id: 'prod_THtXlTjbNn8FXP',
     stripe_price_id: 'price_1SLLWbQNEdHwdojXAmcEYocG',
-    image: 'https://media.oracleboxing.com/Website/obm_tn.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/obm_tn-large.webp',
     description: `**Own All Courses Forever — Even If You Cancel Membership**
 
 Get permanent access to BFFP, Roadmap, and Boxing Clinic, independent of your membership.
@@ -286,7 +286,7 @@ Get permanent access to BFFP, Roadmap, and Boxing Clinic, independent of your me
     metadata: 'ltall_197',
     stripe_product_id: 'prod_THtXlTjbNn8FXP',
     stripe_price_id: 'price_1SLLW7QNEdHwdojX86z2xJW4',
-    image: 'https://media.oracleboxing.com/Website/obm_tn.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/obm_tn-large.webp',
     description: `**Own All Courses Forever — Discounted for Committed Members**
 
 As a 6-month or annual member, get permanent access to all courses at a special rate.
@@ -315,7 +315,7 @@ As a 6-month or annual member, get permanent access to all courses at a special 
     recurring: false,
     stripe_product_id: 'prod_THvKZVW9MTpheP',
     stripe_price_id: 'price_1SLLTqQNEdHwdojXsQKz5qSZ',
-    image: 'https://media.oracleboxing.com/Website/boxing_clinic.webp',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: `**Temporary Full Access to Live Coaching & Community for 6 Weeks**
 
 Experience the full membership benefits for 6 weeks without commitment.
@@ -377,7 +377,7 @@ Direct 1-on-1 access to Oliver or Toni for personalized technical coaching.
     metadata: 'coach_archive',
     stripe_product_id: 'prod_THtSgSl2rHdu8X',
     stripe_price_id: 'price_1SLJtyQNEdHwdojXpNn9LvDH',
-    image: 'https://media.oracleboxing.com/Website/boxing_clinic.png',
+    image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: `**Complete Archive of 1-on-1 Coaching Sessions**
 
 Access to selected 1-on-1 coaching call recordings for study and learning.

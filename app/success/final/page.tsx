@@ -53,7 +53,7 @@ function FinalSuccessContent() {
           {/* Logo */}
           <div className="flex justify-center mb-6 sm:mb-8">
             <img
-              src="https://media.oracleboxing.com/Website/long_black.png"
+              src="https://media.oracleboxing.com/Website/optimized/logos/long_black-large.webp"
               alt="Oracle Boxing"
               className="h-5 sm:h-6 lg:h-7 w-auto"
             />

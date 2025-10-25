@@ -53,22 +53,22 @@ export default function BFFPPage() {
     {
       emoji: '🧘',
       text: 'Stay calm under pressure and control emotion.',
-      imageUrl: 'https://media.oracleboxing.com/Website/ob_fight3.png'
+      imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/ob_fight3.webp'
     },
     {
       emoji: '⚡',
       text: 'Use biomechanics for effortless, natural power.',
-      imageUrl: 'https://media.oracleboxing.com/Website/bffp_tn4.png'
+      imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/bffp_tn4.webp'
     },
     {
       emoji: '🥊',
       text: 'See patterns, read opponents, and think one step ahead.',
-      imageUrl: 'https://media.oracleboxing.com/Website/bffp_course3.png'
+      imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/bffp_course3.webp'
     },
     {
       emoji: '♟️',
       text: 'Build endurance and relaxation that last through every round.',
-      imageUrl: 'https://media.oracleboxing.com/Website/bbffp_course4.png'
+      imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/bbffp_course4.webp'
     }
   ]
 

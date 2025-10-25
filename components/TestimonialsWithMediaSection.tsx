@@ -69,7 +69,6 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
               preload="auto"
             >
               <source src="https://media.oracleboxing.com/webm/Website/obcoachingcall.webm" type="video/webm" />
-              <source src="https://media.oracleboxing.com/Website/obcoachingcall.mp4" type="video/mp4" />
             </video>
           </div>
           <div className="flex gap-8 flex-col order-1 lg:order-2">
@@ -142,7 +141,6 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
               preload="auto"
             >
               <source src="https://media.oracleboxing.com/webm/Website/online_rating.webm" type="video/webm" />
-              <source src="https://media.oracleboxing.com/Website/online_rating.mp4" type="video/mp4" />
             </video>
           </div>
         </div>

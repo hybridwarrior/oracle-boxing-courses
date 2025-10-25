@@ -124,7 +124,7 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
               className={`w-full py-3 sm:py-4 px-4 sm:px-6 rounded transition-all duration-200 ${
                 isLoading
                   ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-[#26304a] hover:bg-[#1e293b]'
+                  : 'bg-[#26304a] hover:bg-[#1e293b] cursor-pointer'
               } text-white flex flex-col items-center gap-1`}
             >
               <span className="text-base sm:text-lg font-bold">
