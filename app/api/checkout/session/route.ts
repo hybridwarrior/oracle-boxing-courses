@@ -47,7 +47,10 @@ export async function POST(req: NextRequest) {
     const hasPhysicalItems = items.some(item => item.product.type === 'merch')
 
     // Get base URL for redirect
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002'
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://shop-alpha-brown.vercel.app'
+
+    console.log('🔍 DEBUG: Base URL:', baseUrl)
+    console.log('🔍 DEBUG: Success URL:', `${baseUrl}/success/{CHECKOUT_SESSION_ID}`)
 
     // Create checkout session
     const session = await createCheckoutSession({
@@ -59,6 +62,16 @@ export async function POST(req: NextRequest) {
       currency: currency || 'USD',
       trackingParams,
     })
+
+    console.log('🔍 DEBUG: Session created:', {
+      id: session.id,
+      url: session.url,
+      status: session.status
+    })
+
+    if (!session.url) {
+      throw new Error('Stripe session created but URL is missing')
+    }
 
     return NextResponse.json({ url: session.url })
   } catch (error: any) {
