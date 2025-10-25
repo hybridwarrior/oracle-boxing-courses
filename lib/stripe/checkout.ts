@@ -139,7 +139,11 @@ export async function createCheckoutSession({
 
   sessionParams.success_url = `${baseUrl}${successPath}?session_id={CHECKOUT_SESSION_ID}`
 
+  console.log('🔍 DEBUG: Input successUrl:', successUrl)
+  console.log('🔍 DEBUG: Extracted baseUrl:', baseUrl)
+  console.log('🔍 DEBUG: Success path:', successPath)
   console.log('🔍 DEBUG: Final success_url:', sessionParams.success_url)
+  console.log('🔍 DEBUG: Cancel URL:', sessionParams.cancel_url)
 
   // Determine the purchase type based on main product
   let purchaseType = 'course' // Default
@@ -315,9 +319,26 @@ export async function createCheckoutSession({
   }
 
   // Create session
-  const session = await stripe.checkout.sessions.create(sessionParams)
+  console.log('🔍 DEBUG: Creating Stripe session with params:', {
+    mode: sessionParams.mode,
+    success_url: sessionParams.success_url,
+    cancel_url: sessionParams.cancel_url,
+    line_items_count: sessionParams.line_items?.length,
+  })
 
-  return session
+  try {
+    const session = await stripe.checkout.sessions.create(sessionParams)
+    console.log('✅ Stripe session created successfully:', session.id)
+    return session
+  } catch (stripeError: any) {
+    console.error('❌ Stripe API Error:', {
+      message: stripeError.message,
+      type: stripeError.type,
+      code: stripeError.code,
+      param: stripeError.param,
+    })
+    throw stripeError
+  }
 }
 
 // ===================================================================
