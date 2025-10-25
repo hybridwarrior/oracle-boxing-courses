@@ -28,6 +28,7 @@ export const metadata: Metadata = {
 import { CartProvider } from "@/contexts/CartContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { Toaster } from "sonner";
+import { UTMTracker } from "@/components/UTMTracker";
 
 export default function RootLayout({
   children,
@@ -43,6 +44,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet" />
       </head>
       <body className="antialiased">
+        <UTMTracker />
         <CurrencyProvider>
           <CartProvider>
             {children}

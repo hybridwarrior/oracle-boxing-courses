@@ -7,6 +7,7 @@ import { toast } from 'sonner'
 
 import { get6WCAddOns, getCourseOrderBump, getProductById } from '@/lib/products'
 import { Product } from '@/lib/types'
+import { getTrackingParams } from '@/lib/tracking-cookies'
 
 // Force dynamic rendering for this page
 export const dynamic = 'force-dynamic'
@@ -56,22 +57,19 @@ function OrderBumpsContent() {
     setName(nameParam)
     setFunnelType(funnelParam)
 
-    // Capture tracking params from URL
-    const referrer = searchParams.get('referrer') || 'direct'
-    const utm_source = searchParams.get('utm_source') || undefined
-    const utm_medium = searchParams.get('utm_medium') || undefined
-    const utm_campaign = searchParams.get('utm_campaign') || undefined
-    const utm_term = searchParams.get('utm_term') || undefined
-    const utm_content = searchParams.get('utm_content') || undefined
+    // Get tracking params from cookies (already captured by UTMTracker)
+    const cookieTracking = getTrackingParams()
 
     setTrackingParams({
-      referrer,
-      utm_source,
-      utm_medium,
-      utm_campaign,
-      utm_term,
-      utm_content,
+      referrer: cookieTracking.referrer,
+      utm_source: cookieTracking.utm_source,
+      utm_medium: cookieTracking.utm_medium,
+      utm_campaign: cookieTracking.utm_campaign,
+      utm_term: cookieTracking.utm_term,
+      utm_content: cookieTracking.utm_content,
     })
+
+    console.log('📊 Order bumps - Tracking params from cookies:', cookieTracking)
 
     // Load appropriate add-ons based on funnel type
     if (funnelParam === 'course') {

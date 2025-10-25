@@ -7,6 +7,7 @@ import { Loader2 } from 'lucide-react'
 import { getProductById } from '@/lib/products'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { Currency } from '@/lib/currency'
+import { getTrackingParams } from '@/lib/tracking-cookies'
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -41,27 +42,21 @@ export default function CheckoutPage() {
       setProductParam(product)
       setSourceParam(source)
 
-      // Capture referrer
-      const referrer = document.referrer || 'direct'
-
-      // Capture UTM parameters
-      const utm_source = params.get('utm_source') || undefined
-      const utm_medium = params.get('utm_medium') || undefined
-      const utm_campaign = params.get('utm_campaign') || undefined
-      const utm_term = params.get('utm_term') || undefined
-      const utm_content = params.get('utm_content') || undefined
+      // Get tracking params from cookies (already captured by UTMTracker)
+      const cookieTracking = getTrackingParams()
 
       setTrackingParams({
-        referrer,
-        utm_source,
-        utm_medium,
-        utm_campaign,
-        utm_term,
-        utm_content,
+        referrer: cookieTracking.referrer,
+        utm_source: cookieTracking.utm_source,
+        utm_medium: cookieTracking.utm_medium,
+        utm_campaign: cookieTracking.utm_campaign,
+        utm_term: cookieTracking.utm_term,
+        utm_content: cookieTracking.utm_content,
       })
 
       console.log('🏷️ Checkout page loaded')
       console.log('🏷️ Product:', product, '| Source:', source)
+      console.log('📊 Tracking params from cookies:', cookieTracking)
 
       // Redirect if no product specified
       if (!product) {

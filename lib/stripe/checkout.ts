@@ -32,6 +32,9 @@ interface CreateCheckoutSessionParams {
     utm_campaign?: string
     utm_term?: string
     utm_content?: string
+    fbclid?: string
+    session_id?: string
+    event_id?: string
   }
 }
 
@@ -171,6 +174,9 @@ export async function createCheckoutSession({
     utm_campaign: trackingParams?.utm_campaign || '',
     utm_term: trackingParams?.utm_term || '',
     utm_content: trackingParams?.utm_content || '',
+    fbclid: trackingParams?.fbclid || '',
+    session_id: trackingParams?.session_id || '',
+    event_id: trackingParams?.event_id || '',
   }
 
   // Add cross-sell recommendations using Stripe's adjustable quantity feature
@@ -257,6 +263,9 @@ export async function createCheckoutSession({
         utm_campaign: trackingParams?.utm_campaign || '',
         utm_term: trackingParams?.utm_term || '',
         utm_content: trackingParams?.utm_content || '',
+        fbclid: trackingParams?.fbclid || '',
+        session_id: trackingParams?.session_id || '',
+        event_id: trackingParams?.event_id || '',
       },
     }
   }
@@ -291,6 +300,9 @@ export async function createCheckoutSession({
         utm_campaign: trackingParams?.utm_campaign || '',
         utm_term: trackingParams?.utm_term || '',
         utm_content: trackingParams?.utm_content || '',
+        fbclid: trackingParams?.fbclid || '',
+        session_id: trackingParams?.session_id || '',
+        event_id: trackingParams?.event_id || '',
       },
     }
   }

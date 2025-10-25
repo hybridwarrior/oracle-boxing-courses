@@ -129,11 +129,99 @@ export function clearTrackingFields(fields: string[]): void {
  */
 export function isDuplicatePurchase(): boolean {
   const trackingData = getOrInitTrackingData();
-  
+
   if (trackingData.purchase_fired && trackingData.purchase_time) {
     const timeSincePurchase = Date.now() - trackingData.purchase_time;
     return timeSincePurchase < 60000; // 60 seconds
   }
-  
+
   return false;
+}
+
+/**
+ * Capture UTM parameters from URL and store in cookies
+ * This function should be called on initial page load
+ */
+export function captureUTMParameters(): void {
+  if (typeof window === 'undefined') return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const trackingData = getOrInitTrackingData();
+
+  // Extract UTM parameters from URL
+  const utmSource = urlParams.get('utm_source');
+  const utmMedium = urlParams.get('utm_medium');
+  const utmCampaign = urlParams.get('utm_campaign');
+  const utmContent = urlParams.get('utm_content');
+  const utmTerm = urlParams.get('utm_term');
+  const fbclid = urlParams.get('fbclid');
+
+  // Update tracking data if UTM parameters are present
+  const updates: Partial<TrackingData> = {};
+
+  if (utmSource) updates.utm_source = utmSource;
+  if (utmMedium) updates.utm_medium = utmMedium;
+  if (utmCampaign) updates.utm_campaign = utmCampaign;
+  if (utmContent) updates.utm_content = utmContent;
+  if (utmTerm) updates.utm_term = utmTerm;
+  if (fbclid) updates.fbclid = fbclid;
+
+  // Only update if we have new parameters
+  if (Object.keys(updates).length > 0) {
+    updateTrackingData(updates);
+    console.log('📊 UTM parameters captured:', updates);
+  }
+}
+
+/**
+ * Get all UTM parameters from cookies
+ */
+export function getUTMParameters(): {
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  utm_term?: string;
+  fbclid?: string;
+} {
+  const trackingData = getOrInitTrackingData();
+
+  return {
+    utm_source: trackingData.utm_source,
+    utm_medium: trackingData.utm_medium,
+    utm_campaign: trackingData.utm_campaign,
+    utm_content: trackingData.utm_content,
+    utm_term: trackingData.utm_term,
+    fbclid: trackingData.fbclid,
+  };
+}
+
+/**
+ * Get tracking parameters for checkout/API calls
+ */
+export function getTrackingParams(): {
+  referrer: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+  fbclid?: string;
+  session_id?: string;
+  event_id?: string;
+} {
+  const trackingData = getOrInitTrackingData();
+  const referrer = typeof window !== 'undefined' ? document.referrer : 'direct';
+
+  return {
+    referrer,
+    utm_source: trackingData.utm_source,
+    utm_medium: trackingData.utm_medium,
+    utm_campaign: trackingData.utm_campaign,
+    utm_term: trackingData.utm_term,
+    utm_content: trackingData.utm_content,
+    fbclid: trackingData.fbclid,
+    session_id: trackingData.session_id,
+    event_id: trackingData.event_id,
+  };
 }
