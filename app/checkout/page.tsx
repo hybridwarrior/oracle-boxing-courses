@@ -30,7 +30,6 @@ export default function CheckoutPage() {
   const [customerInfo, setCustomerInfo] = useState({
     firstName: '',
     email: '',
-    phone: '',
   })
 
   // Detect product parameter from URL and capture tracking params
@@ -74,9 +73,8 @@ export default function CheckoutPage() {
     // Validate required fields
     const fullName = customerInfo.firstName.trim()
     const email = customerInfo.email.trim()
-    const phone = customerInfo.phone.trim()
 
-    if (!fullName || !email || !phone) {
+    if (!fullName || !email) {
       toast.error('Please fill in all required fields')
       return
     }
@@ -85,12 +83,6 @@ export default function CheckoutPage() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       toast.error('Please enter a valid email address')
-      return
-    }
-
-    // Phone validation (basic)
-    if (phone.length < 10) {
-      toast.error('Please enter a valid phone number')
       return
     }
 
@@ -123,7 +115,6 @@ export default function CheckoutPage() {
         const orderBumpsUrl = new URL('/checkout/order-bumps', window.location.origin)
         orderBumpsUrl.searchParams.set('email', email)
         orderBumpsUrl.searchParams.set('name', fullName)
-        orderBumpsUrl.searchParams.set('phone', phone)
         orderBumpsUrl.searchParams.set('funnel', '6wc')
         orderBumpsUrl.searchParams.set('currency', currency)
         if (sourceParam) orderBumpsUrl.searchParams.set('source', sourceParam)
@@ -146,7 +137,6 @@ export default function CheckoutPage() {
         const orderBumpsUrl = new URL('/checkout/order-bumps', window.location.origin)
         orderBumpsUrl.searchParams.set('email', email)
         orderBumpsUrl.searchParams.set('name', fullName)
-        orderBumpsUrl.searchParams.set('phone', phone)
         orderBumpsUrl.searchParams.set('funnel', 'course')
         orderBumpsUrl.searchParams.set('course', productParam)
         orderBumpsUrl.searchParams.set('currency', currency)
@@ -191,7 +181,7 @@ export default function CheckoutPage() {
               firstName: fullName,
               lastName: fullName,
               email: email,
-              phone: phone,
+              phone: '',
               address: {
                 line1: '',
                 line2: '',
@@ -271,7 +261,7 @@ export default function CheckoutPage() {
           </div>
 
           {/* Full Name Input */}
-          <div className="mb-4">
+          <div className="mb-6">
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
               Full Name *
             </label>
@@ -282,23 +272,6 @@ export default function CheckoutPage() {
               onChange={(e) => setCustomerInfo({ ...customerInfo, firstName: e.target.value })}
               className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all"
               placeholder="John Doe"
-              required
-              style={{ cursor: 'text' }}
-            />
-          </div>
-
-          {/* Phone Number Input */}
-          <div className="mb-6">
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-              Phone Number *
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              value={customerInfo.phone}
-              onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
-              className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all"
-              placeholder="+1 (555) 123-4567"
               required
               style={{ cursor: 'text' }}
             />
