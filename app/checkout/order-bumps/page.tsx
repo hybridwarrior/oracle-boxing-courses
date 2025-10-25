@@ -1,12 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ChevronDown, ArrowRight, ArrowLeft } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { get6WCAddOns, getCourseOrderBump, getProductById } from '@/lib/products'
 import { Product } from '@/lib/types'
+
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
 
 // Helper function to convert markdown bold to HTML
 function formatDescription(text: string) {
