@@ -66,14 +66,19 @@ export async function createCheckoutSession({
   let customerId: string | undefined = undefined
 
   if (customerInfo) {
+    // Split full name into first and last name
+    const nameParts = customerInfo.firstName.trim().split(' ')
+    const firstName = nameParts[0] || ''
+    const lastName = nameParts.slice(1).join(' ') || nameParts[0] || '' // Use first name as fallback if no last name
+
     // Create a Stripe Customer for off-session charges (upsells)
     const customer = await stripe.customers.create({
       email: customerInfo.email,
-      name: `${customerInfo.firstName} ${customerInfo.lastName}`,
+      name: customerInfo.firstName.trim(),
       phone: customerInfo.phone || undefined,
       metadata: {
-        first_name: customerInfo.firstName,
-        last_name: customerInfo.lastName,
+        first_name: firstName,
+        last_name: lastName,
       },
     })
 
@@ -98,15 +103,15 @@ export async function createCheckoutSession({
     customer: customerId, // Attach customer to session
     customer_creation: customerId ? undefined : 'always', // Create customer if not provided
     billing_address_collection: 'required', // Collect billing address for tax purposes
-    // Note: To enable automatic tax, set up your origin address at:
-    // https://dashboard.stripe.com/test/settings/tax
-    // Then uncomment the lines below:
-    // automatic_tax: {
-    //   enabled: true,
-    // },
+    phone_number_collection: {
+      enabled: true, // Require phone number collection
+    },
+    automatic_tax: {
+      enabled: true, // Enable automatic tax calculation
+    },
     customer_update: {
       address: 'auto', // Save billing address to customer
-      shipping: 'auto', // Save shipping address to customer
+      shipping: 'never', // Don't update shipping address from checkout
     },
   }
 
@@ -149,10 +154,15 @@ export async function createCheckoutSession({
     purchaseType = 'course'
   }
 
+  // Split full name for metadata
+  const nameParts = customerInfo?.firstName?.trim().split(' ') || []
+  const metadataFirstName = nameParts[0] || ''
+  const metadataLastName = nameParts.slice(1).join(' ') || nameParts[0] || ''
+
   sessionParams.metadata = {
     // Customer info
-    customer_first_name: customerInfo?.firstName || '',
-    customer_last_name: customerInfo?.lastName || '',
+    customer_first_name: metadataFirstName,
+    customer_last_name: metadataLastName,
     customer_phone: customerInfo?.phone || '',
 
     // Funnel tracking
@@ -240,11 +250,11 @@ export async function createCheckoutSession({
   // Add payment intent data for off-session charges (upsells)
   if (mode === 'payment') {
     sessionParams.payment_intent_data = {
-      setup_future_usage: 'off_session',
+      setup_future_usage: 'off_session', // Save payment method for future charges
       metadata: {
         // Copy all metadata to payment intent for charge.succeeded webhook
-        customer_first_name: customerInfo?.firstName || '',
-        customer_last_name: customerInfo?.lastName || '',
+        customer_first_name: metadataFirstName,
+        customer_last_name: metadataLastName,
         customer_email: customerInfo?.email || '',
         customer_phone: customerInfo?.phone || '',
 
@@ -277,11 +287,12 @@ export async function createCheckoutSession({
 
   // Add subscription data for membership purchases
   if (mode === 'subscription') {
+    sessionParams.payment_method_collection = 'always' // Ensure payment method is saved
     sessionParams.subscription_data = {
       metadata: {
         // Copy all metadata to subscription for invoice.payment_succeeded webhook
-        customer_first_name: customerInfo?.firstName || '',
-        customer_last_name: customerInfo?.lastName || '',
+        customer_first_name: metadataFirstName,
+        customer_last_name: metadataLastName,
         customer_email: customerInfo?.email || '',
         customer_phone: customerInfo?.phone || '',
 
