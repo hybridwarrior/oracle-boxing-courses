@@ -132,7 +132,14 @@ export async function createCheckoutSession({
   }
 
   // Update success URL with correct path
-  sessionParams.success_url = `${successUrl.split('/success/')[0]}${successPath}?session_id={CHECKOUT_SESSION_ID}`
+  // Extract base URL (everything before /success/)
+  const baseUrl = successUrl.includes('/success/')
+    ? successUrl.split('/success/')[0]
+    : successUrl.replace('/{CHECKOUT_SESSION_ID}', '');
+
+  sessionParams.success_url = `${baseUrl}${successPath}?session_id={CHECKOUT_SESSION_ID}`
+
+  console.log('🔍 DEBUG: Final success_url:', sessionParams.success_url)
 
   // Determine the purchase type based on main product
   let purchaseType = 'course' // Default
