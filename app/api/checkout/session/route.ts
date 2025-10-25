@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     const hasPhysicalItems = items.some(item => item.product.type === 'merch')
 
     // Get base URL for redirect
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://shop-alpha-brown.vercel.app'
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://shop.oracleboxing.com'
 
     console.log('🔍 DEBUG: Base URL:', baseUrl)
     console.log('🔍 DEBUG: Success URL:', `${baseUrl}/success/{CHECKOUT_SESSION_ID}`)

@@ -22,6 +22,10 @@ export interface TrackingData {
   utm_content?: string;
   utm_term?: string;
 
+  // Attribution - FIRST referrer (never overwritten)
+  first_referrer?: string;
+  first_referrer_time?: number;
+
   // Metadata
   landing_time?: number;
   button_location?: string;
@@ -139,7 +143,7 @@ export function isDuplicatePurchase(): boolean {
 }
 
 /**
- * Capture UTM parameters from URL and store in cookies
+ * Capture UTM parameters and first referrer from URL and store in cookies
  * This function should be called on initial page load
  */
 export function captureUTMParameters(): void {
@@ -147,6 +151,20 @@ export function captureUTMParameters(): void {
 
   const urlParams = new URLSearchParams(window.location.search);
   const trackingData = getOrInitTrackingData();
+
+  // Capture FIRST referrer (only if not already set)
+  if (!trackingData.first_referrer && document.referrer) {
+    const referrer = document.referrer;
+    // Only capture external referrers (not same-domain navigation)
+    const currentDomain = window.location.hostname;
+    const referrerDomain = new URL(referrer).hostname;
+
+    if (referrerDomain !== currentDomain) {
+      trackingData.first_referrer = referrer;
+      trackingData.first_referrer_time = Date.now();
+      console.log('📊 First referrer captured:', referrer);
+    }
+  }
 
   // Extract UTM parameters from URL
   const utmSource = urlParams.get('utm_source');
@@ -166,10 +184,16 @@ export function captureUTMParameters(): void {
   if (utmTerm) updates.utm_term = utmTerm;
   if (fbclid) updates.fbclid = fbclid;
 
-  // Only update if we have new parameters
+  // Add first referrer to updates if it was just captured
+  if (trackingData.first_referrer) {
+    updates.first_referrer = trackingData.first_referrer;
+    updates.first_referrer_time = trackingData.first_referrer_time;
+  }
+
+  // Only update if we have new parameters or first referrer
   if (Object.keys(updates).length > 0) {
     updateTrackingData(updates);
-    console.log('📊 UTM parameters captured:', updates);
+    console.log('📊 Tracking data captured:', updates);
   }
 }
 
@@ -198,6 +222,7 @@ export function getUTMParameters(): {
 
 /**
  * Get tracking parameters for checkout/API calls
+ * Uses FIRST referrer for attribution (not current referrer)
  */
 export function getTrackingParams(): {
   referrer: string;
@@ -211,7 +236,10 @@ export function getTrackingParams(): {
   event_id?: string;
 } {
   const trackingData = getOrInitTrackingData();
-  const referrer = typeof window !== 'undefined' ? document.referrer : 'direct';
+
+  // Use first_referrer for attribution (captured on initial landing)
+  // Falls back to 'direct' if no first referrer was captured
+  const referrer = trackingData.first_referrer || 'direct';
 
   return {
     referrer,
