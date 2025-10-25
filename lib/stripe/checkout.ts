@@ -131,16 +131,10 @@ export async function createCheckoutSession({
     successPath = '/success/membership'
   }
 
-  // Update success URL with correct path
-  // Extract base URL (everything before /success/)
-  const baseUrl = successUrl.includes('/success/')
-    ? successUrl.split('/success/')[0]
-    : successUrl.replace('/{CHECKOUT_SESSION_ID}', '');
+  // Hardcode the success URL to avoid any environment variable issues
+  sessionParams.success_url = `https://shop.oracleboxing.com${successPath}?session_id={CHECKOUT_SESSION_ID}`
+  sessionParams.cancel_url = 'https://shop.oracleboxing.com/'
 
-  sessionParams.success_url = `${baseUrl}${successPath}?session_id={CHECKOUT_SESSION_ID}`
-
-  console.log('🔍 DEBUG: Input successUrl:', successUrl)
-  console.log('🔍 DEBUG: Extracted baseUrl:', baseUrl)
   console.log('🔍 DEBUG: Success path:', successPath)
   console.log('🔍 DEBUG: Final success_url:', sessionParams.success_url)
   console.log('🔍 DEBUG: Cancel URL:', sessionParams.cancel_url)

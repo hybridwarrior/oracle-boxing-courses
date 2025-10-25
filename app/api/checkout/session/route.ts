@@ -46,18 +46,12 @@ export async function POST(req: NextRequest) {
     // Detect physical items
     const hasPhysicalItems = items.some(item => item.product.type === 'merch')
 
-    // Get base URL for redirect
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://shop.oracleboxing.com'
-
-    console.log('🔍 DEBUG: Base URL:', baseUrl)
-    console.log('🔍 DEBUG: Success URL:', `${baseUrl}/success/{CHECKOUT_SESSION_ID}`)
-
-    // Create checkout session
+    // Create checkout session (URLs are hardcoded in checkout.ts to avoid env var issues)
     const session = await createCheckoutSession({
       items,
       hasPhysicalItems,
-      successUrl: `${baseUrl}/success/{CHECKOUT_SESSION_ID}`,
-      cancelUrl: `${baseUrl}/`, // Changed to home page instead of /checkout
+      successUrl: 'https://shop.oracleboxing.com/success/{CHECKOUT_SESSION_ID}', // Will be modified by checkout.ts
+      cancelUrl: 'https://shop.oracleboxing.com/',
       customerInfo,
       currency: currency || 'USD',
       trackingParams,
