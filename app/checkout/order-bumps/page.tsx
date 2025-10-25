@@ -17,7 +17,7 @@ function formatDescription(text: string) {
   return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
 }
 
-export default function OrderBumpsPage() {
+function OrderBumpsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [email, setEmail] = useState('')
@@ -403,5 +403,13 @@ export default function OrderBumpsPage() {
         </div>
       </div>
     </>
+  )
+}
+
+export default function OrderBumpsPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <OrderBumpsContent />
+    </Suspense>
   )
 }
