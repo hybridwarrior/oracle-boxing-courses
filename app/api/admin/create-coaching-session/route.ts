@@ -96,11 +96,11 @@ export async function POST(req: NextRequest) {
       customer_email: email,
       customer_phone: '',
 
-      // Override type to 'closed_coaching'
-      type: 'closed_coaching',
-
       // Pricing metadata from calculation
       ...pricingMetadata,
+
+      // Override type to 'closed_coaching' (must come after spread)
+      type: 'closed_coaching',
 
       // Tracking params (referrer and UTM)
       referrer: trackingParams?.referrer || 'internal_coaching_tool',
