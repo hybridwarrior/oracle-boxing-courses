@@ -1,0 +1,219 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { stripe } from '@/lib/stripe/client'
+import {
+  CoachingTier,
+  CustomerDiscount,
+  PaymentPlan,
+  Coach,
+  calculateCoachingPrice,
+  createCoachingMetadata,
+  COACHING_PRODUCT_ID,
+} from '@/lib/coaching-pricing'
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json()
+    const {
+      email,
+      name,
+      tier,
+      customerDiscount,
+      sixMonthCommitment,
+      paymentPlan,
+      coach,
+      trackingParams,
+    } = body as {
+      email: string
+      name: string
+      tier: CoachingTier
+      customerDiscount: CustomerDiscount
+      sixMonthCommitment: boolean
+      paymentPlan: PaymentPlan
+      coach: Coach
+      trackingParams?: {
+        referrer?: string
+        utm_source?: string
+        utm_medium?: string
+        utm_campaign?: string
+        utm_term?: string
+        utm_content?: string
+        fbclid?: string
+        session_id?: string
+        event_id?: string
+      }
+    }
+
+    console.log('🎯 Creating internal coaching session:', {
+      tier,
+      customerDiscount,
+      sixMonthCommitment,
+      paymentPlan,
+      coach,
+    })
+
+    // Validate required fields
+    if (!email || !name || !tier || !paymentPlan || !coach) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      )
+    }
+
+    // Calculate pricing
+    const calculation = calculateCoachingPrice(
+      tier,
+      customerDiscount || 'none',
+      sixMonthCommitment || false,
+      paymentPlan
+    )
+
+    console.log('💰 Price calculation:', calculation)
+
+    // Split name into first and last name for metadata
+    const nameParts = name.trim().split(' ')
+    const firstName = nameParts[0] || ''
+    const lastName = nameParts.slice(1).join(' ') || nameParts[0] || ''
+
+    // Create base metadata (pricing details)
+    const pricingMetadata = createCoachingMetadata(
+      tier,
+      customerDiscount || 'none',
+      sixMonthCommitment || false,
+      paymentPlan,
+      coach,
+      calculation
+    )
+
+    // Create rich metadata matching the 6WC structure
+    const fullMetadata = {
+      // Customer info
+      customer_first_name: firstName,
+      customer_last_name: lastName,
+      customer_email: email,
+      customer_phone: '',
+
+      // Pricing metadata from calculation
+      ...pricingMetadata,
+
+      // Tracking params (referrer and UTM)
+      referrer: trackingParams?.referrer || 'internal_coaching_tool',
+      utm_source: trackingParams?.utm_source || 'internal',
+      utm_medium: trackingParams?.utm_medium || 'admin_tool',
+      utm_campaign: trackingParams?.utm_campaign || 'coaching',
+      utm_term: trackingParams?.utm_term || '',
+      utm_content: trackingParams?.utm_content || '',
+      fbclid: trackingParams?.fbclid || '',
+      session_id: trackingParams?.session_id || '',
+      event_id: trackingParams?.event_id || '',
+    }
+
+    // Get base URL for redirect
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://shop.oracleboxing.com'
+
+    // Create Stripe checkout session based on payment plan
+    let session
+
+    if (paymentPlan === 'full') {
+      // ONE-TIME PAYMENT
+      session = await stripe.checkout.sessions.create({
+        mode: 'payment',
+        customer_email: email,
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product: COACHING_PRODUCT_ID,
+              unit_amount: calculation.finalPrice * 100, // Convert to cents
+            },
+            quantity: 1,
+          },
+        ],
+        success_url: `${baseUrl}/success/final?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${baseUrl}/admin/coaching-checkout`,
+        metadata: fullMetadata,
+        payment_intent_data: {
+          metadata: fullMetadata, // Also attach to payment intent
+        },
+      })
+    } else if (paymentPlan === 'split_2') {
+      // SPLIT BY 2 - Subscription that cancels after 2 payments
+      // Note: We'll use webhook to cancel after 2nd payment
+      // For now, create regular subscription and handle cancellation logic in webhook
+
+      session = await stripe.checkout.sessions.create({
+        mode: 'subscription',
+        customer_email: email,
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product: COACHING_PRODUCT_ID,
+              unit_amount: calculation.monthlyAmount! * 100, // Convert to cents
+              recurring: {
+                interval: 'month',
+              },
+            },
+            quantity: 1,
+          },
+        ],
+        success_url: `${baseUrl}/success/final?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${baseUrl}/admin/coaching-checkout`,
+        metadata: {
+          ...fullMetadata,
+          auto_cancel_after_payments: '2', // Custom flag for webhook handler
+        },
+        subscription_data: {
+          metadata: {
+            ...fullMetadata,
+            auto_cancel_after_payments: '2', // Custom flag for webhook handler
+          },
+        },
+      })
+    } else if (paymentPlan === 'monthly') {
+      // MONTHLY - Ongoing subscription
+      session = await stripe.checkout.sessions.create({
+        mode: 'subscription',
+        customer_email: email,
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product: COACHING_PRODUCT_ID,
+              unit_amount: calculation.monthlyAmount! * 100, // Convert to cents
+              recurring: {
+                interval: 'month',
+              },
+            },
+            quantity: 1,
+          },
+        ],
+        success_url: `${baseUrl}/success/final?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${baseUrl}/admin/coaching-checkout`,
+        metadata: fullMetadata,
+        subscription_data: {
+          metadata: fullMetadata, // Also attach to subscription
+        },
+      })
+    } else {
+      return NextResponse.json(
+        { error: 'Invalid payment plan' },
+        { status: 400 }
+      )
+    }
+
+    console.log('✅ Coaching session created:', session.id)
+    console.log('🔗 Checkout URL:', session.url)
+
+    return NextResponse.json({
+      url: session.url,
+      sessionId: session.id,
+      calculation,
+    })
+  } catch (error: any) {
+    console.error('❌ Error creating coaching session:', error)
+    return NextResponse.json(
+      { error: error.message || 'Failed to create coaching session' },
+      { status: 500 }
+    )
+  }
+}
