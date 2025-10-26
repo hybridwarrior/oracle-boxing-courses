@@ -135,8 +135,8 @@ export async function POST(req: NextRequest) {
 
     if (paymentPlan === 'full') {
       // ONE-TIME PAYMENT
-      // For 6-month commitment, add 2 products (2 months upfront)
-      const quantity = sixMonthCommitment ? 2 : 1
+      // For 6-month commitment, charge for 6 months upfront (6x quantity)
+      const quantity = sixMonthCommitment ? 6 : 1
 
       session = await stripe.checkout.sessions.create({
         mode: 'payment',
@@ -145,7 +145,6 @@ export async function POST(req: NextRequest) {
           {
             price_data: {
               currency: 'usd',
-              product: COACHING_PRODUCT_ID,
               product_data: {
                 name: `1-on-1 Coaching - ${tierName}`,
                 description: description,
@@ -167,8 +166,8 @@ export async function POST(req: NextRequest) {
       // Note: We'll use webhook to cancel after 2nd payment
       // For now, create regular subscription and handle cancellation logic in webhook
 
-      // For 6-month commitment, add 2 quantities
-      const quantity = sixMonthCommitment ? 2 : 1
+      // For 6-month commitment, charge for 6 months upfront (6x quantity)
+      const quantity = sixMonthCommitment ? 6 : 1
       const splitDescription = `${tierName} 1-on-1 Coaching - Split Payment (${formatPrice(tierPrice)} / 2 = ${formatPrice(calculation.monthlyAmount!)} x 2 months)`
 
       session = await stripe.checkout.sessions.create({
@@ -178,7 +177,6 @@ export async function POST(req: NextRequest) {
           {
             price_data: {
               currency: 'usd',
-              product: COACHING_PRODUCT_ID,
               product_data: {
                 name: `1-on-1 Coaching - ${tierName} (Split Pay)`,
                 description: splitDescription,
@@ -206,8 +204,8 @@ export async function POST(req: NextRequest) {
       })
     } else if (paymentPlan === 'monthly') {
       // MONTHLY - Ongoing subscription
-      // For 6-month commitment, add 2 quantities
-      const quantity = sixMonthCommitment ? 2 : 1
+      // For 6-month commitment, charge for 6 months upfront (6x quantity)
+      const quantity = sixMonthCommitment ? 6 : 1
       const monthlyDescription = `${tierName} 1-on-1 Coaching - Monthly (${formatPrice(tierPrice)} / 3 = ${formatPrice(calculation.monthlyAmount!)} per month)`
 
       session = await stripe.checkout.sessions.create({
@@ -217,7 +215,6 @@ export async function POST(req: NextRequest) {
           {
             price_data: {
               currency: 'usd',
-              product: COACHING_PRODUCT_ID,
               product_data: {
                 name: `1-on-1 Coaching - ${tierName} (Monthly)`,
                 description: monthlyDescription,
