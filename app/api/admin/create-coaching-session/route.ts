@@ -8,6 +8,10 @@ import {
   calculateCoachingPrice,
   createCoachingMetadata,
   COACHING_PRODUCT_ID,
+  TIER_PRICES,
+  CUSTOMER_DISCOUNTS,
+  getTierDisplayName,
+  formatPrice,
 } from '@/lib/coaching-pricing'
 
 export async function POST(req: NextRequest) {
@@ -112,6 +116,20 @@ export async function POST(req: NextRequest) {
     const protocol = req.headers.get('x-forwarded-proto') || 'https'
     const baseUrl = host ? `${protocol}://${host}` : 'https://shop.oracleboxing.com'
 
+    // Build product description with price breakdown
+    const tierName = getTierDisplayName(tier)
+    const tierPrice = TIER_PRICES[tier]
+    let description = `${tierName} 1-on-1 Coaching - ${formatPrice(tierPrice)}`
+
+    if (customerDiscount !== 'none') {
+      const discountName = customerDiscount === 'challenge_winner' ? 'Challenge Winner' : 'Existing Member'
+      description += ` (${discountName} Discount: -${formatPrice(CUSTOMER_DISCOUNTS[customerDiscount])})`
+    }
+
+    if (sixMonthCommitment) {
+      description += ` • 6-Month Commitment: 10% off + 2 months upfront`
+    }
+
     // Create Stripe checkout session based on payment plan
     let session
 
@@ -128,6 +146,10 @@ export async function POST(req: NextRequest) {
             price_data: {
               currency: 'usd',
               product: COACHING_PRODUCT_ID,
+              product_data: {
+                name: `1-on-1 Coaching - ${tierName}`,
+                description: description,
+              },
               unit_amount: calculation.finalPrice * 100, // Convert to cents
             },
             quantity: quantity,
@@ -145,6 +167,10 @@ export async function POST(req: NextRequest) {
       // Note: We'll use webhook to cancel after 2nd payment
       // For now, create regular subscription and handle cancellation logic in webhook
 
+      // For 6-month commitment, add 2 quantities
+      const quantity = sixMonthCommitment ? 2 : 1
+      const splitDescription = `${tierName} 1-on-1 Coaching - Split Payment (${formatPrice(tierPrice)} / 2 = ${formatPrice(calculation.monthlyAmount!)} x 2 months)`
+
       session = await stripe.checkout.sessions.create({
         mode: 'subscription',
         customer_email: email,
@@ -153,12 +179,16 @@ export async function POST(req: NextRequest) {
             price_data: {
               currency: 'usd',
               product: COACHING_PRODUCT_ID,
+              product_data: {
+                name: `1-on-1 Coaching - ${tierName} (Split Pay)`,
+                description: splitDescription,
+              },
               unit_amount: calculation.monthlyAmount! * 100, // Convert to cents
               recurring: {
                 interval: 'month',
               },
             },
-            quantity: 1,
+            quantity: quantity,
           },
         ],
         success_url: `${baseUrl}/success/final?session_id={CHECKOUT_SESSION_ID}`,
@@ -176,6 +206,10 @@ export async function POST(req: NextRequest) {
       })
     } else if (paymentPlan === 'monthly') {
       // MONTHLY - Ongoing subscription
+      // For 6-month commitment, add 2 quantities
+      const quantity = sixMonthCommitment ? 2 : 1
+      const monthlyDescription = `${tierName} 1-on-1 Coaching - Monthly (${formatPrice(tierPrice)} / 3 = ${formatPrice(calculation.monthlyAmount!)} per month)`
+
       session = await stripe.checkout.sessions.create({
         mode: 'subscription',
         customer_email: email,
@@ -184,12 +218,16 @@ export async function POST(req: NextRequest) {
             price_data: {
               currency: 'usd',
               product: COACHING_PRODUCT_ID,
+              product_data: {
+                name: `1-on-1 Coaching - ${tierName} (Monthly)`,
+                description: monthlyDescription,
+              },
               unit_amount: calculation.monthlyAmount! * 100, // Convert to cents
               recurring: {
                 interval: 'month',
               },
             },
-            quantity: 1,
+            quantity: quantity,
           },
         ],
         success_url: `${baseUrl}/success/final?session_id={CHECKOUT_SESSION_ID}`,

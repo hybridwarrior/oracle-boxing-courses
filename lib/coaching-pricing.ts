@@ -23,11 +23,18 @@ export const CUSTOMER_DISCOUNTS = {
   existing_member: 297,
 } as const
 
-// Monthly subscription rates (not affected by discounts)
+// Split pay rates - divide tier price by 2 (not affected by discounts)
+export const SPLIT_PAY_RATES = {
+  tier_1: 750,  // $1500 / 2
+  tier_2: 1000, // $2000 / 2
+  tier_3: 1250, // $2500 / 2
+} as const
+
+// Monthly subscription rates - divide tier price by 3 (not affected by discounts)
 export const MONTHLY_RATES = {
-  tier_1: 500,
-  tier_2: 700,
-  tier_3: 900,
+  tier_1: 500,  // $1500 / 3
+  tier_2: 667,  // $2000 / 3 (rounded)
+  tier_3: 833,  // $2500 / 3 (rounded)
 } as const
 
 // 6-month commitment discount percentage
@@ -77,10 +84,10 @@ export function calculateCoachingPrice(
   let monthlyAmount: number | undefined = undefined
 
   if (paymentPlan === 'split_2') {
-    // Split by 2: Final price divided by 2
-    monthlyAmount = Math.round(finalPrice / 2)
+    // Split by 2: Tier price divided by 2 (no discounts applied)
+    monthlyAmount = SPLIT_PAY_RATES[tier]
   } else if (paymentPlan === 'monthly') {
-    // Monthly: Use tier-specific monthly rate (no discounts)
+    // Monthly: Tier price divided by 3 (no discounts applied)
     monthlyAmount = MONTHLY_RATES[tier]
   }
 

@@ -139,10 +139,7 @@ export default function AdminCoachingCheckout() {
           // Success State - Show checkout URL
           <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-200">
             <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Check className="w-8 h-8 text-green-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Checkout Link Created!</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Checkout Link Created</h2>
               <p className="text-gray-600">Share this link with {name}</p>
             </div>
 
@@ -155,6 +152,12 @@ export default function AdminCoachingCheckout() {
                   readOnly
                   className="flex-1 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-mono"
                 />
+                <button
+                  onClick={() => window.open(checkoutUrl, '_blank')}
+                  className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center gap-2"
+                >
+                  Open
+                </button>
                 <button
                   onClick={copyToClipboard}
                   className="px-4 py-2 bg-[#26304a] text-white rounded-lg hover:bg-[#1e293b] transition-colors flex items-center gap-2"
@@ -174,37 +177,37 @@ export default function AdminCoachingCheckout() {
               </div>
             </div>
 
-            <div className="bg-blue-50 rounded-xl p-4 mb-6">
-              <p className="text-sm font-medium text-blue-900 mb-3">Payment Details:</p>
-              <div className="space-y-2 text-sm text-blue-800">
+            <div className="bg-gray-50 rounded-xl p-4 mb-6">
+              <p className="text-sm font-medium text-gray-700 mb-3">Payment Details:</p>
+              <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex justify-between">
                   <span>Tier:</span>
-                  <span className="font-semibold">{tier.toUpperCase().replace('_', ' ')}</span>
+                  <span className="font-semibold text-gray-900">{tier.toUpperCase().replace('_', ' ')}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Base Price:</span>
-                  <span className="font-semibold">{formatPrice(calculation.basePrice)}</span>
+                  <span className="font-semibold text-gray-900">{formatPrice(calculation.basePrice)}</span>
                 </div>
                 {calculation.customerDiscount > 0 && (
-                  <div className="flex justify-between text-green-700">
+                  <div className="flex justify-between">
                     <span>Customer Discount:</span>
-                    <span className="font-semibold">-{formatPrice(calculation.customerDiscount)}</span>
+                    <span className="font-semibold text-gray-900">-{formatPrice(calculation.customerDiscount)}</span>
                   </div>
                 )}
                 {calculation.sixMonthDiscount > 0 && (
-                  <div className="flex justify-between text-green-700">
+                  <div className="flex justify-between">
                     <span>6-Month Discount (10%):</span>
-                    <span className="font-semibold">-{formatPrice(calculation.sixMonthDiscount)}</span>
+                    <span className="font-semibold text-gray-900">-{formatPrice(calculation.sixMonthDiscount)}</span>
                   </div>
                 )}
-                <div className="flex justify-between pt-2 border-t border-blue-200">
-                  <span className="font-bold">Final Price:</span>
-                  <span className="font-bold text-lg">{formatPrice(calculation.finalPrice)}</span>
+                <div className="flex justify-between pt-2 border-t border-gray-300">
+                  <span className="font-bold text-gray-900">Final Price:</span>
+                  <span className="font-bold text-lg text-gray-900">{formatPrice(calculation.finalPrice)}</span>
                 </div>
                 {calculation.monthlyAmount && (
-                  <div className="flex justify-between text-blue-700">
+                  <div className="flex justify-between">
                     <span>Monthly Payment:</span>
-                    <span className="font-semibold">{formatPrice(calculation.monthlyAmount)}/mo</span>
+                    <span className="font-semibold text-gray-900">{formatPrice(calculation.monthlyAmount)}/mo</span>
                   </div>
                 )}
               </div>
@@ -337,7 +340,7 @@ export default function AdminCoachingCheckout() {
                 </div>
 
                 {/* 6-Month Commitment */}
-                <div className="flex items-center gap-3 p-4 bg-green-50 rounded-xl">
+                <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200">
                   <input
                     type="checkbox"
                     id="sixMonth"
@@ -346,7 +349,7 @@ export default function AdminCoachingCheckout() {
                     className="w-5 h-5 rounded border-gray-300 text-[#26304a] focus:ring-[#26304a]"
                   />
                   <label htmlFor="sixMonth" className="text-sm font-medium text-gray-700 flex-1">
-                    6-Month Commitment <span className="text-green-700 font-semibold">(Get 10% off)</span>
+                    6-Month Commitment <span className="text-gray-900 font-semibold">(Get 10% off + 2 months upfront)</span>
                   </label>
                 </div>
 
