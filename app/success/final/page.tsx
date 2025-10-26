@@ -93,7 +93,9 @@ function FinalSuccessContent() {
                   <span className="text-xs sm:text-sm lg:text-base text-black font-medium">Products Purchased</span>
                   <div className="text-xs sm:text-sm lg:text-base text-black font-semibold text-right">
                     <div>{orderData.productPurchased}</div>
-                    <div className="mt-1">+ 1-on-1 Coaching (1 Month)</div>
+                    {orderData.metadata?.funnel_type !== 'internal_coaching_tool' && (
+                      <div className="mt-1">+ 1-on-1 Coaching (1 Month)</div>
+                    )}
                   </div>
                 </div>
 
@@ -102,7 +104,7 @@ function FinalSuccessContent() {
                     <span className="text-sm sm:text-base lg:text-lg font-bold text-black">Total Paid</span>
                     <span className="text-lg sm:text-xl lg:text-2xl font-bold text-black">
                       {(() => {
-                        // Parse the original amount and add coaching price
+                        // Parse the original amount and add coaching price (only for non-coaching tool purchases)
                         const currencySymbols: Record<string, string> = {
                           'USD': '$',
                           'GBP': '£',
@@ -125,7 +127,10 @@ function FinalSuccessContent() {
                         const amountStr = orderData.amountPaid.replace(/[^0-9.]/g, '');
                         const originalAmount = parseFloat(amountStr);
                         const currency = orderData.currency || 'USD';
-                        const coachingAmount = coachingPrices[currency] || 397;
+
+                        // Only add coaching price if NOT from internal coaching tool
+                        const isCoachingTool = orderData.metadata?.funnel_type === 'internal_coaching_tool';
+                        const coachingAmount = isCoachingTool ? 0 : (coachingPrices[currency] || 397);
                         const totalAmount = originalAmount + coachingAmount;
 
                         const symbol = currencySymbols[currency] || '$';
@@ -146,7 +151,7 @@ function FinalSuccessContent() {
                 <h3 className="text-sm sm:text-base lg:text-base font-bold text-black mb-1 sm:mb-2">Receipt & Access Instructions</h3>
                 <p className="text-xs sm:text-sm lg:text-sm text-black leading-relaxed">
                   {orderData ? (
-                    <>A receipt has been emailed to <strong>{orderData.customerEmail}</strong> with instructions on how to access your products. Our team will reach out to schedule your first 1-on-1 coaching call.</>
+                    <>A receipt has been emailed to <strong>{orderData.customerEmail}</strong> with instructions on how to access your products.{orderData.metadata?.funnel_type !== 'internal_coaching_tool' && <> Our team will reach out to schedule your first 1-on-1 coaching call.</>}</>
                   ) : (
                     <>A receipt has been emailed to you with instructions on how to access your products.</>
                   )}
