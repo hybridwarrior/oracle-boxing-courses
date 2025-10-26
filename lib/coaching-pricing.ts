@@ -84,8 +84,11 @@ export function calculateCoachingPrice(
   let monthlyAmount: number | undefined = undefined
 
   if (paymentPlan === 'split_2') {
-    // Split by 2: Tier price divided by 2 (no discounts applied)
-    monthlyAmount = SPLIT_PAY_RATES[tier]
+    // Split by 2: If 6-month commitment, divide finalPrice by 2
+    // Otherwise use standard split rate
+    monthlyAmount = sixMonthCommitment
+      ? Math.round(finalPrice / 2)
+      : SPLIT_PAY_RATES[tier]
   } else if (paymentPlan === 'monthly') {
     // Monthly: Tier price divided by 3 (no discounts applied)
     monthlyAmount = MONTHLY_RATES[tier]

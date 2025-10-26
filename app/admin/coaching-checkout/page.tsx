@@ -31,6 +31,13 @@ export default function AdminCoachingCheckout() {
   // Calculate pricing whenever selections change
   const calculation = calculateCoachingPrice(tier, customerDiscount, sixMonthCommitment, paymentPlan)
 
+  // Uncheck 6-month commitment when monthly is selected
+  useEffect(() => {
+    if (paymentPlan === 'monthly' && sixMonthCommitment) {
+      setSixMonthCommitment(false)
+    }
+  }, [paymentPlan])
+
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -346,10 +353,12 @@ export default function AdminCoachingCheckout() {
                     id="sixMonth"
                     checked={sixMonthCommitment}
                     onChange={(e) => setSixMonthCommitment(e.target.checked)}
-                    className="w-5 h-5 rounded border-gray-300 text-[#26304a] focus:ring-[#26304a]"
+                    disabled={paymentPlan === 'monthly'}
+                    className="w-5 h-5 rounded border-gray-300 text-[#26304a] focus:ring-[#26304a] disabled:opacity-50 disabled:cursor-not-allowed"
                   />
-                  <label htmlFor="sixMonth" className="text-sm font-medium text-gray-700 flex-1">
+                  <label htmlFor="sixMonth" className={`text-sm font-medium flex-1 ${paymentPlan === 'monthly' ? 'text-gray-400' : 'text-gray-700'}`}>
                     6-Month Commitment <span className="text-gray-900 font-semibold">(Get 10% off + 2 months upfront)</span>
+                    {paymentPlan === 'monthly' && <span className="block text-xs text-gray-400 mt-1">Not available for monthly plans</span>}
                   </label>
                 </div>
 
