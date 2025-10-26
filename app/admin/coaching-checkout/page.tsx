@@ -434,6 +434,100 @@ export default function AdminCoachingCheckout() {
             </div>
           </form>
         )}
+
+        {/* FAQ Section */}
+        <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-200 mt-8">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">FAQ for Closers</h2>
+
+          <div className="space-y-6">
+            {/* Payment Methods */}
+            <div>
+              <h3 className="text-base font-semibold text-gray-900 mb-2">Payment Methods</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>PayPal:</strong> Customers need to select "Pay with USD" option when checking out to use PayPal</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Klarna:</strong> Only available for GBP, EUR, and certain other currencies - NOT available for USD payments</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Apple Pay / Google Pay:</strong> Automatically appears for customers on supported devices (iPhone/Safari for Apple Pay, Android/Chrome for Google Pay)</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Discounts */}
+            <div>
+              <h3 className="text-base font-semibold text-gray-900 mb-2">Discounts & Payment Plans</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Challenge Winner:</strong> -$197 discount (applies to Pay in Full and Split by 2 only)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Existing Member:</strong> -$297 discount (applies to Pay in Full and Split by 2 only)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Monthly Subscriptions:</strong> Do NOT receive customer discounts - standard rates only ($500, $667, or $833/month)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>6-Month Commitment:</strong> Get 10% off + pay for 2 months upfront (not available for monthly plans)</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Payment Plan Breakdown */}
+            <div>
+              <h3 className="text-base font-semibold text-gray-900 mb-2">Payment Plan Details</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Pay in Full:</strong> One-time payment, customer discounts apply</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Split by 2:</strong> 2 monthly payments, auto-cancels after 2nd payment, customer discounts apply</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Monthly:</strong> Ongoing subscription over 3 months, NO customer discounts, 6-month commitment NOT available</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Tax & Billing */}
+            <div>
+              <h3 className="text-base font-semibold text-gray-900 mb-2">Tax & Billing</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Automatic Tax:</strong> Tax is calculated automatically based on customer location and added to the total</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Subscription Billing:</strong> For Split by 2 and Monthly plans, customers are charged on the same day each month</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Coach Assignment */}
+            <div>
+              <h3 className="text-base font-semibold text-gray-900 mb-2">Coach Assignment</h3>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-gray-400 mt-0.5">•</span>
+                  <span><strong>Toni & Charlie:</strong> Select the coach that will work with this client - this is tracked in metadata</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

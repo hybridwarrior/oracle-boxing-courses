@@ -86,12 +86,12 @@ export function calculateCoachingPrice(
 
   if (paymentPlan === 'split_2') {
     // Split by 2: If 6-month commitment, divide finalPrice by 2
-    // Otherwise use standard split rate
+    // Otherwise divide subtotal (after customer discount) by 2
     monthlyAmount = sixMonthCommitment
       ? Math.round(finalPrice / 2)
-      : SPLIT_PAY_RATES[tier]
+      : Math.round(subtotal / 2)
   } else if (paymentPlan === 'monthly') {
-    // Monthly: Tier price divided by 3 (no discounts applied)
+    // Monthly: Divide tier price by 3 (no discounts applied for monthly)
     monthlyAmount = MONTHLY_RATES[tier]
   }
 
