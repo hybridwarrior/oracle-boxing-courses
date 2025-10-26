@@ -108,6 +108,16 @@ export async function POST(req: NextRequest) {
       // Create a subscription for recurring products
       console.log('🔍 UPSELL: Creating subscription')
 
+      // Get customer details for metadata
+      const customer = await stripe.customers.retrieve(customerId);
+      const customerEmail = typeof customer !== 'deleted' ? customer.email || '' : '';
+      const customerName = typeof customer !== 'deleted' ? customer.name || '' : '';
+
+      // Split customer name into first and last name for metadata
+      const nameParts = customerName?.trim().split(' ') || [];
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || nameParts[0] || '';
+
       // Attach payment method to customer first
       await stripe.paymentMethods.attach(paymentMethodId, {
         customer: customerId,
@@ -126,9 +136,35 @@ export async function POST(req: NextRequest) {
         items: [{ price: price_id }],
         default_payment_method: paymentMethodId,
         metadata: {
+          // Customer info
+          customer_first_name: firstName,
+          customer_last_name: lastName,
+          customer_email: customerEmail,
+          customer_phone: '',
+
+          // Funnel tracking
+          funnel_type: 'upsell',
+          type: 'membership',
+          entry_product: product_id,
+
+          // Product details
+          product_name: '6-Week Membership',
+          product_id: product_id,
+
+          // Upsell tracking
           source: 'upsell',
           original_session_id: session_id,
-          product_id: product_id,
+
+          // Tracking params (referrer and UTM)
+          referrer: trackingParams?.referrer || 'direct',
+          utm_source: trackingParams?.utm_source || '',
+          utm_medium: trackingParams?.utm_medium || '',
+          utm_campaign: trackingParams?.utm_campaign || '',
+          utm_term: trackingParams?.utm_term || '',
+          utm_content: trackingParams?.utm_content || '',
+          fbclid: trackingParams?.fbclid || '',
+          session_id: trackingParams?.session_id || '',
+          event_id: trackingParams?.event_id || '',
         },
       })
 
@@ -163,6 +199,16 @@ export async function POST(req: NextRequest) {
         amountInMajorUnit: (amount / 100).toFixed(2)
       });
 
+      // Get customer details for metadata
+      const customer = await stripe.customers.retrieve(customerId);
+      const customerEmail = typeof customer !== 'deleted' ? customer.email || '' : '';
+      const customerName = typeof customer !== 'deleted' ? customer.name || '' : '';
+
+      // Split customer name into first and last name for metadata
+      const nameParts = customerName?.trim().split(' ') || [];
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || nameParts[0] || '';
+
       const upsellPaymentIntent = await stripe.paymentIntents.create({
         amount: amount,
         currency: originalCurrency,
@@ -171,18 +217,36 @@ export async function POST(req: NextRequest) {
         off_session: true,
         confirm: true,
         metadata: {
-          source: 'upsell',
-          type: 'coaching', // Add type metadata for coaching upsell
-          original_session_id: session_id,
+          // Customer info
+          customer_first_name: firstName,
+          customer_last_name: lastName,
+          customer_email: customerEmail,
+          customer_phone: '',
+
+          // Funnel tracking
+          funnel_type: 'upsell',
+          type: 'coaching',
+          entry_product: 'coach1',
+
+          // Product details
+          product_name: '1-Month 1-on-1 Coaching',
           product_id: product_id,
           price_id: price_id,
-          // Include tracking params from original purchase
+
+          // Upsell tracking
+          source: 'upsell',
+          original_session_id: session_id,
+
+          // Tracking params (referrer and UTM)
           referrer: trackingParams?.referrer || 'direct',
           utm_source: trackingParams?.utm_source || '',
           utm_medium: trackingParams?.utm_medium || '',
           utm_campaign: trackingParams?.utm_campaign || '',
           utm_term: trackingParams?.utm_term || '',
           utm_content: trackingParams?.utm_content || '',
+          fbclid: trackingParams?.fbclid || '',
+          session_id: trackingParams?.session_id || '',
+          event_id: trackingParams?.event_id || '',
         },
       })
 

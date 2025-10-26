@@ -6,7 +6,7 @@ import { Currency, getStripePriceId } from '@/lib/currency';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { customerEmail, customerName, originalSessionId, isMembership = false, currency = 'USD' } = body;
+    const { customerEmail, customerName, originalSessionId, isMembership = false, currency = 'USD', trackingParams } = body;
 
     console.log('🎯 Creating coaching upsell:', { customerEmail, isMembership, currency });
 
@@ -27,6 +27,11 @@ export async function POST(req: NextRequest) {
     // Get base URL for redirect
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002';
 
+    // Split customer name into first and last name for metadata
+    const nameParts = customerName?.trim().split(' ') || [];
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || nameParts[0] || '';
+
     // Create Stripe checkout session for the upsell
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -40,15 +45,65 @@ export async function POST(req: NextRequest) {
       success_url: `${baseUrl}/success/final?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/`,
       metadata: {
-        customer_name: customerName,
-        original_session_id: originalSessionId || '',
+        // Customer info
+        customer_first_name: firstName,
+        customer_last_name: lastName,
+        customer_email: customerEmail,
+        customer_phone: '',
+
+        // Funnel tracking
+        funnel_type: 'upsell',
+        type: 'coaching',
+        entry_product: 'coach1',
+
+        // Upsell tracking
         upsell_type: 'coaching',
+        original_session_id: originalSessionId || '',
         is_membership_upsell: isMembership.toString(),
+
+        // Tracking params (referrer and UTM)
+        referrer: trackingParams?.referrer || 'direct',
+        utm_source: trackingParams?.utm_source || '',
+        utm_medium: trackingParams?.utm_medium || '',
+        utm_campaign: trackingParams?.utm_campaign || '',
+        utm_term: trackingParams?.utm_term || '',
+        utm_content: trackingParams?.utm_content || '',
+        fbclid: trackingParams?.fbclid || '',
+        session_id: trackingParams?.session_id || '',
+        event_id: trackingParams?.event_id || '',
       },
       payment_intent_data: {
         metadata: {
+          // Customer info
+          customer_first_name: firstName,
+          customer_last_name: lastName,
+          customer_email: customerEmail,
+          customer_phone: '',
+
+          // Funnel tracking
+          funnel_type: 'upsell',
+          type: 'coaching',
+          entry_product: 'coach1',
+
+          // Product details
+          product_name: '1-Month 1-on-1 Coaching',
+          product_id: 'prod_THuQf0h3DatQUL',
+
+          // Upsell tracking
           upsell_type: 'coaching',
           original_session_id: originalSessionId || '',
+          is_membership_upsell: isMembership.toString(),
+
+          // Tracking params (referrer and UTM)
+          referrer: trackingParams?.referrer || 'direct',
+          utm_source: trackingParams?.utm_source || '',
+          utm_medium: trackingParams?.utm_medium || '',
+          utm_campaign: trackingParams?.utm_campaign || '',
+          utm_term: trackingParams?.utm_term || '',
+          utm_content: trackingParams?.utm_content || '',
+          fbclid: trackingParams?.fbclid || '',
+          session_id: trackingParams?.session_id || '',
+          event_id: trackingParams?.event_id || '',
         },
       },
     });
