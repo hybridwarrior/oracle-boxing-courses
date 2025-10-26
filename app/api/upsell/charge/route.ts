@@ -110,8 +110,8 @@ export async function POST(req: NextRequest) {
 
       // Get customer details for metadata
       const customer = await stripe.customers.retrieve(customerId);
-      const customerEmail = typeof customer !== 'deleted' ? customer.email || '' : '';
-      const customerName = typeof customer !== 'deleted' ? customer.name || '' : '';
+      const customerEmail = customer.deleted ? '' : customer.email || '';
+      const customerName = customer.deleted ? '' : customer.name || '';
 
       // Split customer name into first and last name for metadata
       const nameParts = customerName?.trim().split(' ') || [];
@@ -201,8 +201,8 @@ export async function POST(req: NextRequest) {
 
       // Get customer details for metadata
       const customer = await stripe.customers.retrieve(customerId);
-      const customerEmail = typeof customer !== 'deleted' ? customer.email || '' : '';
-      const customerName = typeof customer !== 'deleted' ? customer.name || '' : '';
+      const customerEmail = customer.deleted ? '' : customer.email || '';
+      const customerName = customer.deleted ? '' : customer.name || '';
 
       // Split customer name into first and last name for metadata
       const nameParts = customerName?.trim().split(' ') || [];
