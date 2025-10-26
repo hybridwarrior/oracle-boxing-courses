@@ -66,13 +66,14 @@ export function calculateCoachingPrice(
   paymentPlan: PaymentPlan
 ): PricingCalculation {
   // Base price for selected tier
-  const basePrice = TIER_PRICES[tier]
+  // For 6-month commitment, base price is 2x the tier price (paying for 2 months upfront)
+  const basePrice = sixMonthCommitment ? TIER_PRICES[tier] * 2 : TIER_PRICES[tier]
 
   // Apply customer discount
   const discountAmount = CUSTOMER_DISCOUNTS[customerDiscount]
   const subtotal = basePrice - discountAmount
 
-  // Calculate 6-month discount if applicable
+  // Calculate 6-month discount if applicable (10% of subtotal)
   const sixMonthDiscount = sixMonthCommitment
     ? Math.round(subtotal * SIX_MONTH_DISCOUNT_PERCENTAGE)
     : 0
