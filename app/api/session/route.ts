@@ -73,6 +73,7 @@ export async function GET(req: NextRequest) {
       sessionId,
       productMetadata,
       trackingParams,
+      metadata: session.metadata, // Pass full metadata to success page
     });
   } catch (error: any) {
     console.error('Session retrieval error:', error);
