@@ -363,7 +363,6 @@ export default function AdminCoachingCheckout() {
                   >
                     <option value="Toni">Toni</option>
                     <option value="Charlie">Charlie</option>
-                    <option value="Oliver">Oliver</option>
                   </select>
                 </div>
               </div>

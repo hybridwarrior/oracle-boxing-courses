@@ -7,7 +7,7 @@
 export type CoachingTier = 'tier_1' | 'tier_2' | 'tier_3'
 export type CustomerDiscount = 'none' | 'challenge_winner' | 'existing_member'
 export type PaymentPlan = 'full' | 'split_2' | 'monthly'
-export type Coach = 'Toni' | 'Charlie' | 'Oliver'
+export type Coach = 'Toni' | 'Charlie'
 
 // Base pricing structure
 export const TIER_PRICES = {

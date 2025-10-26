@@ -107,14 +107,19 @@ export async function POST(req: NextRequest) {
       event_id: trackingParams?.event_id || '',
     }
 
-    // Get base URL for redirect
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://shop.oracleboxing.com'
+    // Get base URL for redirect - use headers for server-side
+    const host = req.headers.get('host')
+    const protocol = req.headers.get('x-forwarded-proto') || 'https'
+    const baseUrl = host ? `${protocol}://${host}` : 'https://shop.oracleboxing.com'
 
     // Create Stripe checkout session based on payment plan
     let session
 
     if (paymentPlan === 'full') {
       // ONE-TIME PAYMENT
+      // For 6-month commitment, add 2 products (2 months upfront)
+      const quantity = sixMonthCommitment ? 2 : 1
+
       session = await stripe.checkout.sessions.create({
         mode: 'payment',
         customer_email: email,
@@ -125,7 +130,7 @@ export async function POST(req: NextRequest) {
               product: COACHING_PRODUCT_ID,
               unit_amount: calculation.finalPrice * 100, // Convert to cents
             },
-            quantity: 1,
+            quantity: quantity,
           },
         ],
         success_url: `${baseUrl}/success/final?session_id={CHECKOUT_SESSION_ID}`,
