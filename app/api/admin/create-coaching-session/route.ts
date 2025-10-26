@@ -96,6 +96,9 @@ export async function POST(req: NextRequest) {
       customer_email: email,
       customer_phone: '',
 
+      // Override type to 'closed_coaching'
+      type: 'closed_coaching',
+
       // Pricing metadata from calculation
       ...pricingMetadata,
 
