@@ -93,7 +93,7 @@ function FinalSuccessContent() {
                   <span className="text-xs sm:text-sm lg:text-base text-black font-medium">Products Purchased</span>
                   <div className="text-xs sm:text-sm lg:text-base text-black font-semibold text-right">
                     <div>{orderData.productPurchased}</div>
-                    {orderData.metadata?.funnel_type !== 'internal_coaching_tool' && (
+                    {orderData.metadata?.funnel_type !== 'internal_coaching_tool' && orderData.metadata?.type !== 'closed_coaching' && (
                       <div className="mt-1">+ 1-on-1 Coaching (1 Month)</div>
                     )}
                   </div>
@@ -129,7 +129,7 @@ function FinalSuccessContent() {
                         const currency = orderData.currency || 'USD';
 
                         // Only add coaching price if NOT from internal coaching tool
-                        const isCoachingTool = orderData.metadata?.funnel_type === 'internal_coaching_tool';
+                        const isCoachingTool = orderData.metadata?.funnel_type === 'internal_coaching_tool' || orderData.metadata?.type === 'closed_coaching';
                         const coachingAmount = isCoachingTool ? 0 : (coachingPrices[currency] || 397);
                         const totalAmount = originalAmount + coachingAmount;
 
@@ -151,7 +151,7 @@ function FinalSuccessContent() {
                 <h3 className="text-sm sm:text-base lg:text-base font-bold text-black mb-1 sm:mb-2">Receipt & Access Instructions</h3>
                 <p className="text-xs sm:text-sm lg:text-sm text-black leading-relaxed">
                   {orderData ? (
-                    <>A receipt has been emailed to <strong>{orderData.customerEmail}</strong> with instructions on how to access your products.{orderData.metadata?.funnel_type !== 'internal_coaching_tool' && <> Our team will reach out to schedule your first 1-on-1 coaching call.</>}</>
+                    <>A receipt has been emailed to <strong>{orderData.customerEmail}</strong> with instructions on how to access your products.{orderData.metadata?.funnel_type !== 'internal_coaching_tool' && orderData.metadata?.type !== 'closed_coaching' && <> Our team will reach out to schedule your first 1-on-1 coaching call.</>}</>
                   ) : (
                     <>A receipt has been emailed to you with instructions on how to access your products.</>
                   )}
