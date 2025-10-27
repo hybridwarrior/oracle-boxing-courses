@@ -253,7 +253,7 @@ export default function CheckoutPage() {
               id="email"
               value={customerInfo.email}
               onChange={(e) => setCustomerInfo({ ...customerInfo, email: e.target.value })}
-              className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all"
+              className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#000000] focus:border-transparent transition-all"
               placeholder="your@email.com"
               required
               style={{ cursor: 'text' }}
@@ -270,7 +270,7 @@ export default function CheckoutPage() {
               id="fullName"
               value={customerInfo.firstName}
               onChange={(e) => setCustomerInfo({ ...customerInfo, firstName: e.target.value })}
-              className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all"
+              className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#000000] focus:border-transparent transition-all"
               placeholder="John Doe"
               required
               style={{ cursor: 'text' }}
@@ -284,7 +284,7 @@ export default function CheckoutPage() {
             className={`w-full py-3 px-6 font-bold text-base rounded-full shadow-lg transition-all duration-200 flex items-center justify-center gap-2 ${
               isLoading
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-[#26304a] hover:bg-[#1e293b] cursor-pointer'
+                : 'bg-[#000000] hover:bg-[#1a1a1a] cursor-pointer'
             } text-white`}
           >
             {isLoading ? (

@@ -68,7 +68,7 @@ export function CourseCurriculum({
             <a
               href="#pricing"
               onClick={onButtonClick}
-              className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#26304a] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#000000] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
             >
               {buttonText}
             </a>

@@ -139,7 +139,7 @@ export default function BundlePage() {
             <a
               href="#pricing"
               onClick={scrollToPricing}
-              className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#26304a] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#000000] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
             >
               I WANT ACCESS
             </a>
@@ -176,7 +176,7 @@ export default function BundlePage() {
           <a
             href="#pricing"
             onClick={scrollToPricing}
-            className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#26304a] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+            className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#000000] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
           >
             I WANT ACCESS
           </a>
@@ -190,7 +190,7 @@ export default function BundlePage() {
             <a
               href="#pricing"
               onClick={scrollToPricing}
-              className="inline-flex items-center justify-center py-2 sm:py-4 px-5 sm:px-12 bg-[#26304a] text-white font-black text-sm sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              className="inline-flex items-center justify-center py-2 sm:py-4 px-5 sm:px-12 bg-[#000000] text-white font-black text-sm sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
             >
               I WANT ACCESS
             </a>

@@ -138,7 +138,7 @@ export function EpicCTAButton({
 
   const buttonClasses = cn(
     "inline-flex items-center justify-center",
-    "bg-[#26304a] hover:bg-[#1e293b]",
+    "bg-[#000000] hover:bg-[#1a1a1a]",
     "text-white font-bold",
     "rounded-lg",
     "transition-all duration-200 ease-out",

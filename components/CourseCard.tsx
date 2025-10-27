@@ -177,7 +177,7 @@ export function CourseCard({ product }: CourseCardProps) {
           {courseDetailPages[product.id] && (
             <Link
               href={courseDetailPages[product.id]}
-              className="w-full py-3 px-4 text-sm font-black bg-[#26304a] text-white rounded-lg shadow-lg uppercase tracking-wide hover:bg-[#1e293b] transition-colors text-center block flex-shrink-0"
+              className="w-full py-3 px-4 text-sm font-black bg-[#000000] text-white rounded-lg shadow-lg uppercase tracking-wide hover:bg-[#1a1a1a] transition-colors text-center block flex-shrink-0"
             >
               Learn More
             </Link>

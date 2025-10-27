@@ -54,7 +54,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
   return (
     <section className="py-8 sm:py-20 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#26304a] rounded-2xl sm:rounded-3xl p-6 sm:p-16 shadow-2xl text-white">
+        <div className="bg-[#000000] rounded-2xl sm:rounded-3xl p-6 sm:p-16 shadow-2xl text-white">
           {/* Logo */}
           <div className="flex justify-center mb-4 sm:mb-10">
             <img
@@ -94,7 +94,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
           {/* CTA Button - White with Red Text */}
           <button
             onClick={handleEnroll}
-            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-white text-[#26304a] font-black text-base sm:text-lg md:text-xl rounded-xl mb-6 sm:mb-8 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200"
+            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-white text-[#000000] font-black text-base sm:text-lg md:text-xl rounded-xl mb-6 sm:mb-8 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200"
             style={{ cursor: 'pointer' }}
           >
             ACCESS NOW

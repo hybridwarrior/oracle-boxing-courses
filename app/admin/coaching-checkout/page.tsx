@@ -172,7 +172,7 @@ export default function AdminCoachingCheckout() {
                 </button>
                 <button
                   onClick={copyToClipboard}
-                  className="px-4 py-2 bg-[#26304a] text-white rounded-lg hover:bg-[#1e293b] transition-colors flex items-center gap-2"
+                  className="px-4 py-2 bg-[#000000] text-white rounded-lg hover:bg-[#1a1a1a] transition-colors flex items-center gap-2"
                 >
                   {copied ? (
                     <>
@@ -249,7 +249,7 @@ export default function AdminCoachingCheckout() {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all"
+                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#000000] focus:border-transparent transition-all"
                     placeholder="customer@email.com"
                     required
                   />
@@ -264,7 +264,7 @@ export default function AdminCoachingCheckout() {
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all"
+                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#000000] focus:border-transparent transition-all"
                     placeholder="John Doe"
                     required
                   />
@@ -284,7 +284,7 @@ export default function AdminCoachingCheckout() {
                     id="tier"
                     value={tier}
                     onChange={(e) => setTier(e.target.value as CoachingTier)}
-                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all"
+                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#000000] focus:border-transparent transition-all"
                   >
                     <option value="tier_1">Tier 1 - {formatPrice(TIER_PRICES.tier_1)}</option>
                     <option value="tier_2">Tier 2 - {formatPrice(TIER_PRICES.tier_2)}</option>
@@ -303,7 +303,7 @@ export default function AdminCoachingCheckout() {
                     value={customerDiscount}
                     onChange={(e) => setCustomerDiscount(e.target.value as CustomerDiscount)}
                     disabled={paymentPlan === 'monthly'}
-                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100"
+                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#000000] focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100"
                   >
                     <option value="none">No Discount</option>
                     <option value="challenge_winner">Challenge Winner (-{formatPrice(CUSTOMER_DISCOUNTS.challenge_winner)})</option>
@@ -322,7 +322,7 @@ export default function AdminCoachingCheckout() {
                       onClick={() => setPaymentPlan('full')}
                       className={`py-3 px-4 rounded-xl font-medium transition-all ${
                         paymentPlan === 'full'
-                          ? 'bg-[#26304a] text-white shadow-lg'
+                          ? 'bg-[#000000] text-white shadow-lg'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -333,7 +333,7 @@ export default function AdminCoachingCheckout() {
                       onClick={() => setPaymentPlan('split_2')}
                       className={`py-3 px-4 rounded-xl font-medium transition-all ${
                         paymentPlan === 'split_2'
-                          ? 'bg-[#26304a] text-white shadow-lg'
+                          ? 'bg-[#000000] text-white shadow-lg'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -344,7 +344,7 @@ export default function AdminCoachingCheckout() {
                       onClick={() => setPaymentPlan('monthly')}
                       className={`py-3 px-4 rounded-xl font-medium transition-all ${
                         paymentPlan === 'monthly'
-                          ? 'bg-[#26304a] text-white shadow-lg'
+                          ? 'bg-[#000000] text-white shadow-lg'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -361,7 +361,7 @@ export default function AdminCoachingCheckout() {
                     checked={sixMonthCommitment}
                     onChange={(e) => setSixMonthCommitment(e.target.checked)}
                     disabled={paymentPlan === 'monthly'}
-                    className="w-5 h-5 rounded border-gray-300 text-[#26304a] focus:ring-[#26304a] disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-5 h-5 rounded border-gray-300 text-[#000000] focus:ring-[#000000] disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label htmlFor="sixMonth" className={`text-sm font-medium flex-1 ${paymentPlan === 'monthly' ? 'text-gray-400' : 'text-gray-700'}`}>
                     6-Month Commitment <span className="text-gray-900 font-semibold">(Get 10% off + 2 months upfront)</span>
@@ -378,7 +378,7 @@ export default function AdminCoachingCheckout() {
                     id="coach"
                     value={coach}
                     onChange={(e) => setCoach(e.target.value as Coach)}
-                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all"
+                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#000000] focus:border-transparent transition-all"
                   >
                     <option value="Toni">Toni</option>
                     <option value="Charlie">Charlie</option>
@@ -408,7 +408,7 @@ export default function AdminCoachingCheckout() {
                   )}
                   <div className="flex justify-between pt-3 border-t border-gray-300 text-lg">
                     <span className="font-bold text-gray-900">Total:</span>
-                    <span className="font-bold text-[#26304a]">{formatPrice(calculation.finalPrice)}</span>
+                    <span className="font-bold text-[#000000]">{formatPrice(calculation.finalPrice)}</span>
                   </div>
                   {calculation.monthlyAmount && (
                     <div className="flex justify-between text-blue-700 pt-2">
@@ -426,7 +426,7 @@ export default function AdminCoachingCheckout() {
                 className={`w-full py-4 px-6 font-bold text-base rounded-full shadow-lg transition-all duration-200 flex items-center justify-center gap-2 ${
                   isLoading
                     ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-[#26304a] hover:bg-[#1e293b] cursor-pointer'
+                    : 'bg-[#000000] hover:bg-[#1a1a1a] cursor-pointer'
                 } text-white`}
               >
                 {isLoading ? (

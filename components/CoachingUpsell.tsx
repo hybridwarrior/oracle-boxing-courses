@@ -50,7 +50,7 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
 
         {/* Exclusive Offer Badge */}
         <div className="flex justify-center mb-4 sm:mb-5 lg:mb-6">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#26304a] text-white rounded text-xs sm:text-sm font-bold uppercase tracking-wide animate-bounce">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#000000] text-white rounded text-xs sm:text-sm font-bold uppercase tracking-wide animate-bounce">
             Exclusive Offer
           </div>
         </div>
@@ -136,7 +136,7 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
               className={`w-full py-3 sm:py-4 px-4 sm:px-6 rounded transition-all duration-200 ${
                 isLoading
                   ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-[#26304a] hover:bg-[#1e293b] cursor-pointer'
+                  : 'bg-[#000000] hover:bg-[#1a1a1a] cursor-pointer'
               } text-white flex flex-col items-center gap-1`}
             >
               <span className="text-base sm:text-lg font-bold">

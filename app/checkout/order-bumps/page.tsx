@@ -291,7 +291,7 @@ function OrderBumpsContent() {
               <div
                 key={product.id}
                 className={`bg-white border-2 rounded-2xl p-6 transition-all duration-300 ease-in-out transform ${
-                  isSelected ? 'border-[#26304a] shadow-lg' : 'border-gray-200'
+                  isSelected ? 'border-[#000000] shadow-lg' : 'border-gray-200'
                 } ${!showAll ? 'animate-fadeIn' : ''}`}
                 style={{
                   animation: !showAll ? 'fadeIn 0.3s ease-in-out' : 'none'
@@ -362,7 +362,7 @@ function OrderBumpsContent() {
                       onClick={() => handleToggleBump(product.id)}
                       className={`mt-3 py-2 px-6 font-bold text-sm rounded-lg transition-all duration-200 ${
                         isSelected
-                          ? 'bg-[#26304a] text-white hover:bg-[#1e293b]'
+                          ? 'bg-[#000000] text-white hover:bg-[#1a1a1a]'
                           : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                       }`}
                       style={{ cursor: 'pointer' }}
@@ -401,7 +401,7 @@ function OrderBumpsContent() {
         {/* Continue Button */}
         <button
           onClick={handleContinue}
-          className="w-full py-3 px-6 bg-[#26304a] text-white font-bold text-base rounded-full shadow-lg hover:bg-[#1e293b] transition-all duration-200"
+          className="w-full py-3 px-6 bg-[#000000] text-white font-bold text-base rounded-full shadow-lg hover:bg-[#1a1a1a] transition-all duration-200"
           style={{ cursor: 'pointer' }}
         >
           Continue to Payment

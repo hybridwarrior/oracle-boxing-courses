@@ -153,7 +153,7 @@ export function NotifyMeModal({ isOpen, onClose }: NotifyMeModalProps) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 px-6 bg-[#26304a] text-white font-black text-base rounded-lg shadow-lg uppercase tracking-wide hover:bg-[#1e293b] disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                className="w-full py-4 px-6 bg-[#000000] text-white font-black text-base rounded-lg shadow-lg uppercase tracking-wide hover:bg-[#1a1a1a] disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
               >
                 {isSubmitting ? 'Submitting...' : 'Notify Me'}
               </button>

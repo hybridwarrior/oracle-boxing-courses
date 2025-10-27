@@ -197,7 +197,7 @@ export default function MembershipsPage() {
                   e.preventDefault()
                   document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-[#26304a] text-white font-black text-base sm:text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+                className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-[#000000] text-white font-black text-base sm:text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
               >
                 LET'S GET TO WORK
               </a>
@@ -244,7 +244,7 @@ export default function MembershipsPage() {
 
               <a
                 href="/6wc"
-                className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-[#26304a] text-white font-black text-base sm:text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
+                className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-[#000000] text-white font-black text-base sm:text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
               >
                 START TODAY
               </a>
@@ -352,7 +352,7 @@ export default function MembershipsPage() {
                 e.preventDefault()
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#26304a] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
               JOIN NOW
             </a>
@@ -496,7 +496,7 @@ export default function MembershipsPage() {
                 e.preventDefault()
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#26304a] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
               JOIN NOW
             </a>
@@ -583,7 +583,7 @@ export default function MembershipsPage() {
                 e.preventDefault()
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-base sm:text-lg lg:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
               I WANT ACCESS
             </a>
@@ -621,7 +621,7 @@ export default function MembershipsPage() {
             {/* Annual - Left */}
             <div className="relative">
               {/* Best Value Badge - On the border line */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-2 bg-[#26304a] text-white text-sm font-black uppercase rounded-full z-10 whitespace-nowrap shadow-md">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-2 bg-[#000000] text-white text-sm font-black uppercase rounded-full z-10 whitespace-nowrap shadow-md">
                 Best Value
               </div>
 
@@ -629,7 +629,7 @@ export default function MembershipsPage() {
                 onClick={() => setSelectedPlan('membership-annual')}
                 className={`cursor-pointer rounded-xl border-2 transition-all ${
                   selectedPlan === 'membership-annual'
-                    ? 'border-[#26304a] shadow-lg'
+                    ? 'border-[#000000] shadow-lg'
                     : 'border-gray-300 hover:border-gray-400'
                 }`}
               >
@@ -637,7 +637,7 @@ export default function MembershipsPage() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedPlan === 'membership-annual' ? 'border-[#26304a] bg-[#26304a]' : 'border-gray-300 bg-white'
+                      selectedPlan === 'membership-annual' ? 'border-[#000000] bg-[#000000]' : 'border-gray-300 bg-white'
                     }`}>
                       {selectedPlan === 'membership-annual' && (
                         <div className="w-3 h-3 bg-white rounded-full"></div>
@@ -682,7 +682,7 @@ export default function MembershipsPage() {
                 onClick={() => setSelectedPlan('membership-6month')}
                 className={`cursor-pointer rounded-xl border-2 transition-all ${
                   selectedPlan === 'membership-6month'
-                    ? 'border-[#26304a] shadow-lg'
+                    ? 'border-[#000000] shadow-lg'
                     : 'border-gray-300 hover:border-gray-400'
                 }`}
               >
@@ -690,7 +690,7 @@ export default function MembershipsPage() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedPlan === 'membership-6month' ? 'border-[#26304a] bg-[#26304a]' : 'border-gray-300 bg-white'
+                      selectedPlan === 'membership-6month' ? 'border-[#000000] bg-[#000000]' : 'border-gray-300 bg-white'
                     }`}>
                       {selectedPlan === 'membership-6month' && (
                         <div className="w-3 h-3 bg-white rounded-full"></div>
@@ -735,7 +735,7 @@ export default function MembershipsPage() {
                 onClick={() => setSelectedPlan('membership-monthly')}
                 className={`cursor-pointer rounded-xl border-2 transition-all ${
                   selectedPlan === 'membership-monthly'
-                    ? 'border-[#26304a] shadow-lg'
+                    ? 'border-[#000000] shadow-lg'
                     : 'border-gray-300 hover:border-gray-400'
                 }`}
               >
@@ -743,7 +743,7 @@ export default function MembershipsPage() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedPlan === 'membership-monthly' ? 'border-[#26304a] bg-[#26304a]' : 'border-gray-300 bg-white'
+                      selectedPlan === 'membership-monthly' ? 'border-[#000000] bg-[#000000]' : 'border-gray-300 bg-white'
                     }`}>
                       {selectedPlan === 'membership-monthly' && (
                         <div className="w-3 h-3 bg-white rounded-full"></div>
@@ -787,7 +787,7 @@ export default function MembershipsPage() {
           <div className="text-center mb-6 sm:mb-8">
             <button
               onClick={handleJoinNow}
-              className="py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#26304a] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+              className="py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
               JOIN NOW
             </button>
@@ -809,8 +809,8 @@ export default function MembershipsPage() {
               {/* Step 1 */}
               <div className="text-center">
                 <div className="flex justify-center mb-6">
-                  <div className="w-32 h-32 bg-[#26304a]/10 rounded-full flex items-center justify-center">
-                    <CreditCard className="w-16 h-16 text-[#26304a]" strokeWidth={1.5} />
+                  <div className="w-32 h-32 bg-[#000000]/10 rounded-full flex items-center justify-center">
+                    <CreditCard className="w-16 h-16 text-[#000000]" strokeWidth={1.5} />
                   </div>
                 </div>
                 <p className="text-lg text-gray-900 font-semibold">
@@ -829,8 +829,8 @@ export default function MembershipsPage() {
               {/* Step 2 */}
               <div className="text-center">
                 <div className="flex justify-center mb-6">
-                  <div className="w-32 h-32 bg-[#26304a]/10 rounded-full flex items-center justify-center">
-                    <Smartphone className="w-16 h-16 text-[#26304a]" strokeWidth={1.5} />
+                  <div className="w-32 h-32 bg-[#000000]/10 rounded-full flex items-center justify-center">
+                    <Smartphone className="w-16 h-16 text-[#000000]" strokeWidth={1.5} />
                   </div>
                 </div>
                 <p className="text-lg text-gray-900 font-semibold">
@@ -849,8 +849,8 @@ export default function MembershipsPage() {
               {/* Step 3 */}
               <div className="text-center">
                 <div className="flex justify-center mb-6">
-                  <div className="w-32 h-32 bg-[#26304a]/10 rounded-full flex items-center justify-center">
-                    <TrendingUp className="w-16 h-16 text-[#26304a]" strokeWidth={1.5} />
+                  <div className="w-32 h-32 bg-[#000000]/10 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-16 h-16 text-[#000000]" strokeWidth={1.5} />
                   </div>
                 </div>
                 <p className="text-lg text-gray-900 font-semibold">
@@ -864,8 +864,8 @@ export default function MembershipsPage() {
               {/* Step 1 */}
               <div className="text-center">
                 <div className="flex justify-center mb-4">
-                  <div className="w-24 h-24 bg-[#26304a]/10 rounded-full flex items-center justify-center">
-                    <CreditCard className="w-12 h-12 text-[#26304a]" strokeWidth={1.5} />
+                  <div className="w-24 h-24 bg-[#000000]/10 rounded-full flex items-center justify-center">
+                    <CreditCard className="w-12 h-12 text-[#000000]" strokeWidth={1.5} />
                   </div>
                 </div>
                 <p className="text-base text-gray-900 font-semibold">
@@ -884,8 +884,8 @@ export default function MembershipsPage() {
               {/* Step 2 */}
               <div className="text-center">
                 <div className="flex justify-center mb-4">
-                  <div className="w-24 h-24 bg-[#26304a]/10 rounded-full flex items-center justify-center">
-                    <Smartphone className="w-12 h-12 text-[#26304a]" strokeWidth={1.5} />
+                  <div className="w-24 h-24 bg-[#000000]/10 rounded-full flex items-center justify-center">
+                    <Smartphone className="w-12 h-12 text-[#000000]" strokeWidth={1.5} />
                   </div>
                 </div>
                 <p className="text-base text-gray-900 font-semibold">
@@ -904,8 +904,8 @@ export default function MembershipsPage() {
               {/* Step 3 */}
               <div className="text-center">
                 <div className="flex justify-center mb-4">
-                  <div className="w-24 h-24 bg-[#26304a]/10 rounded-full flex items-center justify-center">
-                    <TrendingUp className="w-12 h-12 text-[#26304a]" strokeWidth={1.5} />
+                  <div className="w-24 h-24 bg-[#000000]/10 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-12 h-12 text-[#000000]" strokeWidth={1.5} />
                   </div>
                 </div>
                 <p className="text-base text-gray-900 font-semibold">
