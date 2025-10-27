@@ -15,8 +15,11 @@ import { BundleTimelineProcess } from '@/components/BundleTimelineProcess'
 import { PlatformScreenshotsCarousel } from '@/components/PlatformScreenshotsCarousel'
 import { getProductById } from '@/lib/products'
 import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getProductPrice, formatPrice } from '@/lib/currency'
 
 export default function BundlePage() {
+  const { currency } = useCurrency()
   const scrollToPricing = (e: React.MouseEvent) => {
     e.preventDefault()
     const element = document.getElementById('pricing')
@@ -89,13 +92,21 @@ export default function BundlePage() {
     }
   ]
 
+  // Calculate prices in current currency
+  const bffpPrice = getProductPrice('bffp', currency) || 297
+  const roadmapPrice = getProductPrice('brdmp', currency) || 147
+  const replaysPrice = getProductPrice('rcv', currency) || 97
+  const totalIndividualPrice = bffpPrice + roadmapPrice + replaysPrice
+  const bundlePrice = getProductPrice('obm', currency) || 397
+  const savings = totalIndividualPrice - bundlePrice
+
   const priceFeatures = [
-    "Boxing from First Principles ($297)",
-    "Boxing Roadmap ($147)",
-    "Coaching Call Replays ($97)",
+    `Boxing from First Principles (${formatPrice(bffpPrice, currency)})`,
+    `Boxing Roadmap (${formatPrice(roadmapPrice, currency)})`,
+    `Coaching Call Replays (${formatPrice(replaysPrice, currency)})`,
     "Lifetime access to all courses",
     "All future updates included free",
-    "Save $144 vs buying separately",
+    `Save ${formatPrice(savings, currency)} vs buying separately`,
     "30-day money-back guarantee"
   ]
 

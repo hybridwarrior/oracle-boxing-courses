@@ -154,29 +154,40 @@ export const formatProductDescription = (
   currency: Currency
 ): string => {
   // Map of price replacements by product
-  const priceReplacements: Record<string, Array<{find: RegExp, getPrice: () => number}>> = {
+  const priceReplacements: Record<string, Array<{find: RegExp, getReplacement: () => string}>> = {
     'bundle': [
-      { find: /\$297/g, getPrice: () => getProductPrice('bffp', currency) || 297 },
-      { find: /\$147/g, getPrice: () => getProductPrice('brdmp', currency) || 147 },
-      { find: /\$444/g, getPrice: () => (getProductPrice('bffp', currency) || 297) + (getProductPrice('brdmp', currency) || 147) },
-      { find: /\$397/g, getPrice: () => getProductPrice('obm', currency) || 397 },
-      { find: /\$47/g, getPrice: () => {
+      { find: /\$297/g, getReplacement: () => formatPrice(getProductPrice('bffp', currency) || 297, currency) },
+      { find: /\$147/g, getReplacement: () => formatPrice(getProductPrice('brdmp', currency) || 147, currency) },
+      { find: /\$444/g, getReplacement: () => formatPrice((getProductPrice('bffp', currency) || 297) + (getProductPrice('brdmp', currency) || 147), currency) },
+      { find: /\$397/g, getReplacement: () => formatPrice(getProductPrice('obm', currency) || 397, currency) },
+      { find: /\$47/g, getReplacement: () => {
         const total = (getProductPrice('bffp', currency) || 297) + (getProductPrice('brdmp', currency) || 147);
         const bundlePrice = getProductPrice('obm', currency) || 397;
-        return total - bundlePrice;
+        return formatPrice(total - bundlePrice, currency);
       }},
     ],
     'recordings-vault': [
-      { find: /Normally \$197/g, getPrice: () => {
-        // Keep "Normally" but update price
+      { find: /Normally \$197/g, getReplacement: () => {
         const price = 197; // Reference price in description
-        return price;
+        return `Normally ${formatPrice(price, currency)}`;
       }},
-      { find: /\$97/g, getPrice: () => getProductPrice('rcv', currency) || 97 },
+      { find: /\$97/g, getReplacement: () => formatPrice(getProductPrice('rcv', currency) || 97, currency) },
     ],
     'lifetime-bffp': [
-      { find: /Normally \$297/g, getPrice: () => getProductPrice('bffp', currency) || 297 },
-      { find: /\$147/g, getPrice: () => getProductPrice('ltbffp', currency) || 147 },
+      {
+        find: /Normally \$297/g,
+        getReplacement: () => {
+          const price = getProductPrice('bffp', currency) || 297;
+          return `**Normally ${formatPrice(price, currency)}**`;
+        }
+      },
+      {
+        find: /just \$147/g,
+        getReplacement: () => {
+          const price = getProductPrice('ltbffp', currency) || 147;
+          return `just **${formatPrice(price, currency)}**`;
+        }
+      },
     ],
   };
 
@@ -184,10 +195,9 @@ export const formatProductDescription = (
   if (!replacements) return description;
 
   let result = description;
-  replacements.forEach(({ find, getPrice }) => {
-    const price = getPrice();
-    const formatted = formatPrice(price, currency);
-    result = result.replace(find, formatted);
+  replacements.forEach(({ find, getReplacement }) => {
+    const replacement = getReplacement();
+    result = result.replace(find, replacement);
   });
 
   return result;
