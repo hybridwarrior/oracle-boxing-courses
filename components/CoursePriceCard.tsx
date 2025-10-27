@@ -52,15 +52,15 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
   }
 
   return (
-    <section className="py-8 sm:py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#000000] rounded-2xl sm:rounded-3xl p-6 sm:p-16 shadow-2xl text-white">
+    <section className="py-6 sm:py-20 bg-white">
+      <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="bg-[#000000] rounded-xl sm:rounded-3xl p-4 sm:p-16 shadow-2xl text-white">
           {/* Logo */}
-          <div className="flex justify-center mb-4 sm:mb-10">
+          <div className="flex justify-center mb-3 sm:mb-10">
             <img
               src="https://media.oracleboxing.com/Website/infinity_squared_white.svg"
               alt="Oracle Boxing"
-              className="h-5 sm:h-8"
+              className="h-4 sm:h-8"
               onError={(e) => {
                 // Fallback if logo doesn't load
                 e.currentTarget.style.display = 'none'
@@ -69,22 +69,22 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
           </div>
 
           {/* Heading */}
-          <h3 className="text-xl sm:text-3xl md:text-4xl font-medium text-center mb-4 sm:mb-6 lg:mb-8 uppercase" style={{ fontFamily: "var(--font-satoshi)" }}>
+          <h3 className="text-lg sm:text-3xl md:text-4xl font-medium text-center mb-3 sm:mb-6 lg:mb-8 uppercase" style={{ fontFamily: "var(--font-satoshi)" }}>
             {getCourseHeading()}
           </h3>
 
           {/* Price */}
-          <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+          <div className="text-center mb-3 sm:mb-6 lg:mb-8">
             {bundleCrossedPrice && (
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold opacity-60 line-through mb-1 sm:mb-2">
+              <div className="text-xl sm:text-3xl md:text-4xl font-bold opacity-60 line-through mb-1 sm:mb-2">
                 {formatPrice(bundleCrossedPrice, displayCurrency)}
               </div>
             )}
-            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-2 sm:mb-3">
+            <div className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-1 sm:mb-3">
               {formatPrice(convertedPrice, displayCurrency)}
             </div>
             {product.recurring && (
-              <div className="text-base sm:text-lg md:text-xl font-bold opacity-90">per {product.interval}</div>
+              <div className="text-sm sm:text-lg md:text-xl font-bold opacity-90">per {product.interval}</div>
             )}
             {isMembership && currency !== 'USD' && (
               <div className="text-xs sm:text-sm text-white/70 mt-1 sm:mt-2">USD only</div>
@@ -94,7 +94,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
           {/* CTA Button - White with Red Text */}
           <button
             onClick={handleEnroll}
-            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-white text-[#000000] font-black text-base sm:text-lg md:text-xl rounded-xl mb-6 sm:mb-8 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200"
+            className="w-full py-3 sm:py-5 lg:py-6 px-4 sm:px-8 lg:px-12 bg-white text-[#000000] font-black text-sm sm:text-lg md:text-xl rounded-xl mb-4 sm:mb-8 uppercase tracking-wide min-h-[48px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200"
             style={{ cursor: 'pointer' }}
           >
             ACCESS NOW
@@ -102,7 +102,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
 
           {/* Features */}
           {features.length > 0 && (
-            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+            <div className="space-y-2 sm:space-y-4 mb-4 sm:mb-8">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-start gap-3">
                   <Check className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mt-0.5" strokeWidth={3} />

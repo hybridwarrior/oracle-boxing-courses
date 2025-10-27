@@ -206,7 +206,7 @@ export function Header() {
               <Link
                 href="/#newsletter"
                 onClick={closeSidebar}
-                className="text-sm sm:text-base font-semibold py-1.5 sm:py-2 px-3 sm:px-4 rounded-md transition-all duration-200 text-gray-400 hover:text-white text-center"
+                className="text-sm sm:text-base font-semibold py-1.5 sm:py-2 px-3 sm:px-4 rounded-md transition-all duration-200 text-gray-400 hover:text-white text-left"
               >
                 NEWSLETTER
               </Link>
@@ -214,7 +214,7 @@ export function Header() {
               {/* Contact */}
               <a
                 href="mailto:team@oracleboxing.com"
-                className="text-sm sm:text-base font-semibold py-1.5 sm:py-2 px-3 sm:px-4 rounded-md transition-all duration-200 text-gray-400 hover:text-white text-center"
+                className="text-sm sm:text-base font-semibold py-1.5 sm:py-2 px-3 sm:px-4 rounded-md transition-all duration-200 text-gray-400 hover:text-white text-left"
               >
                 CONTACT
               </a>
@@ -222,8 +222,8 @@ export function Header() {
           </nav>
 
           {/* Social Media Icons */}
-          <div className="p-6 border-t border-gray-800">
-            <div className="flex items-center justify-center gap-6">
+          <div className="p-4 sm:p-6 border-t border-gray-800">
+            <div className="flex items-center justify-start gap-4 sm:gap-6 px-3 sm:px-4">
               <a
                 href="https://www.instagram.com/oracle.boxing"
                 target="_blank"
