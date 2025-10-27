@@ -20,7 +20,7 @@ export default function RoadmapPage() {
     e.preventDefault()
     const element = document.getElementById('pricing')
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      element.scrollIntoView({ behavior: 'smooth', block: 'end' })
     }
   }
   const product = getProductById('roadmap')!
@@ -217,7 +217,7 @@ export default function RoadmapPage() {
           modules={modules}
           headerImage={product.image}
           showButton={true}
-          buttonText="ACCESS NOW"
+          buttonText="BUY NOW"
           onButtonClick={scrollToPricing}
         />
       </section>

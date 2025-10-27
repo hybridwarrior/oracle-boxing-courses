@@ -97,7 +97,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
             className="w-full py-3 sm:py-5 lg:py-6 px-4 sm:px-8 lg:px-12 bg-white text-[#000000] font-black text-sm sm:text-lg md:text-xl rounded-xl mb-4 sm:mb-8 uppercase tracking-wide min-h-[48px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200"
             style={{ cursor: 'pointer' }}
           >
-            ACCESS NOW
+            BUY NOW
           </button>
 
           {/* Features */}

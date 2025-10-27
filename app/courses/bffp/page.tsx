@@ -20,7 +20,7 @@ export default function BFFPPage() {
     e.preventDefault()
     const element = document.getElementById('pricing')
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      element.scrollIntoView({ behavior: 'smooth', block: 'end' })
     }
   }
   const product = getProductById('bffp')!
@@ -225,7 +225,7 @@ export default function BFFPPage() {
           modules={modules}
           headerImage={product.image}
           showButton={true}
-          buttonText="ACCESS NOW"
+          buttonText="BUY NOW"
           onButtonClick={scrollToPricing}
         />
       </div>

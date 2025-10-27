@@ -24,7 +24,7 @@ export default function BundlePage() {
     e.preventDefault()
     const element = document.getElementById('pricing')
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      element.scrollIntoView({ behavior: 'smooth', block: 'end' })
     }
   }
   const product = getProductById('bundle')!

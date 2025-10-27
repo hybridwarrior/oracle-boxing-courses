@@ -17,7 +17,7 @@ interface CourseModulesProps {
   onButtonClick?: (e: React.MouseEvent) => void
 }
 
-export function CourseModules({ modules, headerImage, showButton = false, buttonText = "ACCESS NOW", onButtonClick }: CourseModulesProps) {
+export function CourseModules({ modules, headerImage, showButton = false, buttonText = "BUY NOW", onButtonClick }: CourseModulesProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggleModule = (index: number) => {

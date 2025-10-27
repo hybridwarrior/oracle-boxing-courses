@@ -199,7 +199,7 @@ export default function MembershipsPage() {
                 }}
                 className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-[#000000] text-white font-black text-base sm:text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
               >
-                LET'S GET TO WORK
+                BUY NOW
               </a>
             </div>
 
@@ -290,7 +290,7 @@ export default function MembershipsPage() {
               }}
               className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
-              JOIN NOW
+              BUY NOW
             </a>
           </div>
         </div>
@@ -434,7 +434,7 @@ export default function MembershipsPage() {
               }}
               className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
-              JOIN NOW
+              BUY NOW
             </a>
           </div>
         </div>
@@ -521,7 +521,7 @@ export default function MembershipsPage() {
               }}
               className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
-              I WANT ACCESS
+              BUY NOW
             </a>
           </div>
         </div>
@@ -725,7 +725,7 @@ export default function MembershipsPage() {
               onClick={handleJoinNow}
               className="py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-16 bg-[#000000] text-white font-black text-lg sm:text-xl lg:text-2xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
-              JOIN NOW
+              BUY NOW
             </button>
           </div>
 
