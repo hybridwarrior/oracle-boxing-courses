@@ -47,6 +47,7 @@ export const PRODUCT_PRICES: Record<string, Record<Currency, number>> = {
   obm: { USD: 397, GBP: 317, EUR: 365, AUD: 595, CAD: 538, AED: 1465 },
   '6wm': { USD: 97, GBP: 77, EUR: 90, AUD: 145, CAD: 132, AED: 355 },
   coach1: { USD: 397, GBP: 317, EUR: 365, AUD: 595, CAD: 538, AED: 1465 },
+  coach3: { USD: 1500, GBP: 1197, EUR: 1380, AUD: 2247, CAD: 2033, AED: 5532 },
   coach_archive: { USD: 67, GBP: 54, EUR: 62, AUD: 100, CAD: 90, AED: 250 },
 };
 

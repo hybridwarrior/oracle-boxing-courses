@@ -24,13 +24,16 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
 }) => {
   const { currency } = useCurrency();
 
-  // Get the currency-converted prices for coach1 product
+  // Get the currency-converted prices
   const displayPrice = isMembership
     ? 397  // Membership products are USD-only
     : (getProductPrice('coach1', currency) || discountedPrice);
 
-  // Regular price is approximately 25% higher than coach1 (397 -> 500 for USD)
-  const regularPrice = Math.round(displayPrice * 1.26);
+  // Regular price for 3 months coaching
+  const regularPrice = isMembership
+    ? 1500  // Membership products are USD-only
+    : (getProductPrice('coach3', currency) || 1500);
+
   const savings = regularPrice - displayPrice;
 
   const displayCurrency = isMembership ? 'USD' : currency;
