@@ -13,31 +13,24 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
         {/* Main Headline */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
-            <span className="underline decoration-red-600 decoration-4 underline-offset-4">Learn the right way</span>
+            <span className="bg-yellow-200/80 text-black px-2 py-[2px]">Learn the right way</span>
           </h2>
         </div>
 
         {/* Niclas Testimonial - Course */}
         <div className="grid grid-cols-1 gap-8 items-center lg:grid-cols-2 mb-24">
           <div className="flex gap-8 flex-col">
-            <div className="bg-gray-50 rounded-xl p-6">
+            <div className="bg-white rounded-xl p-6">
               <div className="space-y-4">
-                <div className="relative">
-                  <div className="text-orange-400 text-6xl font-serif absolute -left-4 -top-2">"</div>
-                  <blockquote className="text-lg text-gray-700 leading-relaxed px-8">
-                    This is THE source of our kinetic energy potential. Can't thank you enough for the changes I've made thanks to your dedication with First Principles! It was the best choice of my martial arts life - the aha-moments are incredible!
-                  </blockquote>
-                  <div className="text-orange-400 text-6xl font-serif absolute -right-4 -bottom-8">"</div>
-                </div>
-                <div className="flex items-center gap-4 mt-4">
+                <div className="flex items-center gap-4 mb-4">
                   <img
                     src="https://media.oracleboxing.com/webp/Website/niclas.webp"
                     alt="Niclas Laux"
-                    className="w-16 h-16 rounded-full object-cover border-2 border-orange-500/30"
+                    className="w-16 h-16 rounded-full object-cover"
                   />
                   <div>
                     <h4 className="text-gray-900 font-semibold text-base">Niclas Laux</h4>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-600 text-sm">
                       Founder of Samurai Movement Academy, BJJ Purple Belt, Self-Defense Instructor
                     </p>
                     <p className="text-gray-500 text-xs mt-1 italic">
@@ -45,6 +38,9 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
                     </p>
                   </div>
                 </div>
+                <blockquote className="text-base text-gray-700 leading-relaxed">
+                  This is THE source of our kinetic energy potential. Can't thank you enough for the changes I've made thanks to your dedication with First Principles! It was the best choice of my martial arts life - the aha-moments are incredible!
+                </blockquote>
               </div>
             </div>
           </div>
@@ -73,28 +69,24 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
           </div>
           <div className="flex gap-8 flex-col order-1 lg:order-2">
             <div className="lg:pl-6">
-              <div className="bg-gray-50 rounded-xl p-6">
+              <div className="bg-white rounded-xl p-6">
                 <div className="space-y-4">
-                  <div className="relative">
-                    <div className="text-orange-400 text-6xl font-serif absolute -left-4 -top-2">"</div>
-                    <blockquote className="text-base sm:text-lg text-gray-700 leading-relaxed px-8">
-                      I decided to recommit to this community and I already feel like I made breakthroughs on Toni and Ollie's zoom calls. I've gotta tip my hat to how effective you guys are at coaching in this format. I feel like I gain a significantly better understanding of technique every time I make a call.
-                    </blockquote>
-                    <div className="text-orange-400 text-6xl font-serif absolute -right-4 -bottom-8">"</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-4">
+                  <div className="flex items-center gap-4 mb-4">
                     <img
                       src="https://media.oracleboxing.com/webp/Website/torey.webp"
                       alt="Torey Goodall"
-                      className="w-16 h-16 rounded-full object-cover border-2 border-orange-500/30"
+                      className="w-16 h-16 rounded-full object-cover"
                     />
                     <div>
                       <h4 className="text-gray-900 font-semibold text-base">Torey Goodall</h4>
-                      <p className="text-gray-400 text-sm leading-relaxed">
+                      <p className="text-gray-600 text-sm">
                         Community Member & Boxing Enthusiast
                       </p>
                     </div>
                   </div>
+                  <blockquote className="text-base text-gray-700 leading-relaxed">
+                    I decided to recommit to this community and I already feel like I made breakthroughs on Toni and Ollie's zoom calls. I've gotta tip my hat to how effective you guys are at coaching in this format. I feel like I gain a significantly better understanding of technique every time I make a call.
+                  </blockquote>
                 </div>
               </div>
             </div>
@@ -105,28 +97,24 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
         <div className="grid grid-cols-1 gap-8 items-center lg:grid-cols-2 mb-12">
           <div className="flex gap-8 flex-col">
             <div className="lg:pl-6">
-              <div className="bg-gray-50 rounded-xl p-6">
+              <div className="bg-white rounded-xl p-6">
                 <div className="space-y-4">
-                  <div className="relative">
-                    <div className="text-orange-400 text-6xl font-serif absolute -left-4 -top-2">"</div>
-                    <blockquote className="text-base sm:text-lg text-gray-700 leading-relaxed px-8">
-                      Being part of this community has been an incredibly transformative experience. Joining the live Zoom calls almost every day has helped me lose weight, improve my technique, and significantly boost my confidence. The guidance, encouragement, and camaraderie have made a real difference in my development as a boxer.
-                    </blockquote>
-                    <div className="text-orange-400 text-6xl font-serif absolute -right-4 -bottom-8">"</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-4">
+                  <div className="flex items-center gap-4 mb-4">
                     <img
                       src="https://media.oracleboxing.com/webp/Website/balal.webp"
                       alt="Balal Hanif"
-                      className="w-16 h-16 rounded-full object-cover border-2 border-orange-500/30"
+                      className="w-16 h-16 rounded-full object-cover"
                     />
                     <div>
                       <h4 className="text-gray-900 font-semibold text-base">Balal Hanif</h4>
-                      <p className="text-gray-400 text-sm leading-relaxed">
+                      <p className="text-gray-600 text-sm">
                         Community Member & Boxing Enthusiast
                       </p>
                     </div>
                   </div>
+                  <blockquote className="text-base text-gray-700 leading-relaxed">
+                    Being part of this community has been an incredibly transformative experience. Joining the live Zoom calls almost every day has helped me lose weight, improve my technique, and significantly boost my confidence. The guidance, encouragement, and camaraderie have made a real difference in my development as a boxer.
+                  </blockquote>
                 </div>
               </div>
             </div>
@@ -153,7 +141,7 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
             onClick={onCTAClick}
             trackingName="testimonials"
           >
-            <span className="text-lg sm:text-xl font-black uppercase">Start the 6-Week Challenge</span>
+            <span className="text-lg sm:text-xl font-black uppercase">Start Challenge</span>
           </EpicCTAButton>
         </div>
       </div>

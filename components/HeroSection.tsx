@@ -84,7 +84,7 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
             trackingName="hero"
             onClick={handleCTAClick}
           >
-            <span className="text-lg sm:text-xl font-black uppercase">Start the 6-Week Challenge</span>
+            <span className="text-lg sm:text-xl font-black uppercase">Start Challenge</span>
           </EpicCTAButton>
         </div>
       </div>

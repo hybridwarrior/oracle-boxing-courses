@@ -87,7 +87,7 @@ export default function RefundRequirementsSection({ onCTAClick }: RefundRequirem
             onClick={onCTAClick}
             trackingName="refund"
           >
-            <span className="text-lg sm:text-xl font-black uppercase">Start the 6-Week Challenge</span>
+            <span className="text-lg sm:text-xl font-black uppercase">Start Challenge</span>
           </EpicCTAButton>
         </div>
 
