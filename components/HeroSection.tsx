@@ -49,15 +49,15 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
 
   return (
     <section className="relative overflow-hidden bg-white">
-      <div className="max-w-[1600px] mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-10">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
         {/* Centered Text Content */}
         <div className="text-center" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
-          <div className="mb-3 sm:mb-4 inline-block px-2.5 sm:px-3 lg:px-4 py-1 sm:py-1.5 lg:py-2 bg-gradient-to-r from-orange-50 to-red-50 text-orange-600 border border-orange-200 rounded-lg font-bold text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+          <div className="mb-4 sm:mb-6 inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-orange-50 to-red-50 text-orange-600 border border-orange-200 rounded-lg font-bold text-xs sm:text-sm uppercase tracking-wider">
             {headline.badge}
           </div>
 
           <h1
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight leading-[1.2] px-2 sm:px-3 lg:px-4 max-w-5xl mx-auto"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-tight px-4 max-w-5xl mx-auto mb-4 sm:mb-6"
             style={{
               fontFamily: variant === 'B' ? 'ClashDisplay, system-ui, sans-serif' : 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
               fontWeight: '700'
@@ -66,25 +66,25 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
             {headline.main}
           </h1>
 
-          <p className="mt-2 sm:mt-3 lg:mt-4 text-base sm:text-lg md:text-xl lg:text-3xl text-gray-900 max-w-4xl mx-auto px-2 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-900 max-w-4xl mx-auto px-4 leading-relaxed">
             {headline.sub}
           </p>
         </div>
 
         {/* VSL Video */}
-        <div className="mt-5 sm:mt-6 lg:mt-10">
+        <div className="mt-6 sm:mt-8 lg:mt-10">
           <WistiaVideo />
         </div>
 
         {/* CTA Button Below Video */}
-        <div className="mt-4 sm:mt-6 lg:mt-8 flex justify-center px-2 sm:px-3 lg:px-4">
+        <div className="mt-6 sm:mt-8 flex justify-center px-4">
           <EpicCTAButton
             size="lg"
-            className="w-full sm:w-auto max-w-md sm:max-w-none min-h-[72px]"
+            className="w-full sm:w-auto max-w-md sm:max-w-none min-h-[64px] sm:min-h-[72px]"
             trackingName="hero"
             onClick={handleCTAClick}
           >
-            <span className="text-lg sm:text-xl font-bold">Start the 6-Week Challenge →</span>
+            <span className="text-base sm:text-lg md:text-xl font-bold">Start the 6-Week Challenge →</span>
           </EpicCTAButton>
         </div>
       </div>

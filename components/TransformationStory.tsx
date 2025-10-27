@@ -104,12 +104,12 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
   const currentTestimonial = testimonials[currentIndex]
 
   return (
-    <section className="relative bg-white py-24 sm:py-28 lg:py-36 overflow-hidden" style={{ fontFamily }}>
+    <section className="relative bg-white py-12 sm:py-16 lg:py-20 overflow-hidden" style={{ fontFamily }}>
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold" style={{ fontFamily: 'ClashDisplay, system-ui, sans-serif', fontWeight: '700', color: '#222', letterSpacing: '0.02em', lineHeight: '1.2' }}>
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4" style={{ fontFamily: 'ClashDisplay, system-ui, sans-serif', fontWeight: '700', color: '#222', letterSpacing: '0.02em', lineHeight: '1.2' }}>
             Old School Boxing, New School System
           </h2>
         </div>
@@ -140,14 +140,14 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
           </button>
 
           <div
-            className="bg-white rounded-2xl shadow-xl p-8 sm:p-10 border border-gray-100"
+            className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10 border border-gray-100"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
             {/* Profile Header */}
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-[60px] h-[60px] relative overflow-hidden rounded-full">
+            <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="flex-shrink-0 w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] relative overflow-hidden rounded-full">
                 <Image
                   src={currentTestimonial.image}
                   alt={currentTestimonial.name}
@@ -157,21 +157,21 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
                 />
               </div>
               <div className="flex-1">
-                <h3 className="font-bold text-lg text-gray-900">{currentTestimonial.name}</h3>
-                <p className="text-sm text-gray-600">{currentTestimonial.badge}</p>
+                <h3 className="font-bold text-base sm:text-lg text-gray-900">{currentTestimonial.name}</h3>
+                <p className="text-xs sm:text-sm text-gray-600">{currentTestimonial.badge}</p>
               </div>
             </div>
 
             {/* Testimonial Content */}
-            <div className="space-y-4 text-gray-800 leading-relaxed">
-              <p className="font-semibold text-xl">{currentTestimonial.title}</p>
+            <div className="space-y-3 sm:space-y-4 text-gray-800 leading-relaxed">
+              <p className="font-semibold text-base sm:text-lg md:text-xl">{currentTestimonial.title}</p>
 
               {currentTestimonial.content.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
+                <p key={index} className="text-sm sm:text-base">{paragraph}</p>
               ))}
 
               {currentTestimonial.hashtag && (
-                <p className="font-bold text-lg pt-2">
+                <p className="font-bold text-base sm:text-lg pt-2">
                   {currentTestimonial.hashtag}
                 </p>
               )}
@@ -179,14 +179,14 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
           </div>
 
           {/* CTA Button */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 sm:mt-12">
             <EpicCTAButton
               size="lg"
-              className="min-h-[72px]"
+              className="min-h-[64px] sm:min-h-[72px]"
               onClick={onCTAClick}
               trackingName="transformation-story"
             >
-              <span className="text-lg sm:text-xl font-bold">Start the 6-Week Challenge →</span>
+              <span className="text-base sm:text-lg md:text-xl font-bold">Start the 6-Week Challenge →</span>
             </EpicCTAButton>
           </div>
         </div>

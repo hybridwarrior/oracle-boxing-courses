@@ -37,15 +37,15 @@ export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSect
   const totalValue = bffpPrice + rcvPrice + rcvPrice + brdmpPrice // Same as original: bffp + rcv + rcv + brdmp
 
   return (
-    <section id="pricing" className="py-16 sm:py-20 bg-white">
+    <section id="pricing" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#26304a] rounded-3xl p-10 sm:p-16 shadow-2xl text-white">
+        <div className="bg-[#26304a] rounded-3xl p-8 sm:p-12 lg:p-16 shadow-2xl text-white">
           {/* Logo */}
-          <div className="flex justify-center mb-6 sm:mb-10">
+          <div className="flex justify-center mb-6 sm:mb-8">
             <img
               src="https://media.oracleboxing.com/Website/optimized/logos/long_white-large.webp"
               alt="Oracle Boxing"
-              className="h-4 sm:h-5"
+              className="h-4 sm:h-6"
               onError={(e) => {
                 e.currentTarget.style.display = 'none'
               }}
@@ -53,31 +53,31 @@ export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSect
           </div>
 
           {/* Heading */}
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-10 uppercase" style={{ fontFamily: "var(--font-satoshi)" }}>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6 sm:mb-8 uppercase px-4" style={{ fontFamily: "var(--font-satoshi)" }}>
             6-WEEK CHALLENGE
           </h3>
 
           {/* Price Section */}
-          <div className="text-center mb-6 sm:mb-10">
-            <ValuePrice usdAmount={totalValue} className="text-3xl sm:text-4xl font-bold opacity-60 line-through mb-2" />
-            <div className="text-6xl sm:text-7xl md:text-8xl font-black mb-3"><ChallengePrice /></div>
+          <div className="text-center mb-6 sm:mb-8">
+            <ValuePrice usdAmount={totalValue} className="text-2xl sm:text-3xl md:text-4xl font-bold opacity-60 line-through mb-2" />
+            <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-3"><ChallengePrice /></div>
           </div>
 
           {/* CTA Button - White with Navy Text */}
           <a
             href="/checkout?product=6wc"
-            className="w-full py-5 sm:py-6 px-8 sm:px-12 bg-white text-[#26304a] font-black text-xl sm:text-2xl rounded-xl mb-6 sm:mb-10 uppercase tracking-wide min-h-[64px] sm:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200 flex items-center justify-center"
+            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-white text-[#26304a] font-black text-lg sm:text-xl md:text-2xl rounded-xl mb-6 sm:mb-8 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200 flex items-center justify-center"
             style={{ cursor: 'pointer' }}
           >
             START CHALLENGE
           </a>
 
           {/* Benefits List with Checkmarks */}
-          <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-10">
+          <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
             {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center gap-3">
+              <div key={index} className="flex items-start gap-3">
                 <svg
-                  className="w-6 h-6 flex-shrink-0 text-white"
+                  className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 text-white mt-0.5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -87,7 +87,7 @@ export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSect
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="text-base sm:text-lg font-medium leading-relaxed">{benefit}</span>
+                <span className="text-sm sm:text-base md:text-lg font-medium leading-relaxed">{benefit}</span>
               </div>
             ))}
           </div>
