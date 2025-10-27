@@ -186,7 +186,7 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
               onClick={onCTAClick}
               trackingName="transformation-story"
             >
-              <span className="text-base sm:text-lg md:text-xl font-bold">Start the 6-Week Challenge →</span>
+              <span className="text-lg sm:text-xl font-black uppercase">Start the 6-Week Challenge</span>
             </EpicCTAButton>
           </div>
         </div>

@@ -39,7 +39,7 @@ export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSect
   return (
     <section id="pricing" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#26304a] rounded-3xl p-8 sm:p-12 lg:p-16 shadow-2xl text-white">
+        <div className="bg-[#26304a] rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl text-white">
           {/* Logo */}
           <div className="flex justify-center mb-6 sm:mb-8">
             <img
@@ -59,14 +59,14 @@ export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSect
 
           {/* Price Section */}
           <div className="text-center mb-6 sm:mb-8">
-            <ValuePrice usdAmount={totalValue} className="text-2xl sm:text-3xl md:text-4xl font-bold opacity-60 line-through mb-2" />
-            <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-3"><ChallengePrice /></div>
+            <ValuePrice usdAmount={totalValue} className="text-xl sm:text-2xl md:text-3xl font-bold opacity-60 line-through mb-2" />
+            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-3"><ChallengePrice /></div>
           </div>
 
           {/* CTA Button - White with Navy Text */}
           <a
             href="/checkout?product=6wc"
-            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-white text-[#26304a] font-black text-lg sm:text-xl md:text-2xl rounded-xl mb-6 sm:mb-8 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200 flex items-center justify-center"
+            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-white text-[#26304a] font-black text-base sm:text-lg md:text-xl rounded-xl mb-6 sm:mb-8 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200 flex items-center justify-center"
             style={{ cursor: 'pointer' }}
           >
             START CHALLENGE

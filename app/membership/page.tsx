@@ -183,10 +183,6 @@ export default function MembershipsPage() {
                   <Award className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
                   <span className="text-xs sm:text-sm lg:text-base font-bold text-gray-900">#1 Online Coaching Program</span>
                 </div>
-                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-100 border-2 border-gray-300 rounded-full">
-                  <Users className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
-                  <span className="text-xs sm:text-sm lg:text-base font-bold text-gray-900">300+ Members</span>
-                </div>
               </div>
 
               {/* CTA Button */}
@@ -220,32 +216,6 @@ export default function MembershipsPage() {
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 text-center">
-            Master boxing anytime, anywhere
-          </h2>
-          <p className="text-sm sm:text-base lg:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-12">
-            Everything you need to transform your boxing, accessible from any device
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon
-              return (
-                <div key={index} className="text-center p-4 sm:p-5 lg:p-6 rounded-xl bg-gray-50 border border-gray-200">
-                  <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#26304a]/10 rounded-full mb-3 sm:mb-4">
-                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-[#26304a]" />
-                  </div>
-                  <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-1 sm:mb-2">{benefit.title}</h3>
-                  <p className="text-xs sm:text-sm lg:text-base text-gray-600">{benefit.description}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* 6-Week Challenge Section */}
       <section className="py-8 sm:py-12 lg:py-16 bg-gray-50">
@@ -351,6 +321,196 @@ export default function MembershipsPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Engineered For Results Section */}
+      <section className="py-8 sm:py-12 lg:py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-8 sm:mb-12 text-center">
+            Engineered for results
+          </h2>
+
+          {/* Stacked Cards - Always Vertical */}
+          <div className="space-y-12 sm:space-y-16">
+            {/* Daily Coaching Calls */}
+            <div className="mt-16 sm:mt-20 overflow-visible">
+              <div className="bg-white border-2 border-gray-200 rounded-lg overflow-visible p-8 sm:p-10 pt-28 sm:pt-36 text-center">
+                <div className="-mt-44 sm:-mt-52 mb-6 sm:mb-8 mx-auto w-48 h-36 sm:w-64 sm:h-44 rounded-lg overflow-hidden">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  >
+                    <source src="https://media.oracleboxing.com/Website/optimized/testimonials/torey_goodall.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <h3 className="font-bold text-gray-900 text-xl sm:text-2xl mb-4">Daily Coaching Calls</h3>
+                <p className="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed max-w-2xl mx-auto">
+                  I decided to recommit to this community and I already feel like I made breakthroughs on Toni and Ollie's zoom calls. I've gotta tip my hat to how effective you guys are at coaching in this format. I feel like I gain a significantly better understanding of technique every time I make a call.
+                </p>
+                <div className="flex items-center gap-4 justify-center">
+                  <img
+                    src="https://media.oracleboxing.com/Website/optimized/profiles/torey-256.webp"
+                    alt="Torey Goodall"
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div className="text-left">
+                    <p className="font-bold text-gray-900">Torey Goodall</p>
+                    <p className="text-sm text-gray-600">Community Member & Boxing Enthusiast</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* All Courses Included */}
+            <div className="mt-16 sm:mt-20 overflow-visible">
+              <div className="bg-white border-2 border-gray-200 rounded-lg overflow-visible p-8 sm:p-10 pt-28 sm:pt-36 text-center">
+                <div className="-mt-44 sm:-mt-52 mb-6 sm:mb-8 mx-auto w-48 h-36 sm:w-64 sm:h-44 rounded-lg overflow-hidden">
+                  <img
+                    src="https://media.oracleboxing.com/Website/optimized/courses/bundle-thumbnail.webp"
+                    alt="All Courses"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="font-bold text-gray-900 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
+                  All courses included: Boxing from First Principles, Boxing Roadmap, and Coaching Call Replays
+                </p>
+              </div>
+            </div>
+
+            {/* Train Anytime */}
+            <div className="mt-16 sm:mt-20 overflow-visible">
+              <div className="bg-white border-2 border-gray-200 rounded-lg overflow-visible p-8 sm:p-10 pt-28 sm:pt-36 text-center">
+                <div className="-mt-44 sm:-mt-52 mb-6 sm:mb-8 mx-auto w-48 h-36 sm:w-64 sm:h-44 rounded-lg overflow-hidden">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  >
+                    <source src="https://media.oracleboxing.com/Website/optimized/testimonials/balal_hanif.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <h3 className="font-bold text-gray-900 text-xl sm:text-2xl mb-4">Train Anytime, Anywhere</h3>
+                <p className="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed max-w-2xl mx-auto">
+                  Being part of this community has been an incredibly transformative experience. Joining the live Zoom calls almost every day has helped me lose weight, improve my technique, and significantly boost my confidence. The guidance, encouragement, and camaraderie have made a real difference in my development as a boxer.
+                </p>
+                <div className="flex items-center gap-4 justify-center">
+                  <img
+                    src="https://media.oracleboxing.com/Website/optimized/profiles/balal-256.webp"
+                    alt="Balal Hanif"
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div className="text-left">
+                    <p className="font-bold text-gray-900">Balal Hanif</p>
+                    <p className="text-sm text-gray-600">Community Member & Boxing Enthusiast</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* See Inside The Platform Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 text-center">
+            See Inside The Platform
+          </h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-8 sm:mb-12 text-center max-w-3xl mx-auto">
+            Everything you need to master boxing, all in one place
+          </p>
+
+          {/* Scrollable Carousel */}
+          <div className="overflow-x-auto -mx-4 px-4 mb-8 sm:mb-12">
+            <div
+              className="flex gap-6 pb-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+              style={{ minWidth: 'max-content' }}
+            >
+              {[
+                {
+                  image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside1.webp',
+                  title: 'All Your Courses in One Place',
+                  subtitle: 'Access all three courses from a single organized dashboard'
+                },
+                {
+                  image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside2.webp',
+                  title: 'Deep-Dive Video Lessons',
+                  subtitle: 'Follow structured modules with detailed video demonstrations and theory'
+                },
+                {
+                  image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside3.webp',
+                  title: 'Follow-Along Workouts',
+                  subtitle: 'Train with phase-by-phase drills and structured workout progressions'
+                },
+                {
+                  image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside4.webp',
+                  title: 'Powerful Search Feature',
+                  subtitle: 'Find any technique, concept, or drill instantly across all courses'
+                },
+                {
+                  image: 'https://media.oracleboxing.com/Website/optimized/screenshots/phone_mockup1.webp',
+                  title: 'Train Anywhere, Anytime',
+                  subtitle: 'Full mobile access means you can learn and train from any device'
+                }
+              ].map((screenshot, index) => (
+                <div
+                  key={index}
+                  className="snap-center w-[85vw] md:w-[500px] lg:w-[600px]"
+                >
+                  <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg flex flex-col h-full">
+                    <div className="relative w-full aspect-video overflow-hidden bg-gray-100">
+                      <Image
+                        src={screenshot.image}
+                        alt={screenshot.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 360px, (max-width: 1024px) 500px, 600px"
+                      />
+                    </div>
+                    <div className="p-5">
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        {screenshot.title}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {screenshot.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <div className="text-center">
+            <a
+              href="#pricing"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-base sm:text-lg lg:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+            >
+              I WANT ACCESS
+            </a>
+          </div>
+        </div>
+
+        {/* Hide scrollbar */}
+        <style jsx global>{`
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+          .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}</style>
       </section>
 
       {/* Testimonials Section */}

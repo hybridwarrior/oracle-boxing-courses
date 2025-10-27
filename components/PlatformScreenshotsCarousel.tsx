@@ -159,7 +159,7 @@ export function PlatformScreenshotsCarousel() {
             className="min-h-[72px]"
             trackingName="platform-screenshots"
           >
-            <span className="text-lg sm:text-xl font-bold">I WANT ACCESS</span>
+            <span className="text-lg sm:text-xl font-black uppercase">I Want Access</span>
           </EpicCTAButton>
         </div>
       </div>
