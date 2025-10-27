@@ -31,11 +31,9 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
       badge: "10h (edited) • 🏆 Win of the Day",
       title: "Week 6! Here you are... and damn that went fast!",
       content: [
-        "Even today, while still recovering from a bit of a flu, I somehow found myself waking up at 6:40 AM for a +5km run. (Even writing that makes me laugh… who IS this person? 😄)",
-        "I can genuinely SEE and FEEL the shift happening — and it's all been sparked by being part of Oracle Boxing. #SpoonBending",
-        "The value that @Oliver Betts @Jordan Lyne, and @Antonio Troni bring is WAY BEYOND what I ever expected when I joined this challenge.",
-        "One of the biggest moments was realizing just how deeply these guys care about improving boxing — those 1:1 calls for the top 10 leaderboard are insane!",
-        "All I can say is, if you're starting your challenge — I hope you enjoy it even half as much as I am, you'll be hooked!"
+        "Even today, while still recovering from a bit of a flu, I somehow found myself waking up at 6:40 AM for a +5km run.",
+        "I can genuinely SEE and FEEL the shift happening — and it's all been sparked by being part of Oracle Boxing.",
+        "The value that the coaches bring is WAY BEYOND what I ever expected when I joined this challenge."
       ],
       hashtag: "#FUCKPLANB"
     },
@@ -45,10 +43,9 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
       badge: "1d ago • 🏆 WOTD",
       title: "Week 6 🤯 - The final results",
       content: [
-        "Hello everyone. This is it. These are the final results that I got from the last 6 weeks of this challenge. It's been a pleasure to join this community, and the journey doesn't end here, cause I really want to continue in OB.",
-        "I want to really thank you guys for all of the support throughout this 6 weeks. I mainly joined because I watched Hybrid Warrior Elite videos, then I saw Oracle Boxing and the challenge, and since I was already training for my rookie tournament, I decided to commit.",
-        "The material is very rich in content, from videos to coaching calls, even 1-1 calls for the top 10. I had the opportunity to take 3 of them, making significant progress in my technique and my way of seeing boxing.",
-        "The boxing from first principles course was a huge rewiring of my thinking and I didn't even start the boxing roadmap yet. You could be training here and learning new things for months, maybe years! 🥶"
+        "This is it. These are the final results that I got from the last 6 weeks of this challenge. It's been a pleasure to join this community.",
+        "The material is very rich in content, from videos to coaching calls, even 1-1 calls for the top 10.",
+        "The boxing from first principles course was a huge rewiring of my thinking. You could be training here and learning new things for months, maybe years! 🥶"
       ]
     },
     {
@@ -57,10 +54,9 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
       badge: "2d ago",
       title: "JOINING ORACLE BOXING",
       content: [
-        "We got to know each other and had a real good talk, and I already made it clear I'm in Oracle Boxing for the long haul. But just now at the end of the day, I had yet another epiphany about just what an amazing decision I made when I first joined up just a few weeks ago.",
-        "I am very early in my transformation as a boxer, but because I have such a deep passion for this sport, I am truly humbled by the passion, dedication and depth of analysis exemplified by our coaches here.",
-        "@Oliver Betts @Antonio Troni @Charlie Snider and Jordan have organized something very special here for all of us, and the more I explore all the resources on this site available to those of us who want to master the nuances of the sweet science, I'm just knocked out by the wealth of knowledge on offer here.",
-        "I want to say to all of you, if you were attracted to this place by the excitement of becoming a real boxer, then dive in DEEP, recommit with absolute intensity to that goal, knowing you have every asset necessary to achieve exactly that and change your life forever."
+        "I already made it clear I'm in Oracle Boxing for the long haul. Just now, I had yet another epiphany about just what an amazing decision I made when I first joined up.",
+        "I am truly humbled by the passion, dedication and depth of analysis exemplified by our coaches here.",
+        "If you were attracted to this place by the excitement of becoming a real boxer, then dive in DEEP, knowing you have every asset necessary to achieve exactly that and change your life forever."
       ],
       hashtag: "#FUCKPLANB"
     }
@@ -101,6 +97,20 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
     setTouchEnd(0)
   }
 
+  // Handle click on left/right side of testimonial (both mobile and desktop)
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget
+    const rect = card.getBoundingClientRect()
+    const clickX = e.clientX - rect.left
+    const cardWidth = rect.width
+
+    if (clickX < cardWidth / 2) {
+      prevTestimonial()
+    } else {
+      nextTestimonial()
+    }
+  }
+
   const currentTestimonial = testimonials[currentIndex]
 
   return (
@@ -109,80 +119,66 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4" style={{ fontFamily: 'ClashDisplay, system-ui, sans-serif', fontWeight: '700', color: '#222', letterSpacing: '0.02em', lineHeight: '1.2' }}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: '700', color: '#222', letterSpacing: '0.02em', lineHeight: '1.2' }}>
             Old School Boxing, New School System
           </h2>
         </div>
 
         {/* Testimonial Carousel */}
         <div className="max-w-4xl mx-auto relative">
-          {/* Swipe indicator for mobile */}
-          <div className="sm:hidden text-center mb-4">
-            <p className="text-sm text-gray-500 italic">Swipe for more →</p>
-          </div>
-
-          {/* Left Arrow - Hidden on mobile, visible on desktop */}
-          <button
-            onClick={prevTestimonial}
-            className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 lg:-translate-x-16 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-50 transition-colors cursor-pointer"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-8 h-8 text-gray-900" />
-          </button>
-
-          {/* Right Arrow - Hidden on mobile, visible on desktop */}
-          <button
-            onClick={nextTestimonial}
-            className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 lg:translate-x-16 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-50 transition-colors cursor-pointer"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-8 h-8 text-gray-900" />
-          </button>
-
           <div
-            className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10 border border-gray-100"
+            className="bg-white rounded-xl shadow-lg p-6 sm:p-8 border border-gray-200 cursor-pointer select-none"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            onClick={handleCardClick}
           >
             {/* Profile Header */}
-            <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
-              <div className="flex-shrink-0 w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] relative overflow-hidden rounded-full">
-                <Image
-                  src={currentTestimonial.image}
-                  alt={currentTestimonial.name}
-                  width={60}
-                  height={60}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-bold text-base sm:text-lg text-gray-900">{currentTestimonial.name}</h3>
-                <p className="text-xs sm:text-sm text-gray-600">{currentTestimonial.badge}</p>
+            <div className="flex items-center gap-3 mb-4">
+              <Image
+                src={currentTestimonial.image}
+                alt={currentTestimonial.name}
+                width={48}
+                height={48}
+                className="rounded-full"
+              />
+              <div>
+                <h3 className="font-bold text-gray-900">{currentTestimonial.name}</h3>
+                <p className="text-sm text-gray-500">{currentTestimonial.badge}</p>
               </div>
             </div>
 
             {/* Testimonial Content */}
-            <div className="space-y-3 sm:space-y-4 text-gray-800 leading-relaxed">
-              <p className="font-semibold text-base sm:text-lg md:text-xl">{currentTestimonial.title}</p>
-
+            <div className="space-y-3 text-gray-700">
+              <p className="font-semibold text-lg">{currentTestimonial.title}</p>
               {currentTestimonial.content.map((paragraph, index) => (
-                <p key={index} className="text-sm sm:text-base">{paragraph}</p>
+                <p key={index} className="text-sm sm:text-base md:text-lg leading-relaxed">{paragraph}</p>
               ))}
-
               {currentTestimonial.hashtag && (
-                <p className="font-bold text-base sm:text-lg pt-2">
-                  {currentTestimonial.hashtag}
-                </p>
+                <p className="font-bold pt-2">{currentTestimonial.hashtag}</p>
               )}
             </div>
           </div>
 
+          {/* Navigation Dots */}
+          <div className="flex justify-center gap-2 mt-6">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentIndex ? 'bg-gray-900 w-6' : 'bg-gray-300'
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+
           {/* CTA Button */}
-          <div className="text-center mt-8 sm:mt-12">
+          <div className="text-center mt-8">
             <EpicCTAButton
               size="lg"
-              className="min-h-[64px] sm:min-h-[72px]"
+              className="min-h-[52px] sm:min-h-[56px]"
               onClick={onCTAClick}
               trackingName="transformation-story"
             >

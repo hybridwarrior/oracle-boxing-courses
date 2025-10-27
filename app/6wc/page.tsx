@@ -1,7 +1,6 @@
 'use client'
 
-import Image from 'next/image'
-import Link from 'next/link'
+import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import dynamic from 'next/dynamic'
 import HeroSection from '@/components/HeroSection'
@@ -25,24 +24,7 @@ export default function ChallengePage() {
 
   return (
     <>
-      {/* Custom Header with Logo */}
-      <header className="bg-black shadow-lg">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-          <div className="flex items-center justify-center h-10 sm:h-14 lg:h-20">
-            {/* Logo - Centered */}
-            <Link href="/" className="flex-shrink-0 cursor-pointer">
-              <Image
-                src="https://media.oracleboxing.com/webp/Website/logo_site_white.webp"
-                alt="Oracle Boxing"
-                width={150}
-                height={50}
-                className="h-6 sm:h-10 lg:h-14 w-auto"
-                priority
-              />
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <HeroSection />

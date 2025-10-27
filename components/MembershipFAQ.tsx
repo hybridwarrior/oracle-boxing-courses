@@ -75,18 +75,18 @@ export function MembershipFAQ() {
   }
 
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
             Oracle Boxing Full Access Membership FAQ
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
             Everything you need to know about joining the community
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {membershipFaqData.map((item, index) => (
             <div
               key={index}
@@ -94,18 +94,18 @@ export function MembershipFAQ() {
             >
               <button
                 onClick={() => toggleQuestion(index)}
-                className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                className="w-full px-4 py-3 sm:px-6 sm:py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
                 aria-expanded={openIndex === index}
                 aria-controls={`faq-answer-${index}`}
               >
-                <span className="text-base sm:text-lg font-semibold text-gray-900 pr-4">
+                <span className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 pr-3 sm:pr-4">
                   {item.question}
                 </span>
                 <div
                   className="flex-shrink-0 transition-transform duration-150"
                   style={{ transform: openIndex === index ? 'rotate(180deg)' : 'rotate(0deg)' }}
                 >
-                  <ChevronDown className="w-5 h-5 text-gray-500" />
+                  <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
                 </div>
               </button>
 
@@ -114,8 +114,8 @@ export function MembershipFAQ() {
                   id={`faq-answer-${index}`}
                   className="overflow-hidden"
                 >
-                  <div className="px-6 pb-5 pt-0">
-                    <div className="text-gray-600 whitespace-pre-line leading-relaxed">
+                  <div className="px-4 pb-3 pt-0 sm:px-6 sm:pb-5">
+                    <div className="text-xs sm:text-sm md:text-base text-gray-600 whitespace-pre-line leading-relaxed">
                       {item.answer}
                     </div>
                   </div>

@@ -49,15 +49,15 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
 
   return (
     <section className="relative overflow-hidden bg-white">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-16 lg:pb-20">
         {/* Centered Text Content */}
         <div className="text-center" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
-          <div className="mb-6 sm:mb-8 inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-orange-50 to-red-50 text-orange-600 border border-orange-200 rounded-lg font-bold text-xs sm:text-sm uppercase tracking-wider">
+          <div className="mb-4 sm:mb-5 inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-orange-50 to-red-50 text-orange-600 border border-orange-200 rounded-lg font-bold text-xs sm:text-sm uppercase tracking-wider">
             {headline.badge}
           </div>
 
           <h1
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight leading-tight px-4 max-w-5xl mx-auto mb-6 sm:mb-8"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight leading-tight px-4 max-w-5xl mx-auto mb-4 sm:mb-5"
             style={{
               fontFamily: variant === 'B' ? 'ClashDisplay, system-ui, sans-serif' : 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
               fontWeight: '700'
@@ -80,7 +80,7 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
         <div className="mt-8 sm:mt-12 flex justify-center px-4">
           <EpicCTAButton
             size="lg"
-            className="w-full sm:w-auto max-w-md sm:max-w-none min-h-[64px] sm:min-h-[72px]"
+            className="w-full sm:w-auto max-w-md sm:max-w-none min-h-[52px] sm:min-h-[56px]"
             trackingName="hero"
             onClick={handleCTAClick}
           >

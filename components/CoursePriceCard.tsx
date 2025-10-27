@@ -58,9 +58,9 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
           {/* Logo */}
           <div className="flex justify-center mb-6 sm:mb-10">
             <img
-              src="https://media.oracleboxing.com/Website/optimized/logos/long_white-large.webp"
+              src="https://media.oracleboxing.com/Website/infinity_squared_white.svg"
               alt="Oracle Boxing"
-              className="h-4 sm:h-6"
+              className="h-6 sm:h-8"
               onError={(e) => {
                 // Fallback if logo doesn't load
                 e.currentTarget.style.display = 'none'

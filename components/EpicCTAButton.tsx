@@ -125,9 +125,9 @@ export function EpicCTAButton({
     }
   };
   const sizeClasses = {
-    sm: "min-h-9 px-5 text-sm py-2",
-    md: "min-h-10 px-6 text-sm py-2",
-    lg: "py-3 sm:py-4 px-8 sm:px-12 text-base sm:text-lg lg:text-xl"
+    sm: "min-h-9 px-5 text-sm py-1.5",
+    md: "min-h-10 px-6 text-sm py-1.5",
+    lg: "py-2 sm:py-3 px-8 sm:px-12 text-base sm:text-lg lg:text-xl"
   };
 
   const buttonContent = (
