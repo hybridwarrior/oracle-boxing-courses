@@ -222,70 +222,6 @@ export default function MembershipsPage() {
         </div>
       </section>
 
-
-      {/* 6-Week Challenge Section */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
-            {/* Left Column - Text */}
-            <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6">
-                Try the 6-Week Challenge
-              </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 sm:mb-3 lg:mb-4">
-                Our 6-Week Challenge is designed to transform your boxing fundamentals with daily coaching, structured progression, and a supportive community.
-              </p>
-              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-2 sm:mb-3 lg:mb-4">
-                We're so confident you'll see results that we offer a money-back guarantee. Complete the requirements and if you're not satisfied, we'll refund your investment—no questions asked.
-              </p>
-              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-4 sm:mb-5 lg:mb-6">
-                Join hundreds of boxers who've already transformed their skills and confidence in just 6 weeks.
-              </p>
-
-              <a
-                href="/6wc"
-                className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-[#000000] text-white font-black text-base sm:text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none"
-              >
-                START TODAY
-              </a>
-            </div>
-
-            {/* Right Column - Bruno Testimonial */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 border border-gray-200 w-full max-w-md">
-                {/* Profile Header */}
-                <div className="flex items-center gap-3 mb-4">
-                  <img
-                    src="https://media.oracleboxing.com/Website/optimized/profiles/bruno-256.webp"
-                    alt="Bruno Martins"
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <h4 className="font-bold text-gray-900">Bruno Martins</h4>
-                    <p className="text-sm text-gray-500">10h (edited) • 🏆 Win of the Day</p>
-                  </div>
-                </div>
-
-                {/* Testimonial Content */}
-                <div className="space-y-3 text-gray-700">
-                  <p className="font-semibold text-lg">Week 6! Here you are... and damn that went fast!</p>
-                  <p className="text-sm sm:text-base leading-relaxed">
-                    Even today, while still recovering from a bit of a flu, I somehow found myself waking up at 6:40 AM for a +5km run.
-                  </p>
-                  <p className="text-sm sm:text-base leading-relaxed">
-                    I can genuinely SEE and FEEL the shift happening — and it's all been sparked by being part of Oracle Boxing.
-                  </p>
-                  <p className="text-sm sm:text-base leading-relaxed">
-                    The value that the coaches bring is WAY BEYOND what I ever expected when I joined this challenge.
-                  </p>
-                  <p className="font-bold pt-2">#FUCKPLANB</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Results Section */}
       <section className="py-8 sm:py-12 lg:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -606,18 +542,18 @@ export default function MembershipsPage() {
       <MembershipTestimonials testimonials={testimonials} />
 
       {/* Pricing & How It Works Section - Combined */}
-      <section id="pricing" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="pricing" className="py-8 sm:py-16 lg:py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
           {/* Pricing Title */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 text-center">
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 text-center">
             Join Oracle Boxing for as little as $2.46 per day!
           </h2>
-          <p className="text-sm sm:text-base lg:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-12">
+          <p className="text-xs sm:text-base lg:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-4 sm:mb-8 lg:mb-12">
             Choose the plan that fits your commitment level
           </p>
 
           {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-8 sm:mb-12">
             {/* Annual - Left */}
             <div className="relative">
               {/* Best Value Badge - On the border line */}
@@ -634,7 +570,7 @@ export default function MembershipsPage() {
                 }`}
               >
                 {/* Radio Button and Content - Compact */}
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
                       selectedPlan === 'membership-annual' ? 'border-[#000000] bg-[#000000]' : 'border-gray-300 bg-white'
@@ -647,15 +583,15 @@ export default function MembershipsPage() {
 
                   {/* Mobile: 3 lines total */}
                   <div className="block sm:hidden">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Annual</h3>
-                    <div className="flex items-center justify-between gap-4 mb-3">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Annual</h3>
+                    <div className="flex items-center justify-between gap-3 mb-2">
                       <div>
-                        <div className="text-4xl font-black text-gray-900">$897</div>
-                        <div className="text-sm text-gray-600">Billed every year</div>
+                        <div className="text-3xl font-black text-gray-900">$897</div>
+                        <div className="text-xs text-gray-600">Billed every year</div>
                       </div>
-                      <div className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-center flex-shrink-0">
-                        <div className="text-xl font-bold text-gray-900">$74.75</div>
-                        <div className="text-xs text-gray-600 whitespace-nowrap">per month</div>
+                      <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-center flex-shrink-0">
+                        <div className="text-lg font-bold text-gray-900">$74.75</div>
+                        <div className="text-[10px] text-gray-600 whitespace-nowrap">per month</div>
                       </div>
                     </div>
                   </div>
@@ -687,7 +623,7 @@ export default function MembershipsPage() {
                 }`}
               >
                 {/* Radio Button and Content - Compact */}
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
                       selectedPlan === 'membership-6month' ? 'border-[#000000] bg-[#000000]' : 'border-gray-300 bg-white'
@@ -700,15 +636,15 @@ export default function MembershipsPage() {
 
                   {/* Mobile: 3 lines total */}
                   <div className="block sm:hidden">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Bi-Annual</h3>
-                    <div className="flex items-center justify-between gap-4 mb-3">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Bi-Annual</h3>
+                    <div className="flex items-center justify-between gap-3 mb-2">
                       <div>
-                        <div className="text-4xl font-black text-gray-900">$497</div>
-                        <div className="text-sm text-gray-600">Billed every 6 months</div>
+                        <div className="text-3xl font-black text-gray-900">$497</div>
+                        <div className="text-xs text-gray-600">Billed every 6 months</div>
                       </div>
-                      <div className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-center flex-shrink-0">
-                        <div className="text-xl font-bold text-gray-900">$82.83</div>
-                        <div className="text-xs text-gray-600 whitespace-nowrap">per month</div>
+                      <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-center flex-shrink-0">
+                        <div className="text-lg font-bold text-gray-900">$82.83</div>
+                        <div className="text-[10px] text-gray-600 whitespace-nowrap">per month</div>
                       </div>
                     </div>
                   </div>
@@ -740,7 +676,7 @@ export default function MembershipsPage() {
                 }`}
               >
                 {/* Radio Button and Content - Compact */}
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
                       selectedPlan === 'membership-monthly' ? 'border-[#000000] bg-[#000000]' : 'border-gray-300 bg-white'
@@ -753,15 +689,15 @@ export default function MembershipsPage() {
 
                   {/* Mobile: 3 lines total */}
                   <div className="block sm:hidden">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Quarterly</h3>
-                    <div className="flex items-center justify-between gap-4 mb-3">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Quarterly</h3>
+                    <div className="flex items-center justify-between gap-3 mb-2">
                       <div>
-                        <div className="text-4xl font-black text-gray-900">$297</div>
-                        <div className="text-sm text-gray-600">Billed every 3 months</div>
+                        <div className="text-3xl font-black text-gray-900">$297</div>
+                        <div className="text-xs text-gray-600">Billed every 3 months</div>
                       </div>
-                      <div className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-center flex-shrink-0">
-                        <div className="text-xl font-bold text-gray-900">$99</div>
-                        <div className="text-xs text-gray-600 whitespace-nowrap">per month</div>
+                      <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-center flex-shrink-0">
+                        <div className="text-lg font-bold text-gray-900">$99</div>
+                        <div className="text-[10px] text-gray-600 whitespace-nowrap">per month</div>
                       </div>
                     </div>
                   </div>
@@ -784,23 +720,23 @@ export default function MembershipsPage() {
           </div>
 
           {/* Join Now Button */}
-          <div className="text-center mb-6 sm:mb-8">
+          <div className="text-center mb-4 sm:mb-8">
             <button
               onClick={handleJoinNow}
-              className="py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+              className="py-2.5 sm:py-4 lg:py-5 px-6 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-sm sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
               JOIN NOW
             </button>
           </div>
 
           {/* Monthly billing note */}
-          <p className="text-center text-gray-600 text-xs sm:text-sm mb-12 sm:mb-16 lg:mb-20">
+          <p className="text-center text-gray-600 text-[11px] sm:text-sm mb-8 sm:mb-16 lg:mb-20">
             You can switch to monthly billing at $97/month after purchase
           </p>
 
           {/* How It Works Section */}
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-8 sm:mb-10 lg:mb-12 text-center">
+            <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-10 lg:mb-12 text-center">
               How it works
             </h2>
 
