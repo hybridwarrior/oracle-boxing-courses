@@ -60,7 +60,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
             <img
               src="https://media.oracleboxing.com/Website/optimized/logos/long_white-large.webp"
               alt="Oracle Boxing"
-              className="h-6 sm:h-8"
+              className="h-4 sm:h-6"
               onError={(e) => {
                 // Fallback if logo doesn't load
                 e.currentTarget.style.display = 'none'

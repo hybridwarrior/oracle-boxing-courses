@@ -18,7 +18,7 @@ export const Timeline = ({ data, cta }: TimelineProps) => {
     <div className="w-full bg-gray-50 md:px-10 overflow-hidden" style={{ fontFamily }}>
       <div className="max-w-4xl mx-auto pt-20 pb-8 px-4 md:px-8 lg:px-10">
         <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-900 text-center" style={{ fontFamily }}>
-          Three courses working together to take you <span className="bg-yellow-200/80 text-black px-2 py-0.5">from beginner to seriously good boxer.</span>
+          Three courses working together to take you <span className="bg-yellow-200/80 text-black px-2 py-[2px]">from beginner to seriously good boxer.</span>
         </h2>
       </div>
 

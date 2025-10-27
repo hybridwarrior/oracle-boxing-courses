@@ -32,35 +32,17 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
         <div className="sm:hidden -mx-4">
           <div
             ref={scrollContainerRef}
-            className="flex gap-4 overflow-x-auto overscroll-x-contain pb-4 px-4"
+            className="flex gap-4 overflow-x-auto overscroll-x-contain pb-4 px-4 snap-x snap-mandatory scroll-smooth"
             style={{
               WebkitOverflowScrolling: 'touch',
               scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              touchAction: 'pan-x'
-            }}
-            onTouchStart={(e) => {
-              // Prevent page scroll when touching carousel
-              const touch = e.touches[0]
-              const startX = touch.clientX
-              const scrollLeft = e.currentTarget.scrollLeft
-
-              e.currentTarget.dataset.startX = startX.toString()
-              e.currentTarget.dataset.scrollLeft = scrollLeft.toString()
-            }}
-            onTouchMove={(e) => {
-              const startX = parseFloat(e.currentTarget.dataset.startX || '0')
-              const scrollLeft = parseFloat(e.currentTarget.dataset.scrollLeft || '0')
-              const touch = e.touches[0]
-              const x = touch.clientX
-              const walk = (x - startX) * 2
-              e.currentTarget.scrollLeft = scrollLeft - walk
+              msOverflowStyle: 'none'
             }}
           >
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-[#26304a] px-4 py-3 rounded-lg shadow-md flex-shrink-0 w-[85vw]"
+              className="bg-[#26304a] px-4 py-3 rounded-lg shadow-md flex-shrink-0 w-[85vw] snap-start"
             >
               {/* Rating */}
               <div className="flex gap-1 mb-2">

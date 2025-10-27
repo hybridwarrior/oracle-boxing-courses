@@ -122,7 +122,7 @@ export function PlatformScreenshotsCarousel() {
             {screenshots.map((screenshot, index) => (
               <div
                 key={index}
-                className="snap-center w-[360px] md:w-[500px] lg:w-[600px] max-w-[90vw]"
+                className="snap-center w-[85vw] md:w-[500px] lg:w-[600px]"
               >
                 {/* Card Container */}
                 <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg flex flex-col h-full">
