@@ -53,7 +53,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
 
   return (
     <section className="py-6 sm:py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#000000] rounded-xl sm:rounded-3xl p-4 sm:p-16 shadow-2xl text-white">
           {/* Logo */}
           <div className="flex justify-center mb-3 sm:mb-10">

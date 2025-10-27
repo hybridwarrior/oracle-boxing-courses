@@ -723,7 +723,7 @@ export default function MembershipsPage() {
           <div className="text-center mb-4 sm:mb-8">
             <button
               onClick={handleJoinNow}
-              className="py-2.5 sm:py-4 lg:py-5 px-6 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-sm sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+              className="py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-16 bg-[#000000] text-white font-black text-lg sm:text-xl lg:text-2xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
             >
               JOIN NOW
             </button>
