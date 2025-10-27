@@ -8,6 +8,8 @@ import { toast } from 'sonner'
 import { get6WCAddOns, getCourseOrderBump, getProductById } from '@/lib/products'
 import { Product } from '@/lib/types'
 import { getTrackingParams } from '@/lib/tracking-cookies'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getProductPrice, formatPrice, formatProductDescription } from '@/lib/currency'
 
 // Force dynamic rendering for this page
 export const dynamic = 'force-dynamic'
@@ -21,6 +23,7 @@ function formatDescription(text: string) {
 function OrderBumpsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { currency } = useCurrency()
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [funnelType, setFunnelType] = useState<'6wc' | 'course'>('6wc')
@@ -323,14 +326,17 @@ function OrderBumpsContent() {
                             if (courseParam) {
                               const course = getProductById(courseParam)
                               if (course) {
-                                const additionalCost = product.price - course.price
-                                return `+$${additionalCost}`
+                                const bundlePrice = getProductPrice(product.metadata, currency) || product.price
+                                const coursePrice = getProductPrice(course.metadata, currency) || course.price
+                                const additionalCost = bundlePrice - coursePrice
+                                return `+${formatPrice(additionalCost, currency)}`
                               }
                             }
-                            return `$${product.price}`
+                            const bundlePrice = getProductPrice(product.metadata, currency) || product.price
+                            return formatPrice(bundlePrice, currency)
                           })()
                         ) : (
-                          `$${product.price}`
+                          formatPrice(getProductPrice(product.metadata, currency) || product.price, currency)
                         )}
                       </p>
                     </div>
@@ -372,7 +378,9 @@ function OrderBumpsContent() {
                 {isExpanded && (
                   <div
                     className="mt-4 text-sm text-gray-700 whitespace-pre-line"
-                    dangerouslySetInnerHTML={{ __html: formatDescription(product.description) }}
+                    dangerouslySetInnerHTML={{
+                      __html: formatDescription(formatProductDescription(product.id, product.description, currency))
+                    }}
                   />
                 )}
               </div>

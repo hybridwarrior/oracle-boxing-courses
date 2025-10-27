@@ -31,12 +31,17 @@ export default function AdminCoachingCheckout() {
   // Calculate pricing whenever selections change
   const calculation = calculateCoachingPrice(tier, customerDiscount, sixMonthCommitment, paymentPlan)
 
-  // Uncheck 6-month commitment when monthly is selected
+  // Reset discounts and 6-month commitment when monthly is selected
   useEffect(() => {
-    if (paymentPlan === 'monthly' && sixMonthCommitment) {
-      setSixMonthCommitment(false)
+    if (paymentPlan === 'monthly') {
+      if (sixMonthCommitment) {
+        setSixMonthCommitment(false)
+      }
+      if (customerDiscount !== 'none') {
+        setCustomerDiscount('none')
+      }
     }
-  }, [paymentPlan])
+  }, [paymentPlan, sixMonthCommitment, customerDiscount])
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
@@ -289,14 +294,16 @@ export default function AdminCoachingCheckout() {
 
                 {/* Customer Discount */}
                 <div>
-                  <label htmlFor="discount" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="discount" className={`block text-sm font-medium mb-2 ${paymentPlan === 'monthly' ? 'text-gray-400' : 'text-gray-700'}`}>
                     Customer Discount
+                    {paymentPlan === 'monthly' && <span className="text-xs text-gray-400 ml-2">(Not available for monthly plans)</span>}
                   </label>
                   <select
                     id="discount"
                     value={customerDiscount}
                     onChange={(e) => setCustomerDiscount(e.target.value as CustomerDiscount)}
-                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all"
+                    disabled={paymentPlan === 'monthly'}
+                    className="w-full px-5 py-3 bg-white border border-gray-300 rounded-full focus:ring-2 focus:ring-[#26304a] focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100"
                   >
                     <option value="none">No Discount</option>
                     <option value="challenge_winner">Challenge Winner (-{formatPrice(CUSTOMER_DISCOUNTS.challenge_winner)})</option>

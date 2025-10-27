@@ -6,6 +6,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Product } from '@/lib/types'
 import { useCart } from '@/contexts/CartContext'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getProductPrice, formatPrice, isMembershipProduct } from '@/lib/currency'
 import { BookOpen, Dumbbell, FileText, Layers, Clock, Calendar, TrendingUp, ClipboardList, RefreshCw } from 'lucide-react'
 
 interface CourseCardProps {
@@ -15,7 +17,15 @@ interface CourseCardProps {
 export function CourseCard({ product }: CourseCardProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { addItem, clearCart } = useCart()
+  const { currency } = useCurrency()
   const router = useRouter()
+
+  // Get price in selected currency
+  const isMembership = isMembershipProduct(product.metadata)
+  const convertedPrice = isMembership
+    ? product.price
+    : getProductPrice(product.metadata, currency) || product.price
+  const displayCurrency = isMembership ? 'USD' : currency
 
   // Map product IDs to course detail pages
   const courseDetailPages: Record<string, string> = {
@@ -156,8 +166,11 @@ export function CourseCard({ product }: CourseCardProps) {
           {/* Price */}
           <div className="mb-3">
             <p className="text-2xl sm:text-3xl font-bold text-gray-900">
-              ${product.price}
+              {formatPrice(convertedPrice, displayCurrency)}
             </p>
+            {isMembership && currency !== 'USD' && (
+              <p className="text-xs text-gray-500 mt-1">USD only</p>
+            )}
           </div>
 
           {/* Learn More Button */}

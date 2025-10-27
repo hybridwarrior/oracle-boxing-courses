@@ -145,3 +145,49 @@ export const getStripePriceId = (
   // Fallback to default price ID (should be USD)
   return product.stripe_price_id;
 };
+
+// Helper to format product descriptions with currency-aware prices
+export const formatProductDescription = (
+  productId: string,
+  description: string,
+  currency: Currency
+): string => {
+  // Map of price replacements by product
+  const priceReplacements: Record<string, Array<{find: RegExp, getPrice: () => number}>> = {
+    'bundle': [
+      { find: /\$297/g, getPrice: () => getProductPrice('bffp', currency) || 297 },
+      { find: /\$147/g, getPrice: () => getProductPrice('brdmp', currency) || 147 },
+      { find: /\$444/g, getPrice: () => (getProductPrice('bffp', currency) || 297) + (getProductPrice('brdmp', currency) || 147) },
+      { find: /\$397/g, getPrice: () => getProductPrice('obm', currency) || 397 },
+      { find: /\$47/g, getPrice: () => {
+        const total = (getProductPrice('bffp', currency) || 297) + (getProductPrice('brdmp', currency) || 147);
+        const bundlePrice = getProductPrice('obm', currency) || 397;
+        return total - bundlePrice;
+      }},
+    ],
+    'recordings-vault': [
+      { find: /Normally \$197/g, getPrice: () => {
+        // Keep "Normally" but update price
+        const price = 197; // Reference price in description
+        return price;
+      }},
+      { find: /\$97/g, getPrice: () => getProductPrice('rcv', currency) || 97 },
+    ],
+    'lifetime-bffp': [
+      { find: /Normally \$297/g, getPrice: () => getProductPrice('bffp', currency) || 297 },
+      { find: /\$147/g, getPrice: () => getProductPrice('ltbffp', currency) || 147 },
+    ],
+  };
+
+  const replacements = priceReplacements[productId];
+  if (!replacements) return description;
+
+  let result = description;
+  replacements.forEach(({ find, getPrice }) => {
+    const price = getPrice();
+    const formatted = formatPrice(price, currency);
+    result = result.replace(find, formatted);
+  });
+
+  return result;
+};

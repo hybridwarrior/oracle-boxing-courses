@@ -114,34 +114,38 @@ export default function HomePage() {
 
       {/* Apparel Section */}
       <section className="relative w-full h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden">
-        {/* Background Image */}
-        <Image
-          src="https://media.oracleboxing.com/Website/apparel.png"
-          alt="Oracle Boxing Apparel"
-          fill
-          className="object-cover"
-          sizes="100vw"
-          priority
-        />
+        {/* Background Image - Zoomed in and shifted left */}
+        <div className="absolute inset-0" style={{ transform: 'scale(1.2) translateX(-5%)' }}>
+          <Image
+            src="https://media.oracleboxing.com/Website/apparel.png"
+            alt="Oracle Boxing Apparel"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/60"></div>
 
-        {/* Content Overlay */}
-        <div className="relative z-10 h-full flex items-center justify-center">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 uppercase tracking-wide drop-shadow-lg">
-              Represent the brand
-            </h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-white mb-6 sm:mb-8 drop-shadow-md font-medium">
-              Premium apparel designed for boxers. Stay tuned for the launch.
-            </p>
-            <button
-              onClick={() => setIsNotifyModalOpen(true)}
-              className="inline-block py-3 sm:py-4 px-6 sm:px-8 text-sm sm:text-base font-black bg-white text-black rounded-lg shadow-lg uppercase tracking-wide hover:bg-gray-100 transition-colors cursor-pointer"
-            >
-              Notify Me
-            </button>
+        {/* Content Overlay - Right aligned */}
+        <div className="relative z-10 h-full flex items-end pb-8 sm:pb-12 lg:pb-16">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="ml-auto max-w-md lg:max-w-lg text-left">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 uppercase tracking-wide drop-shadow-lg">
+                Represent the brand
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-white mb-4 sm:mb-6 drop-shadow-md font-medium">
+                Premium apparel designed for boxers. Stay tuned for the launch.
+              </p>
+              <button
+                onClick={() => setIsNotifyModalOpen(true)}
+                className="inline-block py-3 sm:py-4 px-6 sm:px-8 text-sm sm:text-base font-black bg-white text-black rounded-lg shadow-lg uppercase tracking-wide hover:bg-gray-100 transition-colors cursor-pointer"
+              >
+                Notify Me
+              </button>
+            </div>
           </div>
         </div>
       </section>

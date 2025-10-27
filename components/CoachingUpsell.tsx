@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Check, Sparkles, Clock, TrendingUp } from 'lucide-react';
 import { useCurrency } from '@/contexts/CurrencyContext';
-import { formatPrice } from '@/lib/currency';
+import { formatPrice, getProductPrice } from '@/lib/currency';
 
 interface CoachingUpsellProps {
   normalPrice: number;
@@ -24,10 +24,16 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
 }) => {
   const { currency } = useCurrency();
 
-  // Use USD pricing for memberships, otherwise use the currency-specific pricing
-  const displayPrice = isMembership ? 397 : discountedPrice;
-  const regularPrice = 500;
+  // Get the currency-converted prices for coach1 product
+  const displayPrice = isMembership
+    ? 397  // Membership products are USD-only
+    : (getProductPrice('coach1', currency) || discountedPrice);
+
+  // Regular price is approximately 25% higher than coach1 (397 -> 500 for USD)
+  const regularPrice = Math.round(displayPrice * 1.26);
   const savings = regularPrice - displayPrice;
+
+  const displayCurrency = isMembership ? 'USD' : currency;
 
   return (
     <div className="h-full flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12 bg-gray-50 border-l border-gray-200 lg:sticky lg:top-0 lg:max-h-screen lg:overflow-y-auto lg:justify-start">
@@ -97,18 +103,18 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
             <div className="flex items-center justify-between mb-3 sm:mb-4 gap-2">
               <span className="text-xs sm:text-sm lg:text-base text-gray-600 font-medium">Regular Price (3 Months):</span>
               <span className="text-sm sm:text-base lg:text-lg text-gray-400 line-through font-semibold">
-                ${regularPrice}
+                {formatPrice(regularPrice, displayCurrency)}
               </span>
             </div>
             <div className="flex items-center justify-between mb-3 sm:mb-4 pb-3 sm:pb-4 border-b border-gray-200 gap-2">
               <span className="text-sm sm:text-base lg:text-lg text-gray-900 font-bold">Today's Price (1 Month):</span>
               <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-                ${displayPrice}
+                {formatPrice(displayPrice, displayCurrency)}
               </span>
             </div>
             <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-gray-700 font-semibold text-sm sm:text-base">
               <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
-              Save ${savings} Today
+              Save {formatPrice(savings, displayCurrency)} Today
             </div>
           </div>
 
@@ -135,7 +141,7 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
               </span>
               {!isLoading && (
                 <span className="text-xs font-normal">
-                  You will be charged ${displayPrice}
+                  You will be charged {formatPrice(displayPrice, displayCurrency)}
                 </span>
               )}
             </button>
