@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getProductPrice, formatPrice } from '@/lib/currency'
 
 interface CourseModule {
   title: string
@@ -13,7 +15,7 @@ interface CourseModule {
 interface BundleCourse {
   id: string
   title: string
-  value: string
+  valueMetadata: string // Product metadata for price lookup
   image: string
   description: string
   modules: CourseModule[]
@@ -23,7 +25,7 @@ const courses: BundleCourse[] = [
   {
     id: 'bffp',
     title: 'Boxing from First Principles',
-    value: '$297 Value',
+    valueMetadata: 'bffp', // Maps to PRODUCT_PRICES in currency.ts
     image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp',
     description: 'The science of boxing, made simple. Master the conceptual framework of boxing through mind, body mechanics, tactics, and conditioning.',
     modules: [
@@ -57,7 +59,7 @@ const courses: BundleCourse[] = [
   {
     id: 'roadmap',
     title: 'Boxing Roadmap',
-    value: '$147 Value',
+    valueMetadata: 'brdmp',
     image: 'https://media.oracleboxing.com/Website/optimized/products/tbrtn5hq-large.webp',
     description: 'Your complete 5-phase training system. Follow structured progressions from fundamentals to mastery with clear drills and techniques.',
     modules: [
@@ -91,7 +93,7 @@ const courses: BundleCourse[] = [
   {
     id: 'clinic',
     title: 'Boxing Clinic Replays',
-    value: '$97 Value',
+    valueMetadata: 'rcv',
     image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: 'Learn from live coaching Q&A. Watch Oliver & Toni answer real student questions covering every aspect of boxing. Updated monthly.',
     modules: [

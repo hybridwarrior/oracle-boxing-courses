@@ -13,11 +13,15 @@ import {
 import { ScrollToTopLink as Link } from '@/components/ScrollToTopLink'
 import { EpicCTAButton } from '@/components/EpicCTAButton'
 import { ChallengePrice, ValuePrice } from '@/components/AdaptivePrice'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getProductPrice } from '@/lib/currency'
+
 interface EpicOfferStackSectionProps {
   onCTAClick?: () => void;
 }
 
 export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSectionProps) {
+  const { currency } = useCurrency()
 
   // Benefits to display with checkmarks
   const benefits = [
@@ -26,7 +30,11 @@ export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSect
     "Finish the challenge, prove your commitment, and get a full refund.",
   ]
 
-  const totalValue = 297 + 97 + 97 + 147 // $638
+  // Calculate total value in current currency
+  const bffpPrice = getProductPrice('bffp', currency) || 297
+  const rcvPrice = getProductPrice('rcv', currency) || 97
+  const brdmpPrice = getProductPrice('brdmp', currency) || 147
+  const totalValue = bffpPrice + rcvPrice + rcvPrice + brdmpPrice // Same as original: bffp + rcv + rcv + brdmp
 
   return (
     <section id="pricing" className="py-16 sm:py-20 bg-white">
@@ -51,7 +59,7 @@ export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSect
 
           {/* Price Section */}
           <div className="text-center mb-6 sm:mb-10">
-            <div className="text-3xl sm:text-4xl font-bold opacity-60 line-through mb-2">${totalValue}</div>
+            <ValuePrice usdAmount={totalValue} className="text-3xl sm:text-4xl font-bold opacity-60 line-through mb-2" />
             <div className="text-6xl sm:text-7xl md:text-8xl font-black mb-3"><ChallengePrice /></div>
           </div>
 

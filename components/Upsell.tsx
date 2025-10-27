@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { Product } from '@/lib/types'
 import { CheckCircle, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getProductPrice, formatPrice, isMembershipProduct } from '@/lib/currency'
 
 // Helper function to convert markdown bold to HTML and clean up
 function formatDescription(text: string) {
@@ -19,6 +21,14 @@ interface UpsellProps {
 export function Upsell({ product, sessionId }: UpsellProps) {
   const [isAdding, setIsAdding] = useState(false)
   const [isAdded, setIsAdded] = useState(false)
+  const { currency } = useCurrency()
+
+  // Get price in selected currency
+  const isMembership = isMembershipProduct(product.metadata)
+  const convertedPrice = isMembership
+    ? product.price
+    : getProductPrice(product.metadata, currency) || product.price
+  const displayCurrency = isMembership ? 'USD' : currency
 
   const handleAccept = async () => {
     setIsAdding(true)
@@ -103,10 +113,13 @@ export function Upsell({ product, sessionId }: UpsellProps) {
       {/* Price */}
       <div className="text-center mb-6">
         <p className="text-4xl font-bold text-gray-900">
-          ${product.price}
+          {formatPrice(convertedPrice, displayCurrency)}
           {product.recurring && <span className="text-lg text-gray-600">/{product.interval}</span>}
         </p>
-        <p className="text-sm text-gray-600 mt-1">One-click add to your order</p>
+        <p className="text-sm text-gray-600 mt-1">
+          One-click add to your order
+          {isMembership && currency !== 'USD' && <span className="block text-xs mt-1">USD only</span>}
+        </p>
       </div>
 
       {/* CTA Buttons */}

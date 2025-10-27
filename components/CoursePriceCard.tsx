@@ -3,6 +3,8 @@
 import { useRouter } from 'next/navigation'
 import { Product } from '@/lib/types'
 import { Check } from 'lucide-react'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getProductPrice, formatPrice, isMembershipProduct } from '@/lib/currency'
 
 interface CoursePriceCardProps {
   product: Product
@@ -11,6 +13,27 @@ interface CoursePriceCardProps {
 
 export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps) {
   const router = useRouter()
+  const { currency } = useCurrency()
+
+  // Get price in selected currency
+  const isMembership = isMembershipProduct(product.metadata)
+  const convertedPrice = isMembership
+    ? product.price
+    : getProductPrice(product.metadata, currency) || product.price
+  const displayCurrency = isMembership ? 'USD' : currency
+
+  // Bundle crossed-out price (sum of individual course prices)
+  const getBundleCrossedOutPrice = () => {
+    if (product.id === 'bundle') {
+      const bffpPrice = getProductPrice('bffp', currency) || 297
+      const roadmapPrice = getProductPrice('brdmp', currency) || 147
+      const clinicPrice = getProductPrice('rcv', currency) || 97
+      return bffpPrice + roadmapPrice + clinicPrice // $541 USD or equivalent
+    }
+    return null
+  }
+
+  const bundleCrossedPrice = getBundleCrossedOutPrice()
 
   const handleEnroll = () => {
     // Direct URL routing - no cart needed
@@ -52,12 +75,19 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
 
           {/* Price */}
           <div className="text-center mb-6 sm:mb-10">
-            {product.id === 'bundle' && (
-              <div className="text-3xl sm:text-4xl font-bold opacity-60 line-through mb-2">$541</div>
+            {bundleCrossedPrice && (
+              <div className="text-3xl sm:text-4xl font-bold opacity-60 line-through mb-2">
+                {formatPrice(bundleCrossedPrice, displayCurrency)}
+              </div>
             )}
-            <div className="text-6xl sm:text-7xl md:text-8xl font-black mb-3">${product.price}</div>
+            <div className="text-6xl sm:text-7xl md:text-8xl font-black mb-3">
+              {formatPrice(convertedPrice, displayCurrency)}
+            </div>
             {product.recurring && (
               <div className="text-xl sm:text-2xl font-bold opacity-90">per {product.interval}</div>
+            )}
+            {isMembership && currency !== 'USD' && (
+              <div className="text-sm text-white/70 mt-2">USD only</div>
             )}
           </div>
 
