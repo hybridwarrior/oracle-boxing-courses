@@ -4,6 +4,8 @@ import React, { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle, Mail, AlertCircle } from 'lucide-react';
 import { Footer } from '@/components/Footer';
+import Image from 'next/image';
+import confetti from 'canvas-confetti';
 
 function FinalSuccessContent() {
   const searchParams = useSearchParams();
@@ -35,6 +37,46 @@ function FinalSuccessContent() {
     fetchOrderData();
   }, [sessionId]);
 
+  // Confetti animation on page load
+  useEffect(() => {
+    if (!isLoading && orderData) {
+      // Fire confetti from both sides
+      const duration = 3000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+      function randomInRange(min: number, max: number) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+
+        // Fire from the left
+        confetti({
+          ...defaults,
+          particleCount,
+          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+        });
+
+        // Fire from the right
+        confetti({
+          ...defaults,
+          particleCount,
+          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+        });
+      }, 250);
+
+      return () => clearInterval(interval);
+    }
+  }, [isLoading, orderData]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
@@ -46,18 +88,22 @@ function FinalSuccessContent() {
     );
   }
 
+  // Check if coaching was purchased (not from internal coaching tool)
+  const hasCoaching = orderData && orderData.metadata?.funnel_type !== 'internal_coaching_tool' && orderData.metadata?.type !== 'closed_coaching';
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12">
-        <div className="max-w-xl mx-auto w-full">
-          {/* Logo */}
-          <div className="flex justify-center mb-6 sm:mb-8">
-            <img
-              src="https://media.oracleboxing.com/Website/optimized/logos/long_black-large.webp"
-              alt="Oracle Boxing"
-              className="h-5 sm:h-6 lg:h-7 w-auto"
-            />
-          </div>
+      <div className={`flex-1 ${hasCoaching ? 'lg:grid lg:grid-cols-2' : 'flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12'}`}>
+        <div className={`${hasCoaching ? 'h-full flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12 bg-white' : 'max-w-xl mx-auto w-full'}`}>
+          <div className={hasCoaching ? 'max-w-xl mx-auto w-full' : ''}>
+            {/* Logo */}
+            <div className="flex justify-center mb-6 sm:mb-8">
+              <img
+                src="https://media.oracleboxing.com/Website/optimized/logos/long_black-large.webp"
+                alt="Oracle Boxing"
+                className="h-4 w-auto"
+              />
+            </div>
 
           {/* Success Message */}
           <div className="text-center mb-6 sm:mb-8 lg:mb-12">
@@ -90,7 +136,7 @@ function FinalSuccessContent() {
                 </div>
 
                 <div className="flex justify-between items-start gap-2">
-                  <span className="text-xs sm:text-sm lg:text-base text-black font-medium">Products Purchased</span>
+                  <span className="text-xs sm:text-sm lg:text-base text-black font-medium">Products</span>
                   <div className="text-xs sm:text-sm lg:text-base text-black font-semibold text-right">
                     <div>{orderData.productPurchased}</div>
                     {orderData.metadata?.funnel_type !== 'internal_coaching_tool' && orderData.metadata?.type !== 'closed_coaching' && (
@@ -143,45 +189,43 @@ function FinalSuccessContent() {
             </div>
           )}
 
-          {/* Email Instructions */}
-          <div className="bg-white p-4 sm:p-5 lg:p-6 mb-4 sm:mb-5 lg:mb-6">
-            <div className="flex items-start gap-2 sm:gap-3 lg:gap-4">
-              <Mail className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-black flex-shrink-0 mt-0.5 sm:mt-1" />
-              <div>
-                <h3 className="text-sm sm:text-base lg:text-base font-bold text-black mb-1 sm:mb-2">Receipt & Access Instructions</h3>
-                <p className="text-xs sm:text-sm lg:text-sm text-black leading-relaxed">
-                  {orderData ? (
-                    <>A receipt has been emailed to <strong>{orderData.customerEmail}</strong> with instructions on how to access your products.{orderData.metadata?.funnel_type !== 'internal_coaching_tool' && orderData.metadata?.type !== 'closed_coaching' && <> Our team will reach out to schedule your first 1-on-1 coaching call.</>}</>
-                  ) : (
-                    <>A receipt has been emailed to you with instructions on how to access your products.</>
-                  )}
+        </div>
+        </div>
+
+        {/* Next Steps Section for Coaching Purchases */}
+        {hasCoaching && (
+          <div className="h-full flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12 bg-gray-50 border-l border-gray-200">
+            <div className="max-w-xl mx-auto w-full">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black mb-4 sm:mb-6">
+                Next Steps
+              </h2>
+
+              <div className="space-y-4 sm:space-y-6">
+                <p className="text-sm sm:text-base lg:text-lg text-black leading-relaxed">
+                  Thank you for purchasing 1-on-1 coaching! We will reach out directly to have you book your first session within the next 24 hours.
+                </p>
+
+                <p className="text-sm sm:text-base lg:text-lg text-black leading-relaxed">
+                  In the meantime, please look in your email for an invitation to join <strong>Oracle Boxing</strong> — the email will look similar to this:
+                </p>
+
+                <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+                  <Image
+                    src="https://media.oracleboxing.com/Website/skool_invite.png"
+                    alt="Skool invitation email example"
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+
+                <p className="text-sm sm:text-base lg:text-lg text-black leading-relaxed">
+                  That's where the rest of the team and all of our students are, so ideally we will contact you there.
                 </p>
               </div>
             </div>
           </div>
-
-          {/* Important Email Notice */}
-          <div className="bg-white p-4 sm:p-5 lg:p-6">
-            <div className="flex items-start gap-2 sm:gap-3 lg:gap-4">
-              <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-black flex-shrink-0 mt-0.5 sm:mt-1" />
-              <div>
-                <h3 className="text-sm sm:text-base lg:text-base font-bold text-black mb-1 sm:mb-2">Important: Check Your Email</h3>
-                <div className="text-xs sm:text-sm lg:text-sm text-black leading-relaxed space-y-1 sm:space-y-2">
-                  <p>
-                    Please check both your <strong>inbox and spam folder</strong> for all emails from Oracle Boxing.
-                  </p>
-                  <p>
-                    <strong>If our emails are in spam:</strong>
-                  </p>
-                  <ul className="list-disc pl-4 sm:pl-5 space-y-0.5 sm:space-y-1">
-                    <li>Move them to your inbox</li>
-                    <li>Reply to the email to ensure future communications land in your inbox</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Footer */}

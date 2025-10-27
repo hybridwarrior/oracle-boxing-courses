@@ -26,7 +26,7 @@ export const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
           <img
             src="https://media.oracleboxing.com/Website/optimized/logos/long_black-large.webp"
             alt="Oracle Boxing"
-            className="h-5 sm:h-6 lg:h-7 w-auto"
+            className="h-4 w-auto"
           />
         </div>
 
@@ -58,7 +58,7 @@ export const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
             </div>
 
             <div className="flex justify-between items-start gap-2">
-              <span className="text-xs sm:text-sm lg:text-base text-black font-medium">Product Purchased</span>
+              <span className="text-xs sm:text-sm lg:text-base text-black font-medium">Purchased</span>
               <span className="text-xs sm:text-sm lg:text-base text-black font-semibold text-right">{productPurchased}</span>
             </div>
 
@@ -71,40 +71,6 @@ export const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
           </div>
         </div>
 
-        {/* Email Instructions */}
-        <div className="bg-white p-4 sm:p-5 lg:p-6 mb-4 sm:mb-5 lg:mb-6">
-          <div className="flex items-start gap-2 sm:gap-3 lg:gap-4">
-            <Mail className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-black flex-shrink-0 mt-0.5 sm:mt-1" />
-            <div>
-              <h3 className="text-sm sm:text-base lg:text-base font-bold text-black mb-1 sm:mb-2">Receipt & Access Instructions</h3>
-              <p className="text-xs sm:text-sm lg:text-sm text-black leading-relaxed">
-                A receipt has been emailed to <strong>{customerEmail}</strong> with instructions on how to access your product.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Important Email Notice */}
-        <div className="bg-white p-4 sm:p-5 lg:p-6">
-          <div className="flex items-start gap-2 sm:gap-3 lg:gap-4">
-            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-black flex-shrink-0 mt-0.5 sm:mt-1" />
-            <div>
-              <h3 className="text-sm sm:text-base lg:text-base font-bold text-black mb-1 sm:mb-2">Important: Check Your Email</h3>
-              <div className="text-xs sm:text-sm lg:text-sm text-black leading-relaxed space-y-1 sm:space-y-2">
-                <p>
-                  Please check both your <strong>inbox and spam folder</strong> for all emails from Oracle Boxing.
-                </p>
-                <p>
-                  <strong>If our emails are in spam:</strong>
-                </p>
-                <ul className="list-disc pl-4 sm:pl-5 space-y-0.5 sm:space-y-1">
-                  <li>Move them to your inbox</li>
-                  <li>Reply to the email to ensure future communications land in your inbox</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

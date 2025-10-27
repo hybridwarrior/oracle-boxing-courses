@@ -26,17 +26,23 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
 
   // Use USD pricing for memberships, otherwise use the currency-specific pricing
   const displayPrice = isMembership ? 397 : discountedPrice;
-  const regularPrice = 1500;
+  const regularPrice = 500;
   const savings = regularPrice - displayPrice;
 
   return (
-    <div className="h-full flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12 bg-gray-50 border-l border-gray-200">
-      <div className="max-w-xl mx-auto w-full">
-        {/* Limited Time Badge with Bounce Animation */}
+    <div className="h-full flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12 bg-gray-50 border-l border-gray-200 lg:sticky lg:top-0 lg:max-h-screen lg:overflow-y-auto lg:justify-start">
+      <div className="max-w-xl mx-auto w-full lg:my-0">
+        {/* Next Step Notice - Desktop Only */}
+        <div className="hidden lg:block bg-white p-4 sm:p-5 lg:p-6 mb-5 sm:mb-6 lg:mb-8 rounded-lg border border-gray-200">
+          <p className="text-sm sm:text-base lg:text-lg text-black leading-relaxed">
+            <strong>Next Step:</strong> Read the information below and then click one of the buttons to continue to the next page.
+          </p>
+        </div>
+
+        {/* Exclusive Offer Badge */}
         <div className="flex justify-center mb-4 sm:mb-5 lg:mb-6">
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#26304a] text-white rounded text-xs sm:text-sm font-bold uppercase tracking-wide animate-bounce">
-            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
-            Limited Time Offer
+            Exclusive Offer
           </div>
         </div>
 
@@ -107,13 +113,10 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
           </div>
 
           {/* Urgency Notice */}
-          <div className="bg-gray-100 border border-gray-300 rounded-lg p-3 sm:p-4 mb-4 sm:mb-5 lg:mb-6">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 flex-shrink-0" />
-              <p className="text-xs sm:text-sm text-gray-900 font-medium">
-                <strong>This page only:</strong> Normally only available as a 3-month commitment. This discounted 1-month trial is exclusive to this offer.
-              </p>
-            </div>
+          <div className="p-3 sm:p-4 mb-4 sm:mb-5 lg:mb-6">
+            <p className="text-xs sm:text-sm text-gray-900 font-medium text-center">
+              Right now, you can try 1-on-1 coaching for just 1 month. Apart from this page, coaching is only available as a 3-month package upfront. If you'd like to take advantage of this, now's the time.
+            </p>
           </div>
 
           {/* CTA Buttons */}
@@ -140,17 +143,13 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
             <button
               onClick={onDecline}
               disabled={isLoading}
-              className="w-full py-2 sm:py-3 px-4 sm:px-6 text-xs sm:text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors disabled:opacity-50"
+              className="w-full py-2 sm:py-3 px-4 sm:px-6 text-xs sm:text-sm font-medium text-black hover:text-gray-700 transition-colors disabled:opacity-50 cursor-pointer"
             >
               No thanks, I'll pass on this exclusive offer
             </button>
           </div>
         </div>
 
-        {/* Trust Badge */}
-        <div className="text-center text-xs sm:text-sm text-gray-500">
-          <p>🔒 Secure checkout • 100% satisfaction guaranteed</p>
-        </div>
       </div>
     </div>
   );

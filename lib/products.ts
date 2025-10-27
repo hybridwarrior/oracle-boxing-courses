@@ -197,28 +197,15 @@ Perfect for beginners or boxers who want rapid improvement with accountability.`
   },
   {
     id: 'recordings-vault',
-    title: 'Recordings Vault',
+    title: 'Recordings Vault Access',
     price: 97,
     type: 'course',
     metadata: 'rcv',
     stripe_product_id: 'prod_THtRqY17sSwQJJ',
     stripe_price_id: 'price_1SLLIKQNEdHwdojXkxUeIDwA',
     image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
-    description: `**Access to All Group + 1-on-1 Coaching Call Replays**
-
-Complete archive of all live coaching sessions, updated weekly.
-
-Perfect for:
-• 6-Week Challenge participants who want to continue learning
-• Boxers who want to study real coaching examples
-• Visual learners who benefit from watching corrections in real-time
-
-**Includes:**
-• All 2024-2025 group coaching call replays
-• Select 1-on-1 coaching session archives
-• Technical breakdowns and common mistake corrections
-• Updated weekly with new content`,
-    shortDescription: 'Complete Archive of All Coaching Call Replays',
+    description: `Get lifetime access to every coaching call and 1-on-1 call recording. Never worry about missing a session, rewatch, review, and learn at your own pace. Normally $197, yours today for just $97.`,
+    shortDescription: 'Lifetime access to all coaching call recordings',
     perfectFor: 'Visual learners who study best through examples',
     lessonCount: 220,
     lessonCountPrefix: '+',
@@ -226,26 +213,15 @@ Perfect for:
   },
   {
     id: 'lifetime-bffp',
-    title: 'Lifetime Access to BFFP',
+    title: 'Lifetime Access to Boxing from First Principles',
     price: 147,
     type: 'course',
     metadata: 'ltbffp',
     stripe_product_id: 'prod_THtTT54jtb1l9c',
     stripe_price_id: 'price_1SLLJlQNEdHwdojXKgVggogM',
     image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp',
-    description: `**Keep Full Access to Boxing from First Principles Forever**
-
-After the 6-Week Challenge ends, keep permanent access to the full BFFP course.
-
-**Why upgrade to lifetime:**
-• Revisit lessons anytime as you progress
-• Reference technical details and principles
-• Continue learning at your own pace
-• Access all future updates and improvements
-
-**Without this:** Your BFFP access expires after the 6-Week Challenge ends.
-**With this:** You own the course forever and can return to it whenever you need.`,
-    shortDescription: 'Permanent Access to BFFP After Challenge Ends',
+    description: `Keep the entire Boxing from First Principles course forever. Review any lesson, any time — even after your Challenge ends. Normally $297, add lifetime access today for just $147.`,
+    shortDescription: 'Keep Boxing from First Principles forever',
     perfectFor: '6-Week Challenge participants who want to keep learning',
     moduleCount: 5,
     lessonCount: 26,

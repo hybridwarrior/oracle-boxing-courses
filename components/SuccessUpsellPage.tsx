@@ -124,8 +124,32 @@ export const SuccessUpsellPage: React.FC<SuccessUpsellPageProps> = ({ isMembersh
   };
 
   const handleDeclineUpsell = () => {
-    // Redirect to final thank you page or dashboard
-    router.push('/');
+    // Check what they purchased to determine which page to show
+    // Course-only purchases: Boxing Roadmap, BFFP (without 6WC membership), OBM (without 3-month membership)
+    // Community purchases: 6WC, Membership, or courses WITH membership upgrades
+
+    const productName = orderData?.productPurchased?.toLowerCase() || '';
+    const cartItems = orderData?.metadata?.cart_items;
+
+    // Check if they have any community/membership access
+    const hasCommunityAccess =
+      productName.includes('6-week challenge') ||
+      productName.includes('6wc') ||
+      productName.includes('membership') ||
+      (cartItems && (
+        cartItems.includes('6wc') ||
+        cartItems.includes('membership') ||
+        cartItems.includes('6-week-membership') ||
+        cartItems.includes('3-month-membership')
+      ));
+
+    if (hasCommunityAccess) {
+      // Has community access - show Skool invitation page
+      router.push(`/success/thankyou?session_id=${sessionId}`);
+    } else {
+      // Course-only purchase - show booking page
+      router.push(`/success/course-only?session_id=${sessionId}`);
+    }
   };
 
   if (isLoadingOrder) {
@@ -160,6 +184,13 @@ export const SuccessUpsellPage: React.FC<SuccessUpsellPageProps> = ({ isMembersh
           productPurchased={orderData.productPurchased}
           currency={orderData.currency}
         />
+
+        {/* Next Step Notice - Mobile Only (between sections) */}
+        <div className="lg:hidden bg-white p-4 sm:p-5 mx-4 sm:mx-6 my-6 rounded-lg border border-gray-200">
+          <p className="text-sm sm:text-base text-black leading-relaxed">
+            <strong>Next Step:</strong> Read the information below and then click one of the buttons to continue to the next page.
+          </p>
+        </div>
 
         {/* Right Side - Coaching Upsell */}
         <CoachingUpsell
