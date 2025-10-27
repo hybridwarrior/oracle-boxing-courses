@@ -115,7 +115,7 @@ export function EpicCTAButton({
     if (typeof window !== 'undefined') {
       const pricingSection = document.getElementById('pricing');
       if (pricingSection) {
-        pricingSection.scrollIntoView({ behavior: 'smooth' });
+        pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 

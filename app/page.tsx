@@ -112,40 +112,33 @@ export default function HomePage() {
       {/* Testimonials Section */}
       <TestimonialSection testimonials={testimonials} />
 
-      {/* Apparel Section */}
-      <section className="relative w-full h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden">
-        {/* Background Image - Zoomed in and shifted left */}
-        <div className="absolute inset-0" style={{ transform: 'scale(1.2) translateX(-5%)' }}>
-          <Image
-            src="https://media.oracleboxing.com/Website/apparel.png"
-            alt="Oracle Boxing Apparel"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-        </div>
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/60"></div>
-
-        {/* Content Overlay - Right aligned */}
-        <div className="relative z-10 h-full flex items-end pb-8 sm:pb-12 lg:pb-16">
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="ml-auto max-w-md lg:max-w-lg text-left">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 uppercase tracking-wide drop-shadow-lg">
-                Represent the brand
-              </h2>
-              <p className="text-base sm:text-lg md:text-xl text-white mb-4 sm:mb-6 drop-shadow-md font-medium">
-                Premium apparel designed for boxers. Stay tuned for the launch.
-              </p>
+      {/* Newsletter Section */}
+      <section id="newsletter" className="py-16 sm:py-20 lg:py-24 bg-black">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+              Join Our Newsletter
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              Get exclusive deals, training tips, and be the first to know about new courses and products.
+            </p>
+            <form className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-6 py-4 rounded-lg bg-transparent border-2 border-white text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
+                required
+              />
               <button
-                onClick={() => setIsNotifyModalOpen(true)}
-                className="inline-block py-3 sm:py-4 px-6 sm:px-8 text-sm sm:text-base font-black bg-white text-black rounded-lg shadow-lg uppercase tracking-wide hover:bg-gray-100 transition-colors cursor-pointer"
+                type="submit"
+                className="px-8 py-4 bg-white text-black font-black rounded-lg uppercase tracking-wide hover:bg-gray-100 transition-colors cursor-pointer"
               >
-                Notify Me
+                Subscribe
               </button>
-            </div>
+            </form>
+            <p className="text-sm text-gray-400 mt-4">
+              No spam. Unsubscribe anytime.
+            </p>
           </div>
         </div>
       </section>

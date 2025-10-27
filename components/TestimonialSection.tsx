@@ -22,9 +22,9 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section className="pt-8 sm:pt-12 pb-12 sm:pb-16 bg-gray-50">
+    <section className="pt-6 sm:pt-12 pb-8 sm:pb-16 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-8 sm:mb-12 text-center">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 sm:mb-12 text-center">
           What Students Are Saying
         </h2>
 
@@ -32,7 +32,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
         <div className="sm:hidden -mx-4">
           <div
             ref={scrollContainerRef}
-            className="flex gap-4 overflow-x-auto overscroll-x-contain pb-4 px-4 snap-x snap-mandatory scroll-smooth"
+            className="flex gap-3 overflow-x-auto overscroll-x-contain pb-3 px-4 snap-x snap-mandatory scroll-smooth"
             style={{
               WebkitOverflowScrolling: 'touch',
               scrollbarWidth: 'none',
@@ -42,23 +42,23 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-[#26304a] px-4 py-3 rounded-lg shadow-md flex-shrink-0 w-[85vw] snap-start"
+              className="bg-[#26304a] px-3 py-2.5 rounded-lg shadow-md flex-shrink-0 w-[85vw] snap-start"
             >
               {/* Rating */}
-              <div className="flex gap-1 mb-2">
+              <div className="flex gap-0.5 mb-1.5">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" strokeWidth={2} />
+                  <Star key={i} className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" strokeWidth={2} />
                 ))}
               </div>
 
               {/* Content */}
-              <p className="text-sm text-white font-bold mb-2 leading-relaxed">
+              <p className="text-xs text-white font-bold mb-1.5 leading-relaxed">
                 "{testimonial.content}"
               </p>
 
               {/* Author */}
               <div className="text-left">
-                <div className="font-bold text-sm text-white">{testimonial.name}</div>
+                <div className="font-bold text-xs text-white">{testimonial.name}</div>
               </div>
             </div>
           ))}
@@ -66,50 +66,50 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
         </div>
 
         {/* Tablet/Desktop: 2-column masonry layout */}
-        <div className="hidden sm:grid sm:grid-cols-2 gap-4 sm:gap-5 items-start">
+        <div className="hidden sm:grid sm:grid-cols-2 gap-3 sm:gap-5 items-start">
           {/* Left Column */}
-          <div className="flex flex-col gap-4 sm:gap-5">
+          <div className="flex flex-col gap-3 sm:gap-5">
             {leftColumn.map((testimonial, index) => (
-              <div key={index * 2} className="bg-[#26304a] px-4 sm:px-5 py-3 sm:py-4 rounded-lg shadow-md">
+              <div key={index * 2} className="bg-[#26304a] px-3 sm:px-5 py-2.5 sm:py-4 rounded-lg shadow-md">
                 {/* Rating */}
-                <div className="flex gap-1 mb-2">
+                <div className="flex gap-0.5 sm:gap-1 mb-1.5 sm:mb-2">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400" strokeWidth={2} />
+                    <Star key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400" strokeWidth={2} />
                   ))}
                 </div>
 
                 {/* Content */}
-                <p className="text-sm sm:text-base text-white font-bold mb-2 sm:mb-3 leading-relaxed">
+                <p className="text-xs sm:text-base text-white font-bold mb-1.5 sm:mb-3 leading-relaxed">
                   "{testimonial.content}"
                 </p>
 
                 {/* Author */}
                 <div className="text-left">
-                  <div className="font-bold text-sm sm:text-base text-white">{testimonial.name}</div>
+                  <div className="font-bold text-xs sm:text-base text-white">{testimonial.name}</div>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col gap-4 sm:gap-5">
+          <div className="flex flex-col gap-3 sm:gap-5">
             {rightColumn.map((testimonial, index) => (
-              <div key={index * 2 + 1} className="bg-[#26304a] px-4 sm:px-5 py-3 sm:py-4 rounded-lg shadow-md">
+              <div key={index * 2 + 1} className="bg-[#26304a] px-3 sm:px-5 py-2.5 sm:py-4 rounded-lg shadow-md">
                 {/* Rating */}
-                <div className="flex gap-1 mb-2">
+                <div className="flex gap-0.5 sm:gap-1 mb-1.5 sm:mb-2">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400" strokeWidth={2} />
+                    <Star key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400" strokeWidth={2} />
                   ))}
                 </div>
 
                 {/* Content */}
-                <p className="text-sm sm:text-base text-white font-bold mb-2 sm:mb-3 leading-relaxed">
+                <p className="text-xs sm:text-base text-white font-bold mb-1.5 sm:mb-3 leading-relaxed">
                   "{testimonial.content}"
                 </p>
 
                 {/* Author */}
                 <div className="text-left">
-                  <div className="font-bold text-sm sm:text-base text-white">{testimonial.name}</div>
+                  <div className="font-bold text-xs sm:text-base text-white">{testimonial.name}</div>
                 </div>
               </div>
             ))}

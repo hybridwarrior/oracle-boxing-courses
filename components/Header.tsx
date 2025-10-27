@@ -1,187 +1,251 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, Instagram, Youtube } from 'lucide-react'
 
 export function Header() {
   const pathname = usePathname()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [coursesDropdownOpen, setCoursesDropdownOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
+
+  const isHomePage = pathname === '/'
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - hide header
+        setIsVisible(false)
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up - show header
+        setIsVisible(true)
+      } else if (currentScrollY === 0) {
+        // At the very top - show header
+        setIsVisible(true)
+      }
+
+      // Set scrolled state for background
+      setIsScrolled(currentScrollY > 50)
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   const isActive = (path: string) => {
     if (path === '/courses') return pathname === '/' || pathname === '/courses' || pathname.startsWith('/courses/')
     return pathname === path
   }
 
-  const closeMobileMenu = () => setMobileMenuOpen(false)
+  const closeSidebar = () => {
+    setSidebarOpen(false)
+  }
 
   return (
-    <header className="bg-black shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <img
-              src="https://media.oracleboxing.com/Website/optimized/logos/long_white-large.webp"
-              alt="Oracle Boxing"
-              className="h-3 sm:h-5 w-auto"
-            />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {/* Courses Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setCoursesDropdownOpen(true)}
-              onMouseLeave={() => setCoursesDropdownOpen(false)}
+    <>
+      <header
+        className={`shadow-lg z-50 transition-all duration-300 ${
+          isHomePage ? 'fixed top-0 left-0 right-0' : 'sticky top-0'
+        } ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        } ${
+          isHomePage && !isScrolled && !isHovered
+            ? 'bg-transparent'
+            : 'bg-black'
+        }`}
+        onMouseEnter={() => isHomePage && setIsHovered(true)}
+        onMouseLeave={() => isHomePage && setIsHovered(false)}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            {/* Left Hamburger */}
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="text-white p-2 rounded-md hover:bg-gray-900 transition-colors"
+              aria-label="Toggle menu"
             >
-              <button
-                className={`text-sm font-semibold transition-colors flex items-center gap-1 ${
-                  isActive('/courses')
-                    ? 'text-white border-b-2 border-[#26304a]'
-                    : 'text-gray-300 hover:text-white'
+              <Menu className="w-6 h-6" />
+            </button>
+
+            {/* Centered Logo - fades when sidebar opens */}
+            <Link
+              href="/"
+              className={`absolute left-1/2 transform -translate-x-1/2 transition-opacity duration-300 ${
+                sidebarOpen ? 'opacity-0' : 'opacity-100'
+              }`}
+            >
+              <img
+                src="https://media.oracleboxing.com/Website/optimized/logos/long_white-large.webp"
+                alt="Oracle Boxing"
+                className="h-3 sm:h-5 w-auto"
+              />
+            </Link>
+
+            {/* Right 6WC Button - hidden when sidebar opens, hidden on mobile, and hidden on /6wc page */}
+            {pathname !== '/6wc' && (
+              <Link
+                href="/6wc"
+                className={`hidden sm:block px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-white text-white text-xs sm:text-base font-black rounded-lg uppercase tracking-wide hover:bg-white hover:text-black transition-opacity duration-300 ${
+                  sidebarOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 }`}
               >
-                COURSES
-                <ChevronDown className="w-4 h-4" />
-              </button>
+                6-WEEK CHALLENGE
+              </Link>
+            )}
+          </div>
+        </div>
 
-              {coursesDropdownOpen && (
-                <div className="absolute top-full left-0 pt-2 w-64 z-50">
-                  <div className="bg-black border border-gray-800 rounded-lg shadow-xl py-2">
-                    <Link
-                      href="/courses/bundle"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-900 transition-colors border-2 border-white rounded mx-2 mb-2"
-                    >
-                      <div className="font-semibold">The Oracle Boxing Method</div>
-                    </Link>
+      </header>
+
+      {/* Sidebar Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
+          onClick={closeSidebar}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-80 bg-black shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col h-full">
+          {/* Sidebar Header */}
+          <div className="flex items-center justify-start p-6 border-b border-gray-800">
+            <button
+              onClick={closeSidebar}
+              className="text-white p-2 rounded-md hover:bg-gray-900 transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Sidebar Content */}
+          <nav className="flex-1 overflow-y-auto p-6">
+            <div className="flex flex-col space-y-6">
+              {/* Courses Section - Always Expanded */}
+              <div>
+                <h3 className="text-gray-400 text-xl font-bold mb-4 px-4">COURSES</h3>
+                <div className="flex flex-col space-y-3">
+                  <Link
+                    href="/courses/bundle"
+                    onClick={closeSidebar}
+                    className={`text-lg py-3 px-4 rounded-md transition-all duration-200 ${
+                      pathname === '/courses/bundle'
+                        ? 'text-white font-bold'
+                        : 'text-white font-semibold hover:text-black hover:bg-white'
+                    }`}
+                  >
+                    The Oracle Boxing Method
+                  </Link>
                   <Link
                     href="/courses/bffp"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-900 transition-colors"
+                    onClick={closeSidebar}
+                    className={`text-lg font-semibold py-3 px-4 rounded-md transition-all duration-200 ${
+                      pathname === '/courses/bffp'
+                        ? 'text-black bg-white'
+                        : 'text-white hover:text-black hover:bg-white'
+                    }`}
                   >
-                    <div className="font-semibold">Boxing from First Principles</div>
+                    Boxing from First Principles
                   </Link>
                   <Link
                     href="/courses/roadmap"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-900 transition-colors"
+                    onClick={closeSidebar}
+                    className={`text-lg font-semibold py-3 px-4 rounded-md transition-all duration-200 ${
+                      pathname === '/courses/roadmap'
+                        ? 'text-black bg-white'
+                        : 'text-white hover:text-black hover:bg-white'
+                    }`}
                   >
-                    <div className="font-semibold">Boxing Roadmap</div>
+                    Boxing Roadmap
                   </Link>
-                  </div>
                 </div>
-              )}
-            </div>
-
-            <Link
-              href="/membership"
-              className={`text-sm font-semibold transition-colors ${
-                isActive('/membership')
-                  ? 'text-white border-b-2 border-[#26304a]'
-                  : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              MEMBERSHIP
-            </Link>
-            <Link
-              href="/6wc"
-              className="px-4 py-2 border-2 border-red-800 text-white text-sm font-black rounded-lg uppercase tracking-wide hover:bg-red-800 transition-colors"
-            >
-              6-WEEK CHALLENGE
-            </Link>
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-white p-2 rounded-md hover:bg-gray-900 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Dropdown Menu */}
-        {mobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-gray-800">
-            <div className="flex flex-col space-y-3">
-              {/* Courses - Expandable */}
-              <div>
-                <button
-                  onClick={() => setCoursesDropdownOpen(!coursesDropdownOpen)}
-                  className="w-full text-left text-sm font-semibold py-2 px-4 rounded-md transition-colors text-gray-300 hover:text-white hover:bg-gray-900 flex items-center justify-between"
-                >
-                  COURSES
-                  <ChevronDown className={`w-4 h-4 transition-transform ${coursesDropdownOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {coursesDropdownOpen && (
-                  <div className="mt-2 ml-4 flex flex-col space-y-2">
-                    <Link
-                      href="/courses/bundle"
-                      onClick={closeMobileMenu}
-                      className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors border-2 border-white ${
-                        pathname === '/courses/bundle'
-                          ? 'text-white bg-[#26304a]'
-                          : 'text-gray-300 hover:text-white hover:bg-gray-900'
-                      }`}
-                    >
-                      The Oracle Boxing Method
-                    </Link>
-                    <Link
-                      href="/courses/bffp"
-                      onClick={closeMobileMenu}
-                      className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors ${
-                        pathname === '/courses/bffp'
-                          ? 'text-white bg-[#26304a]'
-                          : 'text-gray-300 hover:text-white hover:bg-gray-900'
-                      }`}
-                    >
-                      Boxing from First Principles
-                    </Link>
-                    <Link
-                      href="/courses/roadmap"
-                      onClick={closeMobileMenu}
-                      className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors ${
-                        pathname === '/courses/roadmap'
-                          ? 'text-white bg-[#26304a]'
-                          : 'text-gray-300 hover:text-white hover:bg-gray-900'
-                      }`}
-                    >
-                      Boxing Roadmap
-                    </Link>
-                  </div>
-                )}
               </div>
 
+              {/* Divider */}
+              <div className="border-t border-gray-700"></div>
+
+              {/* Membership */}
               <Link
                 href="/membership"
-                onClick={closeMobileMenu}
-                className={`text-sm font-semibold py-2 px-4 rounded-md transition-colors ${
+                onClick={closeSidebar}
+                className={`text-xl font-bold py-3 px-4 rounded-md transition-all duration-200 ${
                   isActive('/membership')
-                    ? 'text-white bg-[#26304a]'
-                    : 'text-gray-300 hover:text-white hover:bg-gray-900'
+                    ? 'text-black bg-white'
+                    : 'text-white hover:text-black hover:bg-white'
                 }`}
               >
                 MEMBERSHIP
               </Link>
+
+              {/* Divider */}
+              <div className="border-t border-gray-700"></div>
+
+              {/* 6-Week Challenge */}
               <Link
                 href="/6wc"
-                onClick={closeMobileMenu}
-                className="px-4 py-3 border-2 border-red-800 text-white text-sm font-black rounded-lg uppercase tracking-wide hover:bg-red-800 transition-colors text-center"
+                onClick={closeSidebar}
+                className="px-4 py-3 border-2 border-white text-white text-lg font-black rounded-lg uppercase tracking-wide hover:bg-white hover:text-black transition-colors text-center"
               >
                 6-WEEK CHALLENGE
               </Link>
+
+              {/* Newsletter */}
+              <Link
+                href="/#newsletter"
+                onClick={closeSidebar}
+                className="text-base font-semibold py-2 px-4 rounded-md transition-all duration-200 text-gray-400 hover:text-white text-center"
+              >
+                NEWSLETTER
+              </Link>
+
+              {/* Contact */}
+              <a
+                href="mailto:team@oracleboxing.com"
+                className="text-base font-semibold py-2 px-4 rounded-md transition-all duration-200 text-gray-400 hover:text-white text-center"
+              >
+                CONTACT
+              </a>
             </div>
           </nav>
-        )}
+
+          {/* Social Media Icons */}
+          <div className="p-6 border-t border-gray-800">
+            <div className="flex items-center justify-center gap-6">
+              <a
+                href="https://www.instagram.com/oracle.boxing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-gray-400 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-8 h-8" />
+              </a>
+              <a
+                href="https://www.youtube.com/@oracle_boxing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-gray-400 transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube className="w-8 h-8" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-    </header>
+    </>
   )
 }

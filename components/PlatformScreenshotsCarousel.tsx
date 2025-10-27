@@ -156,10 +156,10 @@ export function PlatformScreenshotsCarousel() {
         <div className="text-center mt-8">
           <EpicCTAButton
             size="lg"
-            className="min-h-[56px]"
+            className="min-h-[44px] sm:min-h-[56px]"
             trackingName="platform-screenshots"
           >
-            <span className="text-lg sm:text-xl font-black uppercase">I Want Access</span>
+            <span className="text-base sm:text-xl font-black uppercase">I Want Access</span>
           </EpicCTAButton>
         </div>
       </div>

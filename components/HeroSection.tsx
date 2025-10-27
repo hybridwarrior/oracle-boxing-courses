@@ -28,12 +28,12 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
   const headlines = {
     A: {
       badge: 'FOR BEGINNERS & LATE STARTERS',
-      main: 'Join Our 6-Week Boxing Challenge Now!',
+      main: 'I\'ll literally pay you to get better at boxing...',
       sub: 'Train with us for 6 weeks. Do the work we ask. Get all your money back when you finish. It\'s that simple.'
     },
     B: {
       badge: 'FOR BEGINNERS & LATE STARTERS',
-      main: 'Join Our 6-Week Boxing Challenge Now!',
+      main: 'I\'ll literally pay you to get better at boxing...',
       sub: 'Train with us for 6 weeks. Do the work we ask. Get all your money back when you finish. It\'s that simple.'
     }
   }
@@ -59,7 +59,7 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
           <h1
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight leading-tight px-4 max-w-5xl mx-auto mb-4 sm:mb-5"
             style={{
-              fontFamily: variant === 'B' ? 'ClashDisplay, system-ui, sans-serif' : 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+              fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
               fontWeight: '700'
             }}
           >

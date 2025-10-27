@@ -63,8 +63,9 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
               loop
               playsInline
               preload="auto"
+              poster="https://media.oracleboxing.com/Website/obcoachingcall-frame.jpg"
             >
-              <source src="https://media.oracleboxing.com/webm/Website/obcoachingcall.webm" type="video/webm" />
+              <source src="https://media.oracleboxing.com/Website/optimized/videos/obcoachingcall-optimized.webm" type="video/webm" />
             </video>
           </div>
           <div className="flex gap-8 flex-col order-1 lg:order-2">
@@ -127,8 +128,9 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
               loop
               playsInline
               preload="auto"
+              poster="https://media.oracleboxing.com/Website/online_rating-frame.jpg"
             >
-              <source src="https://media.oracleboxing.com/webm/Website/online_rating.webm" type="video/webm" />
+              <source src="https://media.oracleboxing.com/Website/optimized/videos/online_rating-optimized.webm" type="video/webm" />
             </video>
           </div>
         </div>

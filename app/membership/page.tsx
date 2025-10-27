@@ -7,7 +7,7 @@ import { MembershipTestimonials } from '@/components/MembershipTestimonials'
 import { getMemberships } from '@/lib/products'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { Video, Users, Clock, BookOpen, Award, Target, TrendingUp, Heart, CheckCircle, CreditCard, Smartphone, TrendingUp as Progress, ChevronDown } from 'lucide-react'
+import { Video, Users, Clock, BookOpen, Award, Target, TrendingUp, Heart, CheckCircle, CreditCard, Smartphone, TrendingUp as Progress, ChevronDown, Square, Check } from 'lucide-react'
 
 export default function MembershipsPage() {
   const router = useRouter()
@@ -173,8 +173,13 @@ export default function MembershipsPage() {
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6">
                 Old School Boxing, New School System
               </h1>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-6 lg:mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-3 sm:mb-4 lg:mb-5 leading-relaxed">
                 Master the timeless fundamentals of boxing through modern coaching methods, cutting-edge movement science, and a supportive global community.
+              </p>
+
+              {/* Pricing */}
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 lg:mb-8">
+                Starting from just $74.75/mo
               </p>
 
               {/* Stats Badges */}
@@ -206,9 +211,10 @@ export default function MembershipsPage() {
                   loop
                   muted
                   playsInline
+                  poster="https://media.oracleboxing.com/Website/membership-herov4-frame.jpg"
                   className="w-full h-full object-cover"
                 >
-                  <source src="https://media.oracleboxing.com/Website/membership_hero.mp4" type="video/mp4" />
+                  <source src="https://media.oracleboxing.com/Website/membership-herov4.webm" type="video/webm" />
                 </video>
               </div>
             </div>
@@ -246,28 +252,33 @@ export default function MembershipsPage() {
 
             {/* Right Column - Bruno Testimonial */}
             <div className="flex justify-center lg:justify-end">
-              <div className="bg-gray-50 rounded-xl p-6 w-full max-w-md">
-                <div className="space-y-4">
-                  <div className="relative">
-                    <div className="text-orange-400 text-6xl font-serif absolute -left-4 -top-2">"</div>
-                    <blockquote className="text-base sm:text-lg text-gray-700 leading-relaxed px-8">
-                      I can genuinely SEE and FEEL the shift happening — and it's all been sparked by being part of Oracle Boxing. The value that Oliver, Jordan, and Toni bring is WAY BEYOND what I ever expected when I joined this challenge.
-                    </blockquote>
-                    <div className="text-orange-400 text-6xl font-serif absolute -right-4 -bottom-8">"</div>
+              <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 border border-gray-200 w-full max-w-md">
+                {/* Profile Header */}
+                <div className="flex items-center gap-3 mb-4">
+                  <img
+                    src="https://media.oracleboxing.com/Website/optimized/profiles/bruno-256.webp"
+                    alt="Bruno Martins"
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <h4 className="font-bold text-gray-900">Bruno Martins</h4>
+                    <p className="text-sm text-gray-500">10h (edited) • 🏆 Win of the Day</p>
                   </div>
-                  <div className="flex items-center gap-4 mt-4">
-                    <img
-                      src="https://media.oracleboxing.com/Website/optimized/profiles/bruno-256.webp"
-                      alt="Bruno Martins"
-                      className="w-16 h-16 rounded-full object-cover border-2 border-orange-500/30"
-                    />
-                    <div>
-                      <h4 className="text-gray-900 font-semibold text-base">Bruno Martins</h4>
-                      <p className="text-gray-400 text-sm leading-relaxed">
-                        6-Week Challenge Graduate
-                      </p>
-                    </div>
-                  </div>
+                </div>
+
+                {/* Testimonial Content */}
+                <div className="space-y-3 text-gray-700">
+                  <p className="font-semibold text-lg">Week 6! Here you are... and damn that went fast!</p>
+                  <p className="text-sm sm:text-base leading-relaxed">
+                    Even today, while still recovering from a bit of a flu, I somehow found myself waking up at 6:40 AM for a +5km run.
+                  </p>
+                  <p className="text-sm sm:text-base leading-relaxed">
+                    I can genuinely SEE and FEEL the shift happening — and it's all been sparked by being part of Oracle Boxing.
+                  </p>
+                  <p className="text-sm sm:text-base leading-relaxed">
+                    The value that the coaches bring is WAY BEYOND what I ever expected when I joined this challenge.
+                  </p>
+                  <p className="font-bold pt-2">#FUCKPLANB</p>
                 </div>
               </div>
             </div>
@@ -287,16 +298,22 @@ export default function MembershipsPage() {
 
           {/* Desktop: Grid layout */}
           <div className="hidden lg:grid lg:grid-cols-4 gap-6">
-            {['t_andre.mp4', 'sha-lyn.mp4', 't_keli.mp4', 't_charlie.mp4'].map((video, index) => (
+            {[
+              { video: 'a_andre.webm', poster: 'a_andre-frame.jpg' },
+              { video: 'a_shalyn.webm', poster: 'a_shalyn-frame.jpg' },
+              { video: 'a_keli.webm', poster: 'a_keli-frame.jpg' },
+              { video: 'a_charlie.webm', poster: 'a_charlie-frame.jpg' }
+            ].map((item, index) => (
               <div key={index} className="relative aspect-[9/16] rounded-xl overflow-hidden">
                 <video
                   autoPlay
                   loop
                   muted
                   playsInline
+                  poster={`https://media.oracleboxing.com/Website/${item.poster}`}
                   className="w-full h-full object-cover"
                 >
-                  <source src={`https://media.oracleboxing.com/Website/${video}`} type="video/mp4" />
+                  <source src={`https://media.oracleboxing.com/Website/${item.video}`} type="video/webm" />
                 </video>
               </div>
             ))}
@@ -305,112 +322,184 @@ export default function MembershipsPage() {
           {/* Mobile: Scrollable carousel */}
           <div className="lg:hidden overflow-x-auto scrollbar-hide -mx-4 px-4">
             <div className="flex gap-4 pb-4">
-              {['t_andre.mp4', 'sha-lyn.mp4', 't_keli.mp4', 't_charlie.mp4'].map((video, index) => (
+              {[
+                { video: 'a_andre.webm', poster: 'a_andre-frame.jpg' },
+                { video: 'a_shalyn.webm', poster: 'a_shalyn-frame.jpg' },
+                { video: 'a_keli.webm', poster: 'a_keli-frame.jpg' },
+                { video: 'a_charlie.webm', poster: 'a_charlie-frame.jpg' }
+              ].map((item, index) => (
                 <div key={index} className="relative flex-shrink-0 w-[280px] aspect-[9/16] rounded-xl overflow-hidden">
                   <video
                     autoPlay
                     loop
                     muted
                     playsInline
+                    poster={`https://media.oracleboxing.com/Website/${item.poster}`}
                     className="w-full h-full object-cover"
                   >
-                    <source src={`https://media.oracleboxing.com/Website/${video}`} type="video/mp4" />
+                    <source src={`https://media.oracleboxing.com/Website/${item.video}`} type="video/webm" />
                   </video>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* CTA Button */}
+          <div className="text-center mt-8 sm:mt-12">
+            <a
+              href="#pricing"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#26304a] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+            >
+              JOIN NOW
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* Engineered For Results Section */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-8 sm:mb-12 text-center">
-            Engineered for results
-          </h2>
+      {/* Learn the Right Way Section */}
+      <section className="w-full pt-12 pb-24 sm:py-28 lg:py-36 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Main Headline */}
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
+              <span className="bg-yellow-200/80 text-black px-2 py-[2px]">Learn the right way</span>
+            </h2>
+          </div>
 
-          {/* Stacked Cards - Always Vertical */}
-          <div className="space-y-12 sm:space-y-16">
-            {/* Daily Coaching Calls */}
-            <div className="mt-16 sm:mt-20 overflow-visible">
-              <div className="bg-white border-2 border-gray-200 rounded-lg overflow-visible p-8 sm:p-10 pt-28 sm:pt-36 text-center">
-                <div className="-mt-44 sm:-mt-52 mb-6 sm:mb-8 mx-auto w-48 h-36 sm:w-64 sm:h-44 rounded-lg overflow-hidden">
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                  >
-                    <source src="https://media.oracleboxing.com/Website/optimized/testimonials/torey_goodall.mp4" type="video/mp4" />
-                  </video>
+          {/* Niclas Testimonial - Course */}
+          <div className="grid grid-cols-1 gap-8 items-center lg:grid-cols-2 mb-12 sm:mb-16 lg:mb-12">
+            <div className="flex gap-8 flex-col">
+              <div className="bg-white rounded-xl p-4 sm:p-6">
+                <div className="space-y-2 sm:space-y-4">
+                  <div className="flex items-center gap-2 sm:gap-4 mb-2 sm:mb-4">
+                    <img
+                      src="https://media.oracleboxing.com/webp/Website/niclas.webp"
+                      alt="Niclas Laux"
+                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover"
+                    />
+                    <div>
+                      <h4 className="text-gray-900 font-semibold text-sm sm:text-base">Niclas Laux</h4>
+                      <p className="text-gray-600 text-xs sm:text-sm">
+                        Founder of Samurai Movement Academy, BJJ Purple Belt, Self-Defense Instructor
+                      </p>
+                      <p className="text-gray-500 text-xs mt-0.5 sm:mt-1 italic">
+                        Boxing from First Principles Course
+                      </p>
+                    </div>
+                  </div>
+                  <blockquote className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
+                    This is THE source of our kinetic energy potential. Can't thank you enough for the changes I've made thanks to your dedication with First Principles! It was the best choice of my martial arts life - the aha-moments are incredible!
+                  </blockquote>
                 </div>
-                <h3 className="font-bold text-gray-900 text-xl sm:text-2xl mb-4">Daily Coaching Calls</h3>
-                <p className="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed max-w-2xl mx-auto">
-                  I decided to recommit to this community and I already feel like I made breakthroughs on Toni and Ollie's zoom calls. I've gotta tip my hat to how effective you guys are at coaching in this format. I feel like I gain a significantly better understanding of technique every time I make a call.
-                </p>
-                <div className="flex items-center gap-4 justify-center">
-                  <img
-                    src="https://media.oracleboxing.com/Website/optimized/profiles/torey-256.webp"
-                    alt="Torey Goodall"
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div className="text-left">
-                    <p className="font-bold text-gray-900">Torey Goodall</p>
-                    <p className="text-sm text-gray-600">Community Member & Boxing Enthusiast</p>
+              </div>
+            </div>
+            <div className="relative rounded-xl overflow-hidden lg:max-w-md lg:mx-auto" style={{ aspectRatio: '16/9' }}>
+              <img
+                src="https://media.oracleboxing.com/webp/Website/laptop_mockup.webp"
+                alt="Boxing from First Principles Course"
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
+
+          {/* Torey Testimonial - Live Coaching */}
+          <div className="grid grid-cols-1 gap-8 items-center lg:grid-cols-2 mb-12 sm:mb-16 lg:mb-12">
+            <div className="relative aspect-video rounded-xl overflow-hidden order-2 lg:order-1 lg:max-w-md lg:mx-auto">
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster="https://media.oracleboxing.com/Website/obcoachingcall-frame.jpg"
+              >
+                <source src="https://media.oracleboxing.com/Website/optimized/videos/obcoachingcall-optimized.webm" type="video/webm" />
+              </video>
+            </div>
+            <div className="flex gap-8 flex-col order-1 lg:order-2">
+              <div className="lg:pl-6">
+                <div className="bg-white rounded-xl p-4 sm:p-6">
+                  <div className="space-y-2 sm:space-y-4">
+                    <div className="flex items-center gap-2 sm:gap-4 mb-2 sm:mb-4">
+                      <img
+                        src="https://media.oracleboxing.com/webp/Website/torey.webp"
+                        alt="Torey Goodall"
+                        className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover"
+                      />
+                      <div>
+                        <h4 className="text-gray-900 font-semibold text-sm sm:text-base">Torey Goodall</h4>
+                        <p className="text-gray-600 text-xs sm:text-sm">
+                          Community Member & Boxing Enthusiast
+                        </p>
+                      </div>
+                    </div>
+                    <blockquote className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
+                      I decided to recommit to this community and I already feel like I made breakthroughs on Toni and Ollie's zoom calls. I've gotta tip my hat to how effective you guys are at coaching in this format. I feel like I gain a significantly better understanding of technique every time I make a call.
+                    </blockquote>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* All Courses Included */}
-            <div className="mt-16 sm:mt-20 overflow-visible">
-              <div className="bg-white border-2 border-gray-200 rounded-lg overflow-visible p-8 sm:p-10 pt-28 sm:pt-36 text-center">
-                <div className="-mt-44 sm:-mt-52 mb-6 sm:mb-8 mx-auto w-48 h-36 sm:w-64 sm:h-44 rounded-lg overflow-hidden">
-                  <img
-                    src="https://media.oracleboxing.com/Website/optimized/courses/bundle-thumbnail.webp"
-                    alt="All Courses"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="font-bold text-gray-900 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
-                  All courses included: Boxing from First Principles, Boxing Roadmap, and Coaching Call Replays
-                </p>
-              </div>
-            </div>
-
-            {/* Train Anytime */}
-            <div className="mt-16 sm:mt-20 overflow-visible">
-              <div className="bg-white border-2 border-gray-200 rounded-lg overflow-visible p-8 sm:p-10 pt-28 sm:pt-36 text-center">
-                <div className="-mt-44 sm:-mt-52 mb-6 sm:mb-8 mx-auto w-48 h-36 sm:w-64 sm:h-44 rounded-lg overflow-hidden">
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                  >
-                    <source src="https://media.oracleboxing.com/Website/optimized/testimonials/balal_hanif.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <h3 className="font-bold text-gray-900 text-xl sm:text-2xl mb-4">Train Anytime, Anywhere</h3>
-                <p className="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed max-w-2xl mx-auto">
-                  Being part of this community has been an incredibly transformative experience. Joining the live Zoom calls almost every day has helped me lose weight, improve my technique, and significantly boost my confidence. The guidance, encouragement, and camaraderie have made a real difference in my development as a boxer.
-                </p>
-                <div className="flex items-center gap-4 justify-center">
-                  <img
-                    src="https://media.oracleboxing.com/Website/optimized/profiles/balal-256.webp"
-                    alt="Balal Hanif"
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div className="text-left">
-                    <p className="font-bold text-gray-900">Balal Hanif</p>
-                    <p className="text-sm text-gray-600">Community Member & Boxing Enthusiast</p>
+          {/* Balal Testimonial - Community */}
+          <div className="grid grid-cols-1 gap-8 items-center lg:grid-cols-2 mb-12">
+            <div className="flex gap-8 flex-col">
+              <div className="lg:pl-6">
+                <div className="bg-white rounded-xl p-4 sm:p-6">
+                  <div className="space-y-2 sm:space-y-4">
+                    <div className="flex items-center gap-2 sm:gap-4 mb-2 sm:mb-4">
+                      <img
+                        src="https://media.oracleboxing.com/webp/Website/balal.webp"
+                        alt="Balal Hanif"
+                        className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover"
+                      />
+                      <div>
+                        <h4 className="text-gray-900 font-semibold text-sm sm:text-base">Balal Hanif</h4>
+                        <p className="text-gray-600 text-xs sm:text-sm">
+                          Community Member & Boxing Enthusiast
+                        </p>
+                      </div>
+                    </div>
+                    <blockquote className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
+                      Being part of this community has been an incredibly transformative experience. Joining the live Zoom calls almost every day has helped me lose weight, improve my technique, and significantly boost my confidence. The guidance, encouragement, and camaraderie have made a real difference in my development as a boxer.
+                    </blockquote>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden lg:max-w-md lg:mx-auto">
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster="https://media.oracleboxing.com/Website/online_rating-frame.jpg"
+              >
+                <source src="https://media.oracleboxing.com/Website/optimized/videos/online_rating-optimized.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <div className="text-center mt-12">
+            <a
+              href="#pricing"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#26304a] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+            >
+              JOIN NOW
+            </a>
           </div>
         </div>
       </section>
@@ -824,6 +913,81 @@ export default function MembershipsPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Section */}
+      <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden bg-white">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-900" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
+              It doesn't have to be one or the other, but if we're comparing...
+            </h2>
+          </div>
+
+          {/* Two Paths Comparison */}
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
+            {/* Commercial Boxing Gyms */}
+            <div className="relative">
+              <div className="p-4 sm:p-6 lg:p-8 h-full">
+                <div className="mb-4 sm:mb-6">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">Commercial Boxing Gyms</h3>
+                </div>
+
+                <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+                  <div className="flex gap-2 sm:gap-3 items-start">
+                    <Square className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 text-gray-400" />
+                    <p className="text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">Drive an hour</p>
+                  </div>
+                  <div className="flex gap-2 sm:gap-3 items-start">
+                    <Square className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 text-gray-400" />
+                    <p className="text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">Drill bad habits</p>
+                  </div>
+                  <div className="flex gap-2 sm:gap-3 items-start">
+                    <Square className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 text-gray-400" />
+                    <p className="text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">Get hit a bit too hard</p>
+                  </div>
+                  <div className="flex gap-2 sm:gap-3 items-start">
+                    <Square className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 text-gray-400" />
+                    <p className="text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">Hear "keep your hands up"</p>
+                  </div>
+                  <div className="flex gap-2 sm:gap-3 items-start">
+                    <Square className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 text-gray-400" />
+                    <p className="text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">Leave with more questions than answers</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Real Coaching */}
+            <div className="relative">
+              <div className="p-4 sm:p-6 lg:p-8 h-full flex flex-col">
+                <div className="mb-4 sm:mb-6">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">Online Coaching</h3>
+                </div>
+
+                <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+                  <div className="flex gap-2 sm:gap-3 items-start">
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 text-green-600" />
+                    <p className="text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">Learn correct technique</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="text-center mb-4 sm:mb-6">
+            <div className="border-t border-gray-200"></div>
+          </div>
+
+          {/* Closing Statement */}
+          <div className="text-center">
+            <p className="text-base sm:text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto text-gray-600">
+              Less effort. Better results.
+            </p>
           </div>
         </div>
       </section>

@@ -55,7 +55,7 @@ function CountingNumber({ target, suffix = '' }: { target: number; suffix?: stri
   }, [target, hasAnimated])
 
   return (
-    <div ref={elementRef} className="text-5xl md:text-6xl font-semibold text-black mb-2">
+    <div ref={elementRef} className="text-3xl md:text-6xl font-semibold text-black mb-1 md:mb-2">
       {count}{suffix}
     </div>
   )
@@ -67,11 +67,11 @@ export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchas
   const purchaseSuffix = purchaseCount ? purchaseCount.replace(/\d/g, '') : ''
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0 py-12">
+    <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0 py-6 md:py-12">
       {/* Lessons/Recordings */}
-      <div className="text-center px-8">
+      <div className="text-center px-4 md:px-8">
         <CountingNumber target={lessonCount} suffix={lessonCount > 150 ? '+' : ''} />
-        <div className="text-base text-gray-700">{avgDuration ? 'Recordings' : 'Lessons'}</div>
+        <div className="text-sm md:text-base text-gray-700">{avgDuration ? 'Recordings' : 'Lessons'}</div>
       </div>
 
       {/* Separator - hidden on mobile */}
@@ -80,9 +80,9 @@ export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchas
       {/* Average Duration */}
       {avgDuration && (
         <>
-          <div className="text-center px-8">
-            <div className="text-5xl md:text-6xl font-semibold text-black mb-2">{avgDuration}</div>
-            <div className="text-base text-gray-700">Minutes Each</div>
+          <div className="text-center px-4 md:px-8">
+            <div className="text-3xl md:text-6xl font-semibold text-black mb-1 md:mb-2">{avgDuration}</div>
+            <div className="text-sm md:text-base text-gray-700">Minutes Each</div>
           </div>
           {/* Separator - hidden on mobile */}
           <div className="hidden md:block w-px h-20 bg-gray-300"></div>
@@ -92,9 +92,9 @@ export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchas
       {/* Updated Monthly */}
       {updatedMonthly && (
         <>
-          <div className="text-center px-8">
-            <div className="text-5xl md:text-6xl font-semibold text-black mb-2">📅</div>
-            <div className="text-base text-gray-700">Updated Monthly</div>
+          <div className="text-center px-4 md:px-8">
+            <div className="text-3xl md:text-6xl font-semibold text-black mb-1 md:mb-2">📅</div>
+            <div className="text-sm md:text-base text-gray-700">Updated Monthly</div>
           </div>
           {/* Separator - hidden on mobile */}
           <div className="hidden md:block w-px h-20 bg-gray-300"></div>
@@ -104,9 +104,9 @@ export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchas
       {/* Weeks Count */}
       {weeksCount && (
         <>
-          <div className="text-center px-8">
+          <div className="text-center px-4 md:px-8">
             <CountingNumber target={weeksCount} />
-            <div className="text-base text-gray-700">Weeks</div>
+            <div className="text-sm md:text-base text-gray-700">Weeks</div>
           </div>
           {/* Separator - hidden on mobile */}
           <div className="hidden md:block w-px h-20 bg-gray-300"></div>
@@ -116,9 +116,9 @@ export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchas
       {/* Workouts Count */}
       {workoutsCount && (
         <>
-          <div className="text-center px-8">
+          <div className="text-center px-4 md:px-8">
             <CountingNumber target={workoutsCount} />
-            <div className="text-base text-gray-700">Workouts</div>
+            <div className="text-sm md:text-base text-gray-700">Workouts</div>
           </div>
           {/* Separator - hidden on mobile */}
           <div className="hidden md:block w-px h-20 bg-gray-300"></div>
@@ -128,13 +128,13 @@ export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchas
       {/* Purchases or Custom Label - Only show if no weeks/workouts/duration */}
       {!weeksCount && !workoutsCount && !avgDuration && (
         <>
-          <div className="text-center px-8">
+          <div className="text-center px-4 md:px-8">
             {purchaseLabel ? (
-              <div className="text-5xl md:text-6xl font-semibold text-black mb-2">{purchaseLabel}</div>
+              <div className="text-3xl md:text-6xl font-semibold text-black mb-1 md:mb-2">{purchaseLabel}</div>
             ) : numericPurchases !== null ? (
               <CountingNumber target={numericPurchases} suffix={purchaseSuffix} />
             ) : null}
-            <div className="text-base text-gray-700">{purchaseLabel ? (purchaseLabelText || 'Course for Learning Boxing') : 'Purchases'}</div>
+            <div className="text-sm md:text-base text-gray-700">{purchaseLabel ? (purchaseLabelText || 'Course for Learning Boxing') : 'Purchases'}</div>
           </div>
           {/* Separator - hidden on mobile */}
           <div className="hidden md:block w-px h-20 bg-gray-300"></div>
@@ -144,9 +144,9 @@ export function CourseStats({ lessonCount, purchaseCount, purchaseLabel, purchas
       {hasLifetimeAccess && (
         <>
           {/* Lifetime Access */}
-          <div className="text-center px-8">
-            <div className="text-5xl md:text-6xl font-semibold text-black mb-2">∞</div>
-            <div className="text-base text-gray-700">Lifetime Access</div>
+          <div className="text-center px-4 md:px-8">
+            <div className="text-3xl md:text-6xl font-semibold text-black mb-1 md:mb-2">∞</div>
+            <div className="text-sm md:text-base text-gray-700">Lifetime Access</div>
           </div>
         </>
       )}

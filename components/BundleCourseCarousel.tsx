@@ -137,15 +137,15 @@ export function BundleCourseCarousel() {
   }
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-6 sm:py-16 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">
+        <h2 className="text-xl sm:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 text-center">
           The Complete Toolkit for Mastering Boxing
         </h2>
 
         {/* Subtitle */}
-        <p className="text-lg sm:text-xl text-black mb-12 text-center max-w-4xl mx-auto leading-relaxed">
+        <p className="text-sm sm:text-xl text-black mb-4 sm:mb-12 text-center max-w-4xl mx-auto leading-relaxed">
           Combining the theoretical mastery of Boxing from First Principles, the structured progression of the Boxing Roadmap, and the practical wisdom of the Boxing Clinic, this bundle creates a complete toolkit for becoming a seriously good boxer.
         </p>
 
@@ -171,41 +171,41 @@ export function BundleCourseCarousel() {
                 </div>
 
                 {/* Content */}
-                <div className="p-4 flex flex-col flex-1">
+                <div className="p-3 sm:p-4 flex flex-col flex-1">
                   {/* Course Name */}
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 uppercase underline">
+                  <h3 className="text-base sm:text-xl font-bold text-gray-900 mb-1.5 sm:mb-2">
                     {course.title}
                   </h3>
 
                   {/* Short Description */}
-                  <p className="text-sm sm:text-base text-gray-900 font-medium mb-4">
+                  <p className="text-xs sm:text-base text-gray-900 font-medium mb-3 sm:mb-4">
                     {course.description}
                   </p>
 
                   {/* Individual Module Dropdowns - Full Width */}
-                  <div className="space-y-2 flex-1">
+                  <div className="space-y-1.5 sm:space-y-2 flex-1">
                     {course.modules.map((module, index) => (
                       <div key={index} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                         <button
                           onClick={() => toggleModule(course.id, index)}
-                          className="w-full px-3 py-2.5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                          className="w-full px-2.5 py-2 sm:px-3 sm:py-2.5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
                         >
                           <div className="flex-1">
-                            <h4 className="text-sm font-bold text-gray-900">{module.title}</h4>
+                            <h4 className="text-xs sm:text-sm font-bold text-gray-900">{module.title}</h4>
                             {module.lessons > 0 && (
-                              <p className="text-xs text-gray-500 mt-0.5">{module.lessons} lessons</p>
+                              <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5">{module.lessons} lessons</p>
                             )}
                           </div>
                           <ChevronDown
-                            className={`w-4 h-4 text-gray-600 flex-shrink-0 transition-transform duration-200 ${
+                            className={`w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-600 flex-shrink-0 transition-transform duration-200 ${
                               openModules[course.id] === index ? 'transform rotate-180' : ''
                             }`}
                           />
                         </button>
 
                         {openModules[course.id] === index && (
-                          <div className="px-3 pb-2.5 pt-1 border-t border-gray-100">
-                            <p className="text-xs text-gray-700 leading-relaxed whitespace-pre-line">
+                          <div className="px-2.5 pb-2 pt-1 sm:px-3 sm:pb-2.5 border-t border-gray-100">
+                            <p className="text-[10px] sm:text-xs text-gray-700 leading-relaxed whitespace-pre-line">
                               {module.description}
                             </p>
                           </div>
@@ -243,41 +243,41 @@ export function BundleCourseCarousel() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-4 flex flex-col flex-1">
+                  <div className="p-3 flex flex-col flex-1">
                     {/* Course Name */}
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 uppercase underline">
+                    <h3 className="text-base font-bold text-gray-900 mb-1.5">
                       {course.title}
                     </h3>
 
                     {/* Short Description */}
-                    <p className="text-sm text-gray-900 font-medium mb-4">
+                    <p className="text-xs text-gray-900 font-medium mb-3">
                       {course.description}
                     </p>
 
                     {/* Individual Module Dropdowns - Full Width */}
-                    <div className="space-y-2 flex-1">
+                    <div className="space-y-1.5 flex-1">
                       {course.modules.map((module, index) => (
                         <div key={index} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                           <button
                             onClick={() => toggleModule(course.id, index)}
-                            className="w-full px-3 py-2.5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                            className="w-full px-2.5 py-2 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
                           >
                             <div className="flex-1">
-                              <h4 className="text-sm font-bold text-gray-900">{module.title}</h4>
+                              <h4 className="text-xs font-bold text-gray-900">{module.title}</h4>
                               {module.lessons > 0 && (
-                                <p className="text-xs text-gray-500 mt-0.5">{module.lessons} lessons</p>
+                                <p className="text-[10px] text-gray-500 mt-0.5">{module.lessons} lessons</p>
                               )}
                             </div>
                             <ChevronDown
-                              className={`w-4 h-4 text-gray-600 flex-shrink-0 transition-transform duration-200 ${
+                              className={`w-3.5 h-3.5 text-gray-600 flex-shrink-0 transition-transform duration-200 ${
                                 openModules[course.id] === index ? 'transform rotate-180' : ''
                               }`}
                             />
                           </button>
 
                           {openModules[course.id] === index && (
-                            <div className="px-3 pb-2.5 pt-1 border-t border-gray-100">
-                              <p className="text-xs text-gray-700 leading-relaxed whitespace-pre-line">
+                            <div className="px-2.5 pb-2 pt-1 border-t border-gray-100">
+                              <p className="text-[10px] text-gray-700 leading-relaxed whitespace-pre-line">
                                 {module.description}
                               </p>
                             </div>

@@ -351,10 +351,10 @@ export function CourseFAQ({ courseType = 'bffp' }: CourseFAQProps) {
   }
 
   return (
-    <section className="bg-white py-12 sm:py-16 lg:py-20">
+    <section className="bg-white py-8 sm:py-16 lg:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
+        <div className="text-center mb-6 sm:mb-12">
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-4">
             Frequently Asked Questions
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
@@ -362,7 +362,7 @@ export function CourseFAQ({ courseType = 'bffp' }: CourseFAQProps) {
           </p>
         </div>
 
-        <div className="space-y-3 sm:space-y-4">
+        <div className="space-y-2 sm:space-y-4">
           {faqData.map((item, index) => (
             <div
               key={index}
@@ -370,11 +370,11 @@ export function CourseFAQ({ courseType = 'bffp' }: CourseFAQProps) {
             >
               <button
                 onClick={() => toggleQuestion(index)}
-                className="w-full px-4 py-3 sm:px-6 sm:py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                className="w-full px-3 py-2.5 sm:px-6 sm:py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
                 aria-expanded={openIndex === index}
                 aria-controls={`faq-answer-${index}`}
               >
-                <span className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 pr-3 sm:pr-4">
+                <span className="text-xs sm:text-base md:text-lg font-semibold text-gray-900 pr-2 sm:pr-4">
                   {item.question}
                 </span>
                 <div
@@ -390,7 +390,7 @@ export function CourseFAQ({ courseType = 'bffp' }: CourseFAQProps) {
                   id={`faq-answer-${index}`}
                   className="overflow-hidden"
                 >
-                  <div className="px-4 pb-3 pt-0 sm:px-6 sm:pb-5">
+                  <div className="px-3 pb-2.5 pt-0 sm:px-6 sm:pb-5">
                     <div className="text-xs sm:text-sm md:text-base text-gray-600 whitespace-pre-line leading-relaxed">
                       {item.answer}
                     </div>

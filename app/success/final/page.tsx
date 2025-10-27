@@ -96,15 +96,6 @@ function FinalSuccessContent() {
       <div className={`flex-1 ${hasCoaching ? 'lg:grid lg:grid-cols-2' : 'flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12'}`}>
         <div className={`${hasCoaching ? 'h-full flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12 bg-white' : 'max-w-xl mx-auto w-full'}`}>
           <div className={hasCoaching ? 'max-w-xl mx-auto w-full' : ''}>
-            {/* Logo */}
-            <div className="flex justify-center mb-6 sm:mb-8">
-              <img
-                src="https://media.oracleboxing.com/Website/optimized/logos/long_black-large.webp"
-                alt="Oracle Boxing"
-                className="h-4 w-auto"
-              />
-            </div>
-
           {/* Success Message */}
           <div className="text-center mb-6 sm:mb-8 lg:mb-12">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black mb-2 sm:mb-3 lg:mb-4">

@@ -20,13 +20,7 @@ export default function RoadmapPage() {
     e.preventDefault()
     const element = document.getElementById('pricing')
     if (element) {
-      const offset = 80
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-      const offsetPosition = elementPosition - offset
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      })
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
   const product = getProductById('roadmap')!
@@ -152,29 +146,29 @@ export default function RoadmapPage() {
       <CourseNavigation />
 
       {/* Hero Section */}
-      <section className="pt-12 sm:pt-16 pb-6 sm:pb-8 bg-gradient-to-b from-gray-50 to-white">
+      <section className="pt-8 sm:pt-16 pb-4 sm:pb-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Course Title with Pill Border - Smaller */}
-          <div className="inline-block mx-auto mb-6 sm:mb-8 w-full text-center">
-            <div className="inline-block border-2 border-black rounded-full px-4 sm:px-6 py-1.5 sm:py-2">
-              <h1 className="text-sm sm:text-base md:text-lg text-gray-900 uppercase tracking-wide font-medium" style={{ fontFamily: "var(--font-satoshi)" }}>
+          <div className="inline-block mx-auto mb-4 sm:mb-8 w-full text-center">
+            <div className="inline-block border-2 border-black rounded-full px-3 sm:px-6 py-1 sm:py-2">
+              <h1 className="text-xs sm:text-base md:text-lg text-gray-900 uppercase tracking-wide font-medium" style={{ fontFamily: "var(--font-satoshi)" }}>
                 Boxing Roadmap
               </h1>
             </div>
           </div>
 
           {/* Headline */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 text-center mb-3 sm:mb-4 px-2">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 text-center mb-2 sm:mb-4 px-2">
             Your Step-by-Step Path to Real Boxing Skill
           </h2>
 
           {/* Subheadline */}
-          <p className="text-lg sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-2 leading-relaxed">
+          <p className="text-base sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-12 px-2 leading-relaxed">
             Follow a clear 5-phase system that takes you from your first stance to sparring-ready. Every move, every drill, in the right order.
           </p>
 
           {/* Video Sales Letter */}
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-4 sm:mb-8">
             <VideoPlayer
               thumbnail={product.image}
               title="Boxing Roadmap Overview"
@@ -182,11 +176,11 @@ export default function RoadmapPage() {
           </div>
 
           {/* Primary CTA - No Hover Effects */}
-          <div className="text-center mb-6 sm:mb-8">
+          <div className="text-center mb-4 sm:mb-8">
             <a
               href="#pricing"
               onClick={scrollToPricing}
-              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#26304a] text-white font-black text-lg sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#26304a] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
             >
               I'M READY
             </a>
@@ -195,7 +189,7 @@ export default function RoadmapPage() {
       </section>
 
       {/* Stats */}
-      <section id="overview" className="pt-6 pb-12 bg-white">
+      <section id="overview" className="pt-4 sm:pt-6 pb-8 sm:pb-12 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <CourseStats
             lessonCount={176}
@@ -222,18 +216,21 @@ export default function RoadmapPage() {
         <CourseModules
           modules={modules}
           headerImage={product.image}
+          showButton={true}
+          buttonText="ACCESS NOW"
+          onButtonClick={scrollToPricing}
         />
-      </section>
-
-      {/* Testimonials */}
-      <section id="testimonials">
-        <TestimonialSection testimonials={testimonials} />
       </section>
 
       {/* Price Card */}
       <div id="pricing">
         <CoursePriceCard product={product} features={priceFeatures} />
       </div>
+
+      {/* Testimonials */}
+      <section id="testimonials">
+        <TestimonialSection testimonials={testimonials} />
+      </section>
 
       {/* FAQ */}
       <CourseFAQ courseType="roadmap" />
