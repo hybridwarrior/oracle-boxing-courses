@@ -9,6 +9,8 @@ import { useCurrency } from '@/contexts/CurrencyContext'
 import { Currency } from '@/lib/currency'
 import { getTrackingParams } from '@/lib/tracking-cookies'
 
+export const dynamic = 'force-dynamic'
+
 export default function CheckoutPage() {
   const router = useRouter()
   const { currency, isLoading: currencyLoading } = useCurrency()
