@@ -6,6 +6,7 @@ import { Footer } from '@/components/Footer'
 import { CourseCard } from '@/components/CourseCard'
 import { TestimonialSection } from '@/components/TestimonialSection'
 import { NotifyMeModal } from '@/components/NotifyMeModal'
+import { AdaptivePrice } from '@/components/AdaptivePrice'
 import { getCourses } from '@/lib/products'
 import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
 import Image from 'next/image'
@@ -105,7 +106,7 @@ export default function HomePage() {
               {/* Description */}
               <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                 <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
-                  Commit <span className="font-black text-gray-900">$197</span> upfront, do the bare minimum, get way better at boxing...
+                  Commit <AdaptivePrice usdAmount={197} metadata="6wc" className="font-black text-gray-900" showCode={true} /> upfront, do the bare minimum, get way better at boxing...
                 </p>
                 <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">
                   ...and we'll refund all your money at the finish line.

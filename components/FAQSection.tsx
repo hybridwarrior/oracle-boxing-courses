@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { EpicCTAButton } from '@/components/EpicCTAButton'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getProductPrice, formatPrice } from '@/lib/currency'
 
 interface FAQItem {
   question: string
@@ -15,14 +17,10 @@ interface FAQSectionProps {
   onOpenPricing?: () => void;
 }
 
-const faqData: FAQItem[] = [
+const baseFaqData: FAQItem[] = [
   {
     question: "What exactly is the 6-Week Challenge?",
     answer: "It's a 6-week online training program designed to rapidly improve your boxing fundamentals through structured lessons, live coaching, and weekly accountability — with a full refund guarantee when you complete it."
-  },
-  {
-    question: "How does the refund guarantee work?",
-    answer: "You pay $197 upfront to join. Complete all challenge requirements — attend coaching calls, post training clips, complete the course, and attend both check-in calls — and you'll get 100% of your money back within 7–14 days."
   },
   {
     question: "What do I get access to?",
@@ -85,6 +83,21 @@ const faqData: FAQItem[] = [
 const FAQSection = ({ onCTAClick, onOpenPricing }: FAQSectionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const { trackFAQExpand } = useAnalytics()
+  const { currency } = useCurrency()
+
+  // Get the price for 6wc in user's currency
+  const price6wc = getProductPrice('6wc', currency) || 197
+  const formattedPrice = formatPrice(price6wc, currency)
+
+  // Create FAQ data with dynamic price
+  const faqData: FAQItem[] = [
+    baseFaqData[0],
+    {
+      question: "How does the refund guarantee work?",
+      answer: `You pay ${formattedPrice} upfront to join. Complete all challenge requirements — attend coaching calls, post training clips, complete the course, and attend both check-in calls — and you'll get 100% of your money back within 7–14 days.`
+    },
+    ...baseFaqData.slice(1)
+  ]
 
   const toggleQuestion = (index: number) => {
     // Track FAQ expansion only when opening
