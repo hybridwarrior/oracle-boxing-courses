@@ -150,14 +150,7 @@ export function CoursePriceCard({ product, features = [] }: CoursePriceCardProps
                 <div key={index} className="flex items-start gap-3">
                   <Check className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 text-white mt-0.5" />
                   <span className="text-sm sm:text-base md:text-lg font-medium leading-relaxed">
-                    {typeof feature === 'string' ? (
-                      feature
-                    ) : (
-                      <>
-                        <strong className="font-bold">{feature.text}</strong>
-                        {feature.bold}
-                      </>
-                    )}
+                    {feature}
                   </span>
                 </div>
               ))}
