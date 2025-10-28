@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { MembershipTestimonials } from '@/components/MembershipTestimonials'
+import { MembershipPricingPopup } from '@/components/MembershipPricingPopup'
 import { getMemberships } from '@/lib/products'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
@@ -14,6 +15,7 @@ export default function MembershipsPage() {
   const memberships = getMemberships()
   const [selectedPlan, setSelectedPlan] = useState('membership-annual')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [isPricingPopupOpen, setIsPricingPopupOpen] = useState(false)
 
   // Membership testimonials with profile pictures
   const testimonials = [
@@ -66,11 +68,6 @@ export default function MembershipsPage() {
       image: "https://media.oracleboxing.com/Website/optimized/profiles/bernardo-256.webp"
     }
   ]
-
-  const handleJoinNow = () => {
-    // Direct URL routing - no cart needed
-    router.push(`/checkout?product=${selectedPlan}`)
-  }
 
   const benefits = [
     {
@@ -182,25 +179,13 @@ export default function MembershipsPage() {
                 Starting from just $74.75/mo
               </p>
 
-              {/* Stats Badges */}
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6 lg:mb-8">
-                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-red-50 border-2 border-red-600 rounded-full">
-                  <Award className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
-                  <span className="text-xs sm:text-sm lg:text-base font-bold text-gray-900">#1 Online Coaching Program</span>
-                </div>
-              </div>
-
               {/* CTA Button */}
-              <a
-                href="#pricing"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+              <button
+                onClick={() => setIsPricingPopupOpen(true)}
+                className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
               >
-                JOIN NOW
-              </a>
+                SEE PRICING
+              </button>
             </div>
 
             {/* Right Column - Video */}
@@ -282,16 +267,12 @@ export default function MembershipsPage() {
 
           {/* CTA Button */}
           <div className="text-center mt-8 sm:mt-12">
-            <a
-              href="#pricing"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+            <button
+              onClick={() => setIsPricingPopupOpen(true)}
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              JOIN NOW
-            </a>
+              SEE PRICING
+            </button>
           </div>
         </div>
       </section>
@@ -426,16 +407,12 @@ export default function MembershipsPage() {
 
           {/* CTA Button */}
           <div className="text-center mt-12">
-            <a
-              href="#pricing"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+            <button
+              onClick={() => setIsPricingPopupOpen(true)}
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              JOIN NOW
-            </a>
+              SEE PRICING
+            </button>
           </div>
         </div>
       </section>
@@ -513,16 +490,12 @@ export default function MembershipsPage() {
 
           {/* CTA Button */}
           <div className="text-center">
-            <a
-              href="#pricing"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
-              }}
-              className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+            <button
+              onClick={() => setIsPricingPopupOpen(true)}
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              JOIN NOW
-            </a>
+              SEE PRICING
+            </button>
           </div>
         </div>
 
@@ -541,315 +514,21 @@ export default function MembershipsPage() {
       {/* Testimonials Section */}
       <MembershipTestimonials testimonials={testimonials} />
 
-      {/* Pricing & How It Works Section - Combined */}
-      <section id="pricing" className="py-8 sm:py-16 lg:py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
-          {/* Pricing Title */}
-          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 text-center">
-            Join Oracle Boxing for as little as $2.46 per day!
+      {/* CTA Section */}
+      <section id="pricing" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+            Ready to transform your boxing?
           </h2>
-          <p className="text-xs sm:text-base lg:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-4 sm:mb-8 lg:mb-12">
-            Choose the plan that fits your commitment level
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-8 sm:mb-10">
+            Join Oracle Boxing for as little as $2.46 per day!
           </p>
-
-          {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-8 sm:mb-12">
-            {/* Annual - Left */}
-            <div className="relative">
-              {/* Best Value Badge - On the border line */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-2 bg-[#000000] text-white text-sm font-black uppercase rounded-full z-10 whitespace-nowrap shadow-md">
-                Best Value
-              </div>
-
-              <div
-                onClick={() => setSelectedPlan('membership-annual')}
-                className={`cursor-pointer rounded-xl border-2 transition-all ${
-                  selectedPlan === 'membership-annual'
-                    ? 'border-[#000000] shadow-lg'
-                    : 'border-gray-300 hover:border-gray-400'
-                }`}
-              >
-                {/* Radio Button and Content - Compact */}
-                <div className="p-4 sm:p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedPlan === 'membership-annual' ? 'border-[#000000] bg-[#000000]' : 'border-gray-300 bg-white'
-                    }`}>
-                      {selectedPlan === 'membership-annual' && (
-                        <div className="w-3 h-3 bg-white rounded-full"></div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Mobile: 3 lines total */}
-                  <div className="block sm:hidden">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Annual</h3>
-                    <div className="flex items-center justify-between gap-3 mb-2">
-                      <div>
-                        <div className="text-3xl font-black text-gray-900">$897</div>
-                        <div className="text-xs text-gray-600">Billed every year</div>
-                      </div>
-                      <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-center flex-shrink-0">
-                        <div className="text-lg font-bold text-gray-900">$74.75</div>
-                        <div className="text-[10px] text-gray-600 whitespace-nowrap">per month</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Desktop: Same layout */}
-                  <div className="hidden sm:block">
-                    <div className="flex items-baseline justify-between gap-4 mb-3">
-                      <h3 className="text-2xl font-bold text-gray-900">Annual</h3>
-                      <div className="text-4xl font-black text-gray-900">$897</div>
-                    </div>
-                    <div className="text-gray-600 mb-4">Billed every year</div>
-                    <div className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-center">
-                      <div className="text-2xl font-bold text-gray-900">$74.75</div>
-                      <div className="text-sm text-gray-600">per month</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 6-Month - Middle */}
-            <div className="relative">
-              <div
-                onClick={() => setSelectedPlan('membership-6month')}
-                className={`cursor-pointer rounded-xl border-2 transition-all ${
-                  selectedPlan === 'membership-6month'
-                    ? 'border-[#000000] shadow-lg'
-                    : 'border-gray-300 hover:border-gray-400'
-                }`}
-              >
-                {/* Radio Button and Content - Compact */}
-                <div className="p-4 sm:p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedPlan === 'membership-6month' ? 'border-[#000000] bg-[#000000]' : 'border-gray-300 bg-white'
-                    }`}>
-                      {selectedPlan === 'membership-6month' && (
-                        <div className="w-3 h-3 bg-white rounded-full"></div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Mobile: 3 lines total */}
-                  <div className="block sm:hidden">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Bi-Annual</h3>
-                    <div className="flex items-center justify-between gap-3 mb-2">
-                      <div>
-                        <div className="text-3xl font-black text-gray-900">$497</div>
-                        <div className="text-xs text-gray-600">Billed every 6 months</div>
-                      </div>
-                      <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-center flex-shrink-0">
-                        <div className="text-lg font-bold text-gray-900">$82.83</div>
-                        <div className="text-[10px] text-gray-600 whitespace-nowrap">per month</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Desktop: Same layout */}
-                  <div className="hidden sm:block">
-                    <div className="flex items-baseline justify-between gap-4 mb-3">
-                      <h3 className="text-2xl font-bold text-gray-900">Bi-Annual</h3>
-                      <div className="text-4xl font-black text-gray-900">$497</div>
-                    </div>
-                    <div className="text-gray-600 mb-4">Billed every 6 months</div>
-                    <div className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-center">
-                      <div className="text-2xl font-bold text-gray-900">$82.83</div>
-                      <div className="text-sm text-gray-600">per month</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Monthly - Right */}
-            <div className="relative">
-              <div
-                onClick={() => setSelectedPlan('membership-monthly')}
-                className={`cursor-pointer rounded-xl border-2 transition-all ${
-                  selectedPlan === 'membership-monthly'
-                    ? 'border-[#000000] shadow-lg'
-                    : 'border-gray-300 hover:border-gray-400'
-                }`}
-              >
-                {/* Radio Button and Content - Compact */}
-                <div className="p-4 sm:p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedPlan === 'membership-monthly' ? 'border-[#000000] bg-[#000000]' : 'border-gray-300 bg-white'
-                    }`}>
-                      {selectedPlan === 'membership-monthly' && (
-                        <div className="w-3 h-3 bg-white rounded-full"></div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Mobile: 3 lines total */}
-                  <div className="block sm:hidden">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Quarterly</h3>
-                    <div className="flex items-center justify-between gap-3 mb-2">
-                      <div>
-                        <div className="text-3xl font-black text-gray-900">$297</div>
-                        <div className="text-xs text-gray-600">Billed every 3 months</div>
-                      </div>
-                      <div className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-center flex-shrink-0">
-                        <div className="text-lg font-bold text-gray-900">$99</div>
-                        <div className="text-[10px] text-gray-600 whitespace-nowrap">per month</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Desktop: Same layout */}
-                  <div className="hidden sm:block">
-                    <div className="flex items-baseline justify-between gap-4 mb-3">
-                      <h3 className="text-2xl font-bold text-gray-900">Quarterly</h3>
-                      <div className="text-4xl font-black text-gray-900">$297</div>
-                    </div>
-                    <div className="text-gray-600 mb-4">Billed every 3 months</div>
-                    <div className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-center">
-                      <div className="text-2xl font-bold text-gray-900">$99</div>
-                      <div className="text-sm text-gray-600">per month</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Join Now Button */}
-          <div className="text-center mb-4 sm:mb-8">
-            <button
-              onClick={handleJoinNow}
-              className="py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-16 bg-[#000000] text-white font-black text-lg sm:text-xl lg:text-2xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
-            >
-              BUY NOW
-            </button>
-          </div>
-
-          {/* Monthly billing note */}
-          <p className="text-center text-gray-600 text-[11px] sm:text-sm mb-8 sm:mb-16 lg:mb-20">
-            You can switch to monthly billing at $97/month after purchase
-          </p>
-
-          {/* How It Works Section */}
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 sm:mb-10 lg:mb-12 text-center">
-              How it works
-            </h2>
-
-            {/* Desktop: Horizontal with arrows */}
-            <div className="hidden md:grid md:grid-cols-3 gap-8 items-start relative">
-              {/* Step 1 */}
-              <div className="text-center">
-                <div className="flex justify-center mb-6">
-                  <div className="w-32 h-32 bg-[#000000]/10 rounded-full flex items-center justify-center">
-                    <CreditCard className="w-16 h-16 text-[#000000]" strokeWidth={1.5} />
-                  </div>
-                </div>
-                <p className="text-lg text-gray-900 font-semibold">
-                  Choose your subscription and complete your purchase
-                </p>
-              </div>
-
-              {/* Arrow 1 */}
-              <div className="absolute top-[15%] left-[33%] w-[10%] flex items-center justify-center">
-                <svg className="w-full h-8" viewBox="0 0 100 40" preserveAspectRatio="none">
-                  <path d="M 0 20 Q 50 20 100 20" stroke="#000000" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
-                  <polygon points="95,15 100,20 95,25" fill="#000000"/>
-                </svg>
-              </div>
-
-              {/* Step 2 */}
-              <div className="text-center">
-                <div className="flex justify-center mb-6">
-                  <div className="w-32 h-32 bg-[#000000]/10 rounded-full flex items-center justify-center">
-                    <Smartphone className="w-16 h-16 text-[#000000]" strokeWidth={1.5} />
-                  </div>
-                </div>
-                <p className="text-lg text-gray-900 font-semibold">
-                  Login to the portal and download the app
-                </p>
-              </div>
-
-              {/* Arrow 2 */}
-              <div className="absolute top-[15%] left-[57%] w-[10%] flex items-center justify-center">
-                <svg className="w-full h-8" viewBox="0 0 100 40" preserveAspectRatio="none">
-                  <path d="M 0 20 Q 50 20 100 20" stroke="#000000" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
-                  <polygon points="95,15 100,20 95,25" fill="#000000"/>
-                </svg>
-              </div>
-
-              {/* Step 3 */}
-              <div className="text-center">
-                <div className="flex justify-center mb-6">
-                  <div className="w-32 h-32 bg-[#000000]/10 rounded-full flex items-center justify-center">
-                    <TrendingUp className="w-16 h-16 text-[#000000]" strokeWidth={1.5} />
-                  </div>
-                </div>
-                <p className="text-lg text-gray-900 font-semibold">
-                  Start progressing faster than you could have imagined
-                </p>
-              </div>
-            </div>
-
-            {/* Mobile: Vertical with arrows */}
-            <div className="md:hidden space-y-8">
-              {/* Step 1 */}
-              <div className="text-center">
-                <div className="flex justify-center mb-4">
-                  <div className="w-24 h-24 bg-[#000000]/10 rounded-full flex items-center justify-center">
-                    <CreditCard className="w-12 h-12 text-[#000000]" strokeWidth={1.5} />
-                  </div>
-                </div>
-                <p className="text-base text-gray-900 font-semibold">
-                  Choose your subscription and complete your purchase
-                </p>
-              </div>
-
-              {/* Vertical Arrow */}
-              <div className="flex justify-center">
-                <svg className="w-8 h-8" viewBox="0 0 40 100" preserveAspectRatio="none">
-                  <path d="M 20 0 Q 20 50 20 100" stroke="#000000" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
-                  <polygon points="15,95 20,100 25,95" fill="#000000"/>
-                </svg>
-              </div>
-
-              {/* Step 2 */}
-              <div className="text-center">
-                <div className="flex justify-center mb-4">
-                  <div className="w-24 h-24 bg-[#000000]/10 rounded-full flex items-center justify-center">
-                    <Smartphone className="w-12 h-12 text-[#000000]" strokeWidth={1.5} />
-                  </div>
-                </div>
-                <p className="text-base text-gray-900 font-semibold">
-                  Login to the portal and download the app
-                </p>
-              </div>
-
-              {/* Vertical Arrow */}
-              <div className="flex justify-center">
-                <svg className="w-8 h-8" viewBox="0 0 40 100" preserveAspectRatio="none">
-                  <path d="M 20 0 Q 20 50 20 100" stroke="#000000" strokeWidth="2" fill="none" strokeDasharray="5,5"/>
-                  <polygon points="15,95 20,100 25,95" fill="#000000"/>
-                </svg>
-              </div>
-
-              {/* Step 3 */}
-              <div className="text-center">
-                <div className="flex justify-center mb-4">
-                  <div className="w-24 h-24 bg-[#000000]/10 rounded-full flex items-center justify-center">
-                    <TrendingUp className="w-12 h-12 text-[#000000]" strokeWidth={1.5} />
-                  </div>
-                </div>
-                <p className="text-base text-gray-900 font-semibold">
-                  Start progressing faster than you could have imagined
-                </p>
-              </div>
-            </div>
-          </div>
+          <button
+            onClick={() => setIsPricingPopupOpen(true)}
+            className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+          >
+            SEE PRICING OPTIONS
+          </button>
         </div>
       </section>
 
@@ -921,9 +600,17 @@ export default function MembershipsPage() {
 
           {/* Closing Statement */}
           <div className="text-center">
-            <p className="text-base sm:text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto text-gray-600">
+            <p className="text-base sm:text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto text-gray-600 mb-8">
               Less effort. Better results.
             </p>
+
+            {/* CTA Button */}
+            <button
+              onClick={() => setIsPricingPopupOpen(true)}
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+            >
+              SEE PRICING
+            </button>
           </div>
         </div>
       </section>
@@ -961,8 +648,25 @@ export default function MembershipsPage() {
               </div>
             ))}
           </div>
+
+          {/* CTA Button */}
+          <div className="text-center mt-8 sm:mt-12">
+            <button
+              onClick={() => setIsPricingPopupOpen(true)}
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+            >
+              SEE PRICING
+            </button>
+          </div>
         </div>
       </section>
+
+      {/* Pricing Popup */}
+      <MembershipPricingPopup
+        isOpen={isPricingPopupOpen}
+        onClose={() => setIsPricingPopupOpen(false)}
+        defaultPlan={selectedPlan}
+      />
 
       <Footer />
     </div>

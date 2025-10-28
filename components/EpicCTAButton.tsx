@@ -127,7 +127,7 @@ export function EpicCTAButton({
   const sizeClasses = {
     sm: "min-h-9 px-5 text-sm py-1.5",
     md: "min-h-10 px-6 text-sm py-1.5",
-    lg: "py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 text-lg sm:text-xl lg:text-2xl"
+    lg: "py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 text-base sm:text-lg lg:text-xl"
   };
 
   const buttonContent = (
@@ -141,7 +141,7 @@ export function EpicCTAButton({
     "bg-yellow-200 hover:bg-black",
     "text-black hover:text-white font-black",
     "border-4 border-black",
-    "rounded-lg",
+    "rounded-xl",
     "transition-colors duration-300",
     "shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
     "cursor-pointer",

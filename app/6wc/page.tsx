@@ -35,7 +35,7 @@ export default function ChallengePage() {
       <HeroSection onOpenPricing={handleOpenPricing} />
 
       {/* Founder's Transformation Story */}
-      <TransformationStory />
+      <TransformationStory onCTAClick={handleOpenPricing} />
 
       {/* Testimonials with Media Section */}
       <TestimonialsWithMediaSection onOpenPricing={handleOpenPricing} />

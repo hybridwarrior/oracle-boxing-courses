@@ -87,7 +87,7 @@ export default function CostOfInactionCTA({ onCTAClick, onOpenPricing }: CostOfI
             }}
             trackingName="cost-of-inaction"
           >
-            <span className="text-lg sm:text-xl font-black uppercase">Start Challenge</span>
+            <span className="text-lg sm:text-xl font-black uppercase">VIEW DETAILS</span>
           </EpicCTAButton>
         </div>
       </div>

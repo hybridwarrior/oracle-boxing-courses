@@ -33,7 +33,7 @@ export function MembershipTestimonials({ testimonials }: MembershipTestimonialsP
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-yellow-200 border-4 border-black rounded-xl p-6 flex-shrink-0 w-[85vw] snap-center shadow-md"
+              className="bg-white border-4 border-black rounded-xl p-6 flex-shrink-0 w-[85vw] snap-center shadow-md"
             >
               {/* Profile Picture */}
               <div className="flex items-center gap-4 mb-4">
@@ -65,7 +65,7 @@ export function MembershipTestimonials({ testimonials }: MembershipTestimonialsP
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-yellow-200 border-4 border-black rounded-xl p-6 shadow-md"
+              className="bg-white border-4 border-black rounded-xl p-6 shadow-md"
             >
               {/* Profile Picture */}
               <div className="flex items-center gap-3 mb-4">

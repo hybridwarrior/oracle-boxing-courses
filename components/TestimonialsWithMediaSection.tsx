@@ -147,7 +147,7 @@ export default function TestimonialsWithMediaSection({ onCTAClick, onOpenPricing
             }}
             trackingName="testimonials"
           >
-            <span className="text-lg sm:text-xl font-black uppercase">Start Challenge</span>
+            <span className="text-lg sm:text-xl font-black uppercase">VIEW DETAILS</span>
           </EpicCTAButton>
         </div>
       </div>

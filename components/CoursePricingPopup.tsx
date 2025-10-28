@@ -11,7 +11,7 @@ interface CoursePricingPopupProps {
   isOpen: boolean
   onClose: () => void
   product: Product
-  features?: string[]
+  features?: (string | { text: string; bold: string })[]
 }
 
 export function CoursePricingPopup({ isOpen, onClose, product, features = [] }: CoursePricingPopupProps) {
@@ -81,7 +81,7 @@ export function CoursePricingPopup({ isOpen, onClose, product, features = [] }: 
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="relative bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -105,20 +105,33 @@ export function CoursePricingPopup({ isOpen, onClose, product, features = [] }: 
             />
           </div>
 
+          {/* Course Thumbnail */}
+          {product.image && (
+            <div className="flex justify-center mb-6 sm:mb-8">
+              <img
+                src={product.image}
+                alt={product.title}
+                className="w-full max-w-[280px] rounded-xl border-4 border-white shadow-lg object-cover aspect-video"
+              />
+            </div>
+          )}
+
           {/* Heading */}
-          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 sm:mb-8 uppercase px-4" style={{ fontFamily: "var(--font-satoshi)" }}>
+          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 uppercase px-4 whitespace-nowrap" style={{ fontFamily: "var(--font-satoshi)" }}>
             {getCourseHeading()}
           </h3>
 
           {/* Price Section */}
           <div className="text-center mb-6 sm:mb-8">
-            {bundleCrossedPrice && (
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold opacity-60 line-through mb-2">
-                {formatPrice(bundleCrossedPrice, displayCurrency)}
+            <div className="flex items-center justify-center gap-3">
+              {bundleCrossedPrice && (
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold opacity-60 line-through">
+                  {formatPrice(bundleCrossedPrice, displayCurrency)}
+                </div>
+              )}
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black">
+                {formatPrice(convertedPrice, displayCurrency)}
               </div>
-            )}
-            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-3">
-              {formatPrice(convertedPrice, displayCurrency)}
             </div>
             {product.recurring && (
               <div className="text-sm sm:text-lg md:text-xl font-bold opacity-90">per {product.interval}</div>
@@ -131,27 +144,15 @@ export function CoursePricingPopup({ isOpen, onClose, product, features = [] }: 
           {/* CTA Button */}
           <button
             onClick={handleEnroll}
-            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-yellow-200 text-[#000000] font-black text-base sm:text-lg md:text-xl rounded-xl mb-6 sm:mb-8 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center gap-2"
+            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-yellow-200 text-[#000000] font-black text-base sm:text-lg md:text-xl rounded-xl mb-4 sm:mb-6 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center gap-2"
             style={{ cursor: 'pointer' }}
           >
             CONTINUE TO CHECKOUT
             <span className="text-xl sm:text-2xl">→</span>
           </button>
 
-          {/* Features List */}
-          {features.length > 0 && (
-            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 text-white mt-0.5" />
-                  <span className="text-sm sm:text-base md:text-lg font-medium leading-relaxed">{feature}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
           {/* Payment Methods */}
-          <div className="payment_icons-group">
+          <div className="payment_icons-group mb-6 sm:mb-8">
             <img
               loading="lazy"
               alt=""
@@ -177,6 +178,27 @@ export function CoursePricingPopup({ isOpen, onClose, product, features = [] }: 
               className="image-55 bigger-mobile"
             />
           </div>
+
+          {/* Features List */}
+          {features.length > 0 && (
+            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+              {features.map((feature, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <Check className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 text-white mt-0.5" />
+                  <span className="text-sm sm:text-base md:text-lg font-medium leading-relaxed">
+                    {typeof feature === 'string' ? (
+                      feature
+                    ) : (
+                      <>
+                        <strong className="font-bold">{feature.text}</strong>
+                        {feature.bold}
+                      </>
+                    )}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

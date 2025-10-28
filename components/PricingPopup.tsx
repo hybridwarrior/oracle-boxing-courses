@@ -16,9 +16,13 @@ export function PricingPopup({ isOpen, onClose }: PricingPopupProps) {
 
   // Benefits to display with checkmarks
   const benefits = [
-    "Learn step-by-step with live coaching and feedback.",
-    "Structured 6-week system with progress tracking and community support.",
-    "Finish the challenge, prove your commitment, and get a full refund.",
+    { text: "100% refund guarantee", bold: " on completion" },
+    { text: "Structured 6-week training path", bold: "" },
+    { text: "Weekly live coaching calls", bold: " with Oliver" },
+    { text: "Personal feedback", bold: " on your training videos" },
+    { text: "Full access", bold: " to the Boxing Masterclass" },
+    { text: "Lifetime access", bold: " to the Boxing Roadmap" },
+    { text: "Direct access", bold: " to your coaches for questions" }
   ]
 
   // Calculate total value in current currency
@@ -56,7 +60,7 @@ export function PricingPopup({ isOpen, onClose }: PricingPopupProps) {
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="relative bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-gray-500">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -80,49 +84,40 @@ export function PricingPopup({ isOpen, onClose }: PricingPopupProps) {
             />
           </div>
 
+          {/* Challenge Thumbnail */}
+          <div className="flex justify-center mb-6 sm:mb-8">
+            <img
+              src="https://media.oracleboxing.com/Website/skool_art.png"
+              alt="6-Week Challenge"
+              className="w-full max-w-[280px] rounded-xl border-4 border-white shadow-lg"
+            />
+          </div>
+
           {/* Heading */}
-          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 sm:mb-8 uppercase px-4" style={{ fontFamily: "var(--font-satoshi)" }}>
+          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 uppercase px-4 whitespace-nowrap" style={{ fontFamily: "var(--font-satoshi)" }}>
             6-WEEK CHALLENGE
           </h3>
 
           {/* Price Section */}
           <div className="text-center mb-6 sm:mb-8">
-            <ValuePrice usdAmount={totalValue} className="text-xl sm:text-2xl md:text-3xl font-bold opacity-60 line-through mb-2" />
-            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-3"><ChallengePrice /></div>
+            <div className="flex items-center justify-center gap-3">
+              <ValuePrice usdAmount={totalValue} className="text-xl sm:text-2xl md:text-3xl font-bold opacity-60 line-through" />
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black"><ChallengePrice /></div>
+            </div>
           </div>
 
           {/* CTA Button */}
           <a
             href="/checkout?product=6wc"
-            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-yellow-200 text-[#000000] font-black text-base sm:text-lg md:text-xl rounded-xl mb-6 sm:mb-8 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center gap-2"
+            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-yellow-200 text-[#000000] font-black text-base sm:text-lg md:text-xl rounded-xl mb-4 sm:mb-6 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center gap-2"
             style={{ cursor: 'pointer' }}
           >
             CONTINUE TO CHECKOUT
             <span className="text-xl sm:text-2xl">→</span>
           </a>
 
-          {/* Benefits List with Checkmarks */}
-          <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 text-white mt-0.5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span className="text-sm sm:text-base md:text-lg font-medium leading-relaxed">{benefit}</span>
-              </div>
-            ))}
-          </div>
-
           {/* Payment Methods */}
-          <div className="payment_icons-group">
+          <div className="payment_icons-group mb-6 sm:mb-8">
             <img
               loading="lazy"
               alt=""
@@ -147,6 +142,29 @@ export function PricingPopup({ isOpen, onClose }: PricingPopupProps) {
               alt=""
               className="image-55 bigger-mobile"
             />
+          </div>
+
+          {/* Benefits List with Checkmarks */}
+          <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <svg
+                  className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 text-white mt-0.5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="text-sm sm:text-base md:text-lg font-medium leading-relaxed">
+                  <strong className="font-bold">{benefit.text}</strong>
+                  {benefit.bold}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

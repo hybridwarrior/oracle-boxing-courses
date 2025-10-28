@@ -83,11 +83,11 @@ export default function HeroSection({ onCTAClick, onOpenPricing }: HeroSectionPr
         <div className="mt-8 sm:mt-12 flex justify-center px-4">
           <EpicCTAButton
             size="lg"
-            className="w-full sm:w-auto max-w-md sm:max-w-none min-h-[52px] sm:min-h-[56px]"
+            className="w-full sm:w-auto max-w-md sm:max-w-none"
             trackingName="hero"
             onClick={handleCTAClick}
           >
-            <span className="text-lg sm:text-xl font-black uppercase">Start Challenge</span>
+            VIEW DETAILS
           </EpicCTAButton>
         </div>
       </div>

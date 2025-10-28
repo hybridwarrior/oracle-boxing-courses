@@ -43,7 +43,7 @@ interface PlatformScreenshotsCarouselProps {
   buttonText?: string;
 }
 
-export function PlatformScreenshotsCarousel({ onOpenPricing, buttonText = "Start Challenge" }: PlatformScreenshotsCarouselProps = {}) {
+export function PlatformScreenshotsCarousel({ onOpenPricing, buttonText = "VIEW DETAILS" }: PlatformScreenshotsCarouselProps = {}) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const currentIndexRef = useRef(0)

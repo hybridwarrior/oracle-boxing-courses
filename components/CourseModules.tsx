@@ -31,7 +31,7 @@ export function CourseModules({ modules, headerImage, showButton = false, button
           Sounds great! But what <em className="text-red-600">exactly</em> is included?
         </h2>
         <p className="text-base sm:text-xl text-gray-600 mb-4 sm:mb-8 text-center max-w-3xl mx-auto">
-          Learn from real tried-and-tested experience
+          SEE PRICING
         </p>
 
         {/* Header Image */}

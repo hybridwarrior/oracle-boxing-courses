@@ -10,7 +10,6 @@ import { CourseCurriculum } from '@/components/CourseCurriculum'
 import { CourseModules } from '@/components/CourseModules'
 import { TestimonialSection } from '@/components/TestimonialSection'
 import { CourseFAQ } from '@/components/CourseFAQ'
-import { CourseNavigation } from '@/components/CourseNavigation'
 import { CoursePricingPopup } from '@/components/CoursePricingPopup'
 import { getProductById } from '@/lib/products'
 import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
@@ -134,16 +133,16 @@ export default function RoadmapPage() {
   ]
 
   const priceFeatures = [
-    "75 lessons across 5 structured phases",
-    "Lifetime access to all course materials",
-    "Clear progression from beginner to advanced",
-    "Drills and techniques for each phase"
+    { text: "75 lessons", bold: " across 5 structured phases" },
+    { text: "Lifetime access", bold: " to all course materials" },
+    { text: "Step-by-step progression", bold: " from beginner to advanced" },
+    { text: "Drills and techniques", bold: " for every stage of development" },
+    { text: "30-day money-back guarantee", bold: "" }
   ]
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
-      <CourseNavigation />
 
       {/* Hero Section */}
       <section className="pt-8 sm:pt-16 pb-4 sm:pb-8 bg-gradient-to-b from-gray-50 to-white">
@@ -180,9 +179,9 @@ export default function RoadmapPage() {
             <a
               href="#pricing"
               onClick={openPricingPopup}
-              className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              GET COURSE
+              SEE PRICING
             </a>
           </div>
         </div>
@@ -207,7 +206,7 @@ export default function RoadmapPage() {
       <CourseCurriculum
         learningCards={learningCards}
         showButton={true}
-        buttonText="JOIN NOW"
+        buttonText="SEE PRICING"
         onButtonClick={openPricingPopup}
       />
 
@@ -241,9 +240,9 @@ export default function RoadmapPage() {
           <a
             href="#pricing"
             onClick={openPricingPopup}
-            className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+            className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
           >
-            GET COURSE
+            SEE PRICING
           </a>
         </div>
       </section>
@@ -257,9 +256,9 @@ export default function RoadmapPage() {
           <a
             href="#pricing"
             onClick={openPricingPopup}
-            className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+            className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
           >
-            GET COURSE
+            SEE PRICING
           </a>
         </div>
       </section>
