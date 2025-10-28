@@ -11,6 +11,8 @@ import Image from 'next/image'
 import { Video, Users, Clock, BookOpen, Award, Target, TrendingUp, Heart, CheckCircle, CreditCard, Smartphone, TrendingUp as Progress, ChevronDown, Square, Check } from 'lucide-react'
 import { AdaptivePrice, AdaptivePricePerMonth } from '@/components/AdaptivePrice'
 
+export const dynamic = 'force-dynamic'
+
 export default function MembershipsPage() {
   const router = useRouter()
   const memberships = getMemberships()
