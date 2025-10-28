@@ -6,8 +6,9 @@ import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 import { getProductById } from '@/lib/products'
 import { useCurrency } from '@/contexts/CurrencyContext'
-import { Currency } from '@/lib/currency'
+import { Currency, getProductPrice } from '@/lib/currency'
 import { getTrackingParams } from '@/lib/tracking-cookies'
+import { trackInitiateCheckout } from '@/lib/webhook-tracking'
 
 export const dynamic = 'force-dynamic'
 
@@ -110,6 +111,22 @@ export default function CheckoutPage() {
       }
 
       console.log('🏷️ Processing checkout for:', productParam)
+
+      // Get product price in USD for tracking
+      const priceUSD = getProductPrice(productParam, 'USD') || 0
+
+      // Track initiate checkout event
+      const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout'
+      const initialReferrer = trackingParams.referrer || 'direct'
+
+      trackInitiateCheckout(
+        fullName,
+        email,
+        priceUSD,
+        [productParam],
+        currentPage,
+        initialReferrer
+      )
 
       // 6WC → Order bumps
       if (productParam === '6wc') {

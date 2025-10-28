@@ -36,6 +36,25 @@ export interface PurchaseData {
   country: string | null;
 }
 
+export interface InitiateCheckoutData {
+  eventType: string;
+  eventId: string;
+  sessionId: string;
+  date: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  valueUSD: number;
+  products: string[];
+  page: string;
+  country: string | null;
+  initialReferrer: string | null;
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+  utmContent: string | null;
+}
+
 /**
  * Generate a unique event ID for deduplication
  */
@@ -339,5 +358,66 @@ export async function trackPurchase(
     console.log('Purchase tracked:', data);
   } catch (error) {
     console.error('Error tracking purchase:', error);
+  }
+}
+
+/**
+ * Send initiate checkout data to webhook
+ * Tracks when a user fills in their name/email and proceeds to the next checkout step
+ */
+export async function trackInitiateCheckout(
+  fullName: string,
+  email: string,
+  valueUSD: number,
+  products: string[],
+  page: string,
+  initialReferrer: string | null
+): Promise<void> {
+  try {
+    const utm = getUTMParameters();
+    const country = await getUserCountry();
+    const eventId = generateEventId();
+    const sessionId = getOrCreateSessionId();
+
+    // Split full name into first and last name
+    // Takes everything before the first space as first name, rest as last name
+    const nameParts = fullName.trim().split(/\s+/);
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+
+    const data: InitiateCheckoutData = {
+      eventType: 'initiate_checkout',
+      eventId,
+      sessionId,
+      date: new Date().toISOString(),
+      firstName,
+      lastName,
+      email,
+      valueUSD,
+      products,
+      page,
+      country,
+      initialReferrer,
+      utmSource: utm.utmSource,
+      utmMedium: utm.utmMedium,
+      utmCampaign: utm.utmCampaign,
+      utmContent: utm.utmContent,
+    };
+
+    // Send to webhook (non-blocking)
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+      keepalive: true,
+    }).catch((error) => {
+      console.error('Failed to send initiate checkout to webhook:', error);
+    });
+
+    console.log('Initiate checkout tracked:', data);
+  } catch (error) {
+    console.error('Error tracking initiate checkout:', error);
   }
 }

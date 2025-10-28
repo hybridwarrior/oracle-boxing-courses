@@ -10,6 +10,7 @@ import { Product } from '@/lib/types'
 import { getTrackingParams } from '@/lib/tracking-cookies'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { getProductPrice, formatPrice, formatProductDescription } from '@/lib/currency'
+import { trackInitiateCheckout } from '@/lib/webhook-tracking'
 
 // Force dynamic rendering for this page
 export const dynamic = 'force-dynamic'
@@ -168,6 +169,29 @@ function OrderBumpsContent() {
         })
       }
     })
+
+    // Calculate total value in USD for tracking
+    let totalValueUSD = 0
+    const productIds: string[] = []
+
+    items.forEach(item => {
+      const priceUSD = getProductPrice(item.product.metadata, 'USD') || item.product.price
+      totalValueUSD += priceUSD * item.quantity
+      productIds.push(item.product.id)
+    })
+
+    // Track initiate checkout event with all products
+    const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout/order-bumps'
+    const initialReferrer = trackingParams.referrer || 'direct'
+
+    trackInitiateCheckout(
+      name,
+      email,
+      totalValueUSD,
+      productIds,
+      currentPage,
+      initialReferrer
+    )
 
     try {
       // Use the checkout API to create a session with all items
