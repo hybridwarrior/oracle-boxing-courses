@@ -54,6 +54,11 @@ export interface Product {
   workoutPlans?: number
   updatedMonthly?: boolean
   lessonCountPrefix?: string
+  // Membership-specific metadata
+  hasLiveCoaching?: boolean
+  hasCommunity?: boolean
+  hasVideoFeedback?: boolean
+  coursesIncluded?: string[]
 }
 
 export interface CartItem {

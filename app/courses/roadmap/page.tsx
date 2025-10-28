@@ -9,6 +9,7 @@ import { WhoThisIsFor } from '@/components/WhoThisIsFor'
 import { CourseCurriculum } from '@/components/CourseCurriculum'
 import { CourseModules } from '@/components/CourseModules'
 import { TestimonialSection } from '@/components/TestimonialSection'
+import { CoursePriceCard } from '@/components/CoursePriceCard'
 import { CourseFAQ } from '@/components/CourseFAQ'
 import { CoursePricingPopup } from '@/components/CoursePricingPopup'
 import { getProductById } from '@/lib/products'
@@ -205,9 +206,7 @@ export default function RoadmapPage() {
       {/* Learning Outcomes */}
       <CourseCurriculum
         learningCards={learningCards}
-        showButton={true}
-        buttonText="SEE PRICING"
-        onButtonClick={openPricingPopup}
+        showButton={false}
       />
 
       {/* Course Modules */}
@@ -215,9 +214,7 @@ export default function RoadmapPage() {
         <CourseModules
           modules={modules}
           headerImage={product.image}
-          showButton={true}
-          buttonText="BUY NOW"
-          onButtonClick={openPricingPopup}
+          showButton={false}
         />
       </div>
 
@@ -234,34 +231,14 @@ export default function RoadmapPage() {
         <TestimonialSection testimonials={testimonials} />
       </div>
 
-      {/* CTA After Testimonials */}
-      <section className="py-6 sm:py-8 bg-white">
-        <div className="text-center">
-          <a
-            href="#pricing"
-            onClick={openPricingPopup}
-            className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-          >
-            SEE PRICING
-          </a>
-        </div>
-      </section>
+      {/* Inline Pricing Card */}
+      <CoursePriceCard
+        product={product}
+        features={priceFeatures}
+      />
 
       {/* FAQ */}
       <CourseFAQ courseType="roadmap" />
-
-      {/* CTA After FAQ */}
-      <section className="py-6 sm:py-8 bg-white">
-        <div className="text-center">
-          <a
-            href="#pricing"
-            onClick={openPricingPopup}
-            className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-          >
-            SEE PRICING
-          </a>
-        </div>
-      </section>
 
       <Footer />
     </div>

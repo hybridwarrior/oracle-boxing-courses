@@ -8,7 +8,7 @@ import { Product } from '@/lib/types'
 import { useCart } from '@/contexts/CartContext'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { getProductPrice, formatPrice, isMembershipProduct } from '@/lib/currency'
-import { BookOpen, Dumbbell, FileText, Layers, Clock, Calendar, TrendingUp, ClipboardList, RefreshCw } from 'lucide-react'
+import { BookOpen, Dumbbell, FileText, Layers, Clock, Calendar, TrendingUp, ClipboardList, RefreshCw, Video, Users, MessageSquare } from 'lucide-react'
 
 interface CourseCardProps {
   product: Product
@@ -32,7 +32,10 @@ export function CourseCard({ product }: CourseCardProps) {
     'bffp': '/courses/bffp',
     'roadmap': '/courses/roadmap',
     'vault': '/courses/vault',
-    'bundle': '/courses/bundle'
+    'bundle': '/courses/bundle',
+    'membership-6month': '/membership',
+    'membership-monthly': '/membership',
+    'membership-annual': '/membership'
   }
 
   const handleBuyNow = (e: React.MouseEvent) => {
@@ -42,9 +45,8 @@ export function CourseCard({ product }: CourseCardProps) {
     if (isLoading) return
 
     setIsLoading(true)
-    clearCart()
-    addItem(product)
-    router.push('/checkout')
+    // Direct checkout with product parameter
+    router.push(`/checkout?product=${product.id}`)
   }
 
   return (
@@ -89,7 +91,28 @@ export function CourseCard({ product }: CourseCardProps) {
 
           {/* Stats Row */}
           <div className="flex items-center gap-2 mb-3 text-xs flex-wrap">
-            {product.weeks && (
+            {product.hasLiveCoaching && (
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-gray-50 to-white border border-gray-300 rounded-full">
+                <Video className="w-3.5 h-3.5 text-red-800 flex-shrink-0" />
+                <span className="text-gray-600">Daily Coaching Calls</span>
+              </div>
+            )}
+
+            {product.hasCommunity && (
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-gray-50 to-white border border-gray-300 rounded-full">
+                <Users className="w-3.5 h-3.5 text-red-800 flex-shrink-0" />
+                <span className="text-gray-600">Live Community</span>
+              </div>
+            )}
+
+            {product.hasVideoFeedback && (
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-gray-50 to-white border border-gray-300 rounded-full">
+                <MessageSquare className="w-3.5 h-3.5 text-red-800 flex-shrink-0" />
+                <span className="text-gray-600">Video Feedback</span>
+              </div>
+            )}
+
+            {product.weeks && !product.hasLiveCoaching && (
               <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-gray-50 to-white border border-gray-300 rounded-full">
                 <Calendar className="w-3.5 h-3.5 text-red-800 flex-shrink-0" />
                 <span className="font-semibold text-gray-900">{product.weeks}</span>
@@ -173,15 +196,27 @@ export function CourseCard({ product }: CourseCardProps) {
             )}
           </div>
 
-          {/* Learn More Button */}
-          {courseDetailPages[product.id] && (
-            <Link
-              href={courseDetailPages[product.id]}
-              className="w-full py-3 px-4 text-sm font-black bg-yellow-200 text-black border-4 border-black rounded-lg shadow-lg uppercase tracking-wide hover:bg-black hover:text-white transition-colors text-center block flex-shrink-0"
+          {/* Buttons */}
+          <div className="space-y-3 flex-shrink-0">
+            {/* Learn More Button */}
+            {courseDetailPages[product.id] && (
+              <Link
+                href={courseDetailPages[product.id]}
+                className="w-full py-3 sm:py-4 px-4 text-sm sm:text-base md:text-lg font-black bg-white text-black border-4 border-black rounded-xl shadow-lg uppercase tracking-wide hover:bg-black hover:text-white transition-all text-center block"
+              >
+                Learn More
+              </Link>
+            )}
+
+            {/* Buy Now Button */}
+            <button
+              onClick={handleBuyNow}
+              disabled={isLoading}
+              className="w-full py-3 sm:py-4 px-4 text-sm sm:text-base md:text-lg font-black bg-yellow-200 text-black border-4 border-black rounded-xl shadow-lg uppercase tracking-wide hover:bg-black hover:text-yellow-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              Learn More
-            </Link>
-          )}
+              {isLoading ? 'Processing...' : 'Buy Now'}
+            </button>
+          </div>
         </div>
       </div>
     </div>

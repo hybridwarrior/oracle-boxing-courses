@@ -156,18 +156,6 @@ export function PlatformScreenshotsCarousel({ onOpenPricing, buttonText = "VIEW 
             ))}
           </div>
         </div>
-
-        {/* CTA Button */}
-        <div className="text-center mt-8">
-          <EpicCTAButton
-            size="lg"
-            className="min-h-[44px] sm:min-h-[56px]"
-            trackingName="platform-screenshots"
-            onClick={onOpenPricing}
-          >
-            <span className="text-base sm:text-xl font-black uppercase">{buttonText}</span>
-          </EpicCTAButton>
-        </div>
       </div>
 
       {/* Hide scrollbar globally */}

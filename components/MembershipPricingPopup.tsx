@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { X, CreditCard, Smartphone, TrendingUp } from 'lucide-react'
+import { AdaptivePrice, AdaptivePricePerMonth } from './AdaptivePrice'
 
 interface MembershipPricingPopupProps {
   isOpen: boolean
@@ -65,7 +66,7 @@ export function MembershipPricingPopup({ isOpen, onClose, defaultPlan = 'members
         <div className="p-6 sm:p-8 lg:p-10">
           {/* Title */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 text-center">
-            Join Oracle Boxing for as little as $2.46 per day!
+            Join Oracle Boxing for as little as <AdaptivePricePerMonth usdAmount={897} months={12} metadata="mema" className="inline" /> per month!
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-8">
             Choose the plan that fits your commitment level
@@ -101,12 +102,16 @@ export function MembershipPricingPopup({ isOpen, onClose, defaultPlan = 'members
 
                   <div className="flex items-baseline justify-between gap-3 mb-2">
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Annual</h3>
-                    <div className="text-3xl sm:text-4xl font-black text-gray-900">$897</div>
+                    <div className="text-3xl sm:text-4xl font-black text-gray-900">
+                      <AdaptivePrice usdAmount={897} metadata="mema" />
+                    </div>
                   </div>
                   <div className="text-sm text-gray-600 mb-3">Billed every year</div>
                   <div className="w-full bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-center">
                     <div className="flex items-baseline justify-center gap-1">
-                      <div className="text-xl sm:text-2xl font-bold text-gray-900">$74.75</div>
+                      <div className="text-xl sm:text-2xl font-bold text-gray-900">
+                        <AdaptivePricePerMonth usdAmount={897} months={12} metadata="mema" />
+                      </div>
                       <div className="text-xs text-gray-600">/ month</div>
                     </div>
                   </div>
@@ -137,12 +142,16 @@ export function MembershipPricingPopup({ isOpen, onClose, defaultPlan = 'members
 
                   <div className="flex items-baseline justify-between gap-3 mb-2">
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Bi-Annual</h3>
-                    <div className="text-3xl sm:text-4xl font-black text-gray-900">$497</div>
+                    <div className="text-3xl sm:text-4xl font-black text-gray-900">
+                      <AdaptivePrice usdAmount={497} metadata="mem6" />
+                    </div>
                   </div>
                   <div className="text-sm text-gray-600 mb-3">Billed every 6 months</div>
                   <div className="w-full bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-center">
                     <div className="flex items-baseline justify-center gap-1">
-                      <div className="text-xl sm:text-2xl font-bold text-gray-900">$82.83</div>
+                      <div className="text-xl sm:text-2xl font-bold text-gray-900">
+                        <AdaptivePricePerMonth usdAmount={497} months={6} metadata="mem6" />
+                      </div>
                       <div className="text-xs text-gray-600">/ month</div>
                     </div>
                   </div>
@@ -173,12 +182,16 @@ export function MembershipPricingPopup({ isOpen, onClose, defaultPlan = 'members
 
                   <div className="flex items-baseline justify-between gap-3 mb-2">
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Quarterly</h3>
-                    <div className="text-3xl sm:text-4xl font-black text-gray-900">$297</div>
+                    <div className="text-3xl sm:text-4xl font-black text-gray-900">
+                      <AdaptivePrice usdAmount={297} metadata="memq" />
+                    </div>
                   </div>
                   <div className="text-sm text-gray-600 mb-3">Billed every 3 months</div>
                   <div className="w-full bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-center">
                     <div className="flex items-baseline justify-center gap-1">
-                      <div className="text-xl sm:text-2xl font-bold text-gray-900">$99</div>
+                      <div className="text-xl sm:text-2xl font-bold text-gray-900">
+                        <AdaptivePricePerMonth usdAmount={297} months={3} metadata="memq" />
+                      </div>
                       <div className="text-xs text-gray-600">/ month</div>
                     </div>
                   </div>
@@ -191,16 +204,16 @@ export function MembershipPricingPopup({ isOpen, onClose, defaultPlan = 'members
           <div className="text-center mb-3 sm:mb-4">
             <button
               onClick={handleJoinNow}
-              className="py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide transition-colors cursor-pointer hover:bg-yellow-300 flex items-center justify-center gap-2 mx-auto"
+              className="py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black font-black text-xl sm:text-2xl md:text-3xl rounded-xl uppercase tracking-wide transition-colors cursor-pointer hover:bg-yellow-300 flex items-center justify-center gap-2 mx-auto border-4 border-black shadow-lg"
             >
-              CONTINUE TO CHECKOUT
-              <span className="text-lg sm:text-xl">→</span>
+              CHECKOUT
+              <span className="text-2xl sm:text-3xl">→</span>
             </button>
           </div>
 
           {/* Monthly billing note */}
           <p className="text-center text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6">
-            You can switch to monthly billing at $97/month after purchase
+            You can switch to monthly billing at <AdaptivePrice usdAmount={97} metadata="mem_monthly" className="inline" />/month after purchase
           </p>
 
           {/* Payment Methods */}

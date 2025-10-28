@@ -71,3 +71,36 @@ export function ValuePrice({
     />
   )
 }
+
+// Component for per-month prices (divides total by months)
+export function AdaptivePricePerMonth({
+  usdAmount,
+  months,
+  className = '',
+  metadata
+}: {
+  usdAmount: number
+  months: number
+  className?: string
+  metadata?: string
+}) {
+  const { currency, isLoading } = useCurrency()
+
+  if (isLoading) {
+    const perMonthUSD = usdAmount / months
+    return <span className={className}>${perMonthUSD.toFixed(2)}</span>
+  }
+
+  // Get the total price in the user's currency
+  const totalPrice = metadata
+    ? getProductPrice(metadata, currency) || usdAmount
+    : usdAmount
+
+  // Divide by months to get per-month price
+  const perMonthPrice = totalPrice / months
+
+  // Format with proper currency
+  const formattedPrice = formatCurrency(Math.round(perMonthPrice * 100) / 100, currency)
+
+  return <span className={className}>{formattedPrice}</span>
+}

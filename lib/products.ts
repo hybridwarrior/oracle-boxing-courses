@@ -98,7 +98,11 @@ Master every aspect of boxing technique through structured progression.`,
     recurring: true,
     interval: '3 months',
     stripe_product_id: 'prod_THsviAkmOBiKx4',
-    stripe_price_id: 'price_1SLJ9jQNEdHwdojXeX6HtBU3',
+    stripe_price_id: 'price_1SLJ9jQNEdHwdojXeX6HtBU3', // USD default
+    price_ids: {
+      usd: 'price_1SLJ9jQNEdHwdojXeX6HtBU3',
+      multicurrency: 'price_1SNDkHQNEdHwdojX5AJH1EGu',
+    },
     image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: `**Quarterly access to live coaching, community, and all courses**
 
@@ -121,7 +125,11 @@ Transform your boxing with ongoing expert guidance.`,
     recurring: true,
     interval: '6 months',
     stripe_product_id: 'prod_THsviAkmOBiKx4',
-    stripe_price_id: 'price_1SLMIWQNEdHwdojXMLLS6yhP',
+    stripe_price_id: 'price_1SLMIWQNEdHwdojXMLLS6yhP', // USD default
+    price_ids: {
+      usd: 'price_1SLMIWQNEdHwdojXMLLS6yhP',
+      multicurrency: 'price_1SNDlmQNEdHwdojX9U3X8M3l',
+    },
     image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: `**6 months of access — save vs quarterly**
 
@@ -143,7 +151,11 @@ Best for dedicated students ready to transform their boxing.`,
     recurring: true,
     interval: 'year',
     stripe_product_id: 'prod_THsviAkmOBiKx4',
-    stripe_price_id: 'price_1SLMJzQNEdHwdojXPJkBIhBN',
+    stripe_price_id: 'price_1SLMJzQNEdHwdojXPJkBIhBN', // USD default
+    price_ids: {
+      usd: 'price_1SLMJzQNEdHwdojXPJkBIhBN',
+      multicurrency: 'price_1SNDn8QNEdHwdojXOipfd9MG',
+    },
     image: 'https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp',
     description: `**Annual membership — best value**
 

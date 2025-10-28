@@ -175,16 +175,18 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
           </div>
 
           {/* CTA Button */}
-          <div className="text-center mt-8">
-            <EpicCTAButton
-              size="lg"
-              className="min-h-[52px] sm:min-h-[56px]"
-              onClick={onCTAClick}
-              trackingName="transformation-story"
-            >
-              <span className="text-lg sm:text-xl font-black uppercase">VIEW DETAILS</span>
-            </EpicCTAButton>
-          </div>
+          {onCTAClick && (
+            <div className="text-center mt-8">
+              <EpicCTAButton
+                size="lg"
+                className="min-h-[52px] sm:min-h-[56px]"
+                onClick={onCTAClick}
+                trackingName="transformation-story"
+              >
+                <span className="text-lg sm:text-xl font-black uppercase">VIEW DETAILS</span>
+              </EpicCTAButton>
+            </div>
+          )}
         </div>
       </div>
     </section>

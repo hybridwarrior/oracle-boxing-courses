@@ -32,6 +32,7 @@ export async function GET(req: NextRequest) {
       'EUR': '€',
       'CAD': 'CA$',
       'AUD': 'A$',
+      'AED': 'AED ',
     };
     const currencySymbol = currencySymbols[currency] || '$';
 

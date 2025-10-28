@@ -87,7 +87,7 @@ export default function HeroSection({ onCTAClick, onOpenPricing }: HeroSectionPr
             trackingName="hero"
             onClick={handleCTAClick}
           >
-            VIEW DETAILS
+            START CHALLENGE
           </EpicCTAButton>
         </div>
       </div>

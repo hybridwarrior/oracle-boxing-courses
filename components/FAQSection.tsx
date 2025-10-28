@@ -149,19 +149,21 @@ const FAQSection = ({ onCTAClick, onOpenPricing }: FAQSectionProps) => {
         </div>
 
         {/* CTA Button */}
-        <div className="text-center mt-8 sm:mt-12">
-          <EpicCTAButton
-            size="lg"
-            className="min-h-[56px]"
-            onClick={() => {
-              if (onOpenPricing) onOpenPricing()
-              if (onCTAClick) onCTAClick()
-            }}
-            trackingName="faq"
-          >
-            <span className="text-lg sm:text-xl font-black uppercase">VIEW DETAILS</span>
-          </EpicCTAButton>
-        </div>
+        {(onOpenPricing || onCTAClick) && (
+          <div className="text-center mt-8 sm:mt-12">
+            <EpicCTAButton
+              size="lg"
+              className="min-h-[56px]"
+              onClick={() => {
+                if (onOpenPricing) onOpenPricing()
+                if (onCTAClick) onCTAClick()
+              }}
+              trackingName="faq"
+            >
+              <span className="text-lg sm:text-xl font-black uppercase">VIEW DETAILS</span>
+            </EpicCTAButton>
+          </div>
+        )}
       </div>
     </section>
   )

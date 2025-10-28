@@ -139,16 +139,17 @@ export function CoursePricingPopup({ isOpen, onClose, product, features = [] }: 
             {isMembership && currency !== 'USD' && (
               <div className="text-xs sm:text-sm text-white/70 mt-2">USD only</div>
             )}
+            <div className="text-sm text-white/80 mt-2">incl. all taxes</div>
           </div>
 
           {/* CTA Button */}
           <button
             onClick={handleEnroll}
-            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-yellow-200 text-[#000000] font-black text-base sm:text-lg md:text-xl rounded-xl mb-4 sm:mb-6 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center gap-2"
+            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-yellow-200 text-[#000000] font-black text-xl sm:text-2xl md:text-3xl rounded-xl mb-4 sm:mb-6 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center gap-2"
             style={{ cursor: 'pointer' }}
           >
-            CONTINUE TO CHECKOUT
-            <span className="text-xl sm:text-2xl">→</span>
+            CHECKOUT
+            <span className="text-2xl sm:text-3xl">→</span>
           </button>
 
           {/* Payment Methods */}

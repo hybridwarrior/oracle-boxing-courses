@@ -49,14 +49,21 @@ export const PRODUCT_PRICES: Record<string, Record<Currency, number>> = {
   coach1: { USD: 397, GBP: 317, EUR: 365, AUD: 595, CAD: 538, AED: 1465 },
   coach3: { USD: 1500, GBP: 1197, EUR: 1380, AUD: 2247, CAD: 2033, AED: 5532 },
   coach_archive: { USD: 67, GBP: 54, EUR: 62, AUD: 100, CAD: 90, AED: 250 },
+  // Membership pricing (using same exchange rates as other products)
+  memq: { USD: 297, GBP: 237, EUR: 274, AUD: 448, CAD: 403, AED: 1093 },
+  mem6: { USD: 497, GBP: 396, EUR: 459, AUD: 749, CAD: 674, AED: 1829 },
+  mema: { USD: 897, GBP: 715, EUR: 828, AUD: 1352, CAD: 1215, AED: 3301 },
+  // Monthly billing option (post-purchase switch)
+  mem_monthly: { USD: 97, GBP: 77, EUR: 90, AUD: 146, CAD: 131, AED: 357 },
 };
 
-// Membership products (USD only)
-export const MEMBERSHIP_PRODUCTS = ['memm', 'mem6', 'mema', 'ltall_297', 'ltall_197'];
+// Membership products - now support multi-currency
+export const MEMBERSHIP_PRODUCTS = ['memq', 'mem6', 'mema', 'ltall_297', 'ltall_197'];
 
 export const isMembershipProduct = (metadata?: string): boolean => {
   if (!metadata) return false;
-  return MEMBERSHIP_PRODUCTS.includes(metadata);
+  // Only ltall products remain USD-only
+  return metadata === 'ltall_297' || metadata === 'ltall_197';
 };
 
 export const formatPrice = (
@@ -128,16 +135,22 @@ export const getStripePriceId = (
   product: any,
   currency: Currency
 ): string => {
-  // Membership products are always USD only
-  if (isMembershipProduct(product.metadata)) {
-    return product.stripe_price_id; // Return the default USD price ID
-  }
-
   // If product has multi-currency price IDs, use them
   if (product.price_ids) {
+    // For USD, use the USD-specific price ID
+    if (currency === 'USD') {
+      return product.price_ids.usd || product.stripe_price_id;
+    }
+
+    // For other currencies, use the multicurrency price ID if available
+    const multicurrencyPriceId = product.price_ids.multicurrency;
+    if (multicurrencyPriceId) {
+      return multicurrencyPriceId;
+    }
+
+    // Legacy: check for currency-specific price IDs
     const currencyKey = currency.toLowerCase() as Lowercase<Currency>;
     const priceId = product.price_ids[currencyKey];
-
     if (priceId) {
       return priceId;
     }

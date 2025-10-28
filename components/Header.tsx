@@ -123,6 +123,21 @@ export function Header() {
           {/* Sidebar Content */}
           <nav className="flex-1 overflow-y-auto p-4 sm:p-6">
             <div className="flex flex-col space-y-4 sm:space-y-6">
+              {/* Home */}
+              <Link
+                href="/"
+                onClick={closeSidebar}
+                className="text-base sm:text-xl font-bold py-2 sm:py-3 px-3 sm:px-4 text-white relative group"
+              >
+                <span className="relative">
+                  HOME
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
+                </span>
+              </Link>
+
+              {/* Divider */}
+              <div className="border-t border-gray-700"></div>
+
               {/* Courses Section - Always Expanded */}
               <div>
                 <h3 className="text-gray-400 text-base sm:text-xl font-bold mb-3 sm:mb-4 px-3 sm:px-4">COURSES</h3>

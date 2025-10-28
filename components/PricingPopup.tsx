@@ -87,7 +87,7 @@ export function PricingPopup({ isOpen, onClose }: PricingPopupProps) {
           {/* Challenge Thumbnail */}
           <div className="flex justify-center mb-6 sm:mb-8">
             <img
-              src="https://media.oracleboxing.com/Website/skool_art.png"
+              src="https://media.oracleboxing.com/Website/skool_art.webp"
               alt="6-Week Challenge"
               className="w-full max-w-[280px] rounded-xl border-4 border-white shadow-lg"
             />
@@ -104,16 +104,17 @@ export function PricingPopup({ isOpen, onClose }: PricingPopupProps) {
               <ValuePrice usdAmount={totalValue} className="text-xl sm:text-2xl md:text-3xl font-bold opacity-60 line-through" />
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black"><ChallengePrice /></div>
             </div>
+            <div className="text-sm text-white/80 mt-2">incl. all taxes</div>
           </div>
 
           {/* CTA Button */}
           <a
             href="/checkout?product=6wc"
-            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-yellow-200 text-[#000000] font-black text-base sm:text-lg md:text-xl rounded-xl mb-4 sm:mb-6 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center gap-2"
+            className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-yellow-200 text-[#000000] font-black text-xl sm:text-2xl md:text-3xl rounded-xl mb-4 sm:mb-6 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-white transition-all duration-200 flex items-center justify-center gap-2"
             style={{ cursor: 'pointer' }}
           >
-            CONTINUE TO CHECKOUT
-            <span className="text-xl sm:text-2xl">→</span>
+            CHECKOUT
+            <span className="text-2xl sm:text-3xl">→</span>
           </a>
 
           {/* Payment Methods */}

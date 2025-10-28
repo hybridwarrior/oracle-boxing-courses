@@ -7,6 +7,7 @@ import { VideoPlayer } from '@/components/VideoPlayer'
 import { CourseStats } from '@/components/CourseStats'
 import { WhoThisIsFor } from '@/components/WhoThisIsFor'
 import { TestimonialSection } from '@/components/TestimonialSection'
+import { CoursePriceCard } from '@/components/CoursePriceCard'
 import { CourseFAQ } from '@/components/CourseFAQ'
 import { CoursePricingPopup } from '@/components/CoursePricingPopup'
 import { BundleCourseCarousel } from '@/components/BundleCourseCarousel'
@@ -161,39 +162,16 @@ export default function BundlePage() {
       <WhoThisIsFor courseName="Oracle Boxing Bundle" personas={personas} />
 
       {/* Platform Screenshots Carousel */}
-      <PlatformScreenshotsCarousel onOpenPricing={openPricingPopup} buttonText="SEE PRICING" />
+      <PlatformScreenshotsCarousel />
 
       {/* Course Cards Carousel */}
       <section id="lessons">
         <BundleCourseCarousel />
       </section>
 
-      {/* CTA After Course Cards */}
-      <section className="py-3 sm:py-8 bg-white">
-        <div className="text-center">
-          <a
-            href="#pricing"
-            onClick={openPricingPopup}
-            className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-          >
-            SEE PRICING
-          </a>
-        </div>
-      </section>
-
       {/* Timeline Process */}
       <section id="overview">
-        <BundleTimelineProcess
-          cta={
-            <a
-              href="#pricing"
-              onClick={openPricingPopup}
-              className="inline-flex items-center justify-center py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-            >
-              SEE PRICING
-            </a>
-          }
-        />
+        <BundleTimelineProcess />
       </section>
 
       {/* Pricing Popup */}
@@ -209,34 +187,14 @@ export default function BundlePage() {
         <TestimonialSection testimonials={testimonials} />
       </div>
 
-      {/* CTA After Testimonials */}
-      <section className="py-6 sm:py-8 bg-white">
-        <div className="text-center">
-          <a
-            href="#pricing"
-            onClick={openPricingPopup}
-            className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-          >
-            SEE PRICING
-          </a>
-        </div>
-      </section>
+      {/* Inline Pricing Card */}
+      <CoursePriceCard
+        product={product}
+        features={priceFeatures}
+      />
 
       {/* FAQ */}
       <CourseFAQ courseType="bundle" />
-
-      {/* CTA After FAQ */}
-      <section className="py-6 sm:py-8 bg-white">
-        <div className="text-center">
-          <a
-            href="#pricing"
-            onClick={openPricingPopup}
-            className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-yellow-200 text-black border-4 border-black font-black text-base sm:text-lg lg:text-xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-          >
-            SEE PRICING
-          </a>
-        </div>
-      </section>
 
       <Footer />
     </div>

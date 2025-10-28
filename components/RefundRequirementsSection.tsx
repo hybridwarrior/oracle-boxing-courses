@@ -80,16 +80,18 @@ export default function RefundRequirementsSection({ onCTAClick }: RefundRequirem
         </div>
 
         {/* CTA Button */}
-        <div className="text-center mt-12">
-          <EpicCTAButton
-            size="lg"
-            className="min-h-[56px]"
-            onClick={onCTAClick}
-            trackingName="refund"
-          >
-            <span className="text-lg sm:text-xl font-black uppercase">VIEW DETAILS</span>
-          </EpicCTAButton>
-        </div>
+        {onCTAClick && (
+          <div className="text-center mt-12">
+            <EpicCTAButton
+              size="lg"
+              className="min-h-[56px]"
+              onClick={onCTAClick}
+              trackingName="refund"
+            >
+              <span className="text-lg sm:text-xl font-black uppercase">VIEW DETAILS</span>
+            </EpicCTAButton>
+          </div>
+        )}
 
       </div>
     </section>
