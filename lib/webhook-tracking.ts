@@ -3,8 +3,8 @@
 // Sends purchase data to Make.com webhook and Facebook Conversions API (server-side)
 
 const WEBHOOK_URL = 'https://hook.eu2.make.com/rmssfwgpgrbkihnly4ocxd2cf6kmfbo3';
-const FB_PIXEL_ID = '1474540100541059';
-const FB_ACCESS_TOKEN = 'EAA2BabZBcKN4BP7mscf3Tb3S7Cl6ZBQZCVtM2NDlnDeoOTc6jqibS97JuzokPUJcIaDbVbEg2Iaq83sKAgO9QCVvyit6yzHW0U9fsfXMyjLL2wxkMCRDINZCFXIgzvyudQKTqoQ7ZBDB335s4hQr8m12RpV1nBSGqrzbNZCCv6pwWyxDZBlLbk3TPSSEojkrg762QZDZD';
+const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID || '1474540100541059';
+const FB_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN || 'EAA2BabZBcKN4BP7zdm7EBpGJr6oFZCUWcei4YztbHRJXEyb2Ccy062KsatEjbzZAE65tEPZCKSntvC5dWJaT7CZCRdX0ldbpi6J5KadNwnLZACXdzZAhUIw8bYYZBFaE6bIht7qZCyOLcGezNKGxS1FBHqItE8et5dBoMsYYrUHZC5Lb6dSPWtbgWZA1dvH3Wgbw01i6wZDZD';
 const FB_CONVERSIONS_API_URL = `https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/events`;
 
 export interface PageViewData {
