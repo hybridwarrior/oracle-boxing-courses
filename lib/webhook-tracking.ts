@@ -229,7 +229,6 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
         user_data: {
           client_user_agent: getClientUserAgent(),
           ...(fbclid && { fbc: `fb.1.${eventTime}.${fbclid}` }),
-          ...(country && { country: [country.toLowerCase()] }),
         },
       };
 
@@ -323,7 +322,6 @@ export async function trackPurchase(
         user_data: {
           client_user_agent: getClientUserAgent(),
           ...(fbclid && { fbc: `fb.1.${eventTime}.${fbclid}` }),
-          ...(country && { country: [country.toLowerCase()] }),
         },
         custom_data: {
           value,
@@ -477,7 +475,6 @@ export async function trackInitiateCheckout(
           em: [email], // Email (will be hashed by Facebook)
           client_user_agent: getClientUserAgent(),
           ...(fbclid && { fbc: `fb.1.${eventTime}.${fbclid}` }),
-          ...(country && { country: [country.toLowerCase()] }),
         },
         custom_data: {
           value: valueUSD,
