@@ -194,6 +194,51 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       (window as any).fbq('track', 'PageView');
     }
 
+    // Send to Facebook Conversions API with test event code
+    try {
+      const eventData = {
+        event_name: 'PageView',
+        event_time: Math.floor(eventTime / 1000),
+        event_id: eventId,
+        event_source_url: `https://shop.oracleboxing.com${page}`,
+        action_source: 'website',
+        user_data: {
+          client_user_agent: getClientUserAgent(),
+          ...(fbclid && { fbc: `fb.1.${eventTime}.${fbclid}` }),
+          ...(country && { country: [country.toLowerCase()] }),
+        },
+      };
+
+      const payload = {
+        data: [eventData],
+        access_token: FB_ACCESS_TOKEN,
+        test_event_code: 'TEST85396',
+      };
+
+      fetch(FB_CONVERSIONS_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).then(response => {
+        if (!response.ok) {
+          response.json().then(errorData => {
+            console.error('Facebook Conversions API PageView error:', errorData);
+          });
+        } else {
+          response.json().then(result => {
+            console.log('Facebook Conversions API PageView success:', result);
+          });
+        }
+      }).catch((error) => {
+        console.error('Failed to send PageView to Facebook Conversions API:', error);
+      });
+    } catch (error) {
+      console.error('Error sending PageView to Facebook Conversions API:', error);
+    }
+
     console.log('Page view tracked:', data);
   } catch (error) {
     console.error('Error tracking page view:', error);
