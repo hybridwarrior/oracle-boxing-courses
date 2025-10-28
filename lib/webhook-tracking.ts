@@ -9,9 +9,25 @@ const FB_CONVERSIONS_API_URL = `https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/
 export interface PageViewData {
   eventType: string;
   eventId: string;
+  sessionId: string;
   date: string;
   page: string;
   referrer: string;
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+  utmContent: string | null;
+  country: string | null;
+}
+
+export interface PurchaseData {
+  eventType: string;
+  eventId: string;
+  date: string;
+  sessionId: string;
+  value: number;
+  currency: string;
+  products: string[];
   utmSource: string | null;
   utmMedium: string | null;
   utmCampaign: string | null;
@@ -24,6 +40,32 @@ export interface PageViewData {
  */
 function generateEventId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+}
+
+/**
+ * Get or create a session ID for the user
+ * Stored in localStorage and persists across page views
+ */
+function getOrCreateSessionId(): string {
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
+  try {
+    // Check if session_id already exists in localStorage
+    let sessionId = localStorage.getItem('session_id');
+
+    if (!sessionId) {
+      // Generate a new session ID: timestamp + random string
+      sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem('session_id', sessionId);
+    }
+
+    return sessionId;
+  } catch {
+    // Fallback if localStorage is not available
+    return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  }
 }
 
 /**
@@ -170,12 +212,14 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
     const utm = getUTMParameters();
     const country = await getUserCountry();
     const eventId = generateEventId();
+    const sessionId = getOrCreateSessionId();
     const eventTime = Date.now();
     const fbclid = getFbclid();
 
     const data: PageViewData = {
       eventType: 'page_view',
       eventId,
+      sessionId,
       date: new Date(eventTime).toISOString(),
       page,
       referrer,
@@ -204,5 +248,102 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
     console.log('Page view tracked:', data);
   } catch (error) {
     console.error('Error tracking page view:', error);
+  }
+}
+
+/**
+ * Send purchase/conversion data to webhook and Facebook Conversions API
+ */
+export async function trackPurchase(
+  sessionId: string,
+  value: number,
+  currency: string,
+  products: string[]
+): Promise<void> {
+  try {
+    const utm = getUTMParameters();
+    const country = await getUserCountry();
+    const eventId = generateEventId();
+    const eventTime = Date.now();
+    const fbclid = getFbclid();
+
+    const data: PurchaseData = {
+      eventType: 'purchase',
+      eventId,
+      date: new Date(eventTime).toISOString(),
+      sessionId,
+      value,
+      currency,
+      products,
+      utmSource: utm.utmSource,
+      utmMedium: utm.utmMedium,
+      utmCampaign: utm.utmCampaign,
+      utmContent: utm.utmContent,
+      country,
+    };
+
+    // Send to webhook (non-blocking)
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+      keepalive: true,
+    }).catch((error) => {
+      console.error('Failed to send purchase to webhook:', error);
+    });
+
+    // Send to Facebook Conversions API
+    try {
+      const eventData = {
+        event_name: 'Purchase',
+        event_time: Math.floor(eventTime / 1000),
+        event_id: eventId,
+        event_source_url: `https://shop.oracleboxing.com/success`,
+        action_source: 'website',
+        user_data: {
+          client_user_agent: getClientUserAgent(),
+          ...(fbclid && { fbc: `fb.1.${eventTime}.${fbclid}` }),
+          ...(country && { country: [country.toLowerCase()] }),
+        },
+        custom_data: {
+          value,
+          currency,
+          content_ids: products,
+          content_type: 'product',
+          num_items: products.length,
+        },
+      };
+
+      const payload = {
+        data: [eventData],
+        access_token: FB_ACCESS_TOKEN,
+        test_event_code: 'TEST85396',
+      };
+
+      const response = await fetch(FB_CONVERSIONS_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Facebook Conversions API Purchase error:', errorData);
+      } else {
+        const result = await response.json();
+        console.log('Facebook Conversions API Purchase success:', result);
+      }
+    } catch (error) {
+      console.error('Failed to send purchase to Facebook Conversions API:', error);
+    }
+
+    console.log('Purchase tracked:', data);
+  } catch (error) {
+    console.error('Error tracking purchase:', error);
   }
 }
