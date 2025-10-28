@@ -405,16 +405,6 @@ export async function trackInitiateCheckout(
     const firstName = nameParts[0] || '';
     const lastName = nameParts.slice(1).join(' ') || '';
 
-    console.log('💰 Initiate Checkout Tracking:', {
-      firstName,
-      lastName,
-      email,
-      valueUSD,
-      products,
-      country,
-      urlParams
-    });
-
     const data: InitiateCheckoutData = {
       eventType: 'initiate_checkout',
       eventId,
@@ -439,6 +429,9 @@ export async function trackInitiateCheckout(
       source: urlParams?.source || null,
     };
 
+    // Log the complete data being sent
+    console.log('💰 Initiate Checkout - Complete Data Being Sent:', JSON.stringify(data, null, 2));
+
     // Send to webhook (non-blocking)
     fetch(WEBHOOK_URL, {
       method: 'POST',
@@ -447,11 +440,15 @@ export async function trackInitiateCheckout(
       },
       body: JSON.stringify(data),
       keepalive: true,
+    }).then(response => {
+      if (response.ok) {
+        console.log('✅ Initiate checkout successfully sent to webhook');
+      } else {
+        console.error('❌ Webhook returned error status:', response.status);
+      }
     }).catch((error) => {
-      console.error('Failed to send initiate checkout to webhook:', error);
+      console.error('❌ Failed to send initiate checkout to webhook:', error);
     });
-
-    console.log('Initiate checkout tracked:', data);
   } catch (error) {
     console.error('Error tracking initiate checkout:', error);
   }
