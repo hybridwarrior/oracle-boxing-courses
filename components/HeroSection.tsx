@@ -55,10 +55,6 @@ export default function HeroSection({ onCTAClick, onOpenPricing }: HeroSectionPr
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-16 lg:pb-20">
         {/* Centered Text Content */}
         <div className="text-center" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
-          <div className="mb-4 sm:mb-5 inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-orange-50 to-red-50 text-orange-600 border border-orange-200 rounded-lg font-bold text-xs sm:text-sm uppercase tracking-wider">
-            {headline.badge}
-          </div>
-
           <h1
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight leading-tight px-4 max-w-5xl mx-auto mb-4 sm:mb-5"
             style={{
