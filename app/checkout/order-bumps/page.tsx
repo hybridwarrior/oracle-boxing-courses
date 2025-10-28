@@ -184,13 +184,25 @@ function OrderBumpsContent() {
     const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout/order-bumps'
     const initialReferrer = trackingParams.referrer || 'direct'
 
+    // Get URL parameters for tracking
+    const funnelParam = searchParams.get('funnel')
+    const courseParam = searchParams.get('course')
+    const currencyParam = searchParams.get('currency')
+    const sourceParam = searchParams.get('source')
+
     trackInitiateCheckout(
       name,
       email,
       totalValueUSD,
       productIds,
       currentPage,
-      initialReferrer
+      initialReferrer,
+      {
+        funnel: funnelParam,
+        course: courseParam,
+        currency: currencyParam,
+        source: sourceParam,
+      }
     )
 
     try {

@@ -125,7 +125,13 @@ export default function CheckoutPage() {
         priceUSD,
         [productParam],
         currentPage,
-        initialReferrer
+        initialReferrer,
+        {
+          funnel: null, // Not applicable on main checkout page
+          course: null, // Not applicable on main checkout page
+          currency: currency,
+          source: sourceParam,
+        }
       )
 
       // 6WC → Order bumps

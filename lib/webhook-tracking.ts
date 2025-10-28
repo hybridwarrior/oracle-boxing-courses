@@ -53,6 +53,11 @@ export interface InitiateCheckoutData {
   utmMedium: string | null;
   utmCampaign: string | null;
   utmContent: string | null;
+  // URL parameters
+  funnel?: string | null;
+  course?: string | null;
+  currency?: string | null;
+  source?: string | null;
 }
 
 /**
@@ -371,7 +376,13 @@ export async function trackInitiateCheckout(
   valueUSD: number,
   products: string[],
   page: string,
-  initialReferrer: string | null
+  initialReferrer: string | null,
+  urlParams?: {
+    funnel?: string | null;
+    course?: string | null;
+    currency?: string | null;
+    source?: string | null;
+  }
 ): Promise<void> {
   try {
     const utm = getUTMParameters();
@@ -402,6 +413,11 @@ export async function trackInitiateCheckout(
       utmMedium: utm.utmMedium,
       utmCampaign: utm.utmCampaign,
       utmContent: utm.utmContent,
+      // URL parameters
+      funnel: urlParams?.funnel || null,
+      course: urlParams?.course || null,
+      currency: urlParams?.currency || null,
+      source: urlParams?.source || null,
     };
 
     // Send to webhook (non-blocking)
