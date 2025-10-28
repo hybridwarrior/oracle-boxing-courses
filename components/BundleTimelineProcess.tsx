@@ -14,7 +14,7 @@ export function BundleTimelineProcess({ cta }: BundleTimelineProcessProps) {
       content: (
         <div>
           <p className="text-gray-800 text-sm md:text-base font-normal mb-8">
-            Start with Boxing from First Principles to build a deep understanding of the conceptual framework, mechanics, tactics, and mental game that underpin elite boxing.
+            Start with Boxing Masterclass to build a deep understanding of the conceptual framework, mechanics, tactics, and mental game that underpin elite boxing.
           </p>
           <div className="mb-8 space-y-2">
             <div className="flex items-start gap-3">

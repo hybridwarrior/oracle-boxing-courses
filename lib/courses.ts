@@ -43,7 +43,7 @@ All 2024–2025 replays (Jan → Oct) + archives from the Boxing Clinic category
   },
   {
     id: 'boxing-from-first-principles',
-    title: 'Boxing from First Principles',
+    title: 'Boxing Masterclass',
     price: 297,
     image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn.webp',
     description: `**SENTIENCE — The Mind of the Fighter**
@@ -86,11 +86,11 @@ Build the engine that powers it all. Train breathing, conditioning, nervous syst
     title: 'Complete Bundle',
     price: 397,
     image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn.webp',
-    description: `**Get everything. Master boxing from first principles to real application.**
+    description: `**Get everything. Master the complete boxing system from fundamentals to real application.**
 
 **This bundle includes:**
 • Boxing Coaching Replays ($97)
-• Boxing from First Principles ($297)
+• Boxing Masterclass ($297)
 • Boxing Roadmap ($147)
 
 **Total value: $541**

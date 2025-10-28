@@ -4,9 +4,10 @@ import { EpicCTAButton } from '@/components/EpicCTAButton';
 
 interface TestimonialsWithMediaSectionProps {
   onCTAClick?: () => void;
+  onOpenPricing?: () => void;
 }
 
-export default function TestimonialsWithMediaSection({ onCTAClick }: TestimonialsWithMediaSectionProps) {
+export default function TestimonialsWithMediaSection({ onCTAClick, onOpenPricing }: TestimonialsWithMediaSectionProps) {
   return (
     <section className="w-full pt-12 pb-24 sm:py-28 lg:py-36 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +35,7 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
                       Founder of Samurai Movement Academy, BJJ Purple Belt, Self-Defense Instructor
                     </p>
                     <p className="text-gray-500 text-xs mt-0.5 sm:mt-1 italic">
-                      Boxing from First Principles Course
+                      Boxing Masterclass Course
                     </p>
                   </div>
                 </div>
@@ -47,7 +48,7 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
           <div className="relative rounded-xl overflow-hidden lg:max-w-md lg:mx-auto" style={{ aspectRatio: '16/9' }}>
             <img
               src="https://media.oracleboxing.com/webp/Website/laptop_mockup.webp"
-              alt="Boxing from First Principles Course"
+              alt="Boxing Masterclass Course"
               className="w-full h-full object-contain"
             />
           </div>
@@ -140,7 +141,10 @@ export default function TestimonialsWithMediaSection({ onCTAClick }: Testimonial
           <EpicCTAButton
             size="lg"
             className="min-h-[56px]"
-            onClick={onCTAClick}
+            onClick={() => {
+              if (onOpenPricing) onOpenPricing()
+              if (onCTAClick) onCTAClick()
+            }}
             trackingName="testimonials"
           >
             <span className="text-lg sm:text-xl font-black uppercase">Start Challenge</span>

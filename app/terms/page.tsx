@@ -53,7 +53,7 @@ export default function TermsPage() {
             </p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
               <li>Boxing Coaching Replays - Group coaching call recordings</li>
-              <li>Boxing from First Principles - Comprehensive boxing course</li>
+              <li>Boxing Masterclass - Comprehensive boxing course</li>
               <li>Boxing Roadmap - 5-phase training system</li>
               <li>Access to our private Skool community platform</li>
               <li>Digital course materials and video content</li>

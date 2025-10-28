@@ -76,10 +76,10 @@ function OrderBumpsContent() {
 
     // Load appropriate add-ons based on funnel type
     if (funnelParam === 'course') {
-      // Course funnel: Show Oracle Boxing Method bundle upgrade
+      // Course funnel: Show Oracle Boxing Bundle upgrade
       setOrderBumps(getCourseOrderBump())
     } else {
-      // 6WC funnel: Show Recordings Vault + Lifetime BFFP
+      // 6WC funnel: Show Recordings Vault + Lifetime Masterclass
       setOrderBumps(get6WCAddOns())
     }
   }, [searchParams, router])

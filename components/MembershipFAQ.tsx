@@ -11,7 +11,7 @@ interface FAQItem {
 const membershipFaqData: FAQItem[] = [
   {
     question: "What is included in the Full Access Membership?",
-    answer: "Your membership gives you complete access to:\n\n• All Oracle Boxing Courses (including Boxing from First Principles, Boxing Roadmap, and The Vault)\n• Live Coaching Calls every week with Oliver, Toni, and guest coaches\n• Video Feedback Reviews – upload your training clips for breakdowns and corrections\n• Private Skool Community of 300+ boxers, with leaderboards, challenges, and feedback threads\n• Recording Vault – every live call, workshop, and 1:1 session archive\n• Daily Access to the Founders via the Ask Oliver and Win of the Day categories"
+    answer: "Your membership gives you complete access to:\n\n• All Oracle Boxing Courses (including Boxing Masterclass, Boxing Roadmap, and The Vault)\n• Live Coaching Calls every week with Oliver, Toni, and guest coaches\n• Video Feedback Reviews – upload your training clips for breakdowns and corrections\n• Private Skool Community of 300+ boxers, with leaderboards, challenges, and feedback threads\n• Recording Vault – every live call, workshop, and 1:1 session archive\n• Daily Access to the Founders via the Ask Oliver and Win of the Day categories"
   },
   {
     question: "How is this different from the 6-Week Challenge?",
@@ -63,7 +63,7 @@ const membershipFaqData: FAQItem[] = [
   },
   {
     question: "What's the best way to get started?",
-    answer: "Once you join:\n\n• Introduce yourself in the Introductions category (with a short shadowboxing clip)\n• Start the Boxing from First Principles course in the Classroom\n• Book your first live call or post your first clip for feedback\n\nStill have questions?\nEmail team@oracleboxing.com or DM the founders inside Skool — we'll get you sorted."
+    answer: "Once you join:\n\n• Introduce yourself in the Introductions category (with a short shadowboxing clip)\n• Start the Boxing Masterclass course in the Classroom\n• Book your first live call or post your first clip for feedback\n\nStill have questions?\nEmail team@oracleboxing.com or DM the founders inside Skool — we'll get you sorted."
   }
 ]
 

@@ -31,10 +31,10 @@ Last updated: 2025-10-23
 
 | Product | ID | Metadata | Product ID | Price ID (USD) | Price |
 |---------|-----|----------|------------|----------------|-------|
-| **Boxing from First Principles** | `bffp` | `bffp` | `prod_THsl9Np6lVlAPp` | `price_1SLLMGQNEdHwdojXcJB9yqAt` | $297 |
+| **Boxing Masterclass** | `bffp` | `bffp` | `prod_THsl9Np6lVlAPp` | `price_1SLLMGQNEdHwdojXcJB9yqAt` | $297 |
 | **Boxing Roadmap** | `roadmap` | `brdmp` | `prod_THsnVY468QZZqW` | `price_1SLLNdQNEdHwdojXYN9j0mFy` | $147 |
 | **Boxing Clinic Replays** | `vault` | `clnc` | `prod_THso4C0K2pcDZe` | `price_1SLLQNQNEdHwdojXR5ubxHB4` | $97 |
-| **The Oracle Boxing Method (Bundle)** | `bundle` | `obm` | `prod_THsui65fQm9N6o` | `price_1SLLSAQNEdHwdojXPF01j36I` | $397 |
+| **Oracle Boxing Bundle (Bundle)** | `bundle` | `obm` | `prod_THsui65fQm9N6o` | `price_1SLLSAQNEdHwdojXPF01j36I` | $397 |
 
 ### Add-On Products
 
@@ -325,10 +325,10 @@ function select1on1CoachingPriceId(context: 'membership' | 'course'): string {
 ```typescript
 // Core products
 '6wc'         → 6-Week Challenge
-'bffp'        → Boxing from First Principles
+'bffp'        → Boxing Masterclass
 'brdmp'       → Boxing Roadmap
 'clnc'        → Boxing Clinic Replays
-'obm'         → The Oracle Boxing Method (Bundle)
+'obm'         → Oracle Boxing Bundle (Bundle)
 
 // Add-ons
 'rcv'         → Recordings Vault

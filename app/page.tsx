@@ -80,7 +80,7 @@ export default function HomePage() {
                 </div>
                 <Link
                   href="/membership"
-                  className="py-3 px-6 sm:px-8 text-sm sm:text-base font-black bg-white text-black rounded-lg shadow-lg uppercase tracking-wide hover:bg-gray-100 transition-colors"
+                  className="py-3 px-6 sm:px-8 text-sm sm:text-base font-black bg-yellow-200 text-black border-4 border-black rounded-lg shadow-lg uppercase tracking-wide hover:bg-black hover:text-white transition-colors"
                 >
                   View Memberships
                 </Link>

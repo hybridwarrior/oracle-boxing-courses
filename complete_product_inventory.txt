@@ -11,7 +11,7 @@ Total Products: 14 (6 Public + 8 Internal/Upsell)
 ================================================================================
 
 --------------------------------------------------------------------------------
-1. THE ORACLE BOXING METHOD (BUNDLE)
+1. ORACLE BOXING BUNDLE (BUNDLE)
 --------------------------------------------------------------------------------
 Product ID:         bundle
 Metadata Code:      obm
@@ -30,7 +30,7 @@ Multicurrency Pricing:
   - AED: 1465
 
 --------------------------------------------------------------------------------
-2. BOXING FROM FIRST PRINCIPLES
+2. BOXING MASTERCLASS
 --------------------------------------------------------------------------------
 Product ID:         bffp
 Metadata Code:      bffp
@@ -259,7 +259,7 @@ Multicurrency Pricing:
 ================================================================================
 
 PUBLIC PRODUCTS:
-  obm           = The Oracle Boxing Method (Bundle) - $397
+  obm           = Oracle Boxing Bundle (Bundle) - $397
   bffp          = Boxing from First Principles - $297
   brdmp         = Boxing Roadmap - $147
   memm/memq     = Oracle Membership (Quarterly) - $297

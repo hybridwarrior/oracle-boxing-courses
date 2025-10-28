@@ -1,9 +1,9 @@
-# Boxing from First Principles - Course Copy
+# Boxing Masterclass - Course Copy
 
 ## Hero Section
 
 ### Course Title
-Boxing from First Principles
+Boxing Masterclass
 
 ### Main Headline
 Master Boxing From The Ground Up
@@ -150,6 +150,6 @@ Build the engine that powers it all. Train breathing, conditioning, nervous syst
 ---
 
 ## Page Metadata
-**Title:** Boxing from First Principles | Oracle Boxing Shop
+**Title:** Boxing Masterclass | Oracle Boxing Shop
 
 **Description:** Master boxing from the ground up with the complete BFFP system. Learn mind, body, mechanics, tactics, and conditioning.

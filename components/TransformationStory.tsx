@@ -45,7 +45,7 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
       content: [
         "This is it. These are the final results that I got from the last 6 weeks of this challenge. It's been a pleasure to join this community.",
         "The material is very rich in content, from videos to coaching calls, even 1-1 calls for the top 10.",
-        "The boxing from first principles course was a huge rewiring of my thinking. You could be training here and learning new things for months, maybe years! 🥶"
+        "The Boxing Masterclass course was a huge rewiring of my thinking. You could be training here and learning new things for months, maybe years! 🥶"
       ]
     },
     {

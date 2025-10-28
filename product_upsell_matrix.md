@@ -13,10 +13,10 @@ Create a clean, logical funnel system that maximises AOV and lifetime value whil
 | Offer                                   | Price                | Purpose                                                      |
 | --------------------------------------- | -------------------- | ------------------------------------------------------------ |
 | **6-Week Challenge**                    | \$197 (Refundable)   | Fast-start entry offer for rapid progress and accountability |
-| **Boxing from First Principles (BFFP)** | \$297                | Core technical system for mastering fundamentals             |
+| **Boxing Masterclass (BFFP)** | \$297                | Core technical system for mastering fundamentals             |
 | **Boxing Roadmap**                      | \$147                | Structured 5-phase progression program                       |
 | **Boxing Clinic (Replays)**             | \$97                 | Replay library of live group coaching calls                  |
-| **The Oracle Boxing Method (Bundle)**   | \$397                | Full course system (BFFP + Roadmap + Clinic)                 |
+| **Oracle Boxing Bundle (Bundle)**   | \$397                | Full course system (BFFP + Roadmap + Clinic)                 |
 | **Membership (Monthly)**                | \$97/mo (USD only)   | Access to live calls, feedback, and community                |
 | **Membership (6-Month)**                | \$497/6mo (USD only) | Commitment tier, saves \~15%                                 |
 | **Membership (Annual)**                 | \$897/yr (USD only)  | Best value, saves \~25%                                      |
@@ -28,9 +28,9 @@ Create a clean, logical funnel system that maximises AOV and lifetime value whil
 | Funnel                                | Add-On Product(s)                      | Price         | Description                                                                                                        |
 | ------------------------------------- | -------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------ |
 | **6-Week Challenge**                  | Recordings Vault                       | \$97          | Access to all group + 1-on-1 coaching call replays (updated weekly)                                                |
-|                                       | Lifetime Access to BFFP                | \$147         | Keep full access to the Boxing from First Principles course forever, even after the Challenge ends                 |
+|                                       | Lifetime Access to BFFP                | \$147         | Keep full access to the Boxing Masterclass course forever, even after the Challenge ends                 |
 | **Memberships**                       | Lifetime Access (All Courses)          | \$197 / \$297 | Permanent access to all course content. \$197 for 6-month or annual members, \$297 for monthly members. (USD only) |
-| **Courses (BFFP / Roadmap / Clinic)** | Cross-sell to The Oracle Boxing Method | \$397         | Bundle upgrade — full system at 30% savings                                                                        |
+| **Courses (BFFP / Roadmap / Clinic)** | Cross-sell to Oracle Boxing Bundle | \$397         | Bundle upgrade — full system at 30% savings                                                                        |
 | **Oracle Boxing Method**              | 6-Week Membership                      | \$97          | Temporary full access to membership (live calls, community, replays) for 6 weeks                                   |
 
 ---
@@ -53,10 +53,10 @@ Create a clean, logical funnel system that maximises AOV and lifetime value whil
 | 6-Week Challenge                                      | 6wc            | prod\_THsxtrkuzFgwk6 | price\_1SLLGdQNEdHwdojXuQpghdfH | \$197   | £157 | €182 | A\$297 | C\$267 | AED 725   |
 | Recordings Vault                                      | rcv            | prod\_THtRqY17sSwQJJ | price\_1SLLIKQNEdHwdojXkxUeIDwA | \$97    | £77  | €90  | A\$145 | C\$132 | AED 355   |
 | Lifetime Access to BFFP                               | ltbffp         | prod\_THtTT54jtb1l9c | price\_1SLLJlQNEdHwdojXKgVggogM | \$147   | £117 | €136 | A\$220 | C\$199 | AED 540   |
-| Boxing from First Principles (BFFP)                   | bffp           | prod\_THsl9Np6lVlAPp | price\_1SLLMGQNEdHwdojXcJB9yqAt | \$297   | £237 | €273 | A\$445 | C\$403 | AED 1,095 |
+| Boxing Masterclass (BFFP)                   | bffp           | prod\_THsl9Np6lVlAPp | price\_1SLLMGQNEdHwdojXcJB9yqAt | \$297   | £237 | €273 | A\$445 | C\$403 | AED 1,095 |
 | Boxing Roadmap                                        | brdmp          | prod\_THsnVY468QZZqW | price\_1SLLNdQNEdHwdojXYN9j0mFy | \$147   | £117 | €136 | A\$220 | C\$199 | AED 540   |
 | Boxing Clinic                                         | clnc           | prod\_THso4C0K2pcDZe | price\_1SLLQNQNEdHwdojXR5ubxHB4 | \$97    | £77  | €90  | A\$145 | C\$132 | AED 355   |
-| The Oracle Boxing Method                              | obm            | prod\_THsui65fQm9N6o | price\_1SLLSAQNEdHwdojXPF01j36I | \$397   | £317 | €365 | A\$595 | C\$538 | AED 1,465 |
+| Oracle Boxing Bundle                              | obm            | prod\_THsui65fQm9N6o | price\_1SLLSAQNEdHwdojXPF01j36I | \$397   | £317 | €365 | A\$595 | C\$538 | AED 1,465 |
 | 6-Week Membership                                     | 6wm            | prod\_THvKZVW9MTpheP | price\_1SLLTqQNEdHwdojXsQKz5qSZ | \$97    | £77  | €90  | A\$145 | C\$132 | AED 355   |
 | Membership (Monthly)                                  | memm           | prod\_THsviAkmOBiKx4 | price\_1SLJ9jQNEdHwdojXeX6HtBU3 | \$97/mo | —    | —    | —      | —      | —         |
 | Membership (6-Month)                                  | mem6           | prod\_THswn4xZOpBq9I | price\_1SLJAFQNEdHwdojXB8mVV0go | \$497   | —    | —    | —      | —      | —         |

@@ -7,7 +7,7 @@ import { Product, ProductType } from './types'
 export const products: Product[] = [
   {
     id: 'bundle',
-    title: 'The Oracle Boxing Method',
+    title: 'Oracle Boxing Bundle',
     price: 397,
     type: 'course',
     metadata: 'obm',
@@ -20,10 +20,10 @@ export const products: Product[] = [
     lessonCount: 225,
     lessonCountPrefix: '+',
     workoutCount: 100,
-    description: `**Get everything. Master boxing from first principles to real application.**
+    description: `**Get everything. Master the complete boxing system from fundamentals to real application.**
 
 **This bundle includes:**
-• Boxing from First Principles ($297)
+• Boxing Masterclass ($297)
 • Boxing Roadmap ($147)
 
 **Total value: $444**
@@ -34,7 +34,7 @@ Complete access to the entire Oracle Boxing system — theory, technique, and ta
   },
   {
     id: 'bffp',
-    title: 'Boxing from First Principles',
+    title: 'Boxing Masterclass',
     price: 297,
     type: 'course',
     metadata: 'bffp',
@@ -177,7 +177,7 @@ const internalProducts: Product[] = [
 Complete the challenge, get your money back. Simple as that.
 
 **What you get:**
-• Full access to Boxing from First Principles course
+• Full access to Boxing Masterclass course
 • Weekly live coaching calls with Oliver & Toni
 • Private community access and feedback
 • Structured accountability system
@@ -213,15 +213,15 @@ Perfect for beginners or boxers who want rapid improvement with accountability.`
   },
   {
     id: 'lifetime-bffp',
-    title: 'Lifetime Access to Boxing from First Principles',
+    title: 'Lifetime Access to Boxing Masterclass',
     price: 147,
     type: 'course',
     metadata: 'ltbffp',
     stripe_product_id: 'prod_THtTT54jtb1l9c',
     stripe_price_id: 'price_1SLLJlQNEdHwdojXKgVggogM',
     image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp',
-    description: `Keep the entire Boxing from First Principles course forever. Review any lesson, any time — even after your Challenge ends. Normally $297, add lifetime access today for just $147.`,
-    shortDescription: 'Keep Boxing from First Principles forever',
+    description: `Keep the entire Boxing Masterclass course forever. Review any lesson, any time — even after your Challenge ends. Normally $297, add lifetime access today for just $147.`,
+    shortDescription: 'Keep Boxing Masterclass forever',
     perfectFor: '6-Week Challenge participants who want to keep learning',
     moduleCount: 5,
     lessonCount: 26,
@@ -245,7 +245,7 @@ Get permanent access to BFFP, Roadmap, and Boxing Clinic, independent of your me
 • Anyone who wants the safety of permanent access
 
 **What you get:**
-• Lifetime access to Boxing from First Principles
+• Lifetime access to Boxing Masterclass
 • Lifetime access to Boxing Roadmap
 • Lifetime access to Boxing Clinic Replays
 • All future course updates included
@@ -273,7 +273,7 @@ As a 6-month or annual member, get permanent access to all courses at a special 
 • Anyone who values the security of lifetime access
 
 **What you get:**
-• Lifetime access to Boxing from First Principles
+• Lifetime access to Boxing Masterclass
 • Lifetime access to Boxing Roadmap
 • Lifetime access to Boxing Clinic Replays
 • All future course updates included

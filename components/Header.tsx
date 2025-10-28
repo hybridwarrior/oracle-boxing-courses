@@ -89,17 +89,6 @@ export function Header() {
               />
             </Link>
 
-            {/* Right 6WC Button - hidden when sidebar opens, hidden on mobile, and hidden on /6wc page */}
-            {pathname !== '/6wc' && (
-              <Link
-                href="/6wc"
-                className={`hidden sm:block px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-white text-white text-xs sm:text-base font-black rounded-lg uppercase tracking-wide hover:bg-white hover:text-black transition-opacity duration-300 ${
-                  sidebarOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
-                }`}
-              >
-                6-WEEK CHALLENGE
-              </Link>
-            )}
           </div>
         </div>
 
@@ -141,35 +130,32 @@ export function Header() {
                   <Link
                     href="/courses/bundle"
                     onClick={closeSidebar}
-                    className={`text-sm sm:text-lg py-2 sm:py-3 px-3 sm:px-4 rounded-md transition-all duration-200 ${
-                      pathname === '/courses/bundle'
-                        ? 'text-white font-bold'
-                        : 'text-white font-semibold hover:text-black hover:bg-white'
-                    }`}
+                    className="text-sm sm:text-lg py-2 sm:py-3 px-3 sm:px-4 text-white font-semibold relative group uppercase"
                   >
-                    The Oracle Boxing Method
+                    <span className="relative">
+                      Oracle Boxing Bundle
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
                   </Link>
                   <Link
                     href="/courses/bffp"
                     onClick={closeSidebar}
-                    className={`text-sm sm:text-lg font-semibold py-2 sm:py-3 px-3 sm:px-4 rounded-md transition-all duration-200 ${
-                      pathname === '/courses/bffp'
-                        ? 'text-black bg-white'
-                        : 'text-white hover:text-black hover:bg-white'
-                    }`}
+                    className="text-sm sm:text-lg py-2 sm:py-3 px-3 sm:px-4 text-white font-semibold relative group uppercase"
                   >
-                    Boxing from First Principles
+                    <span className="relative">
+                      Boxing Masterclass
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
                   </Link>
                   <Link
                     href="/courses/roadmap"
                     onClick={closeSidebar}
-                    className={`text-sm sm:text-lg font-semibold py-2 sm:py-3 px-3 sm:px-4 rounded-md transition-all duration-200 ${
-                      pathname === '/courses/roadmap'
-                        ? 'text-black bg-white'
-                        : 'text-white hover:text-black hover:bg-white'
-                    }`}
+                    className="text-sm sm:text-lg py-2 sm:py-3 px-3 sm:px-4 text-white font-semibold relative group uppercase"
                   >
-                    Boxing Roadmap
+                    <span className="relative">
+                      Boxing Roadmap
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
                   </Link>
                 </div>
               </div>
@@ -181,13 +167,12 @@ export function Header() {
               <Link
                 href="/membership"
                 onClick={closeSidebar}
-                className={`text-base sm:text-xl font-bold py-2 sm:py-3 px-3 sm:px-4 rounded-md transition-all duration-200 ${
-                  isActive('/membership')
-                    ? 'text-black bg-white'
-                    : 'text-white hover:text-black hover:bg-white'
-                }`}
+                className="text-base sm:text-xl font-bold py-2 sm:py-3 px-3 sm:px-4 text-white relative group"
               >
-                MEMBERSHIP
+                <span className="relative">
+                  MEMBERSHIP
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
+                </span>
               </Link>
 
               {/* Divider */}
@@ -197,26 +182,35 @@ export function Header() {
               <Link
                 href="/6wc"
                 onClick={closeSidebar}
-                className="px-3 sm:px-4 py-2 sm:py-3 border-2 border-white text-white text-sm sm:text-lg font-black rounded-lg uppercase tracking-wide hover:bg-white hover:text-black transition-colors text-center"
+                className="text-base sm:text-xl font-bold py-2 sm:py-3 px-3 sm:px-4 text-white relative group uppercase"
               >
-                6-WEEK CHALLENGE
+                <span className="relative">
+                  6-WEEK CHALLENGE
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                </span>
               </Link>
 
               {/* Newsletter */}
               <Link
                 href="/#newsletter"
                 onClick={closeSidebar}
-                className="text-sm sm:text-base font-semibold py-1.5 sm:py-2 px-3 sm:px-4 rounded-md transition-all duration-200 text-gray-400 hover:text-white text-left"
+                className="text-sm sm:text-base font-semibold py-1.5 sm:py-2 px-3 sm:px-4 text-gray-400 relative group text-left"
               >
-                NEWSLETTER
+                <span className="relative inline-block">
+                  NEWSLETTER
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
+                </span>
               </Link>
 
               {/* Contact */}
               <a
                 href="mailto:team@oracleboxing.com"
-                className="text-sm sm:text-base font-semibold py-1.5 sm:py-2 px-3 sm:px-4 rounded-md transition-all duration-200 text-gray-400 hover:text-white text-left"
+                className="text-sm sm:text-base font-semibold py-1.5 sm:py-2 px-3 sm:px-4 text-gray-400 relative group text-left"
               >
-                CONTACT
+                <span className="relative inline-block">
+                  CONTACT
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
+                </span>
               </a>
             </div>
           </nav>

@@ -38,7 +38,12 @@ const screenshots: Screenshot[] = [
   }
 ]
 
-export function PlatformScreenshotsCarousel() {
+interface PlatformScreenshotsCarouselProps {
+  onOpenPricing?: () => void;
+  buttonText?: string;
+}
+
+export function PlatformScreenshotsCarousel({ onOpenPricing, buttonText = "Start Challenge" }: PlatformScreenshotsCarouselProps = {}) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const currentIndexRef = useRef(0)
@@ -158,8 +163,9 @@ export function PlatformScreenshotsCarousel() {
             size="lg"
             className="min-h-[44px] sm:min-h-[56px]"
             trackingName="platform-screenshots"
+            onClick={onOpenPricing}
           >
-            <span className="text-base sm:text-xl font-black uppercase">I Want Access</span>
+            <span className="text-base sm:text-xl font-black uppercase">{buttonText}</span>
           </EpicCTAButton>
         </div>
       </div>

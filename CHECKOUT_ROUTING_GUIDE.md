@@ -23,7 +23,7 @@ This document explains exactly how each product purchase flows through the check
 
 #### Courses
 
-**The Oracle Boxing Method (Bundle)**
+**Oracle Boxing Bundle (Bundle)**
 - **Product ID:** `bundle`
 - **Stripe Product ID:** `prod_THsui65fQm9N6o`
 - **Stripe Price ID:** `price_1SLLSAQNEdHwdojXPF01j36I`
@@ -31,7 +31,7 @@ This document explains exactly how each product purchase flows through the check
 - **Metadata:** `obm`
 - **Checkout Flow:** Direct to Stripe (no order bumps)
 
-**Boxing from First Principles (BFFP)**
+**Boxing Masterclass (BFFP)**
 - **Product ID:** `bffp`
 - **Stripe Product ID:** `prod_THsl9Np6lVlAPp`
 - **Stripe Price ID:** `price_1SLLMGQNEdHwdojXcJB9yqAt`

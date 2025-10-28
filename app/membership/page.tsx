@@ -132,7 +132,7 @@ export default function MembershipsPage() {
     },
     {
       question: "What's the difference between membership and the courses?",
-      answer: "Courses (like BFFP and The Oracle Boxing Method) teach the system — membership is where you train the system under live guidance and feedback."
+      answer: "Courses (like BFFP and Oracle Boxing Bundle) teach the system — membership is where you train the system under live guidance and feedback."
     },
     {
       question: "What are the membership tiers?",
@@ -197,9 +197,9 @@ export default function MembershipsPage() {
                   e.preventDefault()
                   document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-[#000000] text-white font-black text-base sm:text-lg rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+                className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
               >
-                BUY NOW
+                JOIN NOW
               </a>
             </div>
 
@@ -288,9 +288,9 @@ export default function MembershipsPage() {
                 e.preventDefault()
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+              className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              BUY NOW
+              JOIN NOW
             </a>
           </div>
         </div>
@@ -323,7 +323,7 @@ export default function MembershipsPage() {
                         Founder of Samurai Movement Academy, BJJ Purple Belt, Self-Defense Instructor
                       </p>
                       <p className="text-gray-500 text-xs mt-0.5 sm:mt-1 italic">
-                        Boxing from First Principles Course
+                        Boxing Masterclass Course
                       </p>
                     </div>
                   </div>
@@ -336,7 +336,7 @@ export default function MembershipsPage() {
             <div className="relative rounded-xl overflow-hidden lg:max-w-md lg:mx-auto" style={{ aspectRatio: '16/9' }}>
               <img
                 src="https://media.oracleboxing.com/webp/Website/laptop_mockup.webp"
-                alt="Boxing from First Principles Course"
+                alt="Boxing Masterclass Course"
                 className="w-full h-full object-contain"
               />
             </div>
@@ -432,9 +432,9 @@ export default function MembershipsPage() {
                 e.preventDefault()
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="inline-block py-3 sm:py-4 lg:py-5 px-8 sm:px-10 lg:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-xl shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+              className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-xl uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              BUY NOW
+              JOIN NOW
             </a>
           </div>
         </div>
@@ -519,9 +519,9 @@ export default function MembershipsPage() {
                 e.preventDefault()
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="inline-block py-3 sm:py-4 px-8 sm:px-12 bg-[#000000] text-white font-black text-base sm:text-lg lg:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none cursor-pointer"
+              className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              BUY NOW
+              JOIN NOW
             </a>
           </div>
         </div>

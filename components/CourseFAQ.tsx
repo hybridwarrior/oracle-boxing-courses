@@ -14,8 +14,8 @@ interface CourseFAQProps {
 
 const bffpFaqData: FAQItem[] = [
   {
-    question: "What is Boxing from First Principles?",
-    answer: "Boxing from First Principles (BFFP) is Oracle Boxing's flagship course — a complete, step-by-step framework for mastering boxing from the ground up. It teaches the real fundamentals most boxers never learn properly, built around a scientific and first-principles approach."
+    question: "What is Boxing Masterclass?",
+    answer: "Boxing Masterclass (BFFP) is Oracle Boxing's flagship course — a complete, step-by-step framework for mastering boxing from the ground up. It teaches the real fundamentals most boxers never learn properly, built around a scientific and first-principles approach."
   },
   {
     question: "Who is this course for?",
@@ -26,7 +26,7 @@ const bffpFaqData: FAQItem[] = [
   },
   {
     question: "What's included in the standalone version?",
-    answer: `• Full access to the complete Boxing from First Principles video course
+    answer: `• Full access to the complete Boxing Masterclass video course
 • 6 months of on-demand access (lifetime for bundle purchases)
 • HD video lessons, technical breakdowns, and guided demonstrations
 • Downloadable resources, lesson summaries, and practical assignments
@@ -71,7 +71,7 @@ Each principle builds on the last, guiding you toward complete technical and men
   },
   {
     question: "How do I access the course after purchase?",
-    answer: "After checkout, you'll receive an email with your login link and credentials. Log in using the same email used at purchase to access the Boxing from First Principles course instantly."
+    answer: "After checkout, you'll receive an email with your login link and credentials. Log in using the same email used at purchase to access the Boxing Masterclass course instantly."
   },
   {
     question: "Can I rewatch lessons after finishing?",
@@ -131,7 +131,7 @@ const roadmapFaqData: FAQItem[] = [
     answer: "Yes. The course starts from foundational concepts and gradually layers in advanced drills and tactical thinking. It's designed so even complete beginners can follow along and see rapid improvement."
   },
   {
-    question: "What's the difference between the Roadmap and Boxing from First Principles (BFFP)?",
+    question: "What's the difference between the Roadmap and Boxing Masterclass (BFFP)?",
     answer: `• BFFP teaches the deep theory, biomechanics, and principles of boxing — the why.
 • The Roadmap gives you the weekly how — the step-by-step practice plan that turns that theory into habit.
 
@@ -249,14 +249,14 @@ You can easily search by theme or coach to find what you need.`
 
 const bundleFaqData: FAQItem[] = [
   {
-    question: "What is The Oracle Boxing Method?",
-    answer: "The Oracle Boxing Method is the complete bundle of all Oracle Boxing courses — a full system that teaches boxing from the ground up through movement, tactics, and mindset. It's the ultimate package for anyone who wants to learn real boxing from first principles."
+    question: "What is Oracle Boxing Bundle?",
+    answer: "Oracle Boxing Bundle is the complete bundle of all Oracle Boxing courses — a full system that teaches boxing from the ground up through movement, tactics, and mindset. It's the ultimate package for anyone who wants to learn real boxing from first principles."
   },
   {
     question: "What's included in the bundle?",
     answer: `You get full access to:
 
-• Boxing from First Principles (BFFP) — The foundation of technical skill and understanding.
+• Boxing Masterclass (BFFP) — The foundation of technical skill and understanding.
 • Boxing Roadmap — Your 5-phase training plan to apply what you learn, week by week.
 • Boxing Clinic — Replay library of live coaching calls, corrections, and real sparring analysis.
 • Recordings Vault — Exclusive technical archives and behind-the-scenes training sessions.
@@ -264,7 +264,7 @@ const bundleFaqData: FAQItem[] = [
 Each course builds on the other to give you a complete, structured system — theory, application, and examples — all in one place.`
   },
   {
-    question: "Who is The Oracle Boxing Method for?",
+    question: "Who is Oracle Boxing Bundle for?",
     answer: `• Boxers who want to master the fundamentals properly — not just train for fitness.
 • Intermediate fighters who feel stuck and want to rebuild their form and IQ.
 • Coaches looking for a unified, principle-based system to improve their teaching.
@@ -274,7 +274,7 @@ Each course builds on the other to give you a complete, structured system — th
     question: "How does it work?",
     answer: `Once purchased, you'll unlock all courses instantly inside your Oracle Boxing portal. You can:
 
-• Start with Boxing from First Principles to learn the system
+• Start with Boxing Masterclass to learn the system
 • Follow the Boxing Roadmap to structure your training
 • Watch Boxing Clinic sessions to see real corrections applied
 • Revisit the Recordings Vault to study advanced lessons and drills
@@ -293,7 +293,7 @@ You'll have everything needed to progress like a coached fighter, even if you tr
     question: "What's the difference between this and the 6-Week Challenge or Membership?",
     answer: `• The 6-Week Challenge is a short-term accountability program with live coaching and a refund guarantee.
 • The Full Access Membership includes all courses plus live calls, feedback, and community features.
-• The Oracle Boxing Method Bundle is courses only — lifetime access to the full educational system, without coaching or community.`
+• Oracle Boxing Bundle Bundle is courses only — lifetime access to the full educational system, without coaching or community.`
   },
   {
     question: "Do I need equipment?",

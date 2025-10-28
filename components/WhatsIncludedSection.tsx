@@ -15,7 +15,7 @@ import { EpicCTAButton } from '@/components/EpicCTAButton'
 export default function WhatsIncludedSection() {
   const features = [
     {
-      title: "Boxing from First Principles",
+      title: "Boxing Masterclass",
       image: "https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp",
       description: "Master the science of boxing with our comprehensive 5-module course covering mindset, anatomy, mechanics, tactics, and conditioning."
     },

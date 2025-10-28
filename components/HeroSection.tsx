@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react'
 import { WeeklyCountdown } from '@/components/WeeklyCountdown'
 import WistiaVideo from '@/components/WistiaVideo'
 import { EpicCTAButton } from '@/components/EpicCTAButton'
-
 interface HeroSectionProps {
   onCTAClick?: (location: string) => void
+  onOpenPricing?: () => void
 }
 
-export default function HeroSection({ onCTAClick }: HeroSectionProps) {
+export default function HeroSection({ onCTAClick, onOpenPricing }: HeroSectionProps) {
   const [variant, setVariant] = useState<'A' | 'B'>('A')
 
   useEffect(() => {
@@ -42,6 +42,9 @@ export default function HeroSection({ onCTAClick }: HeroSectionProps) {
 
   // Handle CTA click
   const handleCTAClick = () => {
+    if (onOpenPricing) {
+      onOpenPricing()
+    }
     if (onCTAClick) {
       onCTAClick('hero')
     }

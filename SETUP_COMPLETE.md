@@ -23,7 +23,7 @@ Your course store is ready! Here's what's been built:
    - Image: `https://media.oracleboxing.com/Website/boxing_clinic.jpeg`
    - 140+ replay sessions description
 
-2. **Boxing from First Principles** - $297
+2. **Boxing Masterclass** - $297
    - Image: `https://media.oracleboxing.com/Website/bffp_tn.jpg`
    - 5 modules (SENTIENCE, ANATOMY, FORMIS, GAMBIT, ENGINE)
 

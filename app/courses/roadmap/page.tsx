@@ -9,20 +9,20 @@ import { WhoThisIsFor } from '@/components/WhoThisIsFor'
 import { CourseCurriculum } from '@/components/CourseCurriculum'
 import { CourseModules } from '@/components/CourseModules'
 import { TestimonialSection } from '@/components/TestimonialSection'
-import { CoursePriceCard } from '@/components/CoursePriceCard'
 import { CourseFAQ } from '@/components/CourseFAQ'
 import { CourseNavigation } from '@/components/CourseNavigation'
+import { CoursePricingPopup } from '@/components/CoursePricingPopup'
 import { getProductById } from '@/lib/products'
 import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
 
 export default function RoadmapPage() {
-  const scrollToPricing = (e: React.MouseEvent) => {
-    e.preventDefault()
-    const element = document.getElementById('pricing')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'end' })
-    }
+  const [isPricingPopupOpen, setIsPricingPopupOpen] = useState(false)
+
+  const openPricingPopup = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault()
+    setIsPricingPopupOpen(true)
   }
+
   const product = getProductById('roadmap')!
 
   const personas = [
@@ -175,14 +175,14 @@ export default function RoadmapPage() {
             />
           </div>
 
-          {/* Primary CTA - No Hover Effects */}
+          {/* Primary CTA */}
           <div className="text-center mb-4 sm:mb-8">
             <a
               href="#pricing"
-              onClick={scrollToPricing}
-              className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#000000] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              onClick={openPricingPopup}
+              className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              I'M READY
+              GET COURSE
             </a>
           </div>
         </div>
@@ -208,32 +208,61 @@ export default function RoadmapPage() {
         learningCards={learningCards}
         showButton={true}
         buttonText="JOIN NOW"
-        onButtonClick={scrollToPricing}
+        onButtonClick={openPricingPopup}
       />
 
       {/* Course Modules */}
-      <section id="lessons">
+      <div id="lessons">
         <CourseModules
           modules={modules}
           headerImage={product.image}
           showButton={true}
           buttonText="BUY NOW"
-          onButtonClick={scrollToPricing}
+          onButtonClick={openPricingPopup}
         />
-      </section>
-
-      {/* Price Card */}
-      <div id="pricing">
-        <CoursePriceCard product={product} features={priceFeatures} />
       </div>
 
+      {/* Pricing Popup */}
+      <CoursePricingPopup
+        isOpen={isPricingPopupOpen}
+        onClose={() => setIsPricingPopupOpen(false)}
+        product={product}
+        features={priceFeatures}
+      />
+
       {/* Testimonials */}
-      <section id="testimonials">
+      <div id="testimonials">
         <TestimonialSection testimonials={testimonials} />
+      </div>
+
+      {/* CTA After Testimonials */}
+      <section className="py-6 sm:py-8 bg-white">
+        <div className="text-center">
+          <a
+            href="#pricing"
+            onClick={openPricingPopup}
+            className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+          >
+            GET COURSE
+          </a>
+        </div>
       </section>
 
       {/* FAQ */}
       <CourseFAQ courseType="roadmap" />
+
+      {/* CTA After FAQ */}
+      <section className="py-6 sm:py-8 bg-white">
+        <div className="text-center">
+          <a
+            href="#pricing"
+            onClick={openPricingPopup}
+            className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+          >
+            GET COURSE
+          </a>
+        </div>
+      </section>
 
       <Footer />
     </div>

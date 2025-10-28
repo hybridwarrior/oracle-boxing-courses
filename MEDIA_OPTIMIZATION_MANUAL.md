@@ -127,7 +127,7 @@ Multiple videos loaded dynamically with pattern: `https://media.oracleboxing.com
 
 **Locations:** lib/products.ts:16, 261, 289
 
-##### BFFP (Boxing from First Principles) Images
+##### BFFP (Boxing Masterclass) Images
 | File | Current Format | Usage | Priority |
 |------|---------------|-------|----------|
 | `bffp_tn5.png` | PNG | Product thumbnail | 🔴 HIGH |

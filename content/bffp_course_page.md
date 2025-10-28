@@ -1,10 +1,10 @@
-# Boxing from First Principles - Course Copy (Simplified)
+# Boxing Masterclass - Course Copy (Simplified)
 
 ## Hero Section
 
 ### Course Title
 
-Boxing from First Principles
+Boxing Masterclass
 
 ### Main Headline
 
@@ -29,13 +29,13 @@ The deepest truths of the sweet science—boiled down to their simplest form.
 **300+ Students**\
 **Lifetime Access**
 
-Boxing from First Principles takes the most complex ideas in boxing and makes them simple. You’ll see how everything connects—from thought to movement—so you can build real skill faster, without confusion.
+Boxing Masterclass takes the most complex ideas in boxing and makes them simple. You’ll see how everything connects—from thought to movement—so you can build real skill faster, without confusion.
 
 ---
 
 ## Who This Is For
 
-Boxing from First Principles is for:
+Boxing Masterclass is for:
 
 **The Thinking Boxer**\
 Analytical. Curious. You question everything and crave understanding. You break things down until they make sense and won’t settle for half-truths.
@@ -125,6 +125,6 @@ Yes. Try it for 30 days. If it’s not for you, get a full refund.
 
 ## Page Metadata
 
-**Title:** Boxing from First Principles | Oracle Boxing\
+**Title:** Boxing Masterclass | Oracle Boxing\
 **Description:** The deepest truths of the sweet science—boiled down to timeless fundamentals for faster learning and complete understanding.
 

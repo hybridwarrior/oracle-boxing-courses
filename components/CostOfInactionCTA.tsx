@@ -5,9 +5,10 @@ import { EpicCTAButton } from '@/components/EpicCTAButton'
 
 interface CostOfInactionCTAProps {
   onCTAClick?: () => void;
+  onOpenPricing?: () => void;
 }
 
-export default function CostOfInactionCTA({ onCTAClick }: CostOfInactionCTAProps) {
+export default function CostOfInactionCTA({ onCTAClick, onOpenPricing }: CostOfInactionCTAProps) {
   const fitnessBoxing = [
     "Drive an hour",
     "Drill bad habits",
@@ -69,10 +70,25 @@ export default function CostOfInactionCTA({ onCTAClick }: CostOfInactionCTAProps
         </div>
 
         {/* Closing Statement */}
-        <div className="text-center">
+        <div className="text-center mb-8 sm:mb-12">
           <p className="text-base sm:text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto text-gray-600">
             Less effort. Better results.
           </p>
+        </div>
+
+        {/* CTA Button */}
+        <div className="text-center">
+          <EpicCTAButton
+            size="lg"
+            className="min-h-[56px]"
+            onClick={() => {
+              if (onOpenPricing) onOpenPricing()
+              if (onCTAClick) onCTAClick()
+            }}
+            trackingName="cost-of-inaction"
+          >
+            <span className="text-lg sm:text-xl font-black uppercase">Start Challenge</span>
+          </EpicCTAButton>
         </div>
       </div>
     </section>

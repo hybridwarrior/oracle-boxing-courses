@@ -24,7 +24,7 @@ interface BundleCourse {
 const courses: BundleCourse[] = [
   {
     id: 'bffp',
-    title: 'Boxing from First Principles',
+    title: 'Boxing Masterclass',
     valueMetadata: 'bffp', // Maps to PRODUCT_PRICES in currency.ts
     image: 'https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp',
     description: 'The science of boxing, made simple. Master the conceptual framework of boxing through mind, body mechanics, tactics, and conditioning.',
@@ -146,7 +146,7 @@ export function BundleCourseCarousel() {
 
         {/* Subtitle */}
         <p className="text-sm sm:text-xl text-black mb-4 sm:mb-12 text-center max-w-4xl mx-auto leading-relaxed">
-          Combining the theoretical mastery of Boxing from First Principles, the structured progression of the Boxing Roadmap, and the practical wisdom of the Boxing Clinic, this bundle creates a complete toolkit for becoming a seriously good boxer.
+          Combining the theoretical mastery of Boxing Masterclass, the structured progression of the Boxing Roadmap, and the practical wisdom of the Boxing Clinic, this bundle creates a complete toolkit for becoming a seriously good boxer.
         </p>
 
         {/* Desktop: 3-column grid | Mobile: horizontal scroll */}

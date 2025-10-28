@@ -127,24 +127,26 @@ export function EpicCTAButton({
   const sizeClasses = {
     sm: "min-h-9 px-5 text-sm py-1.5",
     md: "min-h-10 px-6 text-sm py-1.5",
-    lg: "py-2 sm:py-3 px-8 sm:px-12 text-base sm:text-lg lg:text-xl"
+    lg: "py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 text-lg sm:text-xl lg:text-2xl"
   };
 
   const buttonContent = (
     <>
-      <span className="font-bold">{children}</span>
+      <span className="font-black">{children}</span>
     </>
   );
 
   const buttonClasses = cn(
     "inline-flex items-center justify-center",
-    "bg-[#000000] hover:bg-[#1a1a1a]",
-    "text-white font-bold",
+    "bg-yellow-200 hover:bg-black",
+    "text-black hover:text-white font-black",
+    "border-4 border-black",
     "rounded-lg",
-    "transition-all duration-200 ease-out",
-    "transform hover:scale-[1.02]",
-    "shadow-md hover:shadow-lg",
+    "transition-colors duration-300",
+    "shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
     "cursor-pointer",
+    "animate-bounce-subtle",
+    "uppercase tracking-wide",
     sizeClasses[size],
     className
   );

@@ -7,9 +7,9 @@ import { VideoPlayer } from '@/components/VideoPlayer'
 import { CourseStats } from '@/components/CourseStats'
 import { WhoThisIsFor } from '@/components/WhoThisIsFor'
 import { TestimonialSection } from '@/components/TestimonialSection'
-import { CoursePriceCard } from '@/components/CoursePriceCard'
 import { CourseFAQ } from '@/components/CourseFAQ'
 import { CourseNavigation } from '@/components/CourseNavigation'
+import { CoursePricingPopup } from '@/components/CoursePricingPopup'
 import { BundleCourseCarousel } from '@/components/BundleCourseCarousel'
 import { BundleTimelineProcess } from '@/components/BundleTimelineProcess'
 import { PlatformScreenshotsCarousel } from '@/components/PlatformScreenshotsCarousel'
@@ -20,13 +20,13 @@ import { getProductPrice, formatPrice } from '@/lib/currency'
 
 export default function BundlePage() {
   const { currency } = useCurrency()
-  const scrollToPricing = (e: React.MouseEvent) => {
-    e.preventDefault()
-    const element = document.getElementById('pricing')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'end' })
-    }
+  const [isPricingPopupOpen, setIsPricingPopupOpen] = useState(false)
+
+  const openPricingPopup = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault()
+    setIsPricingPopupOpen(true)
   }
+
   const product = getProductById('bundle')!
 
   const personas = [
@@ -58,7 +58,7 @@ export default function BundlePage() {
   const faqs = [
     {
       question: "What exactly is included in the bundle?",
-      answer: "You get complete lifetime access to all three courses: Boxing from First Principles (150 lessons, $297 value), Boxing Roadmap (75 lessons, $147 value), and Coaching Call Replays (140+ sessions, $97 value). Total value $541 for just $397,you save $144."
+      answer: "You get complete lifetime access to all three courses: Boxing Masterclass (150 lessons, $297 value), Boxing Roadmap (75 lessons, $147 value), and Coaching Call Replays (140+ sessions, $97 value). Total value $541 for just $397,you save $144."
     },
     {
       question: "Can I access all courses immediately?",
@@ -66,7 +66,7 @@ export default function BundlePage() {
     },
     {
       question: "Which course should I start with?",
-      answer: "Most students start with BFFP to build the conceptual foundation, then move to Roadmap for practical drills, while using the Vault to supplement both. But you can start anywhere,they all work together."
+      answer: "Most students start with the Masterclass to build the conceptual foundation, then move to Roadmap for practical drills, while using the Vault to supplement both. But you can start anywhere,they all work together."
     },
     {
       question: "Is this better value than buying individually?",
@@ -95,7 +95,7 @@ export default function BundlePage() {
   const savings = totalIndividualPrice - bundlePrice
 
   const priceFeatures = [
-    `Boxing from First Principles (${formatPrice(bffpPrice, currency)})`,
+    `Boxing Masterclass (${formatPrice(bffpPrice, currency)})`,
     `Boxing Roadmap (${formatPrice(roadmapPrice, currency)})`,
     `Coaching Call Replays (${formatPrice(replaysPrice, currency)})`,
     "Lifetime access to all courses",
@@ -116,7 +116,7 @@ export default function BundlePage() {
           <div className="inline-block mx-auto mb-4 sm:mb-8 w-full text-center">
             <div className="inline-block border-2 border-black rounded-full px-3 sm:px-6 py-1 sm:py-2">
               <h1 className="text-xs sm:text-base md:text-lg text-gray-900 uppercase tracking-wide font-medium" style={{ fontFamily: "var(--font-satoshi)" }}>
-                The Oracle Boxing Method
+                Oracle Boxing Bundle
               </h1>
             </div>
           </div>
@@ -130,18 +130,18 @@ export default function BundlePage() {
           <div className="mb-4 sm:mb-8">
             <VideoPlayer
               thumbnail={product.image}
-              title="The Oracle Boxing Method Overview"
+              title="Oracle Boxing Bundle Overview"
             />
           </div>
 
-          {/* Primary CTA - No Hover Effects */}
+          {/* Primary CTA */}
           <div className="text-center mb-4 sm:mb-8">
             <a
               href="#pricing"
-              onClick={scrollToPricing}
-              className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#000000] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              onClick={openPricingPopup}
+              className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              I WANT ACCESS
+              GET COURSES
             </a>
           </div>
         </div>
@@ -160,10 +160,10 @@ export default function BundlePage() {
       </section>
 
       {/* Who This Is For */}
-      <WhoThisIsFor courseName="The Oracle Boxing Method" personas={personas} />
+      <WhoThisIsFor courseName="Oracle Boxing Bundle" personas={personas} />
 
       {/* Platform Screenshots Carousel */}
-      <PlatformScreenshotsCarousel />
+      <PlatformScreenshotsCarousel onOpenPricing={openPricingPopup} buttonText="Get Courses" />
 
       {/* Course Cards Carousel */}
       <section id="lessons">
@@ -175,10 +175,10 @@ export default function BundlePage() {
         <div className="text-center">
           <a
             href="#pricing"
-            onClick={scrollToPricing}
-            className="inline-block py-2.5 sm:py-4 px-6 sm:px-12 bg-[#000000] text-white font-black text-base sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+            onClick={openPricingPopup}
+            className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
           >
-            I WANT ACCESS
+            GET COURSES
           </a>
         </div>
       </section>
@@ -189,27 +189,56 @@ export default function BundlePage() {
           cta={
             <a
               href="#pricing"
-              onClick={scrollToPricing}
-              className="inline-flex items-center justify-center py-2 sm:py-4 px-5 sm:px-12 bg-[#000000] text-white font-black text-sm sm:text-xl rounded-lg shadow-lg uppercase tracking-wide transition-none min-h-[44px]"
+              onClick={openPricingPopup}
+              className="inline-flex items-center justify-center py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
-              I WANT ACCESS
+              GET COURSES
             </a>
           }
         />
       </section>
 
-      {/* Price Card */}
-      <div id="pricing">
-        <CoursePriceCard product={product} features={priceFeatures} />
-      </div>
+      {/* Pricing Popup */}
+      <CoursePricingPopup
+        isOpen={isPricingPopupOpen}
+        onClose={() => setIsPricingPopupOpen(false)}
+        product={product}
+        features={priceFeatures}
+      />
 
       {/* Testimonials */}
-      <section id="testimonials">
+      <div id="testimonials">
         <TestimonialSection testimonials={testimonials} />
+      </div>
+
+      {/* CTA After Testimonials */}
+      <section className="py-6 sm:py-8 bg-white">
+        <div className="text-center">
+          <a
+            href="#pricing"
+            onClick={openPricingPopup}
+            className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+          >
+            GET COURSES
+          </a>
+        </div>
       </section>
 
       {/* FAQ */}
       <CourseFAQ courseType="bundle" />
+
+      {/* CTA After FAQ */}
+      <section className="py-6 sm:py-8 bg-white">
+        <div className="text-center">
+          <a
+            href="#pricing"
+            onClick={openPricingPopup}
+            className="inline-block py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black border-4 border-black font-black text-lg sm:text-xl lg:text-2xl rounded-lg uppercase tracking-wide cursor-pointer animate-bounce-subtle hover:bg-black hover:text-white transition-colors duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+          >
+            GET COURSES
+          </a>
+        </div>
+      </section>
 
       <Footer />
     </div>

@@ -233,7 +233,7 @@ export function buildProductsList(data: PurchaseData): Array<{
   
   if (data.has_lifetime_access) {
     items.push({
-      item_name: 'Lifetime Access - Boxing from First Principles',
+      item_name: 'Lifetime Access - Boxing Masterclass',
       price: 97,
       quantity: 1
     });

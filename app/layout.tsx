@@ -3,8 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Oracle Boxing Shop | Premium Boxing Courses & Training",
-  description: "Shop premium boxing courses, coaching replays, and the complete Boxing from First Principles system. Learn from expert coaches Oliver & Toni.",
-  keywords: "boxing courses, boxing training, online boxing, boxing from first principles, boxing coaching, oracle boxing, boxing shop",
+  description: "Shop premium boxing courses, coaching replays, and the complete Boxing Masterclass system. Learn from expert coaches Oliver & Toni.",
+  keywords: "boxing courses, boxing training, online boxing, boxing masterclass, boxing coaching, oracle boxing, boxing shop",
   authors: [{ name: "Oracle Boxing" }],
   creator: "Oracle Boxing",
   publisher: "Oracle Boxing",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Oracle Boxing Shop | Premium Boxing Courses",
-    description: "Shop premium boxing courses, coaching replays, and the complete Boxing from First Principles system.",
+    description: "Shop premium boxing courses, coaching replays, and the complete Boxing Masterclass system.",
     url: 'https://shop.oracleboxing.com',
     siteName: 'Oracle Boxing Shop',
     locale: 'en_US',

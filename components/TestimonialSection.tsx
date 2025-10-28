@@ -42,23 +42,23 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-[#000000] px-3 py-2.5 rounded-lg shadow-md flex-shrink-0 w-[85vw] snap-start"
+              className="bg-yellow-200 border-4 border-black px-3 py-2.5 rounded-lg shadow-md flex-shrink-0 w-[85vw] snap-start"
             >
               {/* Rating */}
               <div className="flex gap-0.5 mb-1.5">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" strokeWidth={2} />
+                  <Star key={i} className="w-3.5 h-3.5 text-black fill-black" strokeWidth={2} />
                 ))}
               </div>
 
               {/* Content */}
-              <p className="text-xs text-white font-bold mb-1.5 leading-relaxed">
+              <p className="text-xs text-black font-bold mb-1.5 leading-relaxed">
                 "{testimonial.content}"
               </p>
 
               {/* Author */}
               <div className="text-left">
-                <div className="font-bold text-xs text-white">{testimonial.name}</div>
+                <div className="font-bold text-xs text-black">{testimonial.name}</div>
               </div>
             </div>
           ))}
@@ -70,22 +70,22 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
           {/* Left Column */}
           <div className="flex flex-col gap-3 sm:gap-5">
             {leftColumn.map((testimonial, index) => (
-              <div key={index * 2} className="bg-[#000000] px-3 sm:px-5 py-2.5 sm:py-4 rounded-lg shadow-md">
+              <div key={index * 2} className="bg-yellow-200 border-4 border-black px-3 sm:px-5 py-2.5 sm:py-4 rounded-lg shadow-md">
                 {/* Rating */}
                 <div className="flex gap-0.5 sm:gap-1 mb-1.5 sm:mb-2">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400" strokeWidth={2} />
+                    <Star key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black fill-black" strokeWidth={2} />
                   ))}
                 </div>
 
                 {/* Content */}
-                <p className="text-xs sm:text-base text-white font-bold mb-1.5 sm:mb-3 leading-relaxed">
+                <p className="text-xs sm:text-base text-black font-bold mb-1.5 sm:mb-3 leading-relaxed">
                   "{testimonial.content}"
                 </p>
 
                 {/* Author */}
                 <div className="text-left">
-                  <div className="font-bold text-xs sm:text-base text-white">{testimonial.name}</div>
+                  <div className="font-bold text-xs sm:text-base text-black">{testimonial.name}</div>
                 </div>
               </div>
             ))}
@@ -94,22 +94,22 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
           {/* Right Column */}
           <div className="flex flex-col gap-3 sm:gap-5">
             {rightColumn.map((testimonial, index) => (
-              <div key={index * 2 + 1} className="bg-[#000000] px-3 sm:px-5 py-2.5 sm:py-4 rounded-lg shadow-md">
+              <div key={index * 2 + 1} className="bg-yellow-200 border-4 border-black px-3 sm:px-5 py-2.5 sm:py-4 rounded-lg shadow-md">
                 {/* Rating */}
                 <div className="flex gap-0.5 sm:gap-1 mb-1.5 sm:mb-2">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400" strokeWidth={2} />
+                    <Star key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black fill-black" strokeWidth={2} />
                   ))}
                 </div>
 
                 {/* Content */}
-                <p className="text-xs sm:text-base text-white font-bold mb-1.5 sm:mb-3 leading-relaxed">
+                <p className="text-xs sm:text-base text-black font-bold mb-1.5 sm:mb-3 leading-relaxed">
                   "{testimonial.content}"
                 </p>
 
                 {/* Author */}
                 <div className="text-left">
-                  <div className="font-bold text-xs sm:text-base text-white">{testimonial.name}</div>
+                  <div className="font-bold text-xs sm:text-base text-black">{testimonial.name}</div>
                 </div>
               </div>
             ))}

@@ -136,6 +136,20 @@ p, span, a, label, li, td, th {
   display: none;  /* Chrome, Safari and Opera */
 }
 
+/* Subtle bounce animation for CTA buttons */
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
 /* Payment icons styling */
 .payment_icons-group {
   display: flex;

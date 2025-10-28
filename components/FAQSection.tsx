@@ -12,6 +12,7 @@ interface FAQItem {
 
 interface FAQSectionProps {
   onCTAClick?: () => void;
+  onOpenPricing?: () => void;
 }
 
 const faqData: FAQItem[] = [
@@ -26,7 +27,7 @@ const faqData: FAQItem[] = [
   {
     question: "What do I get access to?",
     answer: `• Weekly live coaching calls with Oliver, Toni, and the Oracle team
-• Access to the Boxing from First Principles course
+• Access to the Boxing Masterclass course
 • Full access to the Oracle Boxing community on Skool
 • Challenge Tracker to log your progress and stay accountable
 • Support from other boxers on the same journey`
@@ -37,7 +38,7 @@ const faqData: FAQItem[] = [
 
 • Attend 2 live calls per week (or use recordings if your timezone prevents it)
 • Submit 1 training video each week for feedback
-• Complete all 5 modules of the Boxing from First Principles course
+• Complete all 5 modules of the Boxing Masterclass course
 • Attend your mid-point and graduation check-in calls
 • Submit proof in the Challenge Tracker`
   },
@@ -81,7 +82,7 @@ const faqData: FAQItem[] = [
   }
 ]
 
-const FAQSection = ({ onCTAClick }: FAQSectionProps) => {
+const FAQSection = ({ onCTAClick, onOpenPricing }: FAQSectionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const { trackFAQExpand } = useAnalytics()
 
@@ -152,10 +153,13 @@ const FAQSection = ({ onCTAClick }: FAQSectionProps) => {
           <EpicCTAButton
             size="lg"
             className="min-h-[56px]"
-            onClick={onCTAClick}
+            onClick={() => {
+              if (onOpenPricing) onOpenPricing()
+              if (onCTAClick) onCTAClick()
+            }}
             trackingName="faq"
           >
-            <span className="text-lg sm:text-xl font-bold">Start the 6-Week Challenge →</span>
+            <span className="text-lg sm:text-xl font-black uppercase">Start Challenge</span>
           </EpicCTAButton>
         </div>
       </div>

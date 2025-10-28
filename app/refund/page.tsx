@@ -55,7 +55,7 @@ export default function RefundPage() {
             </p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
               <li>Boxing Coaching Replays</li>
-              <li>Boxing from First Principles</li>
+              <li>Boxing Masterclass</li>
               <li>Boxing Roadmap (all phases)</li>
               <li>Individual phase courses</li>
               <li>Any other digital content or course materials</li>
