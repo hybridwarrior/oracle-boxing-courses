@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { SuccessUpsellPage } from '@/components/SuccessUpsellPage';
 
+export const dynamic = 'force-dynamic'
+
 export default function SixWeekChallengeSuccessPage() {
   return (
     <Suspense fallback={
