@@ -130,11 +130,11 @@ export default function BFFPPage() {
   ]
 
   const priceFeatures = [
-    { text: "26 comprehensive lessons", bold: " across 5 modules" },
-    { text: "Instant lifetime access", bold: " to all course materials" },
-    { text: "Covers theory, mechanics, tactics, and conditioning", bold: "" },
-    { text: "Includes future course updates", bold: " at no extra cost" },
-    { text: "30-day money-back guarantee", bold: "" }
+    "26 comprehensive lessons across 5 modules",
+    "Instant lifetime access to all course materials",
+    "Covers theory, mechanics, tactics, and conditioning",
+    "Includes future course updates at no extra cost",
+    "30-day money-back guarantee"
   ]
 
   return (
