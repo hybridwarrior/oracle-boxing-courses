@@ -134,11 +134,11 @@ export default function RoadmapPage() {
   ]
 
   const priceFeatures = [
-    { text: "75 lessons", bold: " across 5 structured phases" },
-    { text: "Lifetime access", bold: " to all course materials" },
-    { text: "Step-by-step progression", bold: " from beginner to advanced" },
-    { text: "Drills and techniques", bold: " for every stage of development" },
-    { text: "30-day money-back guarantee", bold: "" }
+    "75 lessons across 5 structured phases",
+    "Lifetime access to all course materials",
+    "Step-by-step progression from beginner to advanced",
+    "Drills and techniques for every stage of development",
+    "30-day money-back guarantee"
   ]
 
   return (

@@ -95,13 +95,13 @@ export default function BundlePage() {
   const savings = totalIndividualPrice - bundlePrice
 
   const priceFeatures = [
-    { text: "Full Boxing Masterclass course", bold: "" },
-    { text: "Complete Boxing Roadmap system", bold: "" },
-    { text: "Coaching Call Replays library", bold: "" },
-    { text: "Lifetime access", bold: " to all courses" },
-    { text: "Free access", bold: " to all future updates" },
-    { text: `Save ${formatPrice(savings, currency)}`, bold: " compared to buying separately" },
-    { text: "30-day money-back guarantee", bold: "" }
+    "Full Boxing Masterclass course",
+    "Complete Boxing Roadmap system",
+    "Coaching Call Replays library",
+    "Lifetime access to all courses",
+    "Free access to all future updates",
+    `Save ${formatPrice(savings, currency)} compared to buying separately`,
+    "30-day money-back guarantee"
   ]
 
   return (
