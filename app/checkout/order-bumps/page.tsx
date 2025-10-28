@@ -176,9 +176,12 @@ function OrderBumpsContent() {
 
     items.forEach(item => {
       const priceUSD = getProductPrice(item.product.metadata, 'USD') || item.product.price
+      console.log(`📦 Product: ${item.product.id} (${item.product.metadata}) = $${priceUSD} USD`)
       totalValueUSD += priceUSD * item.quantity
       productIds.push(item.product.id)
     })
+
+    console.log(`💵 Total USD Value: $${totalValueUSD}`)
 
     // Track initiate checkout event with all products
     const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout/order-bumps'

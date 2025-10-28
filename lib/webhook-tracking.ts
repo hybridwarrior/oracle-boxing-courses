@@ -386,7 +386,16 @@ export async function trackInitiateCheckout(
 ): Promise<void> {
   try {
     const utm = getUTMParameters();
-    const country = await getUserCountry();
+
+    // Get country with better error handling
+    let country: string | null = null;
+    try {
+      country = await getUserCountry();
+      console.log('🌍 Country detected:', country);
+    } catch (error) {
+      console.warn('Failed to get country, continuing without it:', error);
+    }
+
     const eventId = generateEventId();
     const sessionId = getOrCreateSessionId();
 
@@ -395,6 +404,16 @@ export async function trackInitiateCheckout(
     const nameParts = fullName.trim().split(/\s+/);
     const firstName = nameParts[0] || '';
     const lastName = nameParts.slice(1).join(' ') || '';
+
+    console.log('💰 Initiate Checkout Tracking:', {
+      firstName,
+      lastName,
+      email,
+      valueUSD,
+      products,
+      country,
+      urlParams
+    });
 
     const data: InitiateCheckoutData = {
       eventType: 'initiate_checkout',
