@@ -174,6 +174,27 @@ function getClientUserAgent(): string {
   return navigator.userAgent;
 }
 
+/**
+ * Hash a string using SHA-256 for Facebook Conversions API
+ */
+async function hashSHA256(text: string): Promise<string> {
+  // Normalize: lowercase and trim
+  const normalized = text.toLowerCase().trim();
+
+  // Convert string to array buffer
+  const encoder = new TextEncoder();
+  const data = encoder.encode(normalized);
+
+  // Hash with SHA-256
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+
+  // Convert to hex string
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+  return hashHex;
+}
+
 
 /**
  * Send page view data to webhook and Facebook Pixel
@@ -465,6 +486,9 @@ export async function trackInitiateCheckout(
       const eventTime = Date.now();
       const fbclid = getFbclid();
 
+      // Hash email for Facebook Conversions API
+      const hashedEmail = await hashSHA256(email);
+
       const eventData = {
         event_name: 'InitiateCheckout',
         event_time: Math.floor(eventTime / 1000),
@@ -472,7 +496,7 @@ export async function trackInitiateCheckout(
         event_source_url: `https://shop.oracleboxing.com${page}`,
         action_source: 'website',
         user_data: {
-          em: [email], // Email (will be hashed by Facebook)
+          em: [hashedEmail], // Hashed email with SHA256
           client_user_agent: getClientUserAgent(),
           ...(fbclid && { fbc: `fb.1.${eventTime}.${fbclid}` }),
         },
