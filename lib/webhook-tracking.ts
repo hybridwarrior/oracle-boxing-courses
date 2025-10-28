@@ -1,5 +1,6 @@
-// Webhook tracking utility for page views
-// Sends page view data to Make.com webhook and Facebook Conversions API
+// Webhook tracking utility for page views and purchases
+// Sends page view data to Make.com webhook and Facebook Pixel (browser-side)
+// Sends purchase data to Make.com webhook and Facebook Conversions API (server-side)
 
 const WEBHOOK_URL = 'https://hook.eu2.make.com/rmssfwgpgrbkihnly4ocxd2cf6kmfbo3';
 const FB_PIXEL_ID = '1474540100541059';
@@ -149,63 +150,9 @@ function getClientUserAgent(): string {
   return navigator.userAgent;
 }
 
-/**
- * Send page view to Facebook Conversions API
- */
-async function sendToFacebookConversionsAPI(
-  eventId: string,
-  eventTime: number,
-  page: string,
-  referrer: string,
-  country: string | null,
-  fbclid: string | null
-): Promise<void> {
-  try {
-    const eventData = {
-      event_name: 'PageView',
-      event_time: Math.floor(eventTime / 1000), // Unix timestamp in seconds
-      event_id: eventId,
-      event_source_url: `https://shop.oracleboxing.com${page}`,
-      action_source: 'website',
-      user_data: {
-        client_user_agent: getClientUserAgent(),
-        ...(fbclid && { fbc: `fb.1.${eventTime}.${fbclid}` }),
-        ...(country && { country: [country.toLowerCase()] }),
-      },
-      custom_data: {
-        ...(referrer && { referrer }),
-      },
-    };
-
-    const payload = {
-      data: [eventData],
-      access_token: FB_ACCESS_TOKEN,
-      test_event_code: 'TEST85396',
-    };
-
-    const response = await fetch(FB_CONVERSIONS_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Facebook Conversions API error:', errorData);
-    } else {
-      const result = await response.json();
-      console.log('Facebook Conversions API success:', result);
-    }
-  } catch (error) {
-    console.error('Failed to send to Facebook Conversions API:', error);
-  }
-}
 
 /**
- * Send page view data to webhook and Facebook Conversions API
+ * Send page view data to webhook and Facebook Pixel
  */
 export async function trackPageView(page: string, referrer: string): Promise<void> {
   try {
@@ -242,8 +189,10 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       console.error('Failed to send page view to webhook:', error);
     });
 
-    // Send to Facebook Conversions API (non-blocking)
-    sendToFacebookConversionsAPI(eventId, eventTime, page, referrer, country, fbclid);
+    // Send to Facebook Pixel (browser-side tracking)
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'PageView');
+    }
 
     console.log('Page view tracked:', data);
   } catch (error) {
