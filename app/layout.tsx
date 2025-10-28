@@ -29,6 +29,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { Toaster } from "sonner";
 import { UTMTracker } from "@/components/UTMTracker";
+import PageViewTracker from "@/components/PageViewTracker";
 
 export default function RootLayout({
   children,
@@ -45,6 +46,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <UTMTracker />
+        <PageViewTracker />
         <CurrencyProvider>
           <CartProvider>
             {children}
