@@ -1,15 +1,14 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { trackPageView } from '@/lib/webhook-tracking';
 
 /**
- * PageViewTracker component
- * Tracks all page views and sends data to webhook
- * Place this component in the root layout to track all routes
+ * PageViewTracker internal component
+ * Uses useSearchParams which requires Suspense boundary
  */
-export default function PageViewTracker() {
+function PageViewTrackerInternal() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const previousPath = useRef<string>('');
@@ -33,4 +32,17 @@ export default function PageViewTracker() {
 
   // This component doesn't render anything
   return null;
+}
+
+/**
+ * PageViewTracker component with Suspense boundary
+ * Tracks all page views and sends data to webhook
+ * Place this component in the root layout to track all routes
+ */
+export default function PageViewTracker() {
+  return (
+    <Suspense fallback={null}>
+      <PageViewTrackerInternal />
+    </Suspense>
+  );
 }
