@@ -449,6 +449,74 @@ export async function trackInitiateCheckout(
     }).catch((error) => {
       console.error('❌ Failed to send initiate checkout to webhook:', error);
     });
+
+    // Send to Facebook Pixel (browser-side tracking)
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'InitiateCheckout', {
+        value: valueUSD,
+        currency: 'USD',
+        content_ids: products,
+        content_type: 'product',
+        num_items: products.length,
+      });
+      console.log('📱 Facebook Pixel InitiateCheckout event sent');
+    }
+
+    // Send to Facebook Conversions API (server-side tracking)
+    try {
+      const eventTime = Date.now();
+      const fbclid = getFbclid();
+
+      const eventData = {
+        event_name: 'InitiateCheckout',
+        event_time: Math.floor(eventTime / 1000),
+        event_id: eventId,
+        event_source_url: `https://shop.oracleboxing.com${page}`,
+        action_source: 'website',
+        user_data: {
+          em: [email], // Email (will be hashed by Facebook)
+          client_user_agent: getClientUserAgent(),
+          ...(fbclid && { fbc: `fb.1.${eventTime}.${fbclid}` }),
+          ...(country && { country: [country.toLowerCase()] }),
+        },
+        custom_data: {
+          value: valueUSD,
+          currency: 'USD',
+          content_ids: products,
+          content_type: 'product',
+          num_items: products.length,
+        },
+      };
+
+      const payload = {
+        data: [eventData],
+        access_token: FB_ACCESS_TOKEN,
+        test_event_code: 'TEST85396',
+      };
+
+      fetch(FB_CONVERSIONS_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).then(response => {
+        if (!response.ok) {
+          response.json().then(errorData => {
+            console.error('❌ Facebook Conversions API InitiateCheckout error:', errorData);
+          });
+        } else {
+          response.json().then(result => {
+            console.log('✅ Facebook Conversions API InitiateCheckout success:', result);
+          });
+        }
+      }).catch((error) => {
+        console.error('❌ Failed to send InitiateCheckout to Facebook Conversions API:', error);
+      });
+    } catch (error) {
+      console.error('Error sending InitiateCheckout to Facebook Conversions API:', error);
+    }
   } catch (error) {
     console.error('Error tracking initiate checkout:', error);
   }
