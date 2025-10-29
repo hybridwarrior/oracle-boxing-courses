@@ -65,7 +65,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           // Generate event_id for deduplication
           var pageViewEventId = Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9);
 
-          fbq('init', '1474540100541059');
+          // Initialize with autoConfig: false to disable automatic PageView tracking
+          fbq('init', '1474540100541059', {}, { autoConfig: false });
           fbq('track', 'PageView', {}, { eventID: pageViewEventId });
 
           // Store event_id globally for server-side tracking
