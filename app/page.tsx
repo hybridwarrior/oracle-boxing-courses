@@ -94,7 +94,7 @@ export default function HomePage() {
             {/* Right Side - Content */}
             <div className="order-1 lg:order-2 text-center lg:text-left">
               {/* Badge */}
-              <div className="inline-block mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-yellow-200 text-black border border-gray-300 rounded-lg font-black text-xs sm:text-sm uppercase tracking-wider">
+              <div className="inline-block mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-yellow-100 text-black border border-gray-300 rounded-lg font-black text-xs sm:text-sm uppercase tracking-wider">
                 Limited Spots Available
               </div>
 
@@ -126,7 +126,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/checkout?product=6wc"
-                  className="inline-block w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 bg-yellow-200 text-black border-4 border-black rounded-xl shadow-lg font-black text-base sm:text-lg md:text-xl uppercase tracking-wide hover:bg-black hover:text-yellow-200 transition-all text-center"
+                  className="inline-block w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 bg-yellow-100 text-black border-4 border-black rounded-xl shadow-lg font-black text-base sm:text-lg md:text-xl uppercase tracking-wide hover:bg-black hover:text-yellow-100 transition-all text-center"
                 >
                   Buy Now
                 </Link>

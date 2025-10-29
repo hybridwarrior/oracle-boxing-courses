@@ -212,7 +212,7 @@ export function CourseCard({ product }: CourseCardProps) {
             <button
               onClick={handleBuyNow}
               disabled={isLoading}
-              className="w-full py-3 sm:py-4 px-4 text-sm sm:text-base md:text-lg font-black bg-yellow-200 text-black border-4 border-black rounded-xl shadow-lg uppercase tracking-wide hover:bg-black hover:text-yellow-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full py-3 sm:py-4 px-4 text-sm sm:text-base md:text-lg font-black bg-yellow-100 text-black border-4 border-black rounded-xl shadow-lg uppercase tracking-wide hover:bg-black hover:text-yellow-100 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {isLoading ? 'Processing...' : 'Buy Now'}
             </button>

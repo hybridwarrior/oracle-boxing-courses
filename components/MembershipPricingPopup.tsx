@@ -204,7 +204,7 @@ export function MembershipPricingPopup({ isOpen, onClose, defaultPlan = 'members
           <div className="text-center mb-3 sm:mb-4">
             <button
               onClick={handleJoinNow}
-              className="py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-200 text-black font-black text-xl sm:text-2xl md:text-3xl rounded-xl uppercase tracking-wide transition-colors cursor-pointer hover:bg-yellow-300 flex items-center justify-center gap-2 mx-auto border-4 border-black shadow-lg"
+              className="py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-100 text-black font-black text-xl sm:text-2xl md:text-3xl rounded-xl uppercase tracking-wide transition-colors cursor-pointer hover:bg-yellow-200 flex items-center justify-center gap-2 mx-auto border-4 border-black shadow-lg"
             >
               CHECKOUT
               <span className="text-2xl sm:text-3xl">→</span>
