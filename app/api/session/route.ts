@@ -13,9 +13,9 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Retrieve the checkout session from Stripe
+    // Retrieve the checkout session from Stripe with expanded line items
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ['line_items', 'customer', 'payment_intent'],
+      expand: ['line_items', 'line_items.data.price.product', 'customer', 'payment_intent'],
     });
 
     // Extract relevant data
@@ -64,7 +64,9 @@ export async function GET(req: NextRequest) {
       utm_content: session.metadata?.utm_content || undefined,
     };
 
+    // Return full session data for Purchase event tracking
     return NextResponse.json({
+      // Original format for backward compatibility
       customerName,
       customerEmail,
       amountPaid,
@@ -74,7 +76,13 @@ export async function GET(req: NextRequest) {
       sessionId,
       productMetadata,
       trackingParams,
-      metadata: session.metadata, // Pass full metadata to success page
+      metadata: session.metadata,
+
+      // Full session data for Purchase tracking
+      amount_total: session.amount_total,
+      customer_details: session.customer_details,
+      customer_email: session.customer_email,
+      line_items: session.line_items,
     });
   } catch (error: any) {
     console.error('Session retrieval error:', error);

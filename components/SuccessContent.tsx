@@ -10,6 +10,50 @@ interface SuccessContentProps {
   sessionId: string
 }
 
+/**
+ * Get tracking cookie data (returns empty object if no consent/cookie)
+ */
+function getTrackingCookie(): any {
+  if (typeof document === 'undefined') return {};
+
+  const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+    const [key, value] = cookie.trim().split('=');
+    acc[key] = value;
+    return acc;
+  }, {} as Record<string, string>);
+
+  const obTrackCookie = cookies['ob_track'];
+  if (!obTrackCookie) return {};
+
+  try {
+    return JSON.parse(decodeURIComponent(obTrackCookie));
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Generate a unique event ID for deduplication
+ */
+function generateEventId(): string {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+}
+
+/**
+ * Get Facebook Click ID (fbclid) from cookies
+ */
+function getFbclid(): string | null {
+  if (typeof document === 'undefined') return null;
+
+  const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+    const [key, value] = cookie.trim().split('=');
+    acc[key] = decodeURIComponent(value);
+    return acc;
+  }, {} as Record<string, string>);
+
+  return cookies['fbclid'] || null;
+}
+
 export function SuccessContent({ sessionId }: SuccessContentProps) {
   const [session, setSession] = useState<any>(null)
   const [upsellProduct, setUpsellProduct] = useState<Product | null>(null)
@@ -18,6 +62,16 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
   useEffect(() => {
     async function fetchSession() {
       try {
+        // Fetch session data from Stripe
+        const response = await fetch(`/api/session?session_id=${sessionId}`);
+        const sessionData = await response.json();
+
+        console.log('Session data:', sessionData);
+        setSession(sessionData);
+
+        // Send Purchase event to Facebook (browser + CAPI)
+        await sendPurchaseEvent(sessionData);
+
         // Determine upsell based on purchase
         // Course → Membership Monthly
         // Membership → Membership Annual upgrade
@@ -31,6 +85,125 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
       } catch (error) {
         console.error('Error fetching session:', error)
         setIsLoading(false)
+      }
+    }
+
+    async function sendPurchaseEvent(sessionData: any) {
+      try {
+        // Get cookie data (empty if no consent)
+        const cookieData = getTrackingCookie();
+
+        // Use cookie event_id or generate new one
+        const eventId = cookieData.event_id || generateEventId();
+
+        // Get fbclid from cookies
+        const fbclid = getFbclid();
+
+        // Extract purchase data from session
+        const amountTotal = sessionData.amount_total ? sessionData.amount_total / 100 : 0;
+        const currency = sessionData.currency?.toUpperCase() || 'USD';
+
+        // Extract product IDs from line items
+        const contentIds = sessionData.line_items?.data?.map((item: any) => {
+          const product = item.price?.product;
+          return typeof product === 'object' ? product.id : product;
+        }).filter(Boolean) || [];
+
+        // Build contents array with quantities and prices
+        const contents = sessionData.line_items?.data?.map((item: any) => ({
+          id: typeof item.price?.product === 'object' ? item.price.product.id : item.price?.product,
+          quantity: item.quantity || 1,
+          item_price: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
+        })) || [];
+
+        console.log('📊 Sending Purchase event:', {
+          event_id: eventId,
+          value: amountTotal,
+          currency,
+          content_ids: contentIds,
+        });
+
+        // 1. Send browser-side Facebook Pixel Purchase event
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('track', 'Purchase', {
+            value: amountTotal,
+            currency,
+            content_ids: contentIds,
+            content_type: 'product',
+            num_items: contents.length,
+          }, {
+            eventID: eventId
+          });
+          console.log('📱 Browser Purchase event sent with event_id:', eventId);
+        }
+
+        // 2. Send server-side CAPI Purchase event
+        fetch('/api/facebook-purchase', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            event_id: eventId,
+            value: amountTotal,
+            currency,
+            content_ids: contentIds,
+            contents,
+            customer_email: sessionData.customer_details?.email || sessionData.customer_email,
+            customer_phone: sessionData.customer_details?.phone,
+            cookie_data: cookieData,
+            fbclid,
+            session_url: `https://shop.oracleboxing.com/success/${sessionId}`,
+          }),
+          keepalive: true,
+        }).then(response => {
+          if (response.ok) {
+            console.log('✅ CAPI Purchase event sent successfully');
+          } else {
+            console.error('❌ CAPI Purchase event failed:', response.status);
+          }
+        }).catch((error) => {
+          console.error('❌ Failed to send CAPI Purchase event:', error);
+        });
+
+        // 3. Send to Make.com webhook
+        const webhookPayload = {
+          event_type: 'purchase',
+          event_time: new Date().toISOString(),
+          session_id: sessionId,
+          order: {
+            id: sessionId,
+            amount_total: amountTotal,
+            currency,
+          },
+          customer: {
+            email: sessionData.customer_details?.email || sessionData.customer_email,
+            name: sessionData.customer_details?.name,
+            phone: sessionData.customer_details?.phone,
+          },
+          products: contentIds,
+          cookie_data: cookieData,
+        };
+
+        fetch('https://hook.eu2.make.com/rmssfwgpgrbkihnly4ocxd2cf6kmfbo3', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(webhookPayload),
+          keepalive: true,
+        }).then(response => {
+          if (response.ok) {
+            console.log('✅ Make.com webhook sent successfully');
+          } else {
+            console.error('❌ Make.com webhook failed:', response.status);
+          }
+        }).catch((error) => {
+          console.error('❌ Failed to send Make.com webhook:', error);
+        });
+
+      } catch (error) {
+        console.error('Error sending Purchase event:', error);
       }
     }
 

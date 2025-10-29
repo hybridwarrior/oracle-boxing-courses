@@ -1,10 +1,10 @@
 # Facebook Purchase Event Tracking Guide
 
-Complete guide to Facebook Conversions API Purchase event tracking from Stripe webhooks.
+Complete guide to Facebook Conversions API Purchase event tracking from success page.
 
 ## Overview
 
-When a customer completes a purchase, comprehensive Purchase events are automatically sent to Facebook Conversions API with:
+When a customer completes a purchase and lands on the success page, comprehensive Purchase events are automatically sent to Facebook with:
 - ✅ Full order details (amount, products, quantities)
 - ✅ Hashed customer data (email, phone)
 - ✅ Complete cookie tracking data (attribution, session, location)
@@ -16,13 +16,14 @@ When a customer completes a purchase, comprehensive Purchase events are automati
 ### Main Purchase Flow
 ```
 1. Customer completes checkout on Stripe
-2. Stripe sends checkout.session.completed webhook
-3. Server-side webhook handler:
-   - Retrieves expanded session with line items
-   - Parses cookie data from Stripe metadata
-   - Builds comprehensive Facebook event
-   - Sends to Facebook Conversions API
-   - Uses event_id for deduplication with browser Purchase event
+2. Customer redirected to success page (/success/[session_id])
+3. Success page component (SuccessContent.tsx):
+   - Fetches session data from /api/session endpoint
+   - Retrieves expanded session with line items from Stripe
+   - Parses cookie data from browser
+   - Sends browser-side Facebook Pixel Purchase event
+   - Sends server-side Facebook CAPI Purchase event
+   - Uses same event_id for deduplication
 ```
 
 ### Upsell Purchase Flow
@@ -437,31 +438,40 @@ Check webhook handler logs for:
 
 ## Implementation Details
 
-**File**: `/opt/shop/app/api/stripe-webhook/route.ts`
+**Success Page Component**: `/opt/shop/components/SuccessContent.tsx`
 
-**Main Purchase Handler** (lines 184-319):
-- Triggered by `checkout.session.completed`
-- Retrieves expanded session with line items
-- Parses cookie_data from session.metadata
-- Builds comprehensive Facebook event
+**Purchase Event Handler**:
+- Triggered on success page load
+- Fetches session data from Stripe via `/api/session`
+- Extracts cookie tracking data from browser
+- Sends browser-side Facebook Pixel Purchase event with event_id
+- Sends server-side Facebook CAPI Purchase event via `/api/facebook-purchase`
+- Sends purchase data to Make.com webhook
+
+**API Endpoint**: `/opt/shop/app/api/facebook-purchase/route.ts`
+
+**CAPI Handler**:
+- Receives Purchase event data from success page
+- Hashes customer PII (email, phone) with SHA-256
+- Builds comprehensive Facebook event with cookie data
 - Sends to Facebook CAPI with TEST85396
 
-**Upsell Handler** (lines 443-559):
-- Triggered by `payment_intent.succeeded`
-- Checks metadata.source === "upsell"
-- Parses cookie_data from payment_intent.metadata
-- Builds upsell Facebook event
-- Sends to Facebook CAPI with TEST85396
+**Session API**: `/opt/shop/app/api/session/route.ts`
+
+**Session Data Retrieval**:
+- Retrieves Stripe checkout session
+- Expands line items with product details
+- Returns full session data for Purchase tracking
 
 **Security**:
-- Webhook signature verification
 - PII hashing (SHA-256)
 - Secure token handling
+- Browser-based execution on success page
 
 **Error Handling**:
-- Try-catch blocks prevent webhook failures
+- Try-catch blocks prevent page failures
 - Detailed error logging
-- Non-blocking (doesn't prevent order processing)
+- Non-blocking (doesn't prevent page display)
 
 ## Related Documentation
 
