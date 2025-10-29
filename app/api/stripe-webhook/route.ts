@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
         });
 
         // Parse cookie data from metadata if it exists
-        let parsedCookieData = {};
+        let parsedCookieData: Record<string, any> = {};
         if (session.metadata?.cookie_data) {
           try {
             parsedCookieData = JSON.parse(session.metadata.cookie_data);
@@ -348,7 +348,7 @@ export async function POST(req: NextRequest) {
           });
 
           // Parse cookie data from metadata if it exists
-          let parsedCookieData = {};
+          let parsedCookieData: Record<string, any> = {};
           if (pi.metadata?.cookie_data) {
             try {
               parsedCookieData = JSON.parse(pi.metadata.cookie_data);
