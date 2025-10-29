@@ -60,8 +60,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
+
+          // Generate event_id for deduplication
+          var pageViewEventId = Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9);
+
           fbq('init', '1474540100541059');
-          fbq('track', 'PageView');
+          fbq('track', 'PageView', {}, { eventID: pageViewEventId });
+
+          // Store event_id globally for server-side tracking
+          window._fbPageViewEventId = pageViewEventId;
         `
         }} />
         <noscript>

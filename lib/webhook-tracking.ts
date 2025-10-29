@@ -238,14 +238,19 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
     // Browser-side pixel handles client tracking
 
     // Send to Facebook Conversions API (server-side) via API route
+    // Use the same event_id from browser Pixel for deduplication
     const fbclid = getFbclid();
+    const browserEventId = typeof window !== 'undefined' && (window as any)._fbPageViewEventId
+      ? (window as any)._fbPageViewEventId
+      : eventId;
+
     fetch('/api/facebook-pageview', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        event_id: eventId,
+        event_id: browserEventId,
         page_url: `https://shop.oracleboxing.com${page}`,
         fbclid: fbclid,
       }),
