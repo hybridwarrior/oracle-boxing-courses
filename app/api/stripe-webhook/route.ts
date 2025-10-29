@@ -372,11 +372,13 @@ export async function POST(req: NextRequest) {
               status: pi.status,
             },
 
-            // Customer Information (from charges if available)
+            // Customer Information (from metadata)
             customer: {
               id: pi.customer as string || '',
-              email: typeof pi.charges?.data?.[0]?.billing_details?.email === 'string' ? pi.charges.data[0].billing_details.email : '',
-              name: typeof pi.charges?.data?.[0]?.billing_details?.name === 'string' ? pi.charges.data[0].billing_details.name : '',
+              email: pi.metadata?.customer_email || '',
+              name: pi.metadata?.customer_first_name && pi.metadata?.customer_last_name
+                ? `${pi.metadata.customer_first_name} ${pi.metadata.customer_last_name}`.trim()
+                : '',
             },
 
             // Upsell-specific information
