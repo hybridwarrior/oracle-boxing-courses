@@ -65,12 +65,12 @@ function OrderBumpsContent() {
     const cookieTracking = getTrackingParams()
 
     setTrackingParams({
-      referrer: cookieTracking.referrer,
-      utm_source: cookieTracking.utm_source,
-      utm_medium: cookieTracking.utm_medium,
-      utm_campaign: cookieTracking.utm_campaign,
-      utm_term: cookieTracking.utm_term,
-      utm_content: cookieTracking.utm_content,
+      referrer: cookieTracking.first_referrer || 'direct',
+      utm_source: cookieTracking.last_utm_source,
+      utm_medium: cookieTracking.last_utm_medium,
+      utm_campaign: cookieTracking.last_utm_campaign,
+      utm_term: cookieTracking.last_utm_term,
+      utm_content: cookieTracking.last_utm_content,
     })
 
     console.log('📊 Order bumps - Tracking params from cookies:', cookieTracking)
