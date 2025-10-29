@@ -30,6 +30,7 @@ import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { Toaster } from "sonner";
 import { UTMTracker } from "@/components/UTMTracker";
 import PageViewTracker from "@/components/PageViewTracker";
+import { CookieBanner } from "@/components/CookieBanner";
 
 export default function RootLayout({
   children,
@@ -107,6 +108,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <CartProvider>
             {children}
             <Toaster position="top-center" />
+            <CookieBanner />
           </CartProvider>
         </CurrencyProvider>
       </body>
