@@ -12,11 +12,21 @@ export async function POST(req: NextRequest) {
       currency?: Currency,
       trackingParams?: {
         referrer: string
-        utm_source?: string
-        utm_medium?: string
-        utm_campaign?: string
-        utm_term?: string
-        utm_content?: string
+        // First Touch Attribution
+        first_utm_source?: string
+        first_utm_medium?: string
+        first_utm_campaign?: string
+        first_utm_term?: string
+        first_utm_content?: string
+        first_referrer_time?: string
+        // Last Touch Attribution
+        last_utm_source?: string
+        last_utm_medium?: string
+        last_utm_campaign?: string
+        last_utm_term?: string
+        last_utm_content?: string
+        last_referrer_time?: string
+        // Additional tracking
         fbclid?: string
         session_id?: string
         event_id?: string

@@ -36,11 +36,18 @@ function OrderBumpsContent() {
   const [showAll, setShowAll] = useState(false)
   const [trackingParams, setTrackingParams] = useState<{
     referrer: string
-    utm_source?: string
-    utm_medium?: string
-    utm_campaign?: string
-    utm_term?: string
-    utm_content?: string
+    first_utm_source?: string
+    first_utm_medium?: string
+    first_utm_campaign?: string
+    first_utm_term?: string
+    first_utm_content?: string
+    first_referrer_time?: string
+    last_utm_source?: string
+    last_utm_medium?: string
+    last_utm_campaign?: string
+    last_utm_term?: string
+    last_utm_content?: string
+    last_referrer_time?: string
   }>({
     referrer: 'direct'
   })
@@ -66,11 +73,20 @@ function OrderBumpsContent() {
 
     setTrackingParams({
       referrer: cookieTracking.first_referrer || 'direct',
-      utm_source: cookieTracking.last_utm_source,
-      utm_medium: cookieTracking.last_utm_medium,
-      utm_campaign: cookieTracking.last_utm_campaign,
-      utm_term: cookieTracking.last_utm_term,
-      utm_content: cookieTracking.last_utm_content,
+      // First Touch Attribution
+      first_utm_source: cookieTracking.first_utm_source,
+      first_utm_medium: cookieTracking.first_utm_medium,
+      first_utm_campaign: cookieTracking.first_utm_campaign,
+      first_utm_term: cookieTracking.first_utm_term,
+      first_utm_content: cookieTracking.first_utm_content,
+      first_referrer_time: getCookie('ob_track')?.first_referrer_time,
+      // Last Touch Attribution
+      last_utm_source: cookieTracking.last_utm_source,
+      last_utm_medium: cookieTracking.last_utm_medium,
+      last_utm_campaign: cookieTracking.last_utm_campaign,
+      last_utm_term: cookieTracking.last_utm_term,
+      last_utm_content: cookieTracking.last_utm_content,
+      last_referrer_time: getCookie('ob_track')?.last_referrer_time,
     })
 
     console.log('📊 Order bumps - Tracking params from cookies:', cookieTracking)

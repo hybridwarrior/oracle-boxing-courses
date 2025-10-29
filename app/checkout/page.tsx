@@ -20,11 +20,18 @@ export default function CheckoutPage() {
   const [sourceParam, setSourceParam] = useState<string | null>(null)
   const [trackingParams, setTrackingParams] = useState<{
     referrer: string
-    utm_source?: string
-    utm_medium?: string
-    utm_campaign?: string
-    utm_term?: string
-    utm_content?: string
+    first_utm_source?: string
+    first_utm_medium?: string
+    first_utm_campaign?: string
+    first_utm_term?: string
+    first_utm_content?: string
+    first_referrer_time?: string
+    last_utm_source?: string
+    last_utm_medium?: string
+    last_utm_campaign?: string
+    last_utm_term?: string
+    last_utm_content?: string
+    last_referrer_time?: string
   }>({
     referrer: ''
   })
@@ -50,11 +57,20 @@ export default function CheckoutPage() {
 
       setTrackingParams({
         referrer: cookieTracking.first_referrer || 'direct',
-        utm_source: cookieTracking.last_utm_source,
-        utm_medium: cookieTracking.last_utm_medium,
-        utm_campaign: cookieTracking.last_utm_campaign,
-        utm_term: cookieTracking.last_utm_term,
-        utm_content: cookieTracking.last_utm_content,
+        // First Touch Attribution
+        first_utm_source: cookieTracking.first_utm_source,
+        first_utm_medium: cookieTracking.first_utm_medium,
+        first_utm_campaign: cookieTracking.first_utm_campaign,
+        first_utm_term: cookieTracking.first_utm_term,
+        first_utm_content: cookieTracking.first_utm_content,
+        first_referrer_time: getCookie('ob_track')?.first_referrer_time,
+        // Last Touch Attribution
+        last_utm_source: cookieTracking.last_utm_source,
+        last_utm_medium: cookieTracking.last_utm_medium,
+        last_utm_campaign: cookieTracking.last_utm_campaign,
+        last_utm_term: cookieTracking.last_utm_term,
+        last_utm_content: cookieTracking.last_utm_content,
+        last_referrer_time: getCookie('ob_track')?.last_referrer_time,
       })
 
       console.log('🏷️ Checkout page loaded')
@@ -128,11 +144,20 @@ export default function CheckoutPage() {
 
         // Pass tracking params
         orderBumpsUrl.searchParams.set('referrer', trackingParams.referrer)
-        if (trackingParams.utm_source) orderBumpsUrl.searchParams.set('utm_source', trackingParams.utm_source)
-        if (trackingParams.utm_medium) orderBumpsUrl.searchParams.set('utm_medium', trackingParams.utm_medium)
-        if (trackingParams.utm_campaign) orderBumpsUrl.searchParams.set('utm_campaign', trackingParams.utm_campaign)
-        if (trackingParams.utm_term) orderBumpsUrl.searchParams.set('utm_term', trackingParams.utm_term)
-        if (trackingParams.utm_content) orderBumpsUrl.searchParams.set('utm_content', trackingParams.utm_content)
+        // First Touch
+        if (trackingParams.first_utm_source) orderBumpsUrl.searchParams.set('first_utm_source', trackingParams.first_utm_source)
+        if (trackingParams.first_utm_medium) orderBumpsUrl.searchParams.set('first_utm_medium', trackingParams.first_utm_medium)
+        if (trackingParams.first_utm_campaign) orderBumpsUrl.searchParams.set('first_utm_campaign', trackingParams.first_utm_campaign)
+        if (trackingParams.first_utm_term) orderBumpsUrl.searchParams.set('first_utm_term', trackingParams.first_utm_term)
+        if (trackingParams.first_utm_content) orderBumpsUrl.searchParams.set('first_utm_content', trackingParams.first_utm_content)
+        if (trackingParams.first_referrer_time) orderBumpsUrl.searchParams.set('first_referrer_time', trackingParams.first_referrer_time)
+        // Last Touch
+        if (trackingParams.last_utm_source) orderBumpsUrl.searchParams.set('last_utm_source', trackingParams.last_utm_source)
+        if (trackingParams.last_utm_medium) orderBumpsUrl.searchParams.set('last_utm_medium', trackingParams.last_utm_medium)
+        if (trackingParams.last_utm_campaign) orderBumpsUrl.searchParams.set('last_utm_campaign', trackingParams.last_utm_campaign)
+        if (trackingParams.last_utm_term) orderBumpsUrl.searchParams.set('last_utm_term', trackingParams.last_utm_term)
+        if (trackingParams.last_utm_content) orderBumpsUrl.searchParams.set('last_utm_content', trackingParams.last_utm_content)
+        if (trackingParams.last_referrer_time) orderBumpsUrl.searchParams.set('last_referrer_time', trackingParams.last_referrer_time)
 
         router.push(orderBumpsUrl.pathname + orderBumpsUrl.search)
         return
@@ -151,11 +176,20 @@ export default function CheckoutPage() {
 
         // Pass tracking params
         orderBumpsUrl.searchParams.set('referrer', trackingParams.referrer)
-        if (trackingParams.utm_source) orderBumpsUrl.searchParams.set('utm_source', trackingParams.utm_source)
-        if (trackingParams.utm_medium) orderBumpsUrl.searchParams.set('utm_medium', trackingParams.utm_medium)
-        if (trackingParams.utm_campaign) orderBumpsUrl.searchParams.set('utm_campaign', trackingParams.utm_campaign)
-        if (trackingParams.utm_term) orderBumpsUrl.searchParams.set('utm_term', trackingParams.utm_term)
-        if (trackingParams.utm_content) orderBumpsUrl.searchParams.set('utm_content', trackingParams.utm_content)
+        // First Touch
+        if (trackingParams.first_utm_source) orderBumpsUrl.searchParams.set('first_utm_source', trackingParams.first_utm_source)
+        if (trackingParams.first_utm_medium) orderBumpsUrl.searchParams.set('first_utm_medium', trackingParams.first_utm_medium)
+        if (trackingParams.first_utm_campaign) orderBumpsUrl.searchParams.set('first_utm_campaign', trackingParams.first_utm_campaign)
+        if (trackingParams.first_utm_term) orderBumpsUrl.searchParams.set('first_utm_term', trackingParams.first_utm_term)
+        if (trackingParams.first_utm_content) orderBumpsUrl.searchParams.set('first_utm_content', trackingParams.first_utm_content)
+        if (trackingParams.first_referrer_time) orderBumpsUrl.searchParams.set('first_referrer_time', trackingParams.first_referrer_time)
+        // Last Touch
+        if (trackingParams.last_utm_source) orderBumpsUrl.searchParams.set('last_utm_source', trackingParams.last_utm_source)
+        if (trackingParams.last_utm_medium) orderBumpsUrl.searchParams.set('last_utm_medium', trackingParams.last_utm_medium)
+        if (trackingParams.last_utm_campaign) orderBumpsUrl.searchParams.set('last_utm_campaign', trackingParams.last_utm_campaign)
+        if (trackingParams.last_utm_term) orderBumpsUrl.searchParams.set('last_utm_term', trackingParams.last_utm_term)
+        if (trackingParams.last_utm_content) orderBumpsUrl.searchParams.set('last_utm_content', trackingParams.last_utm_content)
+        if (trackingParams.last_referrer_time) orderBumpsUrl.searchParams.set('last_referrer_time', trackingParams.last_referrer_time)
 
         router.push(orderBumpsUrl.pathname + orderBumpsUrl.search)
         return
