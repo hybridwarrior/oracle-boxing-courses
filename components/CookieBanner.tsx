@@ -29,28 +29,23 @@ export function CookieBanner() {
         borderTop: '1px solid rgba(255, 255, 255, 0.1)',
       }}
     >
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
         <p className="text-sm sm:text-base text-center sm:text-left">
           Oracle Boxing uses cookies to provide you with personalised content & ads.
-          By clicking accept, you consent to all cookies on the site.
-        </p>
-        <div className="flex items-center gap-4 shrink-0">
-          <button
-            onClick={handleAccept}
-            className="px-6 py-2 text-white font-semibold rounded-lg transition-all hover:opacity-90"
-            style={{
-              backgroundColor: '#FFD700',
-            }}
-          >
-            Accept
-          </button>
+          By clicking accept, you consent to all cookies on the site.{' '}
           <a
             href="/privacy"
-            className="text-sm underline hover:opacity-80 transition-opacity whitespace-nowrap"
+            className="underline hover:opacity-80 transition-opacity"
           >
             Learn More
           </a>
-        </div>
+        </p>
+        <button
+          onClick={handleAccept}
+          className="px-6 py-2 bg-yellow-100 text-black font-semibold rounded-lg transition-all hover:bg-yellow-200 shrink-0"
+        >
+          Accept
+        </button>
       </div>
     </div>
   );
