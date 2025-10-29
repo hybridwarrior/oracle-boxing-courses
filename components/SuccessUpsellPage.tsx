@@ -64,8 +64,8 @@ export const SuccessUpsellPage: React.FC<SuccessUpsellPageProps> = ({ isMembersh
           sessionData_keys: Object.keys(sessionData),
         });
 
-        // Get tracking cookie data
-        const cookieData = getCookie('ob_track') ? JSON.parse(decodeURIComponent(getCookie('ob_track') || '{}')) : {};
+        // Get tracking cookie data (getCookie already returns parsed object)
+        const cookieData = getCookie('ob_track') || {};
 
         // Generate or use event_id for deduplication
         const eventId = cookieData.event_id || `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
