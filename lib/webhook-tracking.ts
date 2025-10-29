@@ -299,7 +299,7 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
     const fbclid = getFbclid();
 
     // Send entire cookie data object (not stringified)
-    const cookieData = typeof sessionId === 'object' ? sessionId : { session_id: sessionId };
+    const pageViewCookieData = typeof sessionId === 'object' ? sessionId : { session_id: sessionId };
 
     console.log('📤 Sending to server API with event_id:', pageViewEventId);
 
@@ -310,7 +310,7 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       },
       body: JSON.stringify({
         event_id: pageViewEventId,
-        cookie_data: cookieData,
+        cookie_data: pageViewCookieData,
         page_url: `https://shop.oracleboxing.com${page}`,
         fbclid: fbclid,
       }),
