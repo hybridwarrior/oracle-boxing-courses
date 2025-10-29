@@ -116,16 +116,41 @@ export const detectCurrencyFromCountry = (countryCode: string): Currency => {
 // Detect user location and return currency
 export const detectUserCurrency = async (): Promise<Currency> => {
   try {
-    // Use ipapi.co for free IP geolocation
-    const response = await fetch('https://ipapi.co/json/');
-    if (!response.ok) throw new Error('Geolocation failed');
+    // Use ipapi.co for free IP geolocation with timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+
+    const response = await fetch('https://ipapi.co/json/', {
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) throw new Error('Geolocation API returned error');
 
     const data = await response.json();
+
+    // Check if we got rate limited
+    if (data.error) {
+      console.warn('ipapi.co rate limit or error:', data);
+      return 'USD';
+    }
+
     const countryCode = data.country_code;
+
+    if (!countryCode) {
+      console.warn('No country code in response');
+      return 'USD';
+    }
 
     return detectCurrencyFromCountry(countryCode);
   } catch (error) {
-    console.error('Failed to detect user location:', error);
+    // Silently fall back to USD - this is expected behavior when API fails
+    if (error instanceof Error && error.name === 'AbortError') {
+      console.log('Currency detection timed out, using USD');
+    } else {
+      console.log('Currency detection unavailable, using USD');
+    }
     return 'USD'; // Default to USD on error
   }
 };
