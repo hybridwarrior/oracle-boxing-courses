@@ -456,7 +456,9 @@ export async function trackInitiateCheckout(
       console.warn('Failed to get country, continuing without it:', error);
     }
 
-    const eventId = generateEventId();
+    // Use session-level event_id from cookie, or generate new one as fallback
+    // This ensures all InitiateCheckout events in the same session use the same event_id for deduplication
+    const eventId = cookieData.event_id || generateEventId();
     const sessionId = getOrCreateSessionId();
 
     // Split full name into first and last name
