@@ -89,28 +89,33 @@ export async function POST(req: NextRequest) {
           },
 
           // Line Items (Products Purchased)
-          line_items: expandedSession.line_items?.data.map(item => ({
-            id: item.id,
-            description: item.description,
-            quantity: item.quantity,
-            amount_total: item.amount_total ? item.amount_total / 100 : 0,
-            amount_subtotal: item.amount_subtotal ? item.amount_subtotal / 100 : 0,
-            price: {
-              id: item.price?.id,
-              unit_amount: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
-              currency: item.price?.currency?.toUpperCase() || 'USD',
-              type: item.price?.type, // one_time or recurring
-              recurring: item.price?.recurring ? {
-                interval: item.price.recurring.interval,
-                interval_count: item.price.recurring.interval_count,
-              } : null,
-            },
-            product: {
-              id: typeof item.price?.product === 'object' ? item.price.product.id : item.price?.product,
-              name: typeof item.price?.product === 'object' ? item.price.product.name : item.description,
-              description: typeof item.price?.product === 'object' ? item.price.product.description : '',
-            }
-          })) || [],
+          line_items: expandedSession.line_items?.data.map(item => {
+            const product = item.price?.product;
+            const isExpandedProduct = product && typeof product === 'object' && 'name' in product;
+
+            return {
+              id: item.id,
+              description: item.description,
+              quantity: item.quantity,
+              amount_total: item.amount_total ? item.amount_total / 100 : 0,
+              amount_subtotal: item.amount_subtotal ? item.amount_subtotal / 100 : 0,
+              price: {
+                id: item.price?.id,
+                unit_amount: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
+                currency: item.price?.currency?.toUpperCase() || 'USD',
+                type: item.price?.type, // one_time or recurring
+                recurring: item.price?.recurring ? {
+                  interval: item.price.recurring.interval,
+                  interval_count: item.price.recurring.interval_count,
+                } : null,
+              },
+              product: {
+                id: typeof product === 'object' ? product.id : product,
+                name: isExpandedProduct ? product.name : item.description,
+                description: isExpandedProduct ? (product.description || '') : '',
+              }
+            };
+          }) || [],
 
           // Stripe Metadata (includes all tracking params)
           metadata: {
