@@ -26,6 +26,42 @@ function FinalSuccessContent() {
 
         if (response.ok) {
           setOrderData(data);
+
+          // Fire browser-side Purchase event for coaching upsell
+          // (Server-side event already fired in /api/upsell/charge)
+          if (typeof window !== 'undefined' && (window as any).fbq) {
+            // Calculate coaching amount based on currency
+            const coachingPrices: Record<string, number> = {
+              'USD': 397,
+              'GBP': 317,
+              'EUR': 365,
+              'CAD': 538,
+              'AUD': 595,
+              'AED': 1465,
+            };
+
+            const currency = data.currency || 'USD';
+            const coachingAmount = coachingPrices[currency] || 397;
+
+            // Use coaching product ID
+            const coachingProductId = 'prod_THuQf0h3DatQUL';
+
+            console.log('📱 Firing browser Purchase event for coaching upsell:', {
+              value: coachingAmount,
+              currency,
+              content_ids: [coachingProductId],
+            });
+
+            (window as any).fbq('track', 'Purchase', {
+              value: coachingAmount,
+              currency: currency.toUpperCase(),
+              content_ids: [coachingProductId],
+              content_type: 'product',
+              num_items: 1,
+            });
+          } else {
+            console.warn('⚠️ Facebook Pixel not loaded - browser Purchase event not sent');
+          }
         }
       } catch (error) {
         console.error('Error fetching order:', error);
