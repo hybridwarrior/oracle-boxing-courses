@@ -102,6 +102,31 @@ export function EpicCTAButton({
         console.log('📱 Facebook Pixel AddToCart event sent with event_id:', addToCartEventId);
       }
 
+      // Get tracking cookie data and fbclid for Facebook CAPI
+      let cookieData = {};
+      let fbclid = null;
+
+      if (typeof document !== 'undefined') {
+        // Get tracking cookie
+        const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+          const [key, value] = cookie.trim().split('=');
+          acc[key] = value;
+          return acc;
+        }, {} as Record<string, string>);
+
+        const obTrackCookie = cookies['ob_track'];
+        if (obTrackCookie) {
+          try {
+            cookieData = JSON.parse(decodeURIComponent(obTrackCookie));
+          } catch (e) {
+            console.warn('Failed to parse tracking cookie:', e);
+          }
+        }
+
+        // Get fbclid
+        fbclid = cookies['fbclid'] || null;
+      }
+
       // Send to Facebook Conversions API (server-side)
       fetch('/api/facebook-addtocart', {
         method: 'POST',
@@ -116,6 +141,8 @@ export function EpicCTAButton({
           currency: 'USD',
           button_location: trackingName,
           page_url: typeof window !== 'undefined' ? window.location.href : '',
+          cookie_data: cookieData,
+          fbclid: fbclid,
         }),
         keepalive: true,
       }).catch((error) => {

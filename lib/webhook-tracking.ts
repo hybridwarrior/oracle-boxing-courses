@@ -60,6 +60,8 @@ export interface InitiateCheckoutData {
   course?: string | null;
   currency?: string | null;
   source?: string | null;
+  // Full cookie data (empty if no consent)
+  cookieData?: any;
 }
 
 /**
@@ -440,6 +442,9 @@ export async function trackInitiateCheckout(
   }
 ): Promise<void> {
   try {
+    // Get all cookie data (will be empty object if no consent)
+    const cookieData = getTrackingCookie();
+
     const utm = getUTMParameters();
 
     // Get country with better error handling
@@ -482,6 +487,8 @@ export async function trackInitiateCheckout(
       course: urlParams?.course || null,
       currency: urlParams?.currency || null,
       source: urlParams?.source || null,
+      // Include full cookie data
+      cookieData,
     };
 
     // Log the complete data being sent
@@ -527,6 +534,32 @@ export async function trackInitiateCheckout(
       // Hash email for Facebook Conversions API
       const hashedEmail = await hashSHA256(email);
 
+      // Parse cookie data into separate fields for custom_data
+      // Each field value must be ≤500 chars
+      const customData: Record<string, any> = {
+        value: valueUSD,
+        currency: 'USD',
+        content_ids: products,
+        content_type: 'product',
+        num_items: products.length,
+      };
+
+      if (cookieData && typeof cookieData === 'object') {
+        // Add individual cookie fields, ensuring each is ≤500 chars
+        Object.keys(cookieData).forEach(key => {
+          // Skip user_agent - it's already sent in user_data section
+          if (key === 'user_agent') {
+            return;
+          }
+
+          const value = cookieData[key];
+          if (value !== null && value !== undefined) {
+            const stringValue = String(value);
+            customData[key] = stringValue.length > 500 ? stringValue.substring(0, 500) : stringValue;
+          }
+        });
+      }
+
       const eventData = {
         event_name: 'InitiateCheckout',
         event_time: Math.floor(eventTime / 1000),
@@ -538,13 +571,7 @@ export async function trackInitiateCheckout(
           client_user_agent: getClientUserAgent(),
           ...(fbclid && { fbc: `fb.1.${eventTime}.${fbclid}` }),
         },
-        custom_data: {
-          value: valueUSD,
-          currency: 'USD',
-          content_ids: products,
-          content_type: 'product',
-          num_items: products.length,
-        },
+        custom_data: customData,
       };
 
       const payload = {

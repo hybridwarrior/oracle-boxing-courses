@@ -39,6 +39,15 @@ interface CreateCheckoutSessionParams {
   cookieData?: any
 }
 
+// Helper function to prepare cookie data for Stripe metadata
+// Excludes user_agent to stay under 500 char limit (user_agent already sent elsewhere)
+function prepareCookieDataForStripe(cookieData: any): string {
+  if (!cookieData) return '';
+
+  const { user_agent, ...cookieDataWithoutUserAgent } = cookieData;
+  return JSON.stringify(cookieDataWithoutUserAgent);
+}
+
 export async function createCheckoutSession({
   items,
   hasPhysicalItems,
@@ -200,8 +209,8 @@ export async function createCheckoutSession({
     session_id: trackingParams?.session_id || '',
     event_id: trackingParams?.event_id || '',
 
-    // Full cookie data (JSON stringified)
-    cookie_data: cookieData ? JSON.stringify(cookieData) : '',
+    // Full cookie data (JSON stringified, excluding user_agent to stay under 500 chars)
+    cookie_data: prepareCookieDataForStripe(cookieData),
   }
 
   // Add cross-sell recommendations using Stripe's adjustable quantity feature

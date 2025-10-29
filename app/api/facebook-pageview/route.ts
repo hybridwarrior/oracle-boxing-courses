@@ -24,13 +24,7 @@ export async function POST(request: NextRequest) {
 
     if (cookie_data && typeof cookie_data === 'object') {
       // Add individual cookie fields, ensuring each is ≤500 chars
-      // Exclude user_agent as it's already in user_data
       Object.keys(cookie_data).forEach(key => {
-        // Skip user_agent - it's already sent in user_data section
-        if (key === 'user_agent') {
-          return;
-        }
-
         const value = cookie_data[key];
         if (value !== null && value !== undefined) {
           const stringValue = String(value);
