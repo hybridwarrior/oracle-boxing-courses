@@ -69,6 +69,9 @@ export function EpicCTAButton({
   const handleClick = (e?: React.MouseEvent) => {
     // Track add_to_cart event when CTA button is clicked
     if (trackingName) {
+      // Generate event_id for deduplication
+      const addToCartEventId = generateEventId();
+
       // GA4 Tracking
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'add_to_cart', {
@@ -84,7 +87,7 @@ export function EpicCTAButton({
         });
       }
 
-      // Facebook Pixel Tracking - Use AddToCart for CTA button clicks
+      // Facebook Pixel Tracking - Use AddToCart with event_id
       if (typeof window !== 'undefined' && (window as any).fbq) {
         (window as any).fbq('track', 'AddToCart', {
           content_ids: ['6WC'],
@@ -93,8 +96,31 @@ export function EpicCTAButton({
           value: 197,
           currency: 'USD',
           button_location: trackingName
+        }, {
+          eventID: addToCartEventId
         });
+        console.log('📱 Facebook Pixel AddToCart event sent with event_id:', addToCartEventId);
       }
+
+      // Send to Facebook Conversions API (server-side)
+      fetch('/api/facebook-addtocart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          event_id: addToCartEventId,
+          content_ids: ['6WC'],
+          content_name: '6-Week Challenge',
+          value: 197,
+          currency: 'USD',
+          button_location: trackingName,
+          page_url: typeof window !== 'undefined' ? window.location.href : '',
+        }),
+        keepalive: true,
+      }).catch((error) => {
+        console.error('Failed to send AddToCart to Facebook CAPI:', error);
+      });
 
       // Vercel Analytics
       if (typeof window !== 'undefined' && (window as any).va) {
@@ -106,6 +132,7 @@ export function EpicCTAButton({
       }
 
       console.log('Tracking AddToCart (Epic CTA):', {
+        event_id: addToCartEventId,
         value: 197,
         location: trackingName
       });

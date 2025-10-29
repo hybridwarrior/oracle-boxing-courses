@@ -505,7 +505,7 @@ export async function trackInitiateCheckout(
       console.error('❌ Failed to send initiate checkout to webhook:', error);
     });
 
-    // Send to Facebook Pixel (browser-side tracking)
+    // Send to Facebook Pixel (browser-side tracking) with event_id
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'InitiateCheckout', {
         value: valueUSD,
@@ -513,8 +513,10 @@ export async function trackInitiateCheckout(
         content_ids: products,
         content_type: 'product',
         num_items: products.length,
+      }, {
+        eventID: eventId
       });
-      console.log('📱 Facebook Pixel InitiateCheckout event sent');
+      console.log('📱 Facebook Pixel InitiateCheckout event sent with event_id:', eventId);
     }
 
     // Send to Facebook Conversions API (server-side tracking)
