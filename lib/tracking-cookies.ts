@@ -1,34 +1,54 @@
 // Cookie-based tracking utilities for event deduplication and attribution
 
 export interface TrackingData {
-  // Single event ID for entire session
-  event_id?: string;
+  // Session Identity
   session_id?: string;
+  event_id?: string;
+  landing_time?: string; // ISO string
+  ip?: string; // Truncated for GDPR (last octet removed)
+  user_agent?: string;
 
-  // Track if events have been fired (for deduplication)
-  page_view_fired?: boolean;
-  last_page_view_sent?: number; // Timestamp of last PageView sent to webhook (for daily unique tracking)
-  initiate_checkout_fired?: boolean;
-  purchase_fired?: boolean;
-  purchase_time?: number;
+  // User Data (only after consent + form submission)
+  first_name?: string;
+  last_name?: string;
+  email?: string; // Lowercase
+
+  // Attribution - First Touch (never overwritten)
+  first_referrer?: string;
+  first_utm_source?: string;
+  first_utm_medium?: string;
+  first_utm_campaign?: string;
+  first_utm_content?: string;
+  first_utm_term?: string;
+  first_referrer_time?: string; // ISO string
+
+  // Attribution - Last Touch (updated on change)
+  last_referrer?: string;
+  last_utm_source?: string;
+  last_utm_medium?: string;
+  last_utm_campaign?: string;
+  last_utm_content?: string;
+  last_utm_term?: string;
+  last_referrer_time?: string; // ISO string
 
   // Facebook Attribution
   fbclid?: string;
 
-  // UTM Parameters
-  utm_source?: string;
-  utm_medium?: string;
-  utm_campaign?: string;
-  utm_content?: string;
-  utm_term?: string;
+  // Location / Currency
+  country_code?: string;
+  currency?: string;
 
-  // Attribution - FIRST referrer (never overwritten)
-  first_referrer?: string;
-  first_referrer_time?: number;
+  // Event Deduplication
+  page_view_fired?: boolean;
+  last_page_view_sent?: number;
+  initiate_checkout_fired?: boolean;
+  purchase_fired?: boolean;
+  purchase_time?: string; // ISO string
 
   // Metadata
-  landing_time?: number;
   button_location?: string;
+  consent_given?: boolean;
+  cookie_version?: number; // Schema version
 }
 
 /**
@@ -77,39 +97,172 @@ export function generateEventId(): string {
 }
 
 /**
- * Generate a unique session ID
+ * Generate a unique session ID (UUIDv4-like)
  */
 export function generateSessionId(): string {
-  const timestamp = Date.now();
-  const random = Math.random().toString(36).substr(2, 9);
-  return `sess_${timestamp}_${random}`;
+  return 'sess_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
 }
 
 /**
- * Get or initialize tracking data
+ * Truncate IP address for GDPR compliance (removes last octet)
+ */
+export function truncateIP(ip: string): string {
+  const parts = ip.split('.');
+  if (parts.length === 4) {
+    return `${parts[0]}.${parts[1]}.${parts[2]}.0`;
+  }
+  // IPv6 truncation - remove last segment
+  const ipv6Parts = ip.split(':');
+  if (ipv6Parts.length > 1) {
+    return ipv6Parts.slice(0, -1).join(':') + ':0';
+  }
+  return ip;
+}
+
+/**
+ * Check if user has given consent for tracking cookies
+ */
+export function hasTrackingConsent(): boolean {
+  if (typeof window === 'undefined') return false;
+
+  const consentCookie = getCookie('ob_consent');
+  return consentCookie === 'accepted' || consentCookie === true;
+}
+
+/**
+ * Get or initialize tracking data (only if consent given)
+ * Returns minimal data if no consent, full tracking if consent given
  */
 export function getOrInitTrackingData(): TrackingData {
+  // Check for existing tracking data
   let trackingData = getCookie('ob_track') || {};
-  
-  // Initialize session and event ID if new
+
+  // If no consent, return empty object (don't initialize anything)
+  if (!hasTrackingConsent()) {
+    return {};
+  }
+
+  // Initialize session and event ID if new (after consent)
   if (!trackingData.session_id) {
     trackingData.session_id = generateSessionId();
-    trackingData.landing_time = Date.now();
+    trackingData.landing_time = new Date().toISOString();
+    trackingData.cookie_version = 1;
+    trackingData.consent_given = true;
+    trackingData.user_agent = typeof navigator !== 'undefined' ? navigator.userAgent : '';
   }
-  
+
   // Generate event ID if not exists (single ID for entire session)
   if (!trackingData.event_id) {
     trackingData.event_id = generateEventId();
-    setCookie('ob_track', trackingData, 30);
   }
-  
+
+  // Fix old landing_time format (number to ISO string)
+  if (trackingData.landing_time && typeof trackingData.landing_time === 'number') {
+    trackingData.landing_time = new Date(trackingData.landing_time).toISOString();
+  }
+
+  // Ensure cookie_version exists (migration)
+  if (!trackingData.cookie_version) {
+    trackingData.cookie_version = 1;
+  }
+
+  // Ensure consent_given exists
+  if (trackingData.consent_given === undefined) {
+    trackingData.consent_given = true;
+  }
+
+  // Ensure user_agent exists
+  if (!trackingData.user_agent && typeof navigator !== 'undefined') {
+    trackingData.user_agent = navigator.userAgent;
+  }
+
+  // Initialize empty attribution fields if they don't exist
+  if (!trackingData.first_referrer) {
+    trackingData.first_referrer = 'direct';
+    trackingData.first_referrer_time = trackingData.landing_time;
+  }
+  if (!trackingData.last_referrer) {
+    trackingData.last_referrer = 'direct';
+    trackingData.last_referrer_time = trackingData.landing_time;
+  }
+
+  // Initialize empty UTM fields with null/undefined if not set
+  if (trackingData.first_utm_source === undefined) {
+    trackingData.first_utm_source = undefined;
+    trackingData.first_utm_medium = undefined;
+    trackingData.first_utm_campaign = undefined;
+    trackingData.first_utm_content = undefined;
+    trackingData.first_utm_term = undefined;
+  }
+  if (trackingData.last_utm_source === undefined) {
+    trackingData.last_utm_source = undefined;
+    trackingData.last_utm_medium = undefined;
+    trackingData.last_utm_campaign = undefined;
+    trackingData.last_utm_content = undefined;
+    trackingData.last_utm_term = undefined;
+  }
+
+  // Fetch and set country/currency if not already set
+  if (!trackingData.country_code || !trackingData.currency) {
+    fetchAndSetLocation(trackingData);
+  }
+
+  // Save initialized data
+  setCookie('ob_track', trackingData, 30);
+
   return trackingData;
 }
 
 /**
- * Update tracking data in cookie
+ * Fetch location and set country/currency in tracking data
+ */
+async function fetchAndSetLocation(trackingData: TrackingData): Promise<void> {
+  try {
+    const response = await fetch('/api/detect-location', {
+      method: 'GET',
+      signal: AbortSignal.timeout(2000),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.country_code) {
+        trackingData.country_code = data.country_code;
+
+        // Map country to currency
+        const currencyMap: Record<string, string> = {
+          US: 'USD', GB: 'GBP', UK: 'GBP', DE: 'EUR', FR: 'EUR', IT: 'EUR',
+          ES: 'EUR', NL: 'EUR', BE: 'EUR', AT: 'EUR', IE: 'EUR', PT: 'EUR',
+          FI: 'EUR', GR: 'EUR', AU: 'AUD', CA: 'CAD', AE: 'AED',
+        };
+
+        trackingData.currency = currencyMap[data.country_code] || 'USD';
+
+        // Save updated data
+        setCookie('ob_track', trackingData, 30);
+      }
+    }
+  } catch (error) {
+    console.warn('Failed to fetch location:', error);
+    // Default to USD if fetch fails
+    trackingData.country_code = trackingData.country_code || 'US';
+    trackingData.currency = trackingData.currency || 'USD';
+    setCookie('ob_track', trackingData, 30);
+  }
+}
+
+/**
+ * Update tracking data in cookie (only if consent given)
  */
 export function updateTrackingData(updates: Partial<TrackingData>): void {
+  if (!hasTrackingConsent()) {
+    console.warn('Cannot update tracking data: No consent given');
+    return;
+  }
+
   const currentData = getOrInitTrackingData();
   const updatedData = { ...currentData, ...updates };
   setCookie('ob_track', updatedData, 30);
@@ -143,30 +296,17 @@ export function isDuplicatePurchase(): boolean {
 }
 
 /**
- * Capture UTM parameters and first referrer from URL and store in cookies
- * This function should be called on initial page load
+ * Capture UTM parameters and referrer attribution
+ * Tracks immediately but only saves to cookies if consent given
+ * Returns captured data for use even without consent
  */
-export function captureUTMParameters(): void {
-  if (typeof window === 'undefined') return;
+export function captureUTMParameters(): Partial<TrackingData> | null {
+  if (typeof window === 'undefined') return null;
 
   const urlParams = new URLSearchParams(window.location.search);
-  const trackingData = getOrInitTrackingData();
+  const now = new Date().toISOString();
 
-  // Capture FIRST referrer (only if not already set)
-  if (!trackingData.first_referrer && document.referrer) {
-    const referrer = document.referrer;
-    // Only capture external referrers (not same-domain navigation)
-    const currentDomain = window.location.hostname;
-    const referrerDomain = new URL(referrer).hostname;
-
-    if (referrerDomain !== currentDomain) {
-      trackingData.first_referrer = referrer;
-      trackingData.first_referrer_time = Date.now();
-      console.log('📊 First referrer captured:', referrer);
-    }
-  }
-
-  // Extract UTM parameters from URL
+  // Extract current UTM and referrer (always do this)
   const utmSource = urlParams.get('utm_source');
   const utmMedium = urlParams.get('utm_medium');
   const utmCampaign = urlParams.get('utm_campaign');
@@ -174,82 +314,165 @@ export function captureUTMParameters(): void {
   const utmTerm = urlParams.get('utm_term');
   const fbclid = urlParams.get('fbclid');
 
-  // Update tracking data if UTM parameters are present
+  // Only save to cookies if consent given
+  if (!hasTrackingConsent()) {
+    console.log('📊 UTM captured but not saved to cookies (no consent)');
+    return null;
+  }
+
+  // Get existing tracking data to check for first touch
+  const existingData = getOrInitTrackingData();
   const updates: Partial<TrackingData> = {};
 
-  if (utmSource) updates.utm_source = utmSource;
-  if (utmMedium) updates.utm_medium = utmMedium;
-  if (utmCampaign) updates.utm_campaign = utmCampaign;
-  if (utmContent) updates.utm_content = utmContent;
-  if (utmTerm) updates.utm_term = utmTerm;
-  if (fbclid) updates.fbclid = fbclid;
-
-  // Add first referrer to updates if it was just captured
-  if (trackingData.first_referrer) {
-    updates.first_referrer = trackingData.first_referrer;
-    updates.first_referrer_time = trackingData.first_referrer_time;
+  // --- FIRST TOUCH ATTRIBUTION (never overwrite if already set) ---
+  if (document.referrer && !existingData.first_referrer) {
+    const referrer = document.referrer;
+    const currentDomain = window.location.hostname;
+    try {
+      const referrerDomain = new URL(referrer).hostname;
+      if (referrerDomain !== currentDomain) {
+        updates.first_referrer = referrer;
+        updates.first_referrer_time = now;
+        console.log('📊 First referrer captured:', referrer);
+      }
+    } catch (e) {
+      console.warn('Invalid referrer URL:', referrer);
+    }
   }
 
-  // Only update if we have new parameters or first referrer
+  // Capture first UTM parameters (only if not already set)
+  if (utmSource && !existingData.first_utm_source) {
+    updates.first_utm_source = utmSource;
+    updates.first_utm_medium = utmMedium || undefined;
+    updates.first_utm_campaign = utmCampaign || undefined;
+    updates.first_utm_content = utmContent || undefined;
+    updates.first_utm_term = utmTerm || undefined;
+    console.log('📊 First touch UTM captured:', { utmSource, utmMedium, utmCampaign });
+  }
+
+  // --- LAST TOUCH ATTRIBUTION (always update if new data) ---
+  if (document.referrer) {
+    const referrer = document.referrer;
+    const currentDomain = window.location.hostname;
+    try {
+      const referrerDomain = new URL(referrer).hostname;
+      if (referrerDomain !== currentDomain && referrer !== existingData.last_referrer) {
+        updates.last_referrer = referrer;
+        updates.last_referrer_time = now;
+        console.log('📊 Last referrer updated:', referrer);
+      }
+    } catch (e) {
+      console.warn('Invalid referrer URL:', referrer);
+    }
+  }
+
+  // Update last UTM parameters if they've changed
+  if (utmSource && utmSource !== existingData.last_utm_source) {
+    updates.last_utm_source = utmSource;
+    updates.last_utm_medium = utmMedium || undefined;
+    updates.last_utm_campaign = utmCampaign || undefined;
+    updates.last_utm_content = utmContent || undefined;
+    updates.last_utm_term = utmTerm || undefined;
+    console.log('📊 Last touch UTM updated:', { utmSource, utmMedium, utmCampaign });
+  }
+
+  // Facebook Click ID (always update if present)
+  if (fbclid) {
+    updates.fbclid = fbclid;
+  }
+
+  // Save updates if any
   if (Object.keys(updates).length > 0) {
+    console.log('📊 Saving attribution updates to cookies:', updates);
     updateTrackingData(updates);
-    console.log('📊 Tracking data captured:', updates);
   }
+
+  return updates;
 }
 
 /**
- * Get all UTM parameters from cookies
+ * Get all UTM parameters from cookies (first and last touch)
  */
 export function getUTMParameters(): {
-  utm_source?: string;
-  utm_medium?: string;
-  utm_campaign?: string;
-  utm_content?: string;
-  utm_term?: string;
+  // First Touch
+  first_utm_source?: string;
+  first_utm_medium?: string;
+  first_utm_campaign?: string;
+  first_utm_content?: string;
+  first_utm_term?: string;
+  // Last Touch
+  last_utm_source?: string;
+  last_utm_medium?: string;
+  last_utm_campaign?: string;
+  last_utm_content?: string;
+  last_utm_term?: string;
+  // Facebook
   fbclid?: string;
 } {
   const trackingData = getOrInitTrackingData();
 
   return {
-    utm_source: trackingData.utm_source,
-    utm_medium: trackingData.utm_medium,
-    utm_campaign: trackingData.utm_campaign,
-    utm_content: trackingData.utm_content,
-    utm_term: trackingData.utm_term,
+    first_utm_source: trackingData.first_utm_source,
+    first_utm_medium: trackingData.first_utm_medium,
+    first_utm_campaign: trackingData.first_utm_campaign,
+    first_utm_content: trackingData.first_utm_content,
+    first_utm_term: trackingData.first_utm_term,
+    last_utm_source: trackingData.last_utm_source,
+    last_utm_medium: trackingData.last_utm_medium,
+    last_utm_campaign: trackingData.last_utm_campaign,
+    last_utm_content: trackingData.last_utm_content,
+    last_utm_term: trackingData.last_utm_term,
     fbclid: trackingData.fbclid,
   };
 }
 
 /**
  * Get tracking parameters for checkout/API calls
- * Uses FIRST referrer for attribution (not current referrer)
+ * Returns both first touch and last touch attribution
  */
 export function getTrackingParams(): {
-  referrer: string;
-  utm_source?: string;
-  utm_medium?: string;
-  utm_campaign?: string;
-  utm_term?: string;
-  utm_content?: string;
-  fbclid?: string;
+  // Session
   session_id?: string;
   event_id?: string;
+  // First Touch Attribution
+  first_referrer?: string;
+  first_utm_source?: string;
+  first_utm_medium?: string;
+  first_utm_campaign?: string;
+  first_utm_term?: string;
+  first_utm_content?: string;
+  // Last Touch Attribution
+  last_referrer?: string;
+  last_utm_source?: string;
+  last_utm_medium?: string;
+  last_utm_campaign?: string;
+  last_utm_term?: string;
+  last_utm_content?: string;
+  // Facebook
+  fbclid?: string;
+  // Location
+  country_code?: string;
+  currency?: string;
 } {
   const trackingData = getOrInitTrackingData();
 
-  // Use first_referrer for attribution (captured on initial landing)
-  // Falls back to 'direct' if no first referrer was captured
-  const referrer = trackingData.first_referrer || 'direct';
-
   return {
-    referrer,
-    utm_source: trackingData.utm_source,
-    utm_medium: trackingData.utm_medium,
-    utm_campaign: trackingData.utm_campaign,
-    utm_term: trackingData.utm_term,
-    utm_content: trackingData.utm_content,
-    fbclid: trackingData.fbclid,
     session_id: trackingData.session_id,
     event_id: trackingData.event_id,
+    first_referrer: trackingData.first_referrer || 'direct',
+    first_utm_source: trackingData.first_utm_source,
+    first_utm_medium: trackingData.first_utm_medium,
+    first_utm_campaign: trackingData.first_utm_campaign,
+    first_utm_term: trackingData.first_utm_term,
+    first_utm_content: trackingData.first_utm_content,
+    last_referrer: trackingData.last_referrer,
+    last_utm_source: trackingData.last_utm_source,
+    last_utm_medium: trackingData.last_utm_medium,
+    last_utm_campaign: trackingData.last_utm_campaign,
+    last_utm_term: trackingData.last_utm_term,
+    last_utm_content: trackingData.last_utm_content,
+    fbclid: trackingData.fbclid,
+    country_code: trackingData.country_code,
+    currency: trackingData.currency,
   };
 }

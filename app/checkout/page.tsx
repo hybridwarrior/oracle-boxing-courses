@@ -7,7 +7,7 @@ import { Loader2 } from 'lucide-react'
 import { getProductById } from '@/lib/products'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { Currency, getProductPrice } from '@/lib/currency'
-import { getTrackingParams } from '@/lib/tracking-cookies'
+import { getTrackingParams, getCookie } from '@/lib/tracking-cookies'
 import { trackInitiateCheckout } from '@/lib/webhook-tracking'
 
 export const dynamic = 'force-dynamic'
@@ -189,6 +189,9 @@ export default function CheckoutPage() {
           throw new Error(`Product not found: ${productParam}`)
         }
 
+        // Get full cookie data
+        const cookieData = getCookie('ob_track')
+
         // Create checkout session with single product
         const response = await fetch('/api/checkout/session', {
           method: 'POST',
@@ -217,6 +220,7 @@ export default function CheckoutPage() {
               },
             },
             trackingParams: trackingParams,
+            cookieData: cookieData,
           }),
         })
 

@@ -19,6 +19,8 @@ export interface PageViewData {
   utmCampaign: string | null;
   utmContent: string | null;
   country: string | null;
+  // Full cookie data (empty if no consent)
+  cookieData?: any;
 }
 
 export interface PurchaseData {
@@ -130,8 +132,8 @@ function getUTMParameters(): {
  */
 async function getUserCountry(): Promise<string | null> {
   try {
-    // Try to get country from a geolocation API
-    const response = await fetch('https://ipapi.co/json/', {
+    // Use our server-side API route to avoid CORS issues
+    const response = await fetch('/api/detect-location', {
       method: 'GET',
       signal: AbortSignal.timeout(2000), // 2 second timeout
     });
@@ -198,15 +200,48 @@ async function hashSHA256(text: string): Promise<string> {
 
 
 /**
+ * Get tracking cookie data (returns empty object if no consent/cookie)
+ */
+function getTrackingCookie(): any {
+  if (typeof document === 'undefined') return {};
+
+  const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+    const [key, value] = cookie.trim().split('=');
+    acc[key] = value;
+    return acc;
+  }, {} as Record<string, string>);
+
+  const obTrackCookie = cookies['ob_track'];
+  if (!obTrackCookie) return {};
+
+  try {
+    return JSON.parse(decodeURIComponent(obTrackCookie));
+  } catch {
+    return {};
+  }
+}
+
+/**
  * Send page view data to webhook and Facebook Pixel
+ * Fires immediately, includes cookie data (empty if no consent)
  */
 export async function trackPageView(page: string, referrer: string): Promise<void> {
   try {
-    const utm = getUTMParameters();
-    const country = await getUserCountry();
-    const eventId = generateEventId();
-    const sessionId = getOrCreateSessionId();
+    // Get all cookie data (will be empty object if no consent)
+    const cookieData = getTrackingCookie();
+
+    // Use cookie data if available, otherwise generate new IDs
+    const eventId = cookieData.event_id || generateEventId();
+    const sessionId = cookieData.session_id || getOrCreateSessionId();
     const eventTime = Date.now();
+
+    const country = await getUserCountry();
+
+    // Extract UTM from cookie (use last_utm as current)
+    const utmSource = cookieData.last_utm_source || null;
+    const utmMedium = cookieData.last_utm_medium || null;
+    const utmCampaign = cookieData.last_utm_campaign || null;
+    const utmContent = cookieData.last_utm_content || null;
 
     const data: PageViewData = {
       eventType: 'page_view',
@@ -215,11 +250,12 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       date: new Date(eventTime).toISOString(),
       page,
       referrer,
-      utmSource: utm.utmSource,
-      utmMedium: utm.utmMedium,
-      utmCampaign: utm.utmCampaign,
-      utmContent: utm.utmContent,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      utmContent,
       country,
+      cookieData, // Include full cookie data
     };
 
     // Send to webhook (non-blocking)

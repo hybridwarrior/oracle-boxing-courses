@@ -6,7 +6,7 @@ import { Currency } from '@/lib/currency'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { items, customerInfo, currency, trackingParams }: {
+    const { items, customerInfo, currency, trackingParams, cookieData }: {
       items: CartItem[],
       customerInfo?: any,
       currency?: Currency,
@@ -17,7 +17,11 @@ export async function POST(req: NextRequest) {
         utm_campaign?: string
         utm_term?: string
         utm_content?: string
-      }
+        fbclid?: string
+        session_id?: string
+        event_id?: string
+      },
+      cookieData?: any
     } = body
 
     // Debug logging
@@ -55,6 +59,7 @@ export async function POST(req: NextRequest) {
       customerInfo,
       currency: currency || 'USD',
       trackingParams,
+      cookieData,
     })
 
     console.log('🔍 DEBUG: Session created:', {

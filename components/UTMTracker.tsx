@@ -5,14 +5,24 @@ import { captureUTMParameters } from '@/lib/tracking-cookies'
 
 /**
  * Client-side UTM parameter tracker
- * Captures UTM parameters from URL and stores them in cookies/session
- * Runs once on initial page load
+ * Captures UTM parameters immediately - cookie storage gated by consent
  */
 export function UTMTracker() {
   useEffect(() => {
-    // Capture UTM parameters from URL on mount
+    // Capture UTM parameters immediately
     captureUTMParameters()
-  }, []) // Empty dependency array - run once on mount
+
+    // Also capture when consent is given (to save to cookies)
+    const handleConsentGiven = () => {
+      captureUTMParameters()
+    }
+
+    window.addEventListener('cookieConsentGiven', handleConsentGiven)
+
+    return () => {
+      window.removeEventListener('cookieConsentGiven', handleConsentGiven)
+    }
+  }, [])
 
   // This component renders nothing
   return null

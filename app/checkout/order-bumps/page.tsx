@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 
 import { get6WCAddOns, getCourseOrderBump, getProductById } from '@/lib/products'
 import { Product } from '@/lib/types'
-import { getTrackingParams } from '@/lib/tracking-cookies'
+import { getTrackingParams, getCookie } from '@/lib/tracking-cookies'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { getProductPrice, formatPrice, formatProductDescription } from '@/lib/currency'
 import { trackInitiateCheckout } from '@/lib/webhook-tracking'
@@ -209,6 +209,9 @@ function OrderBumpsContent() {
     )
 
     try {
+      // Get full cookie data
+      const cookieData = getCookie('ob_track')
+
       // Use the checkout API to create a session with all items
       const response = await fetch('/api/checkout/session', {
         method: 'POST',
@@ -232,6 +235,7 @@ function OrderBumpsContent() {
             },
           },
           trackingParams: trackingParams,
+          cookieData: cookieData,
         }),
       })
 

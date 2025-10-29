@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   console.log('🔍 UPSELL: Request received')
   try {
     const body = await req.json()
-    const { session_id, price_id, product_id, trackingParams } = body
+    const { session_id, price_id, product_id, trackingParams, cookieData } = body
 
     console.log('🔍 UPSELL: Body parsed:', { session_id, price_id, product_id, trackingParams })
 
@@ -165,6 +165,9 @@ export async function POST(req: NextRequest) {
           fbclid: trackingParams?.fbclid || '',
           session_id: trackingParams?.session_id || '',
           event_id: trackingParams?.event_id || '',
+
+          // Full cookie data (JSON stringified)
+          cookie_data: cookieData ? JSON.stringify(cookieData) : '',
         },
       })
 
@@ -247,6 +250,9 @@ export async function POST(req: NextRequest) {
           fbclid: trackingParams?.fbclid || '',
           session_id: trackingParams?.session_id || '',
           event_id: trackingParams?.event_id || '',
+
+          // Full cookie data (JSON stringified)
+          cookie_data: cookieData ? JSON.stringify(cookieData) : '',
         },
       })
 

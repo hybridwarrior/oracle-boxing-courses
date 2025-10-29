@@ -116,26 +116,19 @@ export const detectCurrencyFromCountry = (countryCode: string): Currency => {
 // Detect user location and return currency
 export const detectUserCurrency = async (): Promise<Currency> => {
   try {
-    // Use ipapi.co for free IP geolocation with timeout
+    // Use our server-side API route to avoid CORS issues
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
 
-    const response = await fetch('https://ipapi.co/json/', {
+    const response = await fetch('/api/detect-location', {
       signal: controller.signal,
     });
 
     clearTimeout(timeoutId);
 
-    if (!response.ok) throw new Error('Geolocation API returned error');
+    if (!response.ok) throw new Error('Location detection API returned error');
 
     const data = await response.json();
-
-    // Check if we got rate limited
-    if (data.error) {
-      console.warn('ipapi.co rate limit or error:', data);
-      return 'USD';
-    }
-
     const countryCode = data.country_code;
 
     if (!countryCode) {
@@ -143,6 +136,7 @@ export const detectUserCurrency = async (): Promise<Currency> => {
       return 'USD';
     }
 
+    console.log('Currency detected from location:', countryCode);
     return detectCurrencyFromCountry(countryCode);
   } catch (error) {
     // Silently fall back to USD - this is expected behavior when API fails
@@ -162,26 +156,21 @@ export const getStripePriceId = (
 ): string => {
   // If product has multi-currency price IDs, use them
   if (product.price_ids) {
-    // For USD, use the USD-specific price ID
-    if (currency === 'USD') {
-      return product.price_ids.usd || product.stripe_price_id;
+    // Check for currency-specific price ID first (e.g., usd, gbp, eur)
+    const currencyKey = currency.toLowerCase() as Lowercase<Currency>;
+    const specificPriceId = product.price_ids[currencyKey];
+    if (specificPriceId) {
+      return specificPriceId;
     }
 
-    // For other currencies, use the multicurrency price ID if available
+    // Use multicurrency price ID if available (works for all currencies)
     const multicurrencyPriceId = product.price_ids.multicurrency;
     if (multicurrencyPriceId) {
       return multicurrencyPriceId;
     }
-
-    // Legacy: check for currency-specific price IDs
-    const currencyKey = currency.toLowerCase() as Lowercase<Currency>;
-    const priceId = product.price_ids[currencyKey];
-    if (priceId) {
-      return priceId;
-    }
   }
 
-  // Fallback to default price ID (should be USD)
+  // Fallback to default price ID (should work for all currencies if it's a multicurrency price)
   return product.stripe_price_id;
 };
 

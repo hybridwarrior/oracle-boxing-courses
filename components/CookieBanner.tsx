@@ -1,20 +1,28 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { setCookie, getCookie } from '@/lib/tracking-cookies';
 
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if user has already accepted cookies
-    const hasAccepted = localStorage.getItem('cookies_accepted');
-    if (!hasAccepted) {
+    // Check if user has already responded to cookie consent
+    const consentCookie = getCookie('ob_consent');
+    if (!consentCookie) {
       setIsVisible(true);
     }
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem('cookies_accepted', 'true');
+    // Set consent cookie (used by tracking functions)
+    setCookie('ob_consent', 'accepted', 365); // 1 year
+
+    // Trigger a custom event so other components can initialize tracking
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cookieConsentGiven'));
+    }
+
     setIsVisible(false);
   };
 
@@ -31,8 +39,7 @@ export function CookieBanner() {
     >
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <p className="text-base sm:text-lg text-left w-full sm:flex-1">
-          Oracle Boxing uses cookies to provide you with personalised content & ads.
-          By clicking accept, you consent to all cookies on the site.{' '}
+          We use cookies for analytics, personalised content, and ads. By accepting, you consent to all cookies on this site.{' '}
           <a
             href="/privacy"
             className="underline hover:opacity-80 transition-opacity"

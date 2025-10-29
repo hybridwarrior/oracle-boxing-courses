@@ -6,6 +6,7 @@ import { OrderConfirmation } from '@/components/OrderConfirmation';
 import { CoachingUpsell } from '@/components/CoachingUpsell';
 import { Footer } from '@/components/Footer';
 import { toast } from 'sonner';
+import { getCookie } from '@/lib/tracking-cookies';
 
 interface SuccessUpsellPageProps {
   isMembership?: boolean;
@@ -83,6 +84,9 @@ export const SuccessUpsellPage: React.FC<SuccessUpsellPageProps> = ({ isMembersh
         sessionId
       });
 
+      // Get cookie data
+      const cookieData = getCookie('ob_track')
+
       // Use the one-click charge endpoint with the correct product
       const response = await fetch('/api/upsell/charge', {
         method: 'POST',
@@ -95,6 +99,7 @@ export const SuccessUpsellPage: React.FC<SuccessUpsellPageProps> = ({ isMembersh
           product_id: 'prod_THuQf0h3DatQUL',
           // Pass through tracking params from original session
           trackingParams: orderData.trackingParams,
+          cookieData: cookieData,
         }),
       });
 

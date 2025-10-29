@@ -6,7 +6,7 @@ import { Currency, getStripePriceId } from '@/lib/currency';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { customerEmail, customerName, originalSessionId, isMembership = false, currency = 'USD', trackingParams } = body;
+    const { customerEmail, customerName, originalSessionId, isMembership = false, currency = 'USD', trackingParams, cookieData } = body;
 
     console.log('🎯 Creating coaching upsell:', { customerEmail, isMembership, currency });
 
@@ -71,6 +71,9 @@ export async function POST(req: NextRequest) {
         fbclid: trackingParams?.fbclid || '',
         session_id: trackingParams?.session_id || '',
         event_id: trackingParams?.event_id || '',
+
+        // Full cookie data (JSON stringified)
+        cookie_data: cookieData ? JSON.stringify(cookieData) : '',
       },
       payment_intent_data: {
         metadata: {
@@ -104,6 +107,9 @@ export async function POST(req: NextRequest) {
           fbclid: trackingParams?.fbclid || '',
           session_id: trackingParams?.session_id || '',
           event_id: trackingParams?.event_id || '',
+
+          // Full cookie data (JSON stringified)
+          cookie_data: cookieData ? JSON.stringify(cookieData) : '',
         },
       },
     });

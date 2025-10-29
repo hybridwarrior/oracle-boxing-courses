@@ -6,6 +6,7 @@ import { CheckCircle, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { getProductPrice, formatPrice, isMembershipProduct } from '@/lib/currency'
+import { getCookie, getTrackingParams } from '@/lib/tracking-cookies'
 
 // Helper function to convert markdown bold to HTML and clean up
 function formatDescription(text: string) {
@@ -34,6 +35,10 @@ export function Upsell({ product, sessionId }: UpsellProps) {
     setIsAdding(true)
 
     try {
+      // Get cookie data and tracking params
+      const cookieData = getCookie('ob_track')
+      const trackingParams = getTrackingParams()
+
       const response = await fetch('/api/upsell/charge', {
         method: 'POST',
         headers: {
@@ -43,6 +48,8 @@ export function Upsell({ product, sessionId }: UpsellProps) {
           session_id: sessionId,
           price_id: product.stripe_price_id,
           product_id: product.id,
+          trackingParams: trackingParams,
+          cookieData: cookieData,
         }),
       })
 

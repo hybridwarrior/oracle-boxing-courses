@@ -7,6 +7,7 @@ import { trackPageView } from '@/lib/webhook-tracking';
 /**
  * PageViewTracker internal component
  * Uses useSearchParams which requires Suspense boundary
+ * Tracks immediately - cookie storage handled by tracking-cookies.ts
  */
 function PageViewTrackerInternal() {
   const pathname = usePathname();
@@ -25,7 +26,7 @@ function PageViewTrackerInternal() {
     if (fullPath !== previousPath.current) {
       previousPath.current = fullPath;
 
-      // Track the page view
+      // Track the page view (fires immediately)
       trackPageView(fullPath, referrer);
     }
   }, [pathname, searchParams]);

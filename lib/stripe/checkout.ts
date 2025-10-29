@@ -36,6 +36,7 @@ interface CreateCheckoutSessionParams {
     session_id?: string
     event_id?: string
   }
+  cookieData?: any
 }
 
 export async function createCheckoutSession({
@@ -46,6 +47,7 @@ export async function createCheckoutSession({
   customerInfo,
   currency = 'USD',
   trackingParams,
+  cookieData,
 }: CreateCheckoutSessionParams): Promise<Stripe.Checkout.Session> {
   // Convert cart items to Stripe line items, using correct price ID for currency
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(item => {
@@ -197,6 +199,9 @@ export async function createCheckoutSession({
     fbclid: trackingParams?.fbclid || '',
     session_id: trackingParams?.session_id || '',
     event_id: trackingParams?.event_id || '',
+
+    // Full cookie data (JSON stringified)
+    cookie_data: cookieData ? JSON.stringify(cookieData) : '',
   }
 
   // Add cross-sell recommendations using Stripe's adjustable quantity feature
@@ -286,6 +291,9 @@ export async function createCheckoutSession({
         fbclid: trackingParams?.fbclid || '',
         session_id: trackingParams?.session_id || '',
         event_id: trackingParams?.event_id || '',
+
+        // Full cookie data (JSON stringified)
+        cookie_data: cookieData ? JSON.stringify(cookieData) : '',
       },
     }
   }
@@ -324,6 +332,9 @@ export async function createCheckoutSession({
         fbclid: trackingParams?.fbclid || '',
         session_id: trackingParams?.session_id || '',
         event_id: trackingParams?.event_id || '',
+
+        // Full cookie data (JSON stringified)
+        cookie_data: cookieData ? JSON.stringify(cookieData) : '',
       },
     }
   }
