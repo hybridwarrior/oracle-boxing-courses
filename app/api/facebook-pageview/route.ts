@@ -7,7 +7,7 @@ const FB_CONVERSIONS_API_URL = `https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { event_id, page_url, fbclid } = body;
+    const { event_id, session_id, page_url, fbclid } = body;
 
     // Get client IP from request headers
     const forwarded = request.headers.get('x-forwarded-for');
@@ -29,6 +29,9 @@ export async function POST(request: NextRequest) {
         client_user_agent: userAgent,
         ...(fbclid && { fbc: `fb.1.${eventTime * 1000}.${fbclid}` }),
       },
+      custom_data: {
+        session_id: session_id,
+      },
     };
 
     const payload = {
@@ -36,6 +39,14 @@ export async function POST(request: NextRequest) {
       access_token: FB_ACCESS_TOKEN,
       test_event_code: 'TEST85396',
     };
+
+    console.log('📊 Sending PageView to Facebook CAPI:', {
+      event_id,
+      session_id,
+      page_url,
+      clientIp,
+      userAgent: userAgent.substring(0, 50) + '...',
+    });
 
     const response = await fetch(FB_CONVERSIONS_API_URL, {
       method: 'POST',

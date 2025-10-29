@@ -287,6 +287,7 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       },
       body: JSON.stringify({
         event_id: browserEventId,
+        session_id: sessionId,
         page_url: `https://shop.oracleboxing.com${page}`,
         fbclid: fbclid,
       }),
