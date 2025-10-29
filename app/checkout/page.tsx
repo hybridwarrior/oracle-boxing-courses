@@ -112,27 +112,9 @@ export default function CheckoutPage() {
 
       console.log('🏷️ Processing checkout for:', productParam)
 
-      // Get product price in USD for tracking
-      const priceUSD = getProductPrice(productParam, 'USD') || 0
-
-      // Track initiate checkout event
-      const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout'
-      const initialReferrer = trackingParams.referrer || 'direct'
-
-      trackInitiateCheckout(
-        fullName,
-        email,
-        priceUSD,
-        [productParam],
-        currentPage,
-        initialReferrer,
-        {
-          funnel: null, // Not applicable on main checkout page
-          course: null, // Not applicable on main checkout page
-          currency: currency,
-          source: sourceParam,
-        }
-      )
+      // Don't track InitiateCheckout here - it will be tracked on:
+      // 1. Order bumps page (for 6wc and courses)
+      // 2. When creating Stripe session (for bundle/membership direct-to-Stripe)
 
       // 6WC → Order bumps
       if (productParam === '6wc') {
@@ -188,6 +170,26 @@ export default function CheckoutPage() {
         if (!product) {
           throw new Error(`Product not found: ${productParam}`)
         }
+
+        // Track InitiateCheckout for direct-to-Stripe products (no order bumps)
+        const priceUSD = getProductPrice(productParam, 'USD') || 0
+        const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout'
+        const initialReferrer = trackingParams.referrer || 'direct'
+
+        trackInitiateCheckout(
+          fullName,
+          email,
+          priceUSD,
+          [productParam],
+          currentPage,
+          initialReferrer,
+          {
+            funnel: product.type === 'membership' ? 'membership' : 'bundle',
+            course: null,
+            currency: currency,
+            source: sourceParam,
+          }
+        )
 
         // Get full cookie data
         const cookieData = getCookie('ob_track')
