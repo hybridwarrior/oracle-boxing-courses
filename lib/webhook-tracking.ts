@@ -270,15 +270,21 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       console.error('Failed to send page view to webhook:', error);
     });
 
-    // Note: Facebook Pixel PageView fires automatically from layout.tsx
-    // Browser-side pixel handles client tracking
+    // Generate a fresh event_id for this page view (for deduplication between browser and server)
+    const pageViewEventId = generateEventId();
+
+    // Fire browser-side Facebook Pixel PageView with event_id
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'PageView', {}, { eventID: pageViewEventId });
+      console.log('📱 Browser PageView fired with event_id:', pageViewEventId);
+    }
 
     // Send to Facebook Conversions API (server-side) via API route
-    // Use the same event_id from browser Pixel for deduplication
+    // Use the same event_id for deduplication
     const fbclid = getFbclid();
-    const browserEventId = typeof window !== 'undefined' && (window as any)._fbPageViewEventId
-      ? (window as any)._fbPageViewEventId
-      : eventId;
+
+    // Ensure session_id is a string, not an object
+    const sessionIdString = typeof sessionId === 'string' ? sessionId : String(sessionId);
 
     fetch('/api/facebook-pageview', {
       method: 'POST',
@@ -286,8 +292,8 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        event_id: browserEventId,
-        session_id: sessionId,
+        event_id: pageViewEventId,
+        session_id: sessionIdString,
         page_url: `https://shop.oracleboxing.com${page}`,
         fbclid: fbclid,
       }),

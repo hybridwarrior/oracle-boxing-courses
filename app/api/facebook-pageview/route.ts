@@ -18,6 +18,15 @@ export async function POST(request: NextRequest) {
 
     const eventTime = Math.floor(Date.now() / 1000);
 
+    // Ensure session_id is a string and within Facebook's 500 char limit
+    let sessionIdValue = session_id;
+    if (typeof sessionIdValue === 'object') {
+      // If it's an object, extract just the session_id field
+      sessionIdValue = sessionIdValue.session_id || JSON.stringify(sessionIdValue);
+    }
+    // Convert to string and truncate if needed
+    sessionIdValue = String(sessionIdValue).substring(0, 500);
+
     const eventData = {
       event_name: 'PageView',
       event_time: eventTime,
@@ -30,7 +39,7 @@ export async function POST(request: NextRequest) {
         ...(fbclid && { fbc: `fb.1.${eventTime * 1000}.${fbclid}` }),
       },
       custom_data: {
-        session_id: session_id,
+        session_id: sessionIdValue,
       },
     };
 
@@ -42,7 +51,9 @@ export async function POST(request: NextRequest) {
 
     console.log('📊 Sending PageView to Facebook CAPI:', {
       event_id,
-      session_id,
+      session_id: sessionIdValue,
+      session_id_length: sessionIdValue.length,
+      session_id_type: typeof sessionIdValue,
       page_url,
       clientIp,
       userAgent: userAgent.substring(0, 50) + '...',
