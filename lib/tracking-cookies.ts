@@ -351,16 +351,30 @@ export function captureUTMParameters(): Partial<TrackingData> | null {
     console.log('📊 First touch UTM captured:', { utmSource, utmMedium, utmCampaign });
   }
 
-  // --- LAST TOUCH ATTRIBUTION (always update if new data) ---
+  // --- LAST TOUCH ATTRIBUTION (update only from external marketing sources) ---
+  // Blocklist: Don't update last touch from checkout/payment providers
+  const blockedDomains = [
+    'checkout.stripe.com',
+    'stripe.com',
+    'paypal.com',
+    'pay.google.com',
+    'appleid.apple.com'
+  ];
+
   if (document.referrer) {
     const referrer = document.referrer;
     const currentDomain = window.location.hostname;
     try {
       const referrerDomain = new URL(referrer).hostname;
-      if (referrerDomain !== currentDomain && referrer !== existingData.last_referrer) {
+      const isBlockedDomain = blockedDomains.some(blocked => referrerDomain.includes(blocked));
+
+      // Only update if: external domain + not blocked + different from existing
+      if (referrerDomain !== currentDomain && !isBlockedDomain && referrer !== existingData.last_referrer) {
         updates.last_referrer = referrer;
         updates.last_referrer_time = now;
         console.log('📊 Last referrer updated:', referrer);
+      } else if (isBlockedDomain) {
+        console.log('📊 Referrer blocked (checkout/payment domain):', referrerDomain);
       }
     } catch (e) {
       console.warn('Invalid referrer URL:', referrer);
