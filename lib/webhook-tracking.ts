@@ -298,8 +298,8 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
     // Use the same event_id for deduplication
     const fbclid = getFbclid();
 
-    // Ensure session_id is a string, not an object
-    const sessionIdString = typeof sessionId === 'string' ? sessionId : String(sessionId);
+    // Send entire cookie data object (not stringified)
+    const cookieData = typeof sessionId === 'object' ? sessionId : { session_id: sessionId };
 
     console.log('📤 Sending to server API with event_id:', pageViewEventId);
 
@@ -310,7 +310,7 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       },
       body: JSON.stringify({
         event_id: pageViewEventId,
-        session_id: sessionIdString,
+        cookie_data: cookieData,
         page_url: `https://shop.oracleboxing.com${page}`,
         fbclid: fbclid,
       }),

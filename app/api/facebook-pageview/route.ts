@@ -7,7 +7,7 @@ const FB_CONVERSIONS_API_URL = `https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { event_id, session_id, page_url, fbclid } = body;
+    const { event_id, cookie_data, page_url, fbclid } = body;
 
     // Get client IP from request headers
     const forwarded = request.headers.get('x-forwarded-for');
@@ -18,14 +18,20 @@ export async function POST(request: NextRequest) {
 
     const eventTime = Math.floor(Date.now() / 1000);
 
-    // Ensure session_id is a string and within Facebook's 500 char limit
-    let sessionIdValue = session_id;
-    if (typeof sessionIdValue === 'object') {
-      // If it's an object, extract just the session_id field
-      sessionIdValue = sessionIdValue.session_id || JSON.stringify(sessionIdValue);
+    // Parse cookie data into separate fields for custom_data
+    // Each field value must be ≤500 chars
+    const customData: Record<string, any> = {};
+
+    if (cookie_data && typeof cookie_data === 'object') {
+      // Add individual cookie fields, ensuring each is ≤500 chars
+      Object.keys(cookie_data).forEach(key => {
+        const value = cookie_data[key];
+        if (value !== null && value !== undefined) {
+          const stringValue = String(value);
+          customData[key] = stringValue.length > 500 ? stringValue.substring(0, 500) : stringValue;
+        }
+      });
     }
-    // Convert to string and truncate if needed
-    sessionIdValue = String(sessionIdValue).substring(0, 500);
 
     const eventData = {
       event_name: 'PageView',
@@ -38,9 +44,7 @@ export async function POST(request: NextRequest) {
         client_user_agent: userAgent,
         ...(fbclid && { fbc: `fb.1.${eventTime * 1000}.${fbclid}` }),
       },
-      custom_data: {
-        session_id: sessionIdValue,
-      },
+      custom_data: customData,
     };
 
     const payload = {
@@ -51,9 +55,8 @@ export async function POST(request: NextRequest) {
 
     console.log('📊 Sending PageView to Facebook CAPI:', {
       event_id,
-      session_id: sessionIdValue,
-      session_id_length: sessionIdValue.length,
-      session_id_type: typeof sessionIdValue,
+      custom_data_keys: Object.keys(customData),
+      custom_data: customData,
       page_url,
       clientIp,
       userAgent: userAgent.substring(0, 50) + '...',
