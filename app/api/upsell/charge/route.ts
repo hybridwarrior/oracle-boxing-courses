@@ -285,6 +285,82 @@ export async function POST(req: NextRequest) {
       // Check if succeeded
       if (upsellPaymentIntent.status === 'succeeded') {
         console.log('✅ UPSELL: Payment succeeded:', upsellPaymentIntent.id)
+
+        // Send Facebook Purchase event for upsell
+        try {
+          const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID || '1474540100541059';
+          const FB_ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN || '';
+          const FB_CONVERSIONS_API_URL = `https://graph.facebook.com/v18.0/${FB_PIXEL_ID}/events`;
+
+          // Hash email for Facebook
+          async function hashSHA256(text: string): Promise<string> {
+            const normalized = text.toLowerCase().trim();
+            const encoder = new TextEncoder();
+            const data = encoder.encode(normalized);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+          }
+
+          const eventTime = Math.floor(Date.now() / 1000);
+          const hashedEmail = customerEmail ? await hashSHA256(customerEmail) : null;
+
+          // Build Facebook event
+          const fbEventData = {
+            event_name: 'Purchase',
+            event_time: eventTime,
+            event_id: `server_upsell_${upsellPaymentIntent.id}`,
+            event_source_url: 'https://shop.oracleboxing.com/success',
+            action_source: 'website',
+            user_data: {
+              em: hashedEmail ? [hashedEmail] : [],
+            },
+            custom_data: {
+              value: amount / 100,
+              currency: originalCurrency.toUpperCase(),
+              content_ids: [product_id],
+              content_type: 'product',
+              num_items: 1,
+              contents: [{
+                id: product_id,
+                quantity: 1,
+                item_price: amount / 100,
+              }],
+              // Add cookie tracking data if available
+              ...(cookieData || {}),
+            },
+          };
+
+          const fbPayload = {
+            data: [fbEventData],
+            access_token: FB_ACCESS_TOKEN,
+            test_event_code: 'TEST85396',
+          };
+
+          console.log('📊 Sending upsell Purchase to Facebook CAPI:', {
+            event_id: fbEventData.event_id,
+            value: fbEventData.custom_data.value,
+            currency: fbEventData.custom_data.currency,
+          });
+
+          const fbResponse = await fetch(FB_CONVERSIONS_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(fbPayload),
+          });
+
+          const fbResult = await fbResponse.json();
+          if (fbResponse.ok) {
+            console.log('✅ Facebook CAPI upsell Purchase success:', fbResult);
+          } else {
+            console.error('❌ Facebook CAPI upsell Purchase error:', fbResult);
+          }
+        } catch (fbError) {
+          console.error('❌ Failed to send upsell Purchase to Facebook CAPI:', fbError);
+        }
+
         return NextResponse.json({
           success: true,
           payment_intent_id: upsellPaymentIntent.id,
