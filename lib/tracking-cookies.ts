@@ -288,7 +288,8 @@ export function isDuplicatePurchase(): boolean {
   const trackingData = getOrInitTrackingData();
 
   if (trackingData.purchase_fired && trackingData.purchase_time) {
-    const timeSincePurchase = Date.now() - trackingData.purchase_time;
+    const purchaseTimestamp = new Date(trackingData.purchase_time).getTime();
+    const timeSincePurchase = Date.now() - purchaseTimestamp;
     return timeSincePurchase < 60000; // 60 seconds
   }
 
