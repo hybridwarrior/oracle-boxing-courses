@@ -234,13 +234,8 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       console.error('Failed to send page view to webhook:', error);
     });
 
-    // Send to Facebook Pixel (browser-side tracking only)
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'PageView');
-    }
-
-    // Note: Facebook Conversions API PageView tracking removed
-    // Facebook Pixel handles PageView tracking automatically
+    // Note: Facebook Pixel PageView fires automatically from layout.tsx
+    // No need to track PageView here - Pixel base code handles it
 
     console.log('Page view tracked:', data);
   } catch (error) {
