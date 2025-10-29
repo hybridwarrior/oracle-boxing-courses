@@ -2,6 +2,33 @@ import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe/client'
 import { products } from '@/lib/products'
 
+// Helper function to extract only first/last attribution from cookie data for Stripe metadata
+// Only includes first/last touch referrer and UTM parameters
+function prepareCookieDataForStripe(cookieData: any): string {
+  if (!cookieData) return '';
+
+  // Extract only first and last attribution data
+  const attributionData = {
+    // First-touch attribution
+    first_utm_source: cookieData.first_utm_source || '',
+    first_utm_medium: cookieData.first_utm_medium || '',
+    first_utm_campaign: cookieData.first_utm_campaign || '',
+    first_utm_content: cookieData.first_utm_content || '',
+    first_referrer: cookieData.first_referrer || '',
+    first_touch_timestamp: cookieData.first_touch_timestamp || '',
+
+    // Last-touch attribution
+    last_utm_source: cookieData.last_utm_source || '',
+    last_utm_medium: cookieData.last_utm_medium || '',
+    last_utm_campaign: cookieData.last_utm_campaign || '',
+    last_utm_content: cookieData.last_utm_content || '',
+    last_referrer: cookieData.last_referrer || '',
+    last_touch_timestamp: cookieData.last_touch_timestamp || '',
+  };
+
+  return JSON.stringify(attributionData);
+}
+
 export async function POST(req: NextRequest) {
   console.log('🔍 UPSELL: Request received')
   try {
@@ -166,8 +193,8 @@ export async function POST(req: NextRequest) {
           session_id: trackingParams?.session_id || '',
           event_id: trackingParams?.event_id || '',
 
-          // Full cookie data (JSON stringified)
-          cookie_data: cookieData ? JSON.stringify(cookieData) : '',
+          // Attribution data from cookie (first/last touch only)
+          cookie_data: prepareCookieDataForStripe(cookieData),
         },
       })
 
@@ -251,8 +278,8 @@ export async function POST(req: NextRequest) {
           session_id: trackingParams?.session_id || '',
           event_id: trackingParams?.event_id || '',
 
-          // Full cookie data (JSON stringified)
-          cookie_data: cookieData ? JSON.stringify(cookieData) : '',
+          // Attribution data from cookie (first/last touch only)
+          cookie_data: prepareCookieDataForStripe(cookieData),
         },
       })
 

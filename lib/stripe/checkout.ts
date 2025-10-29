@@ -39,13 +39,31 @@ interface CreateCheckoutSessionParams {
   cookieData?: any
 }
 
-// Helper function to prepare cookie data for Stripe metadata
-// Excludes user_agent to stay under 500 char limit (user_agent already sent elsewhere)
+// Helper function to extract only first/last attribution from cookie data for Stripe metadata
+// Only includes first/last touch referrer and UTM parameters
 function prepareCookieDataForStripe(cookieData: any): string {
   if (!cookieData) return '';
 
-  const { user_agent, ...cookieDataWithoutUserAgent } = cookieData;
-  return JSON.stringify(cookieDataWithoutUserAgent);
+  // Extract only first and last attribution data
+  const attributionData = {
+    // First-touch attribution
+    first_utm_source: cookieData.first_utm_source || '',
+    first_utm_medium: cookieData.first_utm_medium || '',
+    first_utm_campaign: cookieData.first_utm_campaign || '',
+    first_utm_content: cookieData.first_utm_content || '',
+    first_referrer: cookieData.first_referrer || '',
+    first_touch_timestamp: cookieData.first_touch_timestamp || '',
+
+    // Last-touch attribution
+    last_utm_source: cookieData.last_utm_source || '',
+    last_utm_medium: cookieData.last_utm_medium || '',
+    last_utm_campaign: cookieData.last_utm_campaign || '',
+    last_utm_content: cookieData.last_utm_content || '',
+    last_referrer: cookieData.last_referrer || '',
+    last_touch_timestamp: cookieData.last_touch_timestamp || '',
+  };
+
+  return JSON.stringify(attributionData);
 }
 
 export async function createCheckoutSession({
@@ -209,7 +227,7 @@ export async function createCheckoutSession({
     session_id: trackingParams?.session_id || '',
     event_id: trackingParams?.event_id || '',
 
-    // Full cookie data (JSON stringified, excluding user_agent to stay under 500 chars)
+    // Attribution data from cookie (first/last touch only)
     cookie_data: prepareCookieDataForStripe(cookieData),
   }
 
@@ -301,8 +319,8 @@ export async function createCheckoutSession({
         session_id: trackingParams?.session_id || '',
         event_id: trackingParams?.event_id || '',
 
-        // Full cookie data (JSON stringified)
-        cookie_data: cookieData ? JSON.stringify(cookieData) : '',
+        // Full cookie data (JSON stringified, excluding user_agent to stay under 500 chars)
+        cookie_data: prepareCookieDataForStripe(cookieData),
       },
     }
   }
@@ -342,8 +360,8 @@ export async function createCheckoutSession({
         session_id: trackingParams?.session_id || '',
         event_id: trackingParams?.event_id || '',
 
-        // Full cookie data (JSON stringified)
-        cookie_data: cookieData ? JSON.stringify(cookieData) : '',
+        // Full cookie data (JSON stringified, excluding user_agent to stay under 500 chars)
+        cookie_data: prepareCookieDataForStripe(cookieData),
       },
     }
   }
