@@ -235,7 +235,24 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
     });
 
     // Note: Facebook Pixel PageView fires automatically from layout.tsx
-    // No need to track PageView here - Pixel base code handles it
+    // Browser-side pixel handles client tracking
+
+    // Send to Facebook Conversions API (server-side) via API route
+    const fbclid = getFbclid();
+    fetch('/api/facebook-pageview', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        event_id: eventId,
+        page_url: `https://shop.oracleboxing.com${page}`,
+        fbclid: fbclid,
+      }),
+      keepalive: true,
+    }).catch((error) => {
+      console.error('Failed to send PageView to Facebook CAPI:', error);
+    });
 
     console.log('Page view tracked:', data);
   } catch (error) {
