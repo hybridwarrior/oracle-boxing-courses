@@ -270,13 +270,28 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       console.error('Failed to send page view to webhook:', error);
     });
 
-    // Generate a fresh event_id for this page view (for deduplication between browser and server)
-    const pageViewEventId = generateEventId();
+    // Check if this is the initial page load (event_id already generated in layout.tsx)
+    const isInitialPageLoad = typeof window !== 'undefined' &&
+                               (window as any)._fbPageViewEventId &&
+                               !(window as any)._fbPageViewUsed;
 
-    // Fire browser-side Facebook Pixel PageView with event_id
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'PageView', {}, { eventID: pageViewEventId });
-      console.log('📱 Browser PageView fired with event_id:', pageViewEventId);
+    let pageViewEventId: string;
+
+    if (isInitialPageLoad) {
+      // Use the event_id from the initial page load in layout.tsx
+      pageViewEventId = (window as any)._fbPageViewEventId;
+      (window as any)._fbPageViewUsed = true; // Mark as used to avoid reusing
+      console.log('🔄 Using initial page load event_id:', pageViewEventId);
+    } else {
+      // Generate a fresh event_id for route changes
+      pageViewEventId = generateEventId();
+      console.log('🔑 Generated new event_id for route change:', pageViewEventId);
+
+      // Fire browser-side Facebook Pixel PageView with event_id (only for route changes)
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'PageView', {}, { eventID: pageViewEventId });
+        console.log('📱 Browser PageView fired with event_id:', pageViewEventId);
+      }
     }
 
     // Send to Facebook Conversions API (server-side) via API route
@@ -285,6 +300,8 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
 
     // Ensure session_id is a string, not an object
     const sessionIdString = typeof sessionId === 'string' ? sessionId : String(sessionId);
+
+    console.log('📤 Sending to server API with event_id:', pageViewEventId);
 
     fetch('/api/facebook-pageview', {
       method: 'POST',
