@@ -41,8 +41,12 @@ export async function POST(req: NextRequest) {
       value,
       currency,
       content_ids,
-      customer_email: customer_email ? '✓' : '✗',
+      contents_count: contents?.length || 0,
+      customer_email: customer_email ? '✓ ' + customer_email : '✗',
+      customer_phone: customer_phone ? '✓' : '✗',
       cookie_data_present: !!cookie_data,
+      cookie_data_keys: cookie_data ? Object.keys(cookie_data) : [],
+      fbclid: fbclid ? '✓' : '✗',
     });
 
     const eventTime = Math.floor(Date.now() / 1000);

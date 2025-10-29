@@ -90,6 +90,14 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
 
     async function sendPurchaseEvent(sessionData: any) {
       try {
+        console.log('🔍 Session data received for Purchase tracking:', {
+          has_amount_total: !!sessionData.amount_total,
+          has_line_items: !!sessionData.line_items,
+          line_items_count: sessionData.line_items?.data?.length || 0,
+          has_customer_details: !!sessionData.customer_details,
+          sessionData_keys: Object.keys(sessionData),
+        });
+
         // Get cookie data (empty if no consent)
         const cookieData = getTrackingCookie();
 
@@ -121,6 +129,8 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
           value: amountTotal,
           currency,
           content_ids: contentIds,
+          contents_count: contents.length,
+          has_customer_email: !!(sessionData.customer_details?.email || sessionData.customer_email || sessionData.customerEmail),
         });
 
         // 1. Send browser-side Facebook Pixel Purchase event
@@ -135,6 +145,8 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
             eventID: eventId
           });
           console.log('📱 Browser Purchase event sent with event_id:', eventId);
+        } else {
+          console.warn('⚠️ Facebook Pixel not loaded - browser Purchase event not sent');
         }
 
         // 2. Send server-side CAPI Purchase event
@@ -149,57 +161,23 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
             currency,
             content_ids: contentIds,
             contents,
-            customer_email: sessionData.customer_details?.email || sessionData.customer_email,
+            customer_email: sessionData.customer_details?.email || sessionData.customer_email || sessionData.customerEmail,
             customer_phone: sessionData.customer_details?.phone,
             cookie_data: cookieData,
             fbclid,
             session_url: `https://shop.oracleboxing.com/success/${sessionId}`,
           }),
           keepalive: true,
-        }).then(response => {
+        }).then(async response => {
           if (response.ok) {
-            console.log('✅ CAPI Purchase event sent successfully');
+            const result = await response.json();
+            console.log('✅ CAPI Purchase event sent successfully:', result);
           } else {
-            console.error('❌ CAPI Purchase event failed:', response.status);
+            const error = await response.json();
+            console.error('❌ CAPI Purchase event failed:', response.status, error);
           }
         }).catch((error) => {
           console.error('❌ Failed to send CAPI Purchase event:', error);
-        });
-
-        // 3. Send to Make.com webhook
-        const webhookPayload = {
-          event_type: 'purchase',
-          event_time: new Date().toISOString(),
-          session_id: sessionId,
-          order: {
-            id: sessionId,
-            amount_total: amountTotal,
-            currency,
-          },
-          customer: {
-            email: sessionData.customer_details?.email || sessionData.customer_email,
-            name: sessionData.customer_details?.name,
-            phone: sessionData.customer_details?.phone,
-          },
-          products: contentIds,
-          cookie_data: cookieData,
-        };
-
-        fetch('https://hook.eu2.make.com/rmssfwgpgrbkihnly4ocxd2cf6kmfbo3', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(webhookPayload),
-          keepalive: true,
-        }).then(response => {
-          if (response.ok) {
-            console.log('✅ Make.com webhook sent successfully');
-          } else {
-            console.error('❌ Make.com webhook failed:', response.status);
-          }
-        }).catch((error) => {
-          console.error('❌ Failed to send Make.com webhook:', error);
         });
 
       } catch (error) {
