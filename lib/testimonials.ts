@@ -103,12 +103,6 @@ export const bundleTestimonials: Testimonial[] = [
     rating: 5
   },
   {
-    name: "Kevin Wright",
-    role: "Bundle Student",
-    content: "Worth every penny. Instead of buying one course, I got all of them. Now I have the full system to become a real boxer!",
-    rating: 5
-  },
-  {
     name: "Amanda Foster",
     role: "Bundle Student",
     content: "The vault recordings are gold. When I miss something in the masterclass, I find the answer in a coaching call recording. Everything connects!",
@@ -118,12 +112,6 @@ export const bundleTestimonials: Testimonial[] = [
     name: "Ryan Mitchell",
     role: "Bundle Student",
     content: "Best investment in my boxing journey. All the courses plus the recordings give me answers to every question I have!",
-    rating: 5
-  },
-  {
-    name: "Jessica Kim",
-    role: "Bundle Student",
-    content: "Tried buying courses one at a time before. This bundle saves money and gives me the complete picture. Wish I found this sooner!",
     rating: 5
   }
 ]
