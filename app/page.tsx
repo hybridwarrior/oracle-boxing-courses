@@ -188,7 +188,7 @@ export default function HomePage() {
 
               {/* Headline */}
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
-                Join The Exclusive 6-Week Challenge
+                Join The 6-Week Challenge
               </h2>
 
               {/* Description */}
