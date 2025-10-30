@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Check, Sparkles, Clock, TrendingUp } from 'lucide-react';
 import { useCurrency } from '@/contexts/CurrencyContext';
-import { formatPrice, getProductPrice } from '@/lib/currency';
+import { formatPrice, getProductPrice, Currency } from '@/lib/currency';
 
 interface CoachingUpsellProps {
   normalPrice: number;
@@ -11,7 +11,7 @@ interface CoachingUpsellProps {
   onAccept: () => void;
   onDecline: () => void;
   isLoading?: boolean;
-  isMembership?: boolean;
+  purchaseCurrency?: string; // The currency of the original purchase (e.g., 'USD', 'GBP', 'EUR')
 }
 
 export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
@@ -20,23 +20,23 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
   onAccept,
   onDecline,
   isLoading = false,
-  isMembership = false,
+  purchaseCurrency,
 }) => {
   const { currency } = useCurrency();
 
-  // Get the currency-converted prices
-  const displayPrice = isMembership
-    ? 397  // Membership products are USD-only
-    : (getProductPrice('coach1', currency) || discountedPrice);
+  // Use the purchase currency if provided, otherwise fall back to user's currency preference
+  // This ensures the displayed price matches what will actually be charged
+  const chargeCurrency = (purchaseCurrency?.toUpperCase() || currency) as Currency;
+
+  // Get the currency-converted prices using the charge currency
+  const displayPrice = getProductPrice('coach1', chargeCurrency) || discountedPrice;
 
   // Regular price for 3 months coaching
-  const regularPrice = isMembership
-    ? 1500  // Membership products are USD-only
-    : (getProductPrice('coach3', currency) || 1500);
+  const regularPrice = getProductPrice('coach3', chargeCurrency) || 1500;
 
   const savings = regularPrice - displayPrice;
 
-  const displayCurrency = isMembership ? 'USD' : currency;
+  const displayCurrency = chargeCurrency;
 
   return (
     <div className="h-full flex flex-col justify-center px-4 sm:px-6 lg:px-16 py-6 sm:py-8 lg:py-12 bg-gray-50 border-l border-gray-200 lg:sticky lg:top-0 lg:max-h-screen lg:overflow-y-auto lg:justify-start">

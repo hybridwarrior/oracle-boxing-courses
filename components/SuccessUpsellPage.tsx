@@ -313,7 +313,7 @@ export const SuccessUpsellPage: React.FC<SuccessUpsellPageProps> = ({ isMembersh
           onAccept={handleAcceptUpsell}
           onDecline={handleDeclineUpsell}
           isLoading={isLoading}
-          isMembership={orderData.productMetadata?.funnel === 'membership'}
+          purchaseCurrency={orderData.currency}
         />
       </div>
 
