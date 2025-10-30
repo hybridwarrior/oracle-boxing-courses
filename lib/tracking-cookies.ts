@@ -368,11 +368,18 @@ export function captureUTMParameters(): Partial<TrackingData> | null {
       const referrerDomain = new URL(referrer).hostname;
       const isBlockedDomain = blockedDomains.some(blocked => referrerDomain.includes(blocked));
 
-      // Only update if: external domain + not blocked + different from existing
-      if (referrerDomain !== currentDomain && !isBlockedDomain && referrer !== existingData.last_referrer) {
-        updates.last_referrer = referrer;
+      // Update if: external domain + not blocked (always update time, even if same referrer)
+      if (referrerDomain !== currentDomain && !isBlockedDomain) {
+        // Always update last_referrer_time to track most recent visit
         updates.last_referrer_time = now;
-        console.log('📊 Last referrer updated:', referrer);
+
+        // Update last_referrer if it's different OR if current value is 'direct'
+        if (referrer !== existingData.last_referrer || existingData.last_referrer === 'direct') {
+          updates.last_referrer = referrer;
+          console.log('📊 Last referrer updated:', referrer);
+        } else {
+          console.log('📊 Last referrer time updated (same referrer):', referrer);
+        }
       } else if (isBlockedDomain) {
         console.log('📊 Referrer blocked (checkout/payment domain):', referrerDomain);
       }
