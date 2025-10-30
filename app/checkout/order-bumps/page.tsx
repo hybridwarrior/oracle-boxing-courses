@@ -186,18 +186,18 @@ function OrderBumpsContent() {
       }
     })
 
-    // Calculate total value in USD for tracking
-    let totalValueUSD = 0
+    // Calculate total value in user's currency for accurate tracking
+    let totalValue = 0
     const productIds: string[] = []
 
     items.forEach(item => {
-      const priceUSD = getProductPrice(item.product.id, 'USD') || item.product.price
-      console.log(`📦 Product: ${item.product.id} = $${priceUSD} USD`)
-      totalValueUSD += priceUSD * item.quantity
+      const price = getProductPrice(item.product.id, currency) || item.product.price
+      console.log(`📦 Product: ${item.product.id} = ${price} ${currency}`)
+      totalValue += price * item.quantity
       productIds.push(item.product.id)
     })
 
-    console.log(`💵 Total USD Value: $${totalValueUSD}`)
+    console.log(`💵 Total Value: ${totalValue} ${currency}`)
 
     // Track initiate checkout event with all products
     const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout/order-bumps'
@@ -212,7 +212,7 @@ function OrderBumpsContent() {
     trackInitiateCheckout(
       name,
       email,
-      totalValueUSD,
+      totalValue,
       productIds,
       currentPage,
       initialReferrer,

@@ -206,11 +206,11 @@ export default function CheckoutPage() {
         }
 
         // Track InitiateCheckout for direct-to-Stripe products (no order bumps)
-        // For membership products, use product.price directly (they're USD-only)
-        // For other products, use getProductPrice which handles multi-currency
-        const priceUSD = product.type === 'membership'
-          ? product.price
-          : (getProductPrice(productParam, 'USD') || product.price || 0)
+        // Calculate price in user's actual currency for accurate tracking
+        const priceInUserCurrency = product.type === 'membership'
+          ? product.price  // Memberships are USD-only
+          : (getProductPrice(productParam, currency) || product.price || 0)
+
         const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout'
         const initialReferrer = trackingParams.referrer || 'direct'
 
@@ -229,7 +229,7 @@ export default function CheckoutPage() {
         trackInitiateCheckout(
           fullName,
           email,
-          priceUSD,
+          priceInUserCurrency,
           [productParam],
           currentPage,
           initialReferrer,

@@ -46,7 +46,8 @@ export interface InitiateCheckoutData {
   firstName: string;
   lastName: string;
   email: string;
-  valueUSD: number;
+  value: number;  // Value in the currency specified in the 'currency' field
+  valueUSD: number;  // Kept for backwards compatibility (same as 'value')
   products: string[];
   page: string;
   country: string | null;
@@ -58,7 +59,7 @@ export interface InitiateCheckoutData {
   // URL parameters
   funnel?: string | null;
   course?: string | null;
-  currency?: string | null;
+  currency?: string | null;  // The currency for the 'value' field (e.g., 'USD', 'GBP', 'EUR')
   source?: string | null;
   // Full cookie data (empty if no consent)
   cookieData?: any;
@@ -430,7 +431,7 @@ export async function trackPurchase(
 export async function trackInitiateCheckout(
   fullName: string,
   email: string,
-  valueUSD: number,
+  value: number,  // Value in the currency specified in urlParams.currency
   products: string[],
   page: string,
   initialReferrer: string | null,
@@ -475,7 +476,8 @@ export async function trackInitiateCheckout(
       firstName,
       lastName,
       email,
-      valueUSD,
+      value,  // Value in the user's currency
+      valueUSD: value,  // Keep for backwards compatibility (will be deprecated)
       products,
       page,
       country,
@@ -517,8 +519,8 @@ export async function trackInitiateCheckout(
     // Send to Facebook Pixel (browser-side tracking) with event_id
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'InitiateCheckout', {
-        value: valueUSD,
-        currency: 'USD',
+        value: value,
+        currency: urlParams?.currency || 'USD',  // Use actual currency
         content_ids: products,
         content_type: 'product',
         num_items: products.length,
@@ -539,8 +541,8 @@ export async function trackInitiateCheckout(
       // Parse cookie data into separate fields for custom_data
       // Each field value must be ≤500 chars
       const customData: Record<string, any> = {
-        value: valueUSD,
-        currency: 'USD',
+        value: value,
+        currency: urlParams?.currency || 'USD',
         content_ids: products,
         content_type: 'product',
         num_items: products.length,
