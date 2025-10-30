@@ -325,6 +325,20 @@ export function captureUTMParameters(): Partial<TrackingData> | null {
   const existingData = getOrInitTrackingData();
   const updates: Partial<TrackingData> = {};
 
+  // Check if this is truly a new session by comparing timestamps
+  // If last_referrer_time is the same as landing_time, this is the first capture
+  const isFirstCapture = existingData.last_referrer_time === existingData.landing_time;
+
+  // Also consider it a new session if significant time has passed (e.g., 30 minutes)
+  let isNewSession = isFirstCapture;
+  if (existingData.last_referrer_time) {
+    const timeSinceLastUpdate = Date.now() - new Date(existingData.last_referrer_time).getTime();
+    const thirtyMinutesInMs = 30 * 60 * 1000;
+    if (timeSinceLastUpdate > thirtyMinutesInMs) {
+      isNewSession = true;
+    }
+  }
+
   // --- FIRST TOUCH ATTRIBUTION (never overwrite if already set) ---
   if (document.referrer && !existingData.first_referrer) {
     const referrer = document.referrer;
@@ -361,6 +375,9 @@ export function captureUTMParameters(): Partial<TrackingData> | null {
     'appleid.apple.com'
   ];
 
+  // Track whether we should update last_referrer_time
+  let shouldUpdateTime = isNewSession; // Always update on new session
+
   if (document.referrer) {
     const referrer = document.referrer;
     const currentDomain = window.location.hostname;
@@ -368,17 +385,13 @@ export function captureUTMParameters(): Partial<TrackingData> | null {
       const referrerDomain = new URL(referrer).hostname;
       const isBlockedDomain = blockedDomains.some(blocked => referrerDomain.includes(blocked));
 
-      // Update if: external domain + not blocked (always update time, even if same referrer)
+      // Update if: external domain + not blocked
       if (referrerDomain !== currentDomain && !isBlockedDomain) {
-        // Always update last_referrer_time to track most recent visit
-        updates.last_referrer_time = now;
-
         // Update last_referrer if it's different OR if current value is 'direct'
         if (referrer !== existingData.last_referrer || existingData.last_referrer === 'direct') {
           updates.last_referrer = referrer;
+          shouldUpdateTime = true;
           console.log('📊 Last referrer updated:', referrer);
-        } else {
-          console.log('📊 Last referrer time updated (same referrer):', referrer);
         }
       } else if (isBlockedDomain) {
         console.log('📊 Referrer blocked (checkout/payment domain):', referrerDomain);
@@ -395,7 +408,20 @@ export function captureUTMParameters(): Partial<TrackingData> | null {
     updates.last_utm_campaign = utmCampaign || undefined;
     updates.last_utm_content = utmContent || undefined;
     updates.last_utm_term = utmTerm || undefined;
+    shouldUpdateTime = true; // UTM changed, update time
     console.log('📊 Last touch UTM updated:', { utmSource, utmMedium, utmCampaign });
+  }
+
+  // Update last_referrer_time if:
+  // - New session, OR
+  // - Referrer changed, OR
+  // - UTM parameters changed
+  if (shouldUpdateTime) {
+    updates.last_referrer_time = now;
+    console.log('📊 Last referrer time updated:', now,
+                isNewSession ? '(new session)' :
+                updates.last_referrer ? '(referrer changed)' :
+                updates.last_utm_source ? '(UTM changed)' : '');
   }
 
   // Facebook Click ID (always update if present)
