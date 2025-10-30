@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
           phone: customerInfo.phone,
         },
         location: {
-          countryCode: cookieData?.country_code || trackingParams?.country_code,
+          countryCode: cookieData?.country_code || 'US',
           currency: currency || 'USD',
         },
         cart: {
