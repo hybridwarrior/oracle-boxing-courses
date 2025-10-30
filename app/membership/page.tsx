@@ -632,7 +632,7 @@ export default function MembershipsPage() {
           {/* Join Now Button */}
           <div className="text-center mb-3 sm:mb-4">
             <button
-              onClick={() => router.push(`/checkout?product=${selectedPlan}`)}
+              onClick={() => router.push(`/checkout?product=${selectedPlan}&source=membership-page`)}
               className="py-4 sm:py-5 lg:py-6 px-10 sm:px-12 lg:px-14 bg-yellow-100 text-black font-black text-xl sm:text-2xl md:text-3xl rounded-xl uppercase tracking-wide transition-colors cursor-pointer hover:bg-yellow-200 flex items-center justify-center gap-2 mx-auto border-4 border-black shadow-lg"
             >
               CHECKOUT

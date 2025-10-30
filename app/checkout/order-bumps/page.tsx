@@ -191,8 +191,8 @@ function OrderBumpsContent() {
     const productIds: string[] = []
 
     items.forEach(item => {
-      const priceUSD = getProductPrice(item.product.metadata, 'USD') || item.product.price
-      console.log(`📦 Product: ${item.product.id} (${item.product.metadata}) = $${priceUSD} USD`)
+      const priceUSD = getProductPrice(item.product.id, 'USD') || item.product.price
+      console.log(`📦 Product: ${item.product.id} = $${priceUSD} USD`)
       totalValueUSD += priceUSD * item.quantity
       productIds.push(item.product.id)
     })
@@ -203,11 +203,11 @@ function OrderBumpsContent() {
     const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout/order-bumps'
     const initialReferrer = trackingParams.referrer || 'direct'
 
-    // Get URL parameters for tracking
-    const funnelParam = searchParams.get('funnel')
+    // Get URL parameters for tracking with intelligent fallbacks
+    const funnelParam = searchParams.get('funnel') || funnelType
     const courseParam = searchParams.get('course')
-    const currencyParam = searchParams.get('currency')
-    const sourceParam = searchParams.get('source')
+    const currencyParam = searchParams.get('currency') || currency
+    const sourceParam = searchParams.get('source') || 'order-bumps'
 
     trackInitiateCheckout(
       name,

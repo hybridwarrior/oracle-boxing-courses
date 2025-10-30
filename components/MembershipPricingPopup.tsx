@@ -21,7 +21,7 @@ export function MembershipPricingPopup({ isOpen, onClose, defaultPlan = 'members
   }, [defaultPlan])
 
   const handleJoinNow = () => {
-    router.push(`/checkout?product=${selectedPlan}`)
+    router.push(`/checkout?product=${selectedPlan}&source=membership-pricing-popup`)
   }
 
   // Close on Escape key

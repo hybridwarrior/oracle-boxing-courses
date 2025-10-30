@@ -45,8 +45,8 @@ export function CourseCard({ product }: CourseCardProps) {
     if (isLoading) return
 
     setIsLoading(true)
-    // Direct checkout with product parameter
-    router.push(`/checkout?product=${product.id}`)
+    // Direct checkout with product parameter and source tracking
+    router.push(`/checkout?product=${product.id}&source=course-card`)
   }
 
   return (

@@ -125,7 +125,7 @@ export default function HomePage() {
                   Learn More
                 </Link>
                 <Link
-                  href="/checkout?product=6wc"
+                  href="/checkout?product=6wc&source=homepage-hero"
                   className="inline-block w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 bg-yellow-100 text-black border-4 border-black rounded-xl shadow-lg font-black text-base sm:text-lg md:text-xl uppercase tracking-wide hover:bg-black hover:text-yellow-100 transition-all text-center"
                 >
                   Buy Now

@@ -210,6 +210,18 @@ export default function CheckoutPage() {
         const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/checkout'
         const initialReferrer = trackingParams.referrer || 'direct'
 
+        // Intelligent funnel detection based on product type and ID
+        let funnelType = 'direct'
+        if (product.type === 'membership') {
+          funnelType = 'membership'
+        } else if (productParam === '6wc') {
+          funnelType = '6wc'
+        } else if (productParam === 'bundle') {
+          funnelType = 'bundle'
+        } else if (['bffp', 'roadmap', 'vault'].includes(productParam)) {
+          funnelType = 'course'
+        }
+
         trackInitiateCheckout(
           fullName,
           email,
@@ -218,10 +230,10 @@ export default function CheckoutPage() {
           currentPage,
           initialReferrer,
           {
-            funnel: product.type === 'membership' ? 'membership' : 'bundle',
-            course: null,
+            funnel: funnelType,
+            course: (['bffp', 'roadmap', 'vault'].includes(productParam)) ? productParam : null,
             currency: currency,
-            source: sourceParam,
+            source: sourceParam || 'direct-checkout',
           }
         )
 

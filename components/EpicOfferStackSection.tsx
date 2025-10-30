@@ -65,7 +65,7 @@ export default function EpicOfferStackSection({ onCTAClick }: EpicOfferStackSect
 
           {/* CTA Button - White with Navy Text */}
           <a
-            href="/checkout?product=6wc"
+            href="/checkout?product=6wc&source=epic-offer-stack"
             className="w-full py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-12 bg-white text-[#000000] font-black text-base sm:text-lg md:text-xl rounded-xl mb-6 sm:mb-8 uppercase tracking-wide min-h-[60px] sm:min-h-[64px] lg:min-h-[72px] shadow-lg hover:bg-gray-50 transition-all duration-200 flex items-center justify-center"
             style={{ cursor: 'pointer' }}
           >
