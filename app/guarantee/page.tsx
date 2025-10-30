@@ -1,3 +1,13 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Guarantee | Oracle Boxing',
+  description: '30-day money-back guarantee on all digital courses. Learn about our 6-Week Challenge guarantee and refund policies.',
+  alternates: {
+    canonical: '/guarantee',
+  },
+}
+
 export default function Guarantee() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#FFFFFF', color: '#000000', minHeight: '100vh' }}>

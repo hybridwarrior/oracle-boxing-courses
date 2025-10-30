@@ -100,7 +100,34 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <>
+      {/* Organization Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Oracle Boxing",
+            "url": "https://oracleboxing.com",
+            "logo": "https://media.oracleboxing.com/Website/optimized/logos/long_black-large.webp",
+            "description": "Master Old School Boxing Anytime, Anywhere",
+            "email": "team@oracleboxing.com",
+            "sameAs": [
+              "https://www.instagram.com/oracleboxing",
+              "https://www.youtube.com/@oracleboxing"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Unit 5 Artillery 88, Artillery Road",
+              "postalCode": "BA22 8RP",
+              "addressCountry": "GB"
+            }
+          })
+        }}
+      />
+
+      <div className="min-h-screen bg-white text-gray-900">
       <Header />
 
       {/* Hero Section */}
@@ -316,5 +343,6 @@ Best for dedicated students ready to transform their boxing.`,
         onClose={() => setIsNotifyModalOpen(false)}
       />
     </div>
+    </>
   )
 }

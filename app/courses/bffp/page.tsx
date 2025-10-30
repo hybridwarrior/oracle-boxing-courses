@@ -138,7 +138,80 @@ export default function BFFPPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <>
+      {/* Course Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Course",
+            "name": "Boxing Masterclass",
+            "description": "Master the science of boxing through 26 comprehensive lessons covering mind, body, movement, tactics, and conditioning. The deepest truths of the sweet science, boiled down to their simplest form.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Oracle Boxing",
+              "sameAs": "https://oracleboxing.com"
+            },
+            "image": "https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp",
+            "offers": {
+              "@type": "Offer",
+              "category": "Paid",
+              "price": "297",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://oracleboxing.com/courses/bffp"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseMode": "Online",
+              "courseWorkload": "PT26H"
+            },
+            "teaches": [
+              "Boxing fundamentals and theory",
+              "Biomechanics and natural power generation",
+              "Flow state and mental training",
+              "Tactical awareness and pattern recognition",
+              "Conditioning and breathing techniques"
+            ],
+            "numberOfLessons": 26,
+            "educationalLevel": "Beginner to Advanced"
+          })
+        }}
+      />
+
+      {/* Product Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Boxing Masterclass",
+            "description": "Master the science of boxing through 26 comprehensive lessons covering mind, body, movement, tactics, and conditioning.",
+            "image": "https://media.oracleboxing.com/Website/optimized/products/bffp_tn5-large.webp",
+            "brand": {
+              "@type": "Brand",
+              "name": "Oracle Boxing"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "297",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://oracleboxing.com/courses/bffp",
+              "priceValidUntil": "2026-12-31"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5",
+              "reviewCount": "150"
+            }
+          })
+        }}
+      />
+
+      <div className="min-h-screen bg-white text-gray-900">
       <Header />
 
       {/* Hero Section */}
@@ -237,5 +310,6 @@ export default function BFFPPage() {
 
       <Footer />
     </div>
+    </>
   )
 }

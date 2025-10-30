@@ -142,7 +142,81 @@ export default function RoadmapPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <>
+      {/* Course Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Course",
+            "name": "Boxing Roadmap",
+            "description": "Follow a clear 5-phase system with 75 structured lessons that takes you from your first stance to sparring-ready. Every move, every drill, in the right order.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Oracle Boxing",
+              "sameAs": "https://oracleboxing.com"
+            },
+            "image": "https://media.oracleboxing.com/Website/optimized/products/tbrtn5hq-large.webp",
+            "offers": {
+              "@type": "Offer",
+              "category": "Paid",
+              "price": "147",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://oracleboxing.com/courses/roadmap"
+            },
+            "hasCourseInstance": {
+              "@type": "CourseInstance",
+              "courseMode": "Online",
+              "courseWorkload": "PT75H"
+            },
+            "teaches": [
+              "Boxing fundamentals and clean mechanics",
+              "Defence and movement techniques",
+              "Explosive footwork and balance",
+              "Advanced defensive combinations",
+              "Ring-ready technique integration"
+            ],
+            "numberOfLessons": 75,
+            "educationalLevel": "Beginner to Advanced",
+            "coursePrerequisites": "No prior boxing experience required"
+          })
+        }}
+      />
+
+      {/* Product Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Boxing Roadmap",
+            "description": "Follow a clear 5-phase system with 75 structured lessons that takes you from your first stance to sparring-ready.",
+            "image": "https://media.oracleboxing.com/Website/optimized/products/tbrtn5hq-large.webp",
+            "brand": {
+              "@type": "Brand",
+              "name": "Oracle Boxing"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "147",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://oracleboxing.com/courses/roadmap",
+              "priceValidUntil": "2026-12-31"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5",
+              "reviewCount": "200"
+            }
+          })
+        }}
+      />
+
+      <div className="min-h-screen bg-white text-gray-900">
       <Header />
 
       {/* Hero Section */}
@@ -242,5 +316,6 @@ export default function RoadmapPage() {
 
       <Footer />
     </div>
+    </>
   )
 }

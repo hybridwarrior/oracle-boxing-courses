@@ -161,7 +161,58 @@ export default function MembershipsPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <>
+      {/* Product Schema for Membership */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Oracle Boxing Membership",
+            "description": "Ongoing boxing coaching and community program with daily live coaching calls, complete course access, personalized video feedback, and private community support.",
+            "image": "https://media.oracleboxing.com/Website/optimized/products/boxing_clinic-large.webp",
+            "brand": {
+              "@type": "Brand",
+              "name": "Oracle Boxing"
+            },
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "Annual Membership",
+                "price": "897",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://oracleboxing.com/membership",
+                "priceValidUntil": "2026-12-31"
+              },
+              {
+                "@type": "Offer",
+                "name": "Bi-Annual Membership",
+                "price": "497",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://oracleboxing.com/membership"
+              },
+              {
+                "@type": "Offer",
+                "name": "Quarterly Membership",
+                "price": "297",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://oracleboxing.com/membership"
+              }
+            ],
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5",
+              "reviewCount": "300"
+            }
+          })
+        }}
+      />
+
+      <div className="min-h-screen bg-white text-gray-900">
       <Header />
 
       {/* Hero Section - Two Column */}
@@ -899,5 +950,6 @@ export default function MembershipsPage() {
 
       <Footer />
     </div>
+    </>
   )
 }

@@ -105,7 +105,39 @@ export default function BundlePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <>
+      {/* Product Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Oracle Boxing Bundle",
+            "description": "Complete Oracle Boxing system including Boxing Masterclass, Boxing Roadmap, and Coaching Call Replays. 225+ lessons, 220+ coaching calls, lifetime access.",
+            "image": "https://media.oracleboxing.com/Website/optimized/products/obm_tn-large.webp",
+            "brand": {
+              "@type": "Brand",
+              "name": "Oracle Boxing"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "397",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://oracleboxing.com/courses/bundle",
+              "priceValidUntil": "2026-12-31"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5",
+              "reviewCount": "300"
+            }
+          })
+        }}
+      />
+
+      <div className="min-h-screen bg-white text-gray-900">
       <Header />
 
       {/* Hero Section */}
@@ -198,5 +230,6 @@ export default function BundlePage() {
 
       <Footer />
     </div>
+    </>
   )
 }

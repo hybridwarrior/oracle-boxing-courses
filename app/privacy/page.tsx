@@ -1,3 +1,17 @@
+import type { Metadata} from 'next'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | Oracle Boxing',
+  description: 'Privacy Policy for Oracle Boxing. Learn how we collect, use, and protect your personal information, cookies, and data security practices.',
+  alternates: {
+    canonical: '/privacy',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
+
 export default function PrivacyPolicy() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#FFFFFF', color: '#000000', minHeight: '100vh' }}>

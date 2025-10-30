@@ -1,3 +1,13 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Refund Policy | Oracle Boxing',
+  description: 'Refund policy for Oracle Boxing courses and memberships. 30-day money-back guarantee on digital courses. No refunds on memberships.',
+  alternates: {
+    canonical: '/refund',
+  },
+}
+
 export default function RefundPage() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#FFFFFF', color: '#000000', minHeight: '100vh' }}>

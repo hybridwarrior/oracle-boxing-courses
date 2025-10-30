@@ -2,26 +2,49 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Oracle Boxing Shop | Premium Boxing Courses & Training",
-  description: "Shop premium boxing courses, coaching replays, and the complete Boxing Masterclass system. Learn from expert coaches Oliver & Toni.",
-  keywords: "boxing courses, boxing training, online boxing, boxing masterclass, boxing coaching, oracle boxing, boxing shop",
+  title: "Oracle Boxing | Courses | Coaching | Community",
+  description: "Master Old School Boxing Anytime, Anywhere",
+  keywords: "boxing courses, boxing training, online boxing, boxing masterclass, boxing coaching, oracle boxing",
   authors: [{ name: "Oracle Boxing" }],
   creator: "Oracle Boxing",
   publisher: "Oracle Boxing",
-  metadataBase: new URL('https://shop.oracleboxing.com'),
+  metadataBase: new URL('https://oracleboxing.com'),
   alternates: {
     canonical: '/',
   },
   icons: {
-    icon: 'https://media.oracleboxing.com/Website/favicon.png',
+    icon: [
+      { url: 'https://media.oracleboxing.com/Website/favicon.ico' },
+      { url: 'https://media.oracleboxing.com/Website/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: 'https://media.oracleboxing.com/Website/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: 'https://media.oracleboxing.com/Website/apple-touch-icon.png',
+    other: [
+      { rel: 'android-chrome-192x192', url: 'https://media.oracleboxing.com/Website/android-chrome-192x192.png' },
+      { rel: 'android-chrome-512x512', url: 'https://media.oracleboxing.com/Website/android-chrome-512x512.png' },
+    ],
   },
   openGraph: {
-    title: "Oracle Boxing Shop | Premium Boxing Courses",
-    description: "Shop premium boxing courses, coaching replays, and the complete Boxing Masterclass system.",
-    url: 'https://shop.oracleboxing.com',
-    siteName: 'Oracle Boxing Shop',
+    title: "Oracle Boxing | Courses | Coaching | Community",
+    description: "Master Old School Boxing Anytime, Anywhere",
+    url: 'https://oracleboxing.com',
+    siteName: 'Oracle Boxing',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: 'https://media.oracleboxing.com/Website/optimized/products/obm_tn-large.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Oracle Boxing - Master Old School Boxing',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Oracle Boxing | Courses | Coaching | Community",
+    description: "Master Old School Boxing Anytime, Anywhere",
+    images: ['https://media.oracleboxing.com/Website/optimized/products/obm_tn-large.webp'],
   },
 };
 
