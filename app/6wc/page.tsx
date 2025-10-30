@@ -33,13 +33,13 @@ export default function ChallengePage() {
 
   // Benefits to display with checkmarks
   const benefits = [
-    { text: "100% refund guarantee", bold: " on completion" },
-    { text: "Structured 6-week training path", bold: "" },
-    { text: "Weekly live coaching calls", bold: " with Oliver" },
-    { text: "Personal feedback", bold: " on your training videos" },
+    { text: "100% money back", bold: " when you finish" },
+    { text: "Clear 6-week training plan", bold: "" },
+    { text: "Live coaching calls every week", bold: " with Oliver" },
+    { text: "Personal help", bold: " on your training videos" },
     { text: "Full access", bold: " to the Boxing Masterclass" },
-    { text: "Lifetime access", bold: " to the Boxing Roadmap" },
-    { text: "Direct access", bold: " to your coaches for questions" }
+    { text: "Keep forever", bold: " the Boxing Roadmap" },
+    { text: "Ask your coaches", bold: " questions anytime" }
   ]
 
   // Calculate total value in current currency
@@ -58,7 +58,7 @@ export default function ChallengePage() {
             "@context": "https://schema.org",
             "@type": "Product",
             "name": "6-Week Challenge",
-            "description": "Intensive 6-week boxing training program with full money-back guarantee on completion. Includes Boxing Masterclass, lifetime Boxing Roadmap access, live coaching, and personalized feedback.",
+            "description": "6-week boxing training program with full money-back promise when you finish. Includes Boxing Masterclass, Boxing Roadmap you keep forever, live coaching, and personal help.",
             "image": "https://media.oracleboxing.com/Website/skool_art.webp",
             "brand": {
               "@type": "Brand",

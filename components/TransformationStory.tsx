@@ -120,7 +120,7 @@ export default function TransformationStory({ onCTAClick }: TransformationStoryP
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontWeight: '700', color: '#222', letterSpacing: '0.02em', lineHeight: '1.2' }}>
-            Old School Boxing, New School System
+            Real Boxing, Smart System
           </h2>
         </div>
 

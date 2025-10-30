@@ -19,64 +19,64 @@ interface FAQSectionProps {
 
 const baseFaqData: FAQItem[] = [
   {
-    question: "What exactly is the 6-Week Challenge?",
-    answer: "It's a 6-week online training program designed to rapidly improve your boxing fundamentals through structured lessons, live coaching, and weekly accountability — with a full refund guarantee when you complete it."
+    question: "What is the 6-Week Challenge?",
+    answer: "It's a 6-week online boxing program. You learn boxing basics through lessons and live coaching. When you finish, you get all your money back."
   },
   {
-    question: "What do I get access to?",
+    question: "What do I get?",
     answer: `• Weekly live coaching calls with Oliver, Toni, and the Oracle team
-• Access to the Boxing Masterclass course
-• Full access to the Oracle Boxing community on Skool
-• Challenge Tracker to log your progress and stay accountable
-• Support from other boxers on the same journey`
+• The Boxing Masterclass course
+• The Oracle Boxing community on Skool
+• Challenge Tracker to track your progress
+• Help from other boxers doing the challenge`
   },
   {
-    question: "What are the completion requirements?",
-    answer: `To qualify for the refund, you must:
+    question: "What do I need to do to get my money back?",
+    answer: `To get your refund, you must:
 
-• Attend 2 live calls per week (or use recordings if your timezone prevents it)
-• Submit 1 training video each week for feedback
-• Complete all 5 modules of the Boxing Masterclass course
-• Attend your mid-point and graduation check-in calls
-• Submit proof in the Challenge Tracker`
+• Join 2 live calls each week (or watch recordings if you can't make it live)
+• Send 1 training video each week for feedback
+• Complete all 5 lessons of the Boxing Masterclass course
+• Join your 2 check-in calls (one in the middle, one at the end)
+• Show proof in the Challenge Tracker`
   },
   {
-    question: "What if I can't attend live calls because of my timezone?",
-    answer: "No problem. You can watch the replays and post your video takeaways in the community for credit. Just reply \"TZ\" to your onboarding email and we'll guide you on how to get credit through recordings."
+    question: "What if I can't join live calls because of my time zone?",
+    answer: "No problem. You can watch the videos later and post what you learned. Just reply \"TZ\" to your welcome email and we'll show you how to get credit."
   },
   {
-    question: "What happens if I miss a week?",
-    answer: "You can still catch up. As long as all your requirements are submitted by the end of the challenge, you'll remain eligible for your refund."
+    question: "What if I miss a week?",
+    answer: "You can catch up. As long as you finish everything by the end of the 6 weeks, you can still get your money back."
   },
   {
-    question: "What equipment do I need?",
-    answer: "Only your phone (for filming) and basic boxing gear — gloves, wraps, bag or shadowboxing space. No gym required."
+    question: "What stuff do I need?",
+    answer: "Just your phone (to record videos) and boxing gear — gloves, hand wraps, and a bag or space to shadowbox. You don't need a gym."
   },
   {
-    question: "How do I submit videos?",
-    answer: "Simply post your clips inside the Video Feedback section of the community each week. Our coaches and other members will review and give detailed feedback."
+    question: "How do I send videos?",
+    answer: "Post your videos in the Video Feedback section each week. Our coaches and other members will watch them and help you get better."
   },
   {
-    question: "Who is this challenge for?",
-    answer: `• Beginners or late starters who want to fix their form fast
-• Boxers stuck at the same level, looking to finally progress
-• Anyone who wants a proven system to learn real boxing fundamentals`
+    question: "Who is this for?",
+    answer: `• People just starting boxing who want to learn the right way
+• Boxers who feel stuck and want to get better
+• Anyone who wants a clear plan to learn real boxing`
   },
   {
-    question: "How long does the refund take once I finish?",
-    answer: "Once you've submitted all your proof, we'll review it within 48–72 hours and issue your refund within 7–14 business days to your original payment method."
+    question: "How long does it take to get my refund?",
+    answer: "After you show us everything is done, we'll check it in 2-3 days. Then we'll send your money back in 1-2 weeks to the same way you paid."
   },
   {
-    question: "What if I don't finish the challenge?",
-    answer: "You'll still keep access to the course, community, and live calls for the remainder of your 6 weeks — you just won't qualify for the refund."
+    question: "What if I don't finish?",
+    answer: "You still get to keep the course, community, and live calls for your 6 weeks — but you won't get your money back."
   },
   {
-    question: "Can I continue after the challenge?",
-    answer: "Yes — most boxers upgrade to the Full Access Membership after finishing the challenge. That gives you ongoing calls, advanced training, and all other Oracle Boxing programs."
+    question: "Can I keep going after the challenge?",
+    answer: "Yes — most people join the Full Access Membership after they finish. That gives you more calls, harder training, and all our other programs."
   },
   {
-    question: "How do I contact support?",
-    answer: "Email team@oracleboxing.com or DM the founders inside Skool. Replies are usually within 24 hours (Mon–Fri)."
+    question: "How do I get help?",
+    answer: "Email team@oracleboxing.com or message us on Skool. We usually answer in 24 hours (Monday to Friday)."
   }
 ]
 
@@ -93,8 +93,8 @@ const FAQSection = ({ onCTAClick, onOpenPricing }: FAQSectionProps) => {
   const faqData: FAQItem[] = [
     baseFaqData[0],
     {
-      question: "How does the refund guarantee work?",
-      answer: `You pay ${formattedPrice} upfront to join. Complete all challenge requirements — attend coaching calls, post training clips, complete the course, and attend both check-in calls — and you'll get 100% of your money back within 7–14 days.`
+      question: "How does the money-back promise work?",
+      answer: `You pay ${formattedPrice} to join. Do everything we ask — join coaching calls, post training videos, finish the course, and come to both check-in calls — and you'll get all your money back in 1-2 weeks.`
     },
     ...baseFaqData.slice(1)
   ]
@@ -118,7 +118,7 @@ const FAQSection = ({ onCTAClick, onOpenPricing }: FAQSectionProps) => {
             Frequently Asked Questions
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-            Everything you need to know about the Oracle Boxing Challenge
+            Everything you need to know about the challenge
           </p>
         </div>
 

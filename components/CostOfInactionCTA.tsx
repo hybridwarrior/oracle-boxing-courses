@@ -10,11 +10,11 @@ interface CostOfInactionCTAProps {
 
 export default function CostOfInactionCTA({ onCTAClick, onOpenPricing }: CostOfInactionCTAProps) {
   const fitnessBoxing = [
-    "Drive an hour",
-    "Drill bad habits",
-    "Get hit a bit too hard",
-    "Hear \"keep your hands up\"",
-    "Leave with more questions than answers"
+    "Drive for an hour",
+    "Practice bad moves",
+    "Get hit too hard",
+    "Hear \"keep your hands up\" over and over",
+    "Leave with more questions"
   ]
 
   return (
@@ -23,7 +23,7 @@ export default function CostOfInactionCTA({ onCTAClick, onOpenPricing }: CostOfI
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-900" style={{ fontFamily: 'Satoshi, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
-            It doesn't have to be one or the other, but if we're comparing...
+            You don't have to pick one, but here's how they compare
           </h2>
         </div>
 
@@ -57,7 +57,7 @@ export default function CostOfInactionCTA({ onCTAClick, onOpenPricing }: CostOfI
               <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                 <div className="flex gap-2 sm:gap-3 items-start">
                   <Check className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 text-green-600" />
-                  <p className="text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">Learn correct technique</p>
+                  <p className="text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">Learn the right way to box</p>
                 </div>
               </div>
             </div>

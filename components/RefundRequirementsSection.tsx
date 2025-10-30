@@ -13,20 +13,20 @@ export default function RefundRequirementsSection({ onCTAClick }: RefundRequirem
 
   const requirements = [
     {
-      title: "Show Up to Coaching",
-      description: "Join at least 2 live calls each week. We have them every day, so you'll always find one that works for you."
+      title: "Come to Coaching",
+      description: "Join 2 live calls each week. We do them every day, so you can always find one that fits your schedule."
     },
     {
       title: "Post Your Training Videos",
-      description: "Share one short video each week. We'll help you improve and you'll show us you're training."
+      description: "Share one short video each week. We'll help you get better and see that you're training."
     },
     {
       title: "Finish the Course",
-      description: "Complete all 5 lessons in our boxing course. Each one teaches you something important."
+      description: "Complete all 5 lessons in our boxing course. Each lesson teaches you something new."
     },
     {
       title: "Join Your 2 Check-In Calls",
-      description: "We'll check your progress twice during the 6 weeks. We'll help fix your mistakes and answer your questions."
+      description: "We'll check on you twice during the 6 weeks. We'll help fix your mistakes and answer your questions."
     }
   ]
 
@@ -44,7 +44,7 @@ export default function RefundRequirementsSection({ onCTAClick }: RefundRequirem
         <div className="bg-gradient-to-b from-gray-50 to-white rounded-2xl sm:rounded-3xl border-2 border-gray-200 shadow-xl p-5 sm:p-8 lg:p-10">
           {/* Subheadline */}
           <p className="text-left mb-6 sm:mb-8 text-sm sm:text-base" style={{ lineHeight: '1.7', letterSpacing: '0.02em', color: '#222', fontFamily }}>
-            Finish the 6 weeks and we'll give you back every penny. Just do these 4 simple things:
+            Finish the 6 weeks and we'll give you all your money back. Just do these 4 things:
           </p>
 
           {/* Requirements List */}
@@ -74,7 +74,7 @@ export default function RefundRequirementsSection({ onCTAClick }: RefundRequirem
               Why We Do This
             </h3>
             <p className="text-xs sm:text-sm" style={{ lineHeight: '1.6', letterSpacing: '0.02em', color: '#222', fontFamily }}>
-              If you get good at boxing, you'll want to keep training with us. You win by learning for free. We win by earning your trust.
+              When you get good at boxing, you'll want to keep training with us. You win by learning for free. We win when you trust us.
             </p>
           </div>
         </div>

@@ -28,13 +28,13 @@ export default function HeroSection({ onCTAClick, onOpenPricing }: HeroSectionPr
   const headlines = {
     A: {
       badge: 'FOR BEGINNERS & LATE STARTERS',
-      main: 'I\'ll literally pay you to get better at boxing...',
-      sub: 'Train with us for 6 weeks. Do the work we ask. Get all your money back when you finish. It\'s that simple.'
+      main: 'I\'ll pay you to get better at boxing',
+      sub: 'Train with us for 6 weeks. Do what we ask. Get your money back when you finish. That\'s it.'
     },
     B: {
       badge: 'FOR BEGINNERS & LATE STARTERS',
-      main: 'I\'ll literally pay you to get better at boxing...',
-      sub: 'Train with us for 6 weeks. Do the work we ask. Get all your money back when you finish. It\'s that simple.'
+      main: 'I\'ll pay you to get better at boxing',
+      sub: 'Train with us for 6 weeks. Do what we ask. Get your money back when you finish. That\'s it.'
     }
   }
 
