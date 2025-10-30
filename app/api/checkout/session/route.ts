@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createCheckoutSession } from '@/lib/stripe/checkout'
 import { CartItem } from '@/lib/types'
 import { Currency } from '@/lib/currency'
+import { sendInitiatedCheckout } from '@/lib/simple-webhook'
 
 export async function POST(req: NextRequest) {
   try {
@@ -80,6 +81,59 @@ export async function POST(req: NextRequest) {
 
     if (!session.url) {
       throw new Error('Stripe session created but URL is missing')
+    }
+
+    // Send initiated checkout webhook to Make.com for abandoned cart automation
+    // This runs asynchronously and won't block the checkout flow
+    if (customerInfo?.email) {
+      // Calculate total amount from cart items
+      const totalAmount = items.reduce((sum, item) => {
+        return sum + (item.product.price * item.quantity);
+      }, 0);
+
+      // Split full name into first and last name (same logic as checkout.ts)
+      const nameParts = customerInfo.firstName?.trim().split(' ') || [];
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || nameParts[0] || '';
+
+      // Send webhook with all data (non-blocking)
+      sendInitiatedCheckout({
+        sessionId: session.id,
+        checkoutUrl: session.url,
+        customer: {
+          firstName,
+          lastName,
+          email: customerInfo.email,
+          phone: customerInfo.phone,
+        },
+        location: {
+          countryCode: cookieData?.country_code || trackingParams?.country_code,
+          currency: currency || 'USD',
+        },
+        cart: {
+          items: items.map(item => ({
+            productName: item.product.title,
+            productId: item.product.id,
+            metadata: item.product.metadata,
+            quantity: item.quantity,
+            price: item.product.price,
+            currency: currency || 'USD',
+          })),
+          totalAmount,
+          currency: currency || 'USD',
+        },
+        tracking: trackingParams ? {
+          sessionId: trackingParams.session_id,
+          eventId: trackingParams.event_id,
+          utmSource: trackingParams.last_utm_source,
+          utmMedium: trackingParams.last_utm_medium,
+          utmCampaign: trackingParams.last_utm_campaign,
+          fbclid: trackingParams.fbclid,
+        } : undefined,
+      }).catch(err => {
+        // Log but don't fail checkout if webhook fails
+        console.error('Failed to send initiated checkout webhook:', err);
+      });
     }
 
     return NextResponse.json({ url: session.url })

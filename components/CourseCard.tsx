@@ -8,6 +8,7 @@ import { Product } from '@/lib/types'
 import { useCart } from '@/contexts/CartContext'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { getProductPrice, formatPrice, isMembershipProduct } from '@/lib/currency'
+import { useAnalytics } from '@/hooks/useAnalytics'
 import { BookOpen, Dumbbell, FileText, Layers, Clock, Calendar, TrendingUp, ClipboardList, RefreshCw, Video, Users, MessageSquare } from 'lucide-react'
 
 interface CourseCardProps {
@@ -18,6 +19,7 @@ export function CourseCard({ product }: CourseCardProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { addItem, clearCart } = useCart()
   const { currency } = useCurrency()
+  const { trackButtonClick } = useAnalytics()
   const router = useRouter()
 
   // Get price in selected currency
@@ -43,6 +45,17 @@ export function CourseCard({ product }: CourseCardProps) {
     e.stopPropagation()
 
     if (isLoading) return
+
+    // Track button click
+    trackButtonClick({
+      button_location: 'course-card',
+      button_type: 'buy-now',
+      product_id: product.id,
+      product_name: product.title,
+      value: convertedPrice,
+      currency: displayCurrency,
+      destination: `/checkout?product=${product.id}&source=course-card`,
+    })
 
     setIsLoading(true)
     // Direct checkout with product parameter and source tracking

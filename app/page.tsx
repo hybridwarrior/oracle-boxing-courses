@@ -9,6 +9,7 @@ import { NotifyMeModal } from '@/components/NotifyMeModal'
 import { AdaptivePrice } from '@/components/AdaptivePrice'
 import { getCourses } from '@/lib/products'
 import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
+import { useAnalytics } from '@/hooks/useAnalytics'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Users, Video } from 'lucide-react'
@@ -18,11 +19,71 @@ export default function HomePage() {
   // Use stable testimonials for SSR, then randomize on client
   const [testimonials, setTestimonials] = useState(globalTestimonials.slice(0, 6))
   const [isNotifyModalOpen, setIsNotifyModalOpen] = useState(false)
+  const [newsletterLoading, setNewsletterLoading] = useState(false)
+  const [newsletterMessage, setNewsletterMessage] = useState('')
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false)
+  const { trackButtonClick } = useAnalytics()
 
   // Randomize testimonials after hydration to avoid mismatch
   useEffect(() => {
     setTestimonials(getRandomTestimonials(6))
   }, [])
+
+  const handleButtonClick = (location: string, type: string, productId?: string, value?: number, destination?: string) => {
+    trackButtonClick({
+      button_location: location,
+      button_type: type,
+      product_id: productId,
+      value: value,
+      currency: 'USD',
+      destination: destination,
+    })
+  }
+
+  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setNewsletterLoading(true)
+    setNewsletterMessage('')
+
+    const form = e.currentTarget
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+
+    try {
+      // Send to Make.com webhook
+      const response = await fetch('https://hook.eu2.make.com/88r1e3e2u8t7uobr5amfeykt4m4vgqtd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'homepage',
+          timestamp: new Date().toISOString(),
+        }),
+      })
+
+      if (response.ok) {
+        setNewsletterSuccess(true)
+        setNewsletterMessage('✅ Successfully subscribed! Check your email.')
+        form.reset()
+
+        // Track newsletter signup
+        trackButtonClick({
+          button_location: 'homepage-newsletter',
+          button_type: 'newsletter-signup',
+          destination: 'newsletter',
+        })
+      } else {
+        throw new Error('Subscription failed')
+      }
+    } catch (error) {
+      console.error('Newsletter signup error:', error)
+      setNewsletterSuccess(false)
+      setNewsletterMessage('❌ Something went wrong. Please try again.')
+    } finally {
+      setNewsletterLoading(false)
+    }
+  }
 
   const scrollToCourses = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -120,12 +181,14 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link
                   href="/6wc"
+                  onClick={() => handleButtonClick('homepage-hero', 'secondary-cta', '6wc', undefined, '/6wc')}
                   className="inline-block w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 bg-white text-black border-4 border-black rounded-xl shadow-lg font-black text-base sm:text-lg md:text-xl uppercase tracking-wide hover:bg-black hover:text-white transition-all text-center"
                 >
                   Learn More
                 </Link>
                 <Link
                   href="/checkout?product=6wc&source=homepage-hero"
+                  onClick={() => handleButtonClick('homepage-hero', 'buy-now', '6wc', 197, '/checkout?product=6wc&source=homepage-hero')}
                   className="inline-block w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 bg-yellow-100 text-black border-4 border-black rounded-xl shadow-lg font-black text-base sm:text-lg md:text-xl uppercase tracking-wide hover:bg-black hover:text-yellow-100 transition-all text-center"
                 >
                   Buy Now
@@ -217,20 +280,27 @@ Best for dedicated students ready to transform their boxing.`,
             <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
               Get exclusive deals, training tips, and be the first to know about new courses and products.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
               <input
                 type="email"
+                name="email"
                 placeholder="Enter your email"
                 className="flex-1 px-6 py-4 rounded-lg bg-transparent border-2 border-white text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
                 required
               />
               <button
                 type="submit"
-                className="px-8 py-4 bg-white text-black font-black rounded-lg uppercase tracking-wide hover:bg-gray-100 transition-colors cursor-pointer"
+                disabled={newsletterLoading}
+                className="px-8 py-4 bg-white text-black font-black rounded-lg uppercase tracking-wide hover:bg-gray-100 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Subscribe
+                {newsletterLoading ? 'Subscribing...' : 'Subscribe'}
               </button>
             </form>
+            {newsletterMessage && (
+              <p className={`text-sm mt-4 ${newsletterSuccess ? 'text-green-400' : 'text-red-400'}`}>
+                {newsletterMessage}
+              </p>
+            )}
             <p className="text-sm text-gray-400 mt-4">
               No spam. Unsubscribe anytime.
             </p>

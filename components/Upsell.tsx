@@ -7,6 +7,7 @@ import { toast } from 'sonner'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { getProductPrice, formatPrice, isMembershipProduct } from '@/lib/currency'
 import { getCookie, getTrackingParams } from '@/lib/tracking-cookies'
+import { useAnalytics } from '@/hooks/useAnalytics'
 
 // Helper function to convert markdown bold to HTML and clean up
 function formatDescription(text: string) {
@@ -22,7 +23,9 @@ interface UpsellProps {
 export function Upsell({ product, sessionId }: UpsellProps) {
   const [isAdding, setIsAdding] = useState(false)
   const [isAdded, setIsAdded] = useState(false)
+  const [hasDeclined, setHasDeclined] = useState(false)
   const { currency } = useCurrency()
+  const { trackUpsellInteraction } = useAnalytics()
 
   // Get price in selected currency
   const isMembership = isMembershipProduct(product.metadata)
@@ -70,6 +73,15 @@ export function Upsell({ product, sessionId }: UpsellProps) {
       if (data.success) {
         setIsAdded(true)
         toast.success('Added to your order!')
+
+        // Track upsell acceptance
+        trackUpsellInteraction({
+          action: 'accept',
+          product_id: product.id,
+          product_name: product.title,
+          value: convertedPrice,
+          currency: displayCurrency,
+        })
       }
     } catch (error: any) {
       console.error('Upsell error:', error)
@@ -77,6 +89,23 @@ export function Upsell({ product, sessionId }: UpsellProps) {
     } finally {
       setIsAdding(false)
     }
+  }
+
+  const handleDecline = () => {
+    if (hasDeclined) return;
+
+    setHasDeclined(true);
+
+    // Track upsell decline
+    trackUpsellInteraction({
+      action: 'decline',
+      product_id: product.id,
+      product_name: product.title,
+      value: convertedPrice,
+      currency: displayCurrency,
+    })
+
+    console.log('Upsell declined:', product.title)
   }
 
   if (isAdded) {
@@ -151,10 +180,15 @@ export function Upsell({ product, sessionId }: UpsellProps) {
         </button>
 
         <button
-          onClick={() => {}}
-          className="w-full py-3 px-6 text-gray-600 hover:text-gray-900 font-semibold transition-colors"
+          onClick={handleDecline}
+          disabled={hasDeclined}
+          className={`w-full py-3 px-6 font-semibold transition-colors ${
+            hasDeclined
+              ? 'text-gray-400 cursor-not-allowed'
+              : 'text-gray-600 hover:text-gray-900'
+          }`}
         >
-          No thanks
+          {hasDeclined ? 'Declined' : 'No thanks'}
         </button>
       </div>
     </div>

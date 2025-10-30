@@ -5,6 +5,7 @@ import { CheckCircle, Mail, ArrowRight } from 'lucide-react'
 import { Upsell } from './Upsell'
 import { Product } from '@/lib/types'
 import { products } from '@/lib/products'
+import { useAnalytics } from '@/hooks/useAnalytics'
 
 interface SuccessContentProps {
   sessionId: string
@@ -58,6 +59,7 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
   const [session, setSession] = useState<any>(null)
   const [upsellProduct, setUpsellProduct] = useState<Product | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const { trackPurchase } = useAnalytics()
 
   useEffect(() => {
     async function fetchSession() {
@@ -124,12 +126,23 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
           item_price: item.price?.unit_amount ? item.price.unit_amount / 100 : 0,
         })) || [];
 
+        // Extract metadata for Vercel Analytics
+        const metadata = sessionData.metadata || {};
+        const products = contentIds; // Use Stripe product IDs as product identifiers
+        const funnelType = metadata.funnel_type || 'unknown';
+        const orderBumps = metadata.add_ons_included ? metadata.add_ons_included.split(',') : [];
+        const hasOrderBumps = orderBumps.length > 0;
+
         console.log('📊 Sending Purchase event:', {
           event_id: eventId,
           value: amountTotal,
           currency,
           content_ids: contentIds,
           contents_count: contents.length,
+          products,
+          funnel_type: funnelType,
+          has_order_bumps: hasOrderBumps,
+          order_bumps: orderBumps,
           has_customer_email: !!(sessionData.customer_details?.email || sessionData.customer_email || sessionData.customerEmail),
         });
 
@@ -179,6 +192,19 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
         }).catch((error) => {
           console.error('❌ Failed to send CAPI Purchase event:', error);
         });
+
+        // 3. Send Vercel Analytics Purchase event
+        trackPurchase({
+          value: amountTotal,
+          currency,
+          transaction_id: sessionId,
+          products,
+          product_count: products.length,
+          funnel_type: funnelType as any,
+          has_order_bumps: hasOrderBumps,
+          order_bumps: orderBumps,
+        });
+        console.log('✅ Vercel Analytics Purchase event sent');
 
       } catch (error) {
         console.error('Error sending Purchase event:', error);

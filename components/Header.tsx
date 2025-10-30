@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown, Instagram, Youtube } from 'lucide-react'
+import { useAnalytics } from '@/hooks/useAnalytics'
 
 export function Header() {
   const pathname = usePathname()
@@ -13,6 +14,7 @@ export function Header() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
+  const { trackSocialClick, trackButtonClick } = useAnalytics()
 
   const isHomePage = pathname === '/'
 
@@ -47,6 +49,22 @@ export function Header() {
 
   const closeSidebar = () => {
     setSidebarOpen(false)
+  }
+
+  const handleSocialClick = (platform: 'instagram' | 'youtube', url: string) => {
+    trackSocialClick({
+      platform,
+      location: 'sidebar',
+      destination: url,
+    })
+  }
+
+  const handleContactClick = () => {
+    trackButtonClick({
+      button_location: 'sidebar',
+      button_type: 'contact',
+      destination: 'mailto:team@oracleboxing.com',
+    })
   }
 
   return (
@@ -220,6 +238,7 @@ export function Header() {
               {/* Contact */}
               <a
                 href="mailto:team@oracleboxing.com"
+                onClick={handleContactClick}
                 className="text-sm sm:text-base font-semibold py-1.5 sm:py-2 px-3 sm:px-4 text-gray-400 relative group text-left"
               >
                 <span className="relative inline-block">
@@ -237,6 +256,7 @@ export function Header() {
                 href="https://www.instagram.com/oracle.boxing"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => handleSocialClick('instagram', 'https://www.instagram.com/oracle.boxing')}
                 className="text-white hover:text-gray-400 transition-colors"
                 aria-label="Instagram"
               >
@@ -246,6 +266,7 @@ export function Header() {
                 href="https://www.youtube.com/@oracle_boxing"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => handleSocialClick('youtube', 'https://www.youtube.com/@oracle_boxing')}
                 className="text-white hover:text-gray-400 transition-colors"
                 aria-label="YouTube"
               >
