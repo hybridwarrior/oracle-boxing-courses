@@ -29,21 +29,15 @@ export const bffpTestimonials: Testimonial[] = [
     rating: 5
   },
   {
-    name: "Lisa Thompson",
+    name: "Brian Thompson",
     role: "BFFP Student",
-    content: "Finally understand why my punches weren't landing right. The weight transfer lesson was a game changer. My jab is twice as fast now!",
+    content: "Finally understand why my punches weren't landing right. The weight transfer lesson was a game changer.",
     rating: 5
   },
   {
     name: "David Park",
     role: "BFFP Student",
     content: "Best boxing course I've ever taken. Everything is broken down step by step. Even my coach noticed my punches got cleaner!",
-    rating: 5
-  },
-  {
-    name: "Rachel Green",
-    role: "BFFP Student",
-    content: "Used to get frustrated because I couldn't box like the pros. This course showed me exactly what I was doing wrong. Now boxing feels natural!",
     rating: 5
   }
 ]
@@ -69,21 +63,9 @@ export const roadmapTestimonials: Testimonial[] = [
     rating: 5
   },
   {
-    name: "Michael Brown",
-    role: "Roadmap Student",
-    content: "Finally have a training plan that works. The videos show me exactly what good form looks like. No more bad habits!",
-    rating: 5
-  },
-  {
     name: "Sophie Anderson",
     role: "Roadmap Student",
     content: "Best part is I can train at my own pace. The roadmap keeps me on track but I can go back and practice when I need to.",
-    rating: 5
-  },
-  {
-    name: "Chris Taylor",
-    role: "Roadmap Student",
-    content: "Used to waste time practicing the wrong stuff. This roadmap shows me the most important skills to focus on. My progress is faster now!",
     rating: 5
   }
 ]
