@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     const payload = {
       data: [eventData],
       access_token: FB_ACCESS_TOKEN,
-      test_event_code: 'TEST85396',
+      test_event_code: 'TEST3801',
     };
 
     console.log('📊 Sending AddToCart to Facebook CAPI:', {

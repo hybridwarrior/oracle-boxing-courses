@@ -394,7 +394,7 @@ export async function trackPurchase(
       const payload = {
         data: [eventData],
         access_token: FB_ACCESS_TOKEN,
-        test_event_code: 'TEST85396',
+        test_event_code: 'TEST3801',
       };
 
       const response = await fetch(FB_CONVERSIONS_API_URL, {
@@ -579,7 +579,7 @@ export async function trackInitiateCheckout(
       const payload = {
         data: [eventData],
         access_token: FB_ACCESS_TOKEN,
-        test_event_code: 'TEST85396',
+        test_event_code: 'TEST3801',
       };
 
       fetch(FB_CONVERSIONS_API_URL, {
