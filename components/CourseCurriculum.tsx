@@ -25,38 +25,38 @@ export function CourseCurriculum({
   }
 
   return (
-    <section className="py-8 sm:py-16 bg-white overflow-visible">
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 overflow-visible">
+    <section className="py-8 sm:py-16 bg-white">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 sm:mb-12 text-center">
           {title}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-16 w-full mx-auto overflow-visible">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 w-full mx-auto">
           {learningCards.map((card, index) => (
-            <div key={index} className="mt-12 sm:mt-20 overflow-visible">
-              <div className="bg-white border-2 border-gray-200 rounded-lg overflow-visible p-6 sm:p-10 pt-20 sm:pt-36 text-center">
-                {/* Image or Video - spills over top */}
-                <div className="-mt-32 sm:-mt-52 mb-4 sm:mb-8 mx-auto w-40 h-32 sm:w-64 sm:h-44 rounded-lg overflow-hidden">
-                  {isVideo(card.imageUrl) ? (
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover"
-                    >
-                      <source src={card.imageUrl} type="video/mp4" />
-                    </video>
-                  ) : (
-                    <img
-                      src={card.imageUrl || 'https://placehold.co/400x300/e5e5e5/666666?text=Boxing'}
-                      alt="Course visual"
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
+            <div key={index} className="bg-white border-2 border-gray-200 rounded-lg overflow-hidden">
+              {/* Image or Video - full width at top */}
+              <div className="w-full aspect-[4/3] overflow-hidden">
+                {isVideo(card.imageUrl) ? (
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  >
+                    <source src={card.imageUrl} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img
+                    src={card.imageUrl || 'https://placehold.co/400x300/e5e5e5/666666?text=Boxing'}
+                    alt="Course visual"
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
 
-                {/* Text content */}
-                <p className="font-bold text-gray-900 text-base sm:text-xl leading-relaxed max-w-2xl mx-auto">{card.text}</p>
+              {/* Text content below */}
+              <div className="p-4 sm:p-6 text-center">
+                <p className="font-bold text-gray-900 text-base sm:text-lg leading-relaxed">{card.text}</p>
               </div>
             </div>
           ))}

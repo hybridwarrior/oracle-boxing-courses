@@ -13,7 +13,7 @@ import { CoursePriceCard } from '@/components/CoursePriceCard'
 import { CourseFAQ } from '@/components/CourseFAQ'
 import { CoursePricingPopup } from '@/components/CoursePricingPopup'
 import { getProductById } from '@/lib/products'
-import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
+import { getBffpTestimonials, bffpTestimonials } from '@/lib/testimonials'
 
 export default function BFFPPage() {
   const [isPricingPopupOpen, setIsPricingPopupOpen] = useState(false)
@@ -28,40 +28,40 @@ export default function BFFPPage() {
   const personas = [
     {
       emoji: '🧠',
-      title: 'You question everything and crave understanding.',
-      subtitle: 'You break things down until they make sense and won\'t settle for half-truths.'
+      title: 'You ask questions and want to understand everything.',
+      subtitle: 'You break things down until they make sense. You want the full truth.'
     },
     {
       emoji: '⚡',
-      title: 'If you\'re going to do something, you might as well be the best.',
-      subtitle: 'You push past good enough and chase mastery in every detail.'
+      title: 'You want to be the best at boxing.',
+      subtitle: 'You work hard on every small detail to get better.'
     },
     {
       emoji: '🥊',
-      title: 'You believe real boxing starts with what never breaks: solid fundamentals.',
-      subtitle: 'You build skill layer by layer, knowing that mastery comes from doing the simple things better than anyone else.'
+      title: 'You believe real boxing starts with strong basics.',
+      subtitle: 'You build your skills step by step. You know that doing simple things really well is how you get great.'
     }
   ]
 
   const learningCards = [
     {
       emoji: '🧘',
-      text: 'Stay calm under pressure and control emotion.',
+      text: 'Stay calm when things get hard and control your feelings.',
       imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/ob_fight3.webp'
     },
     {
       emoji: '⚡',
-      text: 'Use biomechanics for effortless, natural power.',
+      text: 'Use your body the right way to punch with more power.',
       imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/bffp_tn4.webp'
     },
     {
       emoji: '🥊',
-      text: 'See patterns, read opponents, and think one step ahead.',
+      text: 'See patterns, read your opponent, and think ahead.',
       imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/bffp_course3.webp'
     },
     {
       emoji: '♟️',
-      text: 'Build endurance and relaxation that last through every round.',
+      text: 'Build energy and stay relaxed through every round.',
       imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/bbffp_course4.webp'
     }
   ]
@@ -69,72 +69,67 @@ export default function BFFPPage() {
   const modules = [
     {
       title: "Sentience (Mind)",
-      description: "Learn how to think like a real boxer. You'll build focus, manage emotions, and learn to perform at your best without overthinking. This is where you master flow state.\n\nLessons:\n• Shifting Your Paradigm For Success\n• Spoon Bending 101\n• Accessing The Flow State\n\nFocus: Identity · Awareness · Flow · Calm under pressure\nOutcome: A clear, stable mindset that keeps you composed and present in every moment.",
+      description: "Learn how to think like a real boxer. You'll build focus, control your emotions, and learn to do your best without thinking too much. This is where you learn to stay in the zone.\n\nLessons:\n• Changing Your Mindset For Success\n• Spoon Bending 101\n• Getting Into The Flow State\n\nFocus: Who you are · Awareness · Flow · Stay calm when stressed\nOutcome: A clear, steady mind that keeps you calm and focused every moment.",
       lessons: 4
     },
     {
       title: "Anatomy (Body)",
-      description: "See what really makes your body fast and powerful. You'll learn how the brain, nerves, and fascia connect every punch and step so energy moves through you instead of against you.\n\nLessons:\n• The Nervous System\n• Fascia\n\nFocus: Nervous System · Fascia · Kinetic Chain · Energy Flow\nOutcome: Effortless speed and natural power through biomechanical alignment.",
+      description: "See what really makes your body fast and strong. You'll learn how your brain, nerves, and body parts connect every punch and step. Energy moves through you the right way.\n\nLessons:\n• The Nervous System\n• Fascia\n\nFocus: Nervous System · Fascia · How Energy Moves · Energy Flow\nOutcome: Easy speed and natural power by using your body the right way.",
       lessons: 3
     },
     {
       title: "Formis (Movement)",
-      description: "Build the shape and form of great boxing. You'll learn how to stand, move, and throw with balance, turning good technique into natural instinct.\n\nLessons:\n• What Is Formis\n• State And Repositioning\n• Striking\n• Defence\n• The Flow Of Boxing\n• Default Mode\n• Feints And Draws\n• Distance\n\nFocus: Shape · Stance · Defence · Striking\nOutcome: Smooth, balanced movement that stays sharp and efficient in every exchange.",
+      description: "Build the shape and form of great boxing. You'll learn how to stand, move, and throw with balance. Turn good moves into natural habit.\n\nLessons:\n• What Is Formis\n• Standing And Moving\n• Punching\n• Defense\n• The Flow Of Boxing\n• Your Default Way\n• Fakes And Tricks\n• Distance\n\nFocus: Shape · Stance · Defense · Punching\nOutcome: Smooth, balanced moves that stay sharp in every fight.",
       lessons: 8
     },
     {
       title: "Gambit (Tactics)",
-      description: "Boxing is a game of moves and responses. Here you'll learn how to control range, find timing, and make your opponent react to you instead of the other way around.\n\nLessons:\n• What Is Gambit\n• Positioning\n• Pattern Recognition\n• Comfort Deception\n• Guard Manipulation\n\nFocus: Positioning · Timing · Deception · Tactical Awareness\nOutcome: Smarter decision-making and the ability to control every exchange.",
+      description: "Boxing is a game of moves and answers. Here you'll learn how to control space, find the right time, and make your opponent react to you.\n\nLessons:\n• What Is Gambit\n• Where To Stand\n• Seeing Patterns\n• Comfort Tricks\n• Guard Control\n\nFocus: Where You Stand · Timing · Tricks · Smart Thinking\nOutcome: Smarter choices and the ability to control every exchange.",
       lessons: 6
     },
     {
       title: "Engine (Conditioning)",
-      description: "This is where strength meets control. Learn how to use breath, recovery, and relaxation to stay calm and sharp even when tired. You'll finish stronger than you started.\n\nLessons:\n• What Is Engine\n• Relaxation\n• Energy Systems\n• Breathing And Breathe Holds\n• Diet And Health\n\nFocus: Conditioning · Breathing · Relaxation · Recovery\nOutcome: Long-lasting performance, fast recovery, and composure under fatigue.",
+      description: "This is where strength meets control. Learn how to use breathing, rest, and staying relaxed to stay calm and sharp even when tired. You'll finish stronger than you started.\n\nLessons:\n• What Is Engine\n• Staying Relaxed\n• Energy Systems\n• Breathing And Breath Holds\n• Food And Health\n\nFocus: Conditioning · Breathing · Staying Relaxed · Recovery\nOutcome: Long energy, fast recovery, and staying calm when tired.",
       lessons: 5
     }
   ]
 
-  // Use stable testimonials for SSR, then randomize on client
-  const [testimonials, setTestimonials] = useState(globalTestimonials.slice(0, 6))
-
-  // Randomize testimonials after hydration to avoid mismatch
-  useEffect(() => {
-    setTestimonials(getRandomTestimonials(6))
-  }, [])
+  // Use BFFP-specific testimonials
+  const testimonials = bffpTestimonials
 
   const faqs = [
     {
       question: "Is this for beginners?",
-      answer: "Yes. It's designed to build your understanding from zero,no background needed."
+      answer: "Yes. It's made to teach you from the start. You don't need to know anything about boxing."
     },
     {
       question: "How is it different from the Boxing Roadmap?",
-      answer: "The Roadmap shows what to train week to week. This course explains why it all works. Together, they give you both structure and understanding."
+      answer: "The Roadmap shows what to train each week. This course explains why it all works. Together, they give you the plan and the reasons."
     },
     {
       question: "Will it help with sparring?",
-      answer: "Absolutely. You'll learn how to stay calm, think clearly, and make smarter choices under pressure."
+      answer: "Yes. You'll learn how to stay calm, think clearly, and make smarter choices when things get tough."
     },
     {
       question: "How long will it take?",
-      answer: "Most students finish in three to six months, but you can take it at your own pace."
+      answer: "Most students finish in three to six months. But you can go at your own speed."
     },
     {
       question: "What do I need?",
-      answer: "Nothing to start. Gloves and a bag help for practice, but all the learning comes from understanding first principles."
+      answer: "Nothing to start. Gloves and a bag help for practice. But all the learning comes from understanding the basics first."
     },
     {
-      question: "Is there a refund policy?",
-      answer: "Yes. Try it for 30 days. If it's not for you, get a full refund."
+      question: "Can I get my money back?",
+      answer: "Yes. Try it for 30 days. If it's not for you, we give you all your money back."
     }
   ]
 
   const priceFeatures = [
-    "26 comprehensive lessons across 5 modules",
-    "Instant lifetime access to all course materials",
-    "Covers theory, mechanics, tactics, and conditioning",
-    "Includes future course updates at no extra cost",
-    "30-day money-back guarantee"
+    "26 complete lessons across 5 modules",
+    "Watch all videos forever starting now",
+    "Learn the mind, body, moves, tactics, and conditioning",
+    "Get all new videos we add for free",
+    "Get your money back within 30 days if not happy"
   ]
 
   return (
@@ -228,12 +223,12 @@ export default function BFFPPage() {
 
           {/* Headline - Bigger */}
           <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 text-center mb-2 sm:mb-4 px-2">
-            The Science of Boxing, Made Simple.
+            Learn How Boxing Really Works.
           </h2>
 
           {/* Subheadline */}
           <p className="text-base sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-12 px-2 leading-relaxed">
-            The deepest truths of the sweet science, boiled down to their simplest form.
+            The biggest secrets of boxing explained in simple ways.
           </p>
 
           {/* Video Sales Letter */}

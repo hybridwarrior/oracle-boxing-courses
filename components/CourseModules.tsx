@@ -27,12 +27,9 @@ export function CourseModules({ modules, headerImage, showButton = false, button
   return (
     <section className="py-8 sm:py-16 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 text-center">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-8 text-center">
           Sounds great! But what <em className="text-red-600">exactly</em> is included?
         </h2>
-        <p className="text-base sm:text-xl text-gray-600 mb-4 sm:mb-8 text-center max-w-3xl mx-auto">
-          SEE PRICING
-        </p>
 
         {/* Header Image */}
         {headerImage && (

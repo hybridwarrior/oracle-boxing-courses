@@ -154,10 +154,10 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-3xl">
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 lg:mb-6 capitalize drop-shadow-lg leading-tight sm:leading-normal lg:leading-tight">
-                Boxing Education For <span className="font-bold text-white">Beginners</span> & <span className="font-bold text-white">Late Starters</span>
+                Learn Boxing - Perfect for <span className="font-bold text-white">Beginners</span>
               </h1>
               <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white leading-relaxed drop-shadow-md font-medium">
-                Learn the art and science of boxing through a complete system of courses, coaching, and community.
+                Learn boxing step-by-step with videos, coaching, and a team of boxers like you.
               </p>
             </div>
           </div>
@@ -194,13 +194,13 @@ export default function HomePage() {
               {/* Description */}
               <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                 <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
-                  Commit <AdaptivePrice usdAmount={197} metadata="6wc" className="font-black text-gray-900" showCode={true} /> upfront, do the bare minimum, get way better at boxing...
+                  Pay <AdaptivePrice usdAmount={197} metadata="6wc" className="font-black text-gray-900" showCode={true} /> today. Do the work for 6 weeks. Get better at boxing.
                 </p>
                 <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">
-                  ...and we'll refund all your money at the finish line.
+                  We give you all your money back at the end.
                 </p>
                 <p className="text-sm sm:text-base text-gray-600 italic">
-                  Train with us for 6 weeks. Complete the requirements. Get 100% of your money back. It's that simple.
+                  Train with us for 6 weeks. Finish the tasks. We give you 100% of your money back. It's that easy.
                 </p>
               </div>
 
@@ -248,7 +248,7 @@ export default function HomePage() {
               stripe_price_id: 'price_1SLLSAQNEdHwdojXPF01j36I',
               image: 'https://media.oracleboxing.com/Website/optimized/products/obm_tn-large.webp',
               shortDescription: 'Every Course, Every Call, Every System, All in One Bundle.',
-              perfectFor: 'Serious boxers who want to master everything, fast',
+              perfectFor: 'Boxers who want to learn everything quickly',
               moduleCount: 5,
               lessonCount: 225,
               lessonCountPrefix: '+',
@@ -285,7 +285,7 @@ Complete access to the entire Oracle Boxing system — theory, technique, and ta
 
 Best for dedicated students ready to transform their boxing.`,
               shortDescription: 'Save With 6-Month Commitment',
-              perfectFor: 'Dedicated boxers ready for serious transformation',
+              perfectFor: 'Boxers ready to make big changes',
               hasLiveCoaching: true,
               hasCommunity: true,
               hasVideoFeedback: true,
@@ -305,7 +305,7 @@ Best for dedicated students ready to transform their boxing.`,
               Join Our Newsletter
             </h2>
             <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Get exclusive deals, training tips, and be the first to know about new courses and products.
+              Get special deals, training tips, and find out first about new courses.
             </p>
             <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
               <input

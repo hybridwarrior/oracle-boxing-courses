@@ -40,7 +40,7 @@ export default function TestimonialsWithMediaSection({ onCTAClick, onOpenPricing
                   </div>
                 </div>
                 <blockquote className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
-                  This is THE source of our kinetic energy potential. Can't thank you enough for the changes I've made thanks to your dedication with First Principles! It was the best choice of my martial arts life - the aha-moments are incredible!
+                  This course showed me where my power comes from. I can't thank you enough for helping me box better! It was the best choice I ever made - the "aha!" moments are amazing!
                 </blockquote>
               </div>
             </div>
@@ -87,7 +87,7 @@ export default function TestimonialsWithMediaSection({ onCTAClick, onOpenPricing
                     </div>
                   </div>
                   <blockquote className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
-                    I decided to recommit to this community and I already feel like I made breakthroughs on Toni and Ollie's zoom calls. I've gotta tip my hat to how effective you guys are at coaching in this format. I feel like I gain a significantly better understanding of technique every time I make a call.
+                    I came back to this community and already made big progress on Toni and Oliver's Zoom calls. I have to say - you guys are really good at coaching online. I learn so much about boxing technique every time I join a call.
                   </blockquote>
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function TestimonialsWithMediaSection({ onCTAClick, onOpenPricing
                     </div>
                   </div>
                   <blockquote className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
-                    Being part of this community has been an incredibly transformative experience. Joining the live Zoom calls almost every day has helped me lose weight, improve my technique, and significantly boost my confidence. The guidance, encouragement, and camaraderie have made a real difference in my development as a boxer.
+                    Being part of this community has changed my life. Joining the live Zoom calls almost every day has helped me lose weight, box better, and feel more confident. The help, support, and friendship here have made a real difference in how I box.
                   </blockquote>
                 </div>
               </div>

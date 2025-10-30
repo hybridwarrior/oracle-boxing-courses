@@ -14,7 +14,7 @@ import { BundleCourseCarousel } from '@/components/BundleCourseCarousel'
 import { BundleTimelineProcess } from '@/components/BundleTimelineProcess'
 import { PlatformScreenshotsCarousel } from '@/components/PlatformScreenshotsCarousel'
 import { getProductById } from '@/lib/products'
-import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
+import { getBundleTestimonials, bundleTestimonials } from '@/lib/testimonials'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { getProductPrice, formatPrice } from '@/lib/currency'
 
@@ -32,57 +32,52 @@ export default function BundlePage() {
   const personas = [
     {
       emoji: '⚡',
-      title: 'If you\'re going to do something, you might as well be the best.',
-      subtitle: 'You push past good enough and chase mastery in every detail.'
+      title: 'You want to be the best at boxing.',
+      subtitle: 'You work hard on every small detail to get better.'
     },
     {
       emoji: '🥇',
-      title: 'You\'re preparing for sparring and want your foundation solid.',
-      subtitle: 'Your technique clean, confident, and fight-ready.'
+      title: 'You\'re getting ready to spar and want to be ready.',
+      subtitle: 'You want your moves to be clean and strong.'
     },
     {
       emoji: '💼',
-      title: 'You are busy and often work from home, so your training time has to count.',
-      subtitle: 'You need efficient, effective ways to keep improving your boxing skills and staying connected to real coaching without leaving your space.'
+      title: 'You are busy and work from home.',
+      subtitle: 'You need quick, good ways to get better at boxing at home with real coaching help.'
     }
   ]
 
-  // Use stable testimonials for SSR, then randomize on client
-  const [testimonials, setTestimonials] = useState(globalTestimonials.slice(0, 6))
-
-  // Randomize testimonials after hydration to avoid mismatch
-  useEffect(() => {
-    setTestimonials(getRandomTestimonials(6))
-  }, [])
+  // Use Bundle-specific testimonials
+  const testimonials = bundleTestimonials
 
   const faqs = [
     {
-      question: "What exactly is included in the bundle?",
-      answer: "You get complete lifetime access to all three courses: Boxing Masterclass (150 lessons, $297 value), Boxing Roadmap (75 lessons, $147 value), and Coaching Call Replays (140+ sessions, $97 value). Total value $541 for just $397,you save $144."
+      question: "What do I get in the bundle?",
+      answer: "You get all three courses forever: Boxing Masterclass (150 lessons, $297), Boxing Roadmap (75 lessons, $147), and Coaching Call Replays (140+ videos, $97). Total value $541 for just $397. You save $144."
     },
     {
-      question: "Can I access all courses immediately?",
-      answer: "Yes! As soon as you purchase, you get instant access to all three courses. You can start with any course and work through them at your own pace."
+      question: "Can I start watching right away?",
+      answer: "Yes! As soon as you buy, you can watch all three courses. Start with any course and go at your own speed."
     },
     {
-      question: "Which course should I start with?",
-      answer: "Most students start with the Masterclass to build the conceptual foundation, then move to Roadmap for practical drills, while using the Vault to supplement both. But you can start anywhere,they all work together."
+      question: "Which course should I watch first?",
+      answer: "Most students start with the Masterclass to learn the basics. Then they move to Roadmap for drills. You can watch the Vault anytime. But you can start anywhere. They all work together."
     },
     {
-      question: "Is this better value than buying individually?",
-      answer: "Absolutely. Buying all three separately costs $541. The bundle is $397,saving you $144. Plus, you get everything integrated from the start instead of piecing it together later."
+      question: "Is this cheaper than buying them one at a time?",
+      answer: "Yes. Buying all three separately costs $541. The bundle is $397. You save $144. Plus, you get everything at once instead of buying it piece by piece."
     },
     {
-      question: "Do I still get updates to all courses?",
-      answer: "Yes! You get lifetime access to all current content plus any future updates to BFFP, Roadmap, and the Vault. New coaching call replays are added monthly to the Vault."
+      question: "Do I get new videos when you add them?",
+      answer: "Yes! You get all videos now plus any new videos we add later to BFFP, Roadmap, and the Vault. We add new coaching call videos every month to the Vault."
     },
     {
-      question: "What if I already own one of the courses?",
-      answer: "If you already own one course and want to upgrade to the bundle, contact us at support@oracleboxing.com and we'll work out a fair upgrade price based on what you've already purchased."
+      question: "What if I already bought one course?",
+      answer: "If you already own one course and want the bundle, email us at support@oracleboxing.com. We will give you a fair price based on what you already bought."
     },
     {
-      question: "Is there a payment plan available?",
-      answer: "Currently, the bundle is a one-time payment. However, we do offer a 30-day money-back guarantee if you're not satisfied for any reason."
+      question: "Can I pay in parts?",
+      answer: "Right now, the bundle is one payment. But we do give you your money back if you are not happy within 30 days."
     }
   ]
 
@@ -98,10 +93,10 @@ export default function BundlePage() {
     "Full Boxing Masterclass course",
     "Complete Boxing Roadmap system",
     "Coaching Call Replays library",
-    "Lifetime access to all courses",
-    "Free access to all future updates",
+    "Keep all courses forever",
+    "Get all new videos we add for free",
     `Save ${formatPrice(savings, currency)} compared to buying separately`,
-    "30-day money-back guarantee"
+    "Get your money back within 30 days if not happy"
   ]
 
   return (
@@ -154,7 +149,7 @@ export default function BundlePage() {
 
           {/* Headline */}
           <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 text-center mb-6 sm:mb-12 px-2">
-            The Complete Methodology for Learning Old School Boxing, Anytime, Anywhere
+            Learn Old School Boxing Anytime, Anywhere
           </h2>
 
           {/* Video Sales Letter */}

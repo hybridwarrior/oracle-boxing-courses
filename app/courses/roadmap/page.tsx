@@ -13,7 +13,7 @@ import { CoursePriceCard } from '@/components/CoursePriceCard'
 import { CourseFAQ } from '@/components/CourseFAQ'
 import { CoursePricingPopup } from '@/components/CoursePricingPopup'
 import { getProductById } from '@/lib/products'
-import { getRandomTestimonials, globalTestimonials } from '@/lib/testimonials'
+import { getRoadmapTestimonials, roadmapTestimonials } from '@/lib/testimonials'
 
 export default function RoadmapPage() {
   const [isPricingPopupOpen, setIsPricingPopupOpen] = useState(false)
@@ -29,39 +29,39 @@ export default function RoadmapPage() {
     {
       emoji: '🎓',
       title: 'You want to train the right way from day one.',
-      subtitle: 'You value order, progress, and doing things properly.'
+      subtitle: 'You like order, progress, and doing things the right way.'
     },
     {
       emoji: '🏠',
-      title: 'You train alone, but you don\'t want to guess.',
-      subtitle: 'You need structure, direction, and drills that build real skill without a coach over your shoulder.'
+      title: 'You train alone and don\'t want to guess.',
+      subtitle: 'You need a clear plan and drills that build real skill without a coach watching you.'
     },
     {
       emoji: '🥇',
-      title: 'You\'re preparing for sparring and want your foundation solid.',
-      subtitle: 'Your technique clean, confident, and fight-ready.'
+      title: 'You\'re getting ready to spar and want to be ready.',
+      subtitle: 'You want your moves to be clean, strong, and ready for a fight.'
     }
   ]
 
   const learningCards = [
     {
       emoji: '📐',
-      text: 'Build technical form, clean mechanics, and control from the ground up.',
+      text: 'Build good form, clean moves, and control from the start.',
       imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/tbr_course1.webp'
     },
     {
       emoji: '🛡️',
-      text: 'Master defence and movement that keep you safe while staying sharp.',
+      text: 'Learn defense and movement that keep you safe and sharp.',
       imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/tbr_course2.webp'
     },
     {
       emoji: '👟',
-      text: 'Develop explosive footwork that connects balance with power.',
+      text: 'Build fast footwork that connects balance with power.',
       imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/tbr_course22.webp'
     },
     {
       emoji: '🎭',
-      text: 'Blend attack, defence, and rhythm into one flowing style.',
+      text: 'Mix attack, defense, and rhythm into one smooth style.',
       imageUrl: 'https://media.oracleboxing.com/Website/optimized/course-content/tbr_course4.webp'
     }
   ]
@@ -69,76 +69,71 @@ export default function RoadmapPage() {
   const modules = [
     {
       title: "Phase I (Fundamentals)",
-      description: "Learn your stance, balance, and the true mechanics of each punch. Build relaxation and flow before speed or power.\n\nFocus: Shape · Rotation · Relaxation · Linking punches\nOutcome: Clean, efficient movement that feels natural and powerful.",
+      description: "Learn your stance, balance, and how each punch really works. Build relaxation and flow before speed or power.\n\nFocus: Shape · Turning · Staying Relaxed · Connecting Punches\nOutcome: Clean, smooth moves that feel natural and powerful.",
       lessons: 15
     },
     {
       title: "Phase II (Defence & Range)",
-      description: "Add movement, defence, and awareness. Learn to slip, roll, control range, and integrate punches with footwork.\n\nFocus: Range · Defence · Pendulum Steps · Flow\nOutcome: Confidence in distance, rhythm, and reactive defence.",
+      description: "Add movement, defense, and awareness. Learn to slip, roll, control space, and mix punches with footwork.\n\nFocus: Space · Defense · Pendulum Steps · Flow\nOutcome: Confidence in distance, rhythm, and quick defense.",
       lessons: 18
     },
     {
       title: "Phase III (Footwork)",
-      description: "Learn how to shift, pivot, and move with balance and intent. Connect the power of your legs to every punch.\n\nFocus: Shifting · Drop Steps · Balance · Rotation\nOutcome: Dynamic footwork that drives both speed and control.",
+      description: "Learn how to shift, turn, and move with balance and purpose. Connect the power of your legs to every punch.\n\nFocus: Shifting · Drop Steps · Balance · Turning\nOutcome: Fast footwork that brings both speed and control.",
       lessons: 14
     },
     {
       title: "Phase IV (Advanced Defence)",
-      description: "Combine head, hand, and foot defences seamlessly. Learn to use feints to control reactions and create openings.\n\nFocus: Pulls · Weaves · Lay Back · Feints\nOutcome: Fluid defensive reactions and deceptive offence.",
+      description: "Mix head, hand, and foot defense smoothly. Learn to use fakes to control reactions and make openings.\n\nFocus: Pulls · Weaves · Lay Back · Fakes\nOutcome: Smooth defensive moves and tricky offense.",
       lessons: 16
     },
     {
       title: "Phase V (Integration)",
-      description: "Perfect your technique under motion. Master the mechanics of each punch, then add steps, slips, and rolls to make it ring-ready.\n\nFocus: Punch Mastery · Stepping · Slipping · Rolling\nOutcome: Complete, integrated skill that holds up in sparring.",
+      description: "Perfect your moves while moving. Master how each punch works. Then add steps, slips, and rolls to make it ready for the ring.\n\nFocus: Punch Mastery · Stepping · Slipping · Rolling\nOutcome: Complete skill that works in sparring.",
       lessons: 12
     }
   ]
 
-  // Use stable testimonials for SSR, then randomize on client
-  const [testimonials, setTestimonials] = useState(globalTestimonials.slice(0, 6))
-
-  // Randomize testimonials after hydration to avoid mismatch
-  useEffect(() => {
-    setTestimonials(getRandomTestimonials(6))
-  }, [])
+  // Use Roadmap-specific testimonials
+  const testimonials = roadmapTestimonials
 
   const faqs = [
     {
       question: "How is the Roadmap different from BFFP?",
-      answer: "BFFP explains the why—the system behind boxing. The Roadmap gives you the how—the drills, structure, and daily progression that make it real."
+      answer: "BFFP explains why boxing works the way it does. The Roadmap shows you how to train with drills and daily practice that makes it real."
     },
     {
-      question: "Do I need to complete the phases in order?",
-      answer: "Yes. Each phase builds on the last to form a full skill set. You can revisit earlier phases anytime."
+      question: "Do I need to finish the phases in order?",
+      answer: "Yes. Each phase builds on the last one to teach you all the skills. You can go back to earlier phases anytime."
     },
     {
       question: "How long should I spend on each phase?",
-      answer: "Most students spend 2–4 weeks per phase, depending on how often they train. Take your time—progress beats rushing."
+      answer: "Most students spend 2 to 4 weeks per phase. It depends on how often you train. Take your time. Getting better is more important than rushing."
     },
     {
       question: "Can I use this if I train at a gym?",
-      answer: "Definitely. The Roadmap gives you structure and homework to complement your gym sessions."
+      answer: "Yes. The Roadmap gives you a clear plan and homework to add to your gym training."
     },
     {
-      question: "What equipment do I need?",
-      answer: "Gloves, hand wraps, and a heavy bag are ideal. But many drills can be done shadowboxing if needed."
+      question: "What do I need?",
+      answer: "Gloves, hand wraps, and a heavy bag work best. But many drills can be done shadowboxing if you don't have a bag."
     },
     {
-      question: "Is it good prep for sparring?",
-      answer: "Yes. By Phase V, you'll be technically sharp, defensively sound, and confident under pressure."
+      question: "Will this help me get ready for sparring?",
+      answer: "Yes. By Phase V, you'll be sharp with your moves, good at defense, and confident when things get tough."
     },
     {
-      question: "Will I get updates?",
-      answer: "Yes. All future updates and improvements are free. Lifetime access means you always have the latest version."
+      question: "Do I get new videos when you add them?",
+      answer: "Yes. All new videos and improvements are free. You keep the videos forever and always get the newest version."
     }
   ]
 
   const priceFeatures = [
-    "75 lessons across 5 structured phases",
-    "Lifetime access to all course materials",
-    "Step-by-step progression from beginner to advanced",
-    "Drills and techniques for every stage of development",
-    "30-day money-back guarantee"
+    "75 lessons across 5 clear phases",
+    "Keep all videos forever",
+    "Step-by-step lessons from beginner to advanced",
+    "Drills and moves for every stage",
+    "Get your money back within 30 days if not happy"
   ]
 
   return (
@@ -233,12 +228,12 @@ export default function RoadmapPage() {
 
           {/* Headline */}
           <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 text-center mb-2 sm:mb-4 px-2">
-            Your Step-by-Step Path to Real Boxing Skill
+            Learn Boxing Step by Step
           </h2>
 
           {/* Subheadline */}
           <p className="text-base sm:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-12 px-2 leading-relaxed">
-            Follow a clear 5-phase system that takes you from your first stance to sparring-ready. Every move, every drill, in the right order.
+            Follow a clear 5-step plan. Go from your first boxing stance to being ready to spar. Every move and drill in the right order.
           </p>
 
           {/* Video Sales Letter */}

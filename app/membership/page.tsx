@@ -25,49 +25,49 @@ export default function MembershipsPage() {
     {
       name: "Torey Goodall",
       role: "Community Member",
-      content: "Doing pad work yesterday and multiple times the coach asked me what I've been doing as my balance and therefore power was noticeably improved - 100% down to applying all the learning here!",
+      content: "Did pad work yesterday and my coach kept asking what I've been doing. My balance and power got way better - all from what I learned here!",
       image: "https://media.oracleboxing.com/Website/optimized/profiles/torey-256.webp"
     },
     {
       name: "Harvey Swift",
       role: "Community Member",
-      content: "The training here is excellent! I wasn't expecting so much high-level of observation and precise, personal guidance from the coaches. I'm already noticing how making a few subtle changes can produce big results.",
+      content: "The training here is great! I didn't expect such detailed, personal help from the coaches. I'm already seeing how small changes can make big results.",
       image: "https://media.oracleboxing.com/Website/optimized/profiles/harvey-256.webp"
     },
     {
       name: "Myles Suehiro",
       role: "Community Member",
-      content: "Being part of this community has been an incredibly transformative experience for me. The guidance, encouragement, and camaraderie I've experienced here has made all the difference in my development as a boxer.",
+      content: "Being part of this community has changed me. The help, support, and friendship I get here has made all the difference in how I box.",
       image: "https://media.oracleboxing.com/Website/optimized/profiles/luacs-256.webp"
     },
     {
       name: "Charlie Snider",
       role: "Community Member",
-      content: "You need to find a passion that you truly love and that you can truly set and reach goals for. For me it was boxing. Work tirelessly for those goals and become obsessed with hitting them.",
+      content: "You need to find something you really love and set goals for it. For me it was boxing. Work hard for those goals and get obsessed with hitting them.",
       image: "https://media.oracleboxing.com/Website/optimized/profiles/charlie-256.webp"
     },
     {
       name: "Balal Hanif",
       role: "Community Member",
-      content: "Just finished 2nd kinetic chain with Toni. The analysis, insight and explanation was amazing. I've been around boxing for over 50 years and have never had this experience.",
+      content: "Just finished my session with Toni. The way he breaks things down and explains them was amazing. I've been boxing for over 50 years and never had this experience.",
       image: "https://media.oracleboxing.com/Website/optimized/profiles/balal-256.webp"
     },
     {
       name: "Sam Oliver",
       role: "Community Member",
-      content: "A great presentation, well presented - nice work! I'm in the process of shifting my current paradigm and this really helps by adding an additional layer of confluence for me.",
+      content: "Great stuff, really well done! I'm changing the way I think about boxing and this really helps. It confirms I made the right choice to join.",
       image: "https://media.oracleboxing.com/Website/optimized/profiles/niko-256.webp"
     },
     {
       name: "Niclas Laux",
       role: "Community Member",
-      content: "I think you saved my life! I am not sure right now how many things will change, but my mind completely changed for better! I was sure that I will learn here how to box, and that's for sure!",
+      content: "I think you saved my life! I'm not sure how many things will change, but my mind changed for the better! I was sure I'd learn to box here, and I was right!",
       image: "https://media.oracleboxing.com/Website/optimized/profiles/niclas-256.webp"
     },
     {
       name: "Bernardo D",
       role: "Community Member",
-      content: "The Nervous System module was excellent. Control your breathing to control your central nervous system. Being relaxed allows you to perform better since relaxation removes tension.",
+      content: "The Nervous System lesson was great. Control your breathing to control your body. Being relaxed helps you box better because it removes tension.",
       image: "https://media.oracleboxing.com/Website/optimized/profiles/bernardo-256.webp"
     }
   ]
@@ -96,67 +96,67 @@ export default function MembershipsPage() {
   ]
 
   const steps = [
-    'Choose your subscription and complete your purchase',
-    'Login to the portal and download the app',
-    'Start progressing faster than you could have imagined'
+    'Choose your plan and finish buying',
+    'Log in to the site and download the app',
+    'Start getting better faster than you thought'
   ]
 
   const faqs = [
     {
       question: "What is the Full Access Membership?",
-      answer: "The Full Access Membership is Oracle Boxing's ongoing coaching and community program. It's where boxers train live with the coaches every week, get feedback on their clips, and continue building their skill after completing any of the courses or the 6-Week Challenge."
+      answer: "The Full Access Membership is Oracle Boxing's ongoing coaching and community program. Boxers train live with the coaches every week, get feedback on their videos, and keep building their skills after finishing any courses or the 6-Week Challenge."
     },
     {
       question: "What do I get with my membership?",
-      answer: "Live coaching calls twice per week with Oliver, Toni, and the team. Video feedback on your uploaded clips. Access to all call replays through the Recordings Vault. Community support via our private Skool group. Progress tracking and accountability tools."
+      answer: "Live coaching calls twice per week with Oliver, Toni, and the team. Video feedback on your clips. Access to all call replays through the Recordings Vault. Community help through our private Skool group. Progress tracking and help staying on track."
     },
     {
       question: "How much does it cost?",
-      answer: "We offer three subscription options:\n\n• Quarterly: Billed every 3 months\n• 6-Month: Billed every 6 months (save ~15%)\n• Annual: Billed yearly (save ~25%)\n\nPrices are displayed in your local currency and automatically renew unless cancelled. You can switch to monthly billing after purchase."
+      answer: "We offer three plans:\n\n• Quarterly: Paid every 3 months\n• 6-Month: Paid every 6 months (save about 15%)\n• Annual: Paid every year (save about 25%)\n\nPrices show in your local money and renew on their own unless you cancel. You can switch to monthly billing after you buy."
     },
     {
       question: "Can I cancel anytime?",
-      answer: "Yes. You can cancel your membership anytime from your account settings or by emailing team@oracleboxing.com. Your access will continue until the end of your current billing period."
+      answer: "Yes. You can cancel your membership anytime from your account settings or by emailing team@oracleboxing.com. Your access stays until the end of your current billing time."
     },
     {
       question: "What happens if I cancel?",
-      answer: "You'll lose access to live calls, feedback, and the private community at the end of your billing cycle. However, any courses you've purchased separately remain in your account permanently."
+      answer: "You'll lose access to live calls, feedback, and the private community at the end of your billing time. But any courses you bought separately stay in your account forever."
     },
     {
-      question: "Is there a refund policy?",
-      answer: "Membership payments are non-refundable since they include live access and coaching time. You can, however, cancel future renewals anytime."
+      question: "Can I get my money back?",
+      answer: "Membership payments cannot be refunded since they include live access and coaching time. You can cancel future payments anytime."
     },
     {
       question: "What's the difference between membership and the 6-Week Challenge?",
-      answer: "The 6-Week Challenge is a short-term structured program with a refund guarantee if completed. The Membership is an ongoing coaching ecosystem where you continue to level up, refine your skills, and get direct feedback long-term."
+      answer: "The 6-Week Challenge is a short program with a money-back promise if you finish. The Membership is ongoing coaching where you keep getting better, improve your skills, and get direct feedback long-term."
     },
     {
       question: "What's the difference between membership and the courses?",
-      answer: "Courses (like BFFP and Oracle Boxing Bundle) teach the system — membership is where you train the system under live guidance and feedback."
+      answer: "Courses (like BFFP and Oracle Boxing Bundle) teach the system. Membership is where you train the system with live help and feedback."
     },
     {
-      question: "What are the membership tiers?",
-      answer: "Quarterly: Flexibility and short-term access.\nBi-Annual: Best for consistent improvement; includes discounted pricing.\nAnnual: Best overall value and bonuses like extended vault access."
+      question: "What are the membership levels?",
+      answer: "Quarterly: Flexible and short-term access.\nBi-Annual: Best for steady improvement with lower pricing.\nAnnual: Best overall value with bonuses like extra vault access."
     },
     {
       question: "What are the optional add-ons?",
-      answer: "Lifetime Access (All Courses): $197 keep every course forever.\n1-Month 1-on-1 Coaching: $397 — four weeks of private Zoom coaching and custom training feedback."
+      answer: "Lifetime Access (All Courses): $197 to keep every course forever.\n1-Month 1-on-1 Coaching: $397 for four weeks of private Zoom coaching and custom training feedback."
     },
     {
       question: "How do I join the calls?",
-      answer: "Once subscribed, you'll receive the Zoom links and calendar invites in your member dashboard and email each week. You can join from any device."
+      answer: "Once you join, you'll get the Zoom links and calendar invites in your member area and email each week. You can join from any device."
     },
     {
       question: "What if I miss a call?",
-      answer: "All sessions are recorded and uploaded to the Recordings Vault, which is included in your membership. You can rewatch anytime."
+      answer: "All sessions are recorded and uploaded to the Recordings Vault, which comes with your membership. You can watch them again anytime."
     },
     {
       question: "Who are the coaches?",
-      answer: "Your primary coaches are Oliver Betts, Coach Toni, and Coach Charlie."
+      answer: "Your main coaches are Oliver Betts, Coach Toni, and Coach Charlie."
     },
     {
       question: "How do I get help with billing or access?",
-      answer: "Email team@oracleboxing.com for any support requests. Replies usually arrive within 24 hours (Mon–Fri)."
+      answer: "Email team@oracleboxing.com for any help. We usually reply within 24 hours (Monday to Friday)."
     }
   ]
 
@@ -222,10 +222,10 @@ export default function MembershipsPage() {
             {/* Left Column - Text & CTA */}
             <div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6">
-                Old School Boxing, New School System
+                Old School Boxing, New Way to Learn
               </h1>
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-3 sm:mb-4 lg:mb-5 leading-relaxed">
-                Master the timeless fundamentals of boxing through modern coaching methods, cutting-edge movement science, and a supportive global community.
+                Learn the basics of boxing with modern coaching, smart training methods, and a helpful community from around the world.
               </p>
 
               {/* Pricing */}
@@ -265,10 +265,10 @@ export default function MembershipsPage() {
       <section className="py-8 sm:py-12 lg:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 text-center">
-            4 out of 5 members see incredible progress
+            4 out of 5 members see amazing progress
           </h2>
           <p className="text-sm sm:text-base lg:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-12">
-            Real transformations from members who committed to the process
+            Real changes from members who did the work
           </p>
 
           {/* Desktop: Grid layout */}
@@ -458,7 +458,7 @@ export default function MembershipsPage() {
             See Inside The Platform
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-8 sm:mb-12 text-center max-w-3xl mx-auto">
-            Everything you need to master boxing, all in one place
+            Everything you need to learn boxing, all in one place
           </p>
 
           {/* Scrollable Carousel */}
@@ -475,18 +475,18 @@ export default function MembershipsPage() {
                 },
                 {
                   image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside2.webp',
-                  title: 'Deep-Dive Video Lessons',
-                  subtitle: 'Follow structured modules with detailed video demonstrations and theory'
+                  title: 'Full Video Lessons',
+                  subtitle: 'Follow clear lessons with detailed video shows and learning'
                 },
                 {
                   image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside3.webp',
                   title: 'Follow-Along Workouts',
-                  subtitle: 'Train with phase-by-phase drills and structured workout progressions'
+                  subtitle: 'Train with step-by-step drills and clear workout plans'
                 },
                 {
                   image: 'https://media.oracleboxing.com/Website/optimized/screenshots/inside4.webp',
-                  title: 'Powerful Search Feature',
-                  subtitle: 'Find any technique, concept, or drill instantly across all courses'
+                  title: 'Strong Search Feature',
+                  subtitle: 'Find any move, idea, or drill quickly across all courses'
                 },
                 {
                   image: 'https://media.oracleboxing.com/Website/optimized/screenshots/phone_mockup1.webp',
@@ -804,7 +804,7 @@ export default function MembershipsPage() {
                   <CreditCard className="w-8 h-8 text-[#000000]" strokeWidth={1.5} />
                 </div>
                 <p className="text-sm text-gray-900 font-semibold">
-                  Choose your subscription and complete your purchase
+                  Choose your plan and finish buying
                 </p>
               </div>
 
@@ -813,7 +813,7 @@ export default function MembershipsPage() {
                   <Smartphone className="w-8 h-8 text-[#000000]" strokeWidth={1.5} />
                 </div>
                 <p className="text-sm text-gray-900 font-semibold">
-                  Login to the portal and download the app
+                  Log in to the site and download the app
                 </p>
               </div>
 
@@ -822,7 +822,7 @@ export default function MembershipsPage() {
                   <Progress className="w-8 h-8 text-[#000000]" strokeWidth={1.5} />
                 </div>
                 <p className="text-sm text-gray-900 font-semibold">
-                  Start progressing faster than you could have imagined
+                  Start getting better faster than you thought
                 </p>
               </div>
             </div>
