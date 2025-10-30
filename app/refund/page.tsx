@@ -1,140 +1,182 @@
-'use client'
-
-import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowLeft, AlertCircle } from 'lucide-react'
-
 export default function RefundPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0E0E0E]">
-      {/* Simple header with back button */}
-      <header className="sticky top-0 z-50 bg-[#0E0E0E] border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex-shrink-0">
-              <Image
-                src="/logo-white.png"
-                alt="Oracle Boxing"
-                width={150}
-                height={50}
-                className="h-8 sm:h-10 w-auto"
-              />
-            </Link>
+    <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#FFFFFF', color: '#000000', minHeight: '100vh' }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '40px 20px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '8px' }}>Refund Policy</h1>
+        <p style={{ fontSize: '14px', color: '#666666', marginBottom: '32px' }}>Last Updated: November 2025</p>
 
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition-all duration-300"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </Link>
-          </div>
-        </div>
-      </header>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '32px', marginBottom: '16px' }}>30-Day Money-Back Guarantee for Digital Courses</h2>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          Oracle Boxing offers a 30-day money-back guarantee for digital course purchases bought by themselves. If you are not satisfied with your standalone course purchase for any reason, you can request a full refund within 30 days of purchase—no questions asked.
+        </p>
 
-      <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold text-white mb-8">Refund Policy</h1>
-        <p className="text-sm text-gray-500 mb-8">Last Updated: January 2025</p>
+        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px' }}>Courses Covered by 30-Day Guarantee:</h3>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li>Boxing Masterclass (purchased standalone)</li>
+          <li>Boxing Roadmap (purchased standalone)</li>
+          <li>Oracle Boxing Bundle (purchased standalone)</li>
+          <li>Any other individual digital course product purchased by itself</li>
+        </ul>
 
-        {/* Quick Summary Box */}
-        <div className="bg-[#F25C05]/10 border-2 border-[#F25C05] rounded-xl p-6 mb-12">
-          <h2 className="text-2xl font-bold text-[#F25C05] mb-4 flex items-center gap-2">
-            <AlertCircle className="w-8 h-8 text-[#F25C05]" />
-            Digital Course Refund Policy
-          </h2>
-          <p className="text-lg text-gray-300">
-            All digital course sales are final. We do not offer refunds for course purchases.
-          </p>
-        </div>
+        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px' }}>What's NOT Covered by the Guarantee:</h3>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          The 30-day money-back guarantee does NOT apply to:
+        </p>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li><strong>Lifetime access upgrades</strong> added to course purchases</li>
+          <li><strong>Order bumps or add-ons</strong> purchased alongside courses (e.g., 6-Week Membership add-on, Recordings Vault add-on)</li>
+          <li><strong>Additional products added during checkout</strong></li>
+          <li><strong>Any content included as part of the 6-Week Challenge</strong></li>
+        </ul>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          <strong>Important:</strong> Only the standalone course purchase itself is covered by the 30-day guarantee. Any add-ons, upgrades, or order bumps selected during checkout are final sale and non-refundable.
+        </p>
 
-        <div className="prose prose-lg prose-invert max-w-none text-gray-300">
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-white mb-4">No Refunds for Digital Courses</h2>
-            <p className="mb-4">
-              Oracle Boxing does not offer refunds for digital course purchases, including:
-            </p>
-            <ul className="list-disc pl-6 mb-4 space-y-2">
-              <li>Boxing Coaching Replays</li>
-              <li>Boxing Masterclass</li>
-              <li>Boxing Roadmap (all phases)</li>
-              <li>Individual phase courses</li>
-              <li>Any other digital content or course materials</li>
-            </ul>
-            <p className="mb-4 font-semibold text-white">
-              All sales are final. Please review course descriptions carefully before purchasing.
-            </p>
-          </section>
+        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px' }}>How to Request a Refund:</h3>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          To request a refund for a standalone digital course, email us at <strong>team@oracleboxing.com</strong> within 30 days of your purchase date. Include your order number or purchase confirmation email. We will process your refund promptly, typically within 5-10 business days.
+        </p>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-white mb-4">Why No Refunds?</h2>
-            <p className="mb-4">
-              Once you purchase a digital course, you immediately gain access to all course materials.
-              Due to the nature of digital products and to prevent abuse, we cannot offer refunds once
-              access has been granted.
-            </p>
-          </section>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '48px', marginBottom: '16px' }}>NO REFUNDS FOR MEMBERSHIPS</h2>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px', fontWeight: 'bold' }}>
+          Oracle Boxing does NOT offer refunds for membership purchases under any circumstances.
+        </p>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-white mb-4">Special Circumstances</h2>
-            <p className="mb-4">
-              While our general policy is no refunds, we understand that exceptional circumstances may arise.
-              If you believe you have a special case, such as:
-            </p>
-            <ul className="list-disc pl-6 mb-4 space-y-2">
-              <li>Technical issues preventing access to content</li>
-              <li>Duplicate charges or billing errors</li>
-              <li>Other extraordinary circumstances</li>
-            </ul>
-            <p className="mb-4">
-              Please contact our support team with documentation, and we will review on a case-by-case basis.
-            </p>
-          </section>
+        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px' }}>Memberships (No Refunds):</h3>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li>Monthly Membership</li>
+          <li>Quarterly Membership (3 months)</li>
+          <li>6-Month Membership</li>
+          <li>Annual Membership (12 months)</li>
+          <li>Any other recurring or one-time membership payment</li>
+        </ul>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-white mb-4">Disputes and Chargebacks</h2>
-            <p className="mb-4">
-              If you have a concern about a charge, please contact us directly at team@oracleboxing.com
-              before initiating a chargeback. We're committed to resolving any billing issues quickly.
-            </p>
-            <p className="mb-4">
-              Initiating a chargeback without first attempting to resolve the issue with us may result in
-              permanent suspension of your account and loss of access to all content.
-            </p>
-          </section>
+        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px' }}>Why No Refunds for Memberships?</h3>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          Oracle Boxing actively budgets and makes critical business decisions based on expected membership revenue. This includes:
+        </p>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li>Scheduling coaching calls and allocating coach time</li>
+          <li>Planning community resources and support</li>
+          <li>Maintaining platform infrastructure and services</li>
+          <li>Making financial commitments to third-party services</li>
+        </ul>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          Because we rely on membership revenue for operational planning, all membership payments are final and non-refundable.
+        </p>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-white mb-4">Contact Us</h2>
-            <p className="mb-4">
-              For questions about our refund policy or assistance with course access:
-            </p>
-            <p className="mb-4">
-              Email: <a href="mailto:team@oracleboxing.com" className="text-[#F25C05] underline">team@oracleboxing.com</a><br />
-              Response time: Within 24 hours
-            </p>
-          </section>
-        </div>
-      </main>
+        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px' }}>Your Responsibility to Cancel:</h3>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          <strong>It is your responsibility to cancel your membership before it renews if you do not wish to continue.</strong>
+        </p>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li>You can cancel your membership at any time by contacting team@oracleboxing.com</li>
+          <li>Cancellations must be submitted BEFORE your next billing date to avoid being charged</li>
+          <li>We will NOT refund membership payments if you forget to cancel before renewal</li>
+          <li>Upon cancellation, you will retain access through the end of your current paid period</li>
+        </ul>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          We send renewal reminders, but it remains your responsibility to manage your subscription and cancel if desired.
+        </p>
 
-      <footer className="w-full border-t border-zinc-800 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-sm text-gray-400">
-              © 2025 Oracle Boxing. All rights reserved.
-            </div>
-            <div className="flex items-center gap-6 text-sm">
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
-                Terms & Conditions
-              </Link>
-              <a
-                href="mailto:team@oracleboxing.com"
-                className="text-gray-400 hover:text-[#F25C05] transition-colors"
-              >
-                team@oracleboxing.com
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '48px', marginBottom: '16px' }}>NO REFUNDS FOR 1-ON-1 COACHING</h2>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          All 1-on-1 coaching purchases are final and non-refundable. Once you book and pay for coaching services, we reserve coach time specifically for you. No refunds will be issued for coaching services.
+        </p>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          If you need to reschedule a coaching session, please contact us as soon as possible. We will work with you to find an alternative time, but we cannot guarantee availability and cannot offer refunds.
+        </p>
+
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '48px', marginBottom: '16px' }}>6-WEEK CHALLENGE REFUND (DISCRETIONARY)</h2>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          The 6-Week Challenge operates under a different guarantee structure. Refund approval is determined at the sole discretion of Oracle Boxing Ltd.
+        </p>
+
+        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px' }}>Completion Requirements:</h3>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          To be considered for a potential refund, participants should complete the following over the 6-week period:
+        </p>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li>Attend at least 2 live coaching calls per week (or watch the replays)</li>
+          <li>Post at least 1 training video per week for feedback</li>
+          <li>Complete all 5 core course lessons from the Boxing Masterclass</li>
+          <li>Join at least 2 community check-in calls</li>
+        </ul>
+
+        <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px' }}>Discretionary Approval:</h3>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          Meeting the above requirements does not guarantee a refund. The final decision on whether a participant has "won" the challenge and qualifies for a refund is made entirely at Oracle Boxing Ltd's discretion.
+        </p>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          We reserve the right to approve or deny refund requests based on genuine participation, effort, and engagement with the program. This discretionary structure maintains the integrity of the challenge while rewarding authentic commitment.
+        </p>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          For complete details about the 6-Week Challenge guarantee, please see our Guarantee page.
+        </p>
+
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '48px', marginBottom: '16px' }}>Special Circumstances</h2>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          While our policies are clearly stated above, we understand that exceptional circumstances may arise. If you believe you have a special case, such as:
+        </p>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li>Technical issues preventing access to purchased content</li>
+          <li>Duplicate charges or billing errors</li>
+          <li>Unauthorized charges on your account</li>
+          <li>Other extraordinary technical or billing circumstances</li>
+        </ul>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          Please contact our support team at team@oracleboxing.com with detailed documentation. We will review your case individually. However, please note that "special circumstances" do not include forgetting to cancel a membership or changing your mind about a purchase.
+        </p>
+
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '48px', marginBottom: '16px' }}>Disputes and Chargebacks</h2>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          If you have any concern about a charge or believe there has been a billing error, please contact us directly at team@oracleboxing.com BEFORE initiating a chargeback with your bank or credit card company.
+        </p>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          We are committed to resolving billing issues quickly and fairly. Most issues can be resolved within 24-48 hours when you contact us directly.
+        </p>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px', fontWeight: 'bold' }}>
+          Initiating a chargeback without first attempting to resolve the issue with us may result in:
+        </p>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li>Immediate suspension of your account</li>
+          <li>Permanent loss of access to all courses, memberships, and community</li>
+          <li>Inability to make future purchases from Oracle Boxing</li>
+        </ul>
+
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '48px', marginBottom: '16px' }}>Refund Processing Time</h2>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          For approved refunds (digital courses within 30 days or special circumstances):
+        </p>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li>Refunds are processed within 5-10 business days of approval</li>
+          <li>Refunds are issued to the original payment method used for purchase</li>
+          <li>Depending on your bank or card issuer, it may take an additional 5-10 business days for the refund to appear in your account</li>
+        </ul>
+
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '48px', marginBottom: '16px' }}>Summary of Refund Policy</h2>
+        <ul style={{ lineHeight: '1.6', marginBottom: '16px', marginLeft: '20px' }}>
+          <li><strong>Digital Courses:</strong> 30-day money-back guarantee, no questions asked</li>
+          <li><strong>Memberships:</strong> NO REFUNDS under any circumstances - customer must cancel before renewal</li>
+          <li><strong>1-on-1 Coaching:</strong> NO REFUNDS - all coaching purchases are final</li>
+          <li><strong>6-Week Challenge:</strong> Discretionary refund based on completion and Oracle Boxing Ltd's sole judgment</li>
+          <li><strong>Special Circumstances:</strong> Technical/billing issues reviewed case-by-case</li>
+        </ul>
+
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '48px', marginBottom: '16px' }}>Contact Us</h2>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          For questions about our refund policy, to request a refund, or for assistance with billing issues:
+        </p>
+        <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
+          <strong>Oracle Boxing Ltd</strong><br />
+          Unit 5 Artillery 88<br />
+          Artillery Road<br />
+          BA22 8RP<br />
+          United Kingdom<br />
+          Email: team@oracleboxing.com<br />
+          Response Time: Within 24 hours
+        </p>
+      </div>
     </div>
   )
 }
