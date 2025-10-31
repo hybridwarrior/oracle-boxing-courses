@@ -7,6 +7,7 @@ import { CoachingUpsell } from '@/components/CoachingUpsell';
 import { Footer } from '@/components/Footer';
 import { toast } from 'sonner';
 import { getCookie } from '@/lib/tracking-cookies';
+import { COACHING_PRODUCT_1MONTH, COACHING_PRICE_1MONTH } from '@/lib/coaching-pricing';
 
 interface SuccessUpsellPageProps {
   isMembership?: boolean;
@@ -175,21 +176,15 @@ export const SuccessUpsellPage: React.FC<SuccessUpsellPageProps> = ({ isMembersh
       const purchaseCurrency = orderData.currency || 'USD';
 
       // Determine the price ID based on membership status and currency
-      // For now, we'll use the multi-currency price which supports multiple currencies
-      // The charge endpoint will ensure it charges in the same currency as original purchase
-      let priceId: string;
-      if (isMembershipPurchase) {
-        // Membership buyers get this price
-        priceId = 'price_1SLLY7QNEdHwdojXVriclpjV';
-      } else {
-        // Course/Challenge buyers get this price
-        priceId = 'price_1SLLY7QNEdHwdojXVriclpjV';
-      }
+      // Using environment variable for 1-Month Coaching price (multicurrency)
+      const priceId = COACHING_PRICE_1MONTH;
+      const productId = COACHING_PRODUCT_1MONTH;
 
       console.log('🔍 Upsell request:', {
         isMembershipPurchase,
         purchaseCurrency,
         priceId,
+        productId,
         sessionId
       });
 
@@ -205,7 +200,7 @@ export const SuccessUpsellPage: React.FC<SuccessUpsellPageProps> = ({ isMembersh
         body: JSON.stringify({
           session_id: sessionId,
           price_id: priceId,
-          product_id: 'prod_THuQf0h3DatQUL',
+          product_id: productId,
           // Pass through tracking params from original session
           trackingParams: orderData.trackingParams,
           cookieData: cookieData,
