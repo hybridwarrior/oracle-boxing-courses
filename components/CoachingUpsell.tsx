@@ -58,10 +58,10 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
         {/* Main Headline */}
         <div className="text-center mb-5 sm:mb-6 lg:mb-8">
           <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 leading-tight">
-            Want To Go Even Faster?
+            Get 1-on-1 Coaching for 1 Month at an Exclusive Discount
           </h2>
           <p className="text-sm sm:text-base lg:text-xl text-gray-600 font-medium">
-            Get 1-on-1 Coaching for 1 Month at an Exclusive Discount
+            Want to learn faster? Get personal help from a coach!
           </p>
         </div>
 
@@ -75,28 +75,28 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
                 <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
                   <Check className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" strokeWidth={3} />
                 </div>
-                <p className="text-sm sm:text-base font-semibold text-gray-900">4 x Weekly 1-on-1 Zoom Calls</p>
+                <p className="text-sm sm:text-base font-semibold text-gray-900">4 Weekly Video Calls with Your Coach</p>
               </div>
 
               <div className="flex items-start gap-2 sm:gap-3">
                 <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
                   <Check className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" strokeWidth={3} />
                 </div>
-                <p className="text-sm sm:text-base font-semibold text-gray-900">Custom Training Plan + Tailored Learning Path</p>
+                <p className="text-sm sm:text-base font-semibold text-gray-900">A Training Plan Made Just for You</p>
               </div>
 
               <div className="flex items-start gap-2 sm:gap-3">
                 <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
                   <Check className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" strokeWidth={3} />
                 </div>
-                <p className="text-sm sm:text-base font-semibold text-gray-900">Priority Whatsapp Support</p>
+                <p className="text-sm sm:text-base font-semibold text-gray-900">Fast Help Anytime on WhatsApp</p>
               </div>
 
               <div className="flex items-start gap-2 sm:gap-3">
                 <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
                   <Check className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" strokeWidth={3} />
                 </div>
-                <p className="text-sm sm:text-base font-semibold text-gray-900">Direct Video Analysis</p>
+                <p className="text-sm sm:text-base font-semibold text-gray-900">Your Coach Watches Your Videos and Helps You Improve</p>
               </div>
             </div>
           </div>
@@ -124,7 +124,7 @@ export const CoachingUpsell: React.FC<CoachingUpsellProps> = ({
           {/* Urgency Notice */}
           <div className="p-3 sm:p-4 mb-4 sm:mb-5 lg:mb-6">
             <p className="text-xs sm:text-sm text-gray-900 font-medium text-center">
-              Right now, you can try 1-on-1 coaching for just 1 month. Apart from this page, coaching is only available as a 3-month package upfront. If you'd like to take advantage of this, now's the time.
+              This is your only chance to try coaching for just 1 month. Usually, you have to buy 3 months at once. This special deal is only on this page!
             </p>
           </div>
 
