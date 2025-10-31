@@ -40,8 +40,13 @@ export const MONTHLY_RATES = {
 // 6-month commitment discount percentage
 export const SIX_MONTH_DISCOUNT_PERCENTAGE = 0.10 // 10%
 
-// Stripe product ID for 1-on-1 coaching
-export const COACHING_PRODUCT_ID = 'prod_TJ3JW1RJaNaBMu'
+// Stripe product IDs for 1-on-1 coaching
+export const COACHING_PRODUCT_1MONTH = process.env.STRIPE_PRODUCT_COACHING_1MONTH || 'prod_TKZFDm6V59aYf7'
+export const COACHING_PRODUCT_3MONTH = process.env.STRIPE_PRODUCT_COACHING_3MONTH || 'prod_TKZE6NZZFeK8SM'
+export const COACHING_PRICE_1MONTH = process.env.STRIPE_PRICE_COACHING_1MONTH || 'price_1SNu6dKPvH4Ddlg1UbAOpoo4'
+
+// Legacy product ID (for compatibility)
+export const COACHING_PRODUCT_ID = COACHING_PRODUCT_3MONTH
 
 // ===================================================================
 // PRICING CALCULATION FUNCTIONS
