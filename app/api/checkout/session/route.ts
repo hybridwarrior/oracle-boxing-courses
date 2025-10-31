@@ -3,6 +3,7 @@ import { createCheckoutSession } from '@/lib/stripe/checkout'
 import { CartItem } from '@/lib/types'
 import { Currency } from '@/lib/currency'
 import { sendInitiatedCheckout } from '@/lib/simple-webhook'
+import { getProductById } from '@/lib/products'
 
 export async function POST(req: NextRequest) {
   try {
@@ -49,21 +50,39 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    // CRITICAL FIX: Re-fetch products server-side to get correct env var values
+    // Client-side process.env is undefined, so we need to lookup products here
+    const serverSideItems = items.map(item => {
+      const serverProduct = getProductById(item.product.id);
+      if (!serverProduct) {
+        console.warn(`⚠️ Product not found: ${item.product.id}, using client product`);
+        return item;
+      }
+      // Replace client product with server product (has correct env vars)
+      return {
+        ...item,
+        product: serverProduct,
+        // Update price_id to use server-side value if it was set
+        price_id: item.price_id || serverProduct.stripe_price_id,
+      };
+    });
+
     // Log each item's price ID
-    items.forEach((item: CartItem, index: number) => {
+    serverSideItems.forEach((item: CartItem, index: number) => {
       console.log(`🔍 DEBUG Item ${index + 1}:`, {
         product: item.product?.title,
         price_id: item.price_id,
+        stripe_price_id: item.product?.stripe_price_id,
         type: item.product?.type,
       })
     })
 
     // Detect physical items
-    const hasPhysicalItems = items.some(item => item.product.type === 'merch')
+    const hasPhysicalItems = serverSideItems.some(item => item.product.type === 'merch')
 
-    // Create checkout session (URLs are hardcoded in checkout.ts to avoid env var issues)
+    // Create checkout session with server-side products (correct env vars)
     const session = await createCheckoutSession({
-      items,
+      items: serverSideItems,
       hasPhysicalItems,
       successUrl: 'https://oracleboxing.com/success/{CHECKOUT_SESSION_ID}', // Will be modified by checkout.ts
       cancelUrl: 'https://oracleboxing.com/',
@@ -86,8 +105,8 @@ export async function POST(req: NextRequest) {
     // Send initiated checkout webhook to Make.com for abandoned cart automation
     // This runs asynchronously and won't block the checkout flow
     if (customerInfo?.email) {
-      // Calculate total amount from cart items
-      const totalAmount = items.reduce((sum, item) => {
+      // Calculate total amount from cart items (use server-side items)
+      const totalAmount = serverSideItems.reduce((sum, item) => {
         return sum + (item.product.price * item.quantity);
       }, 0);
 
@@ -96,7 +115,7 @@ export async function POST(req: NextRequest) {
       const firstName = nameParts[0] || '';
       const lastName = nameParts.slice(1).join(' ') || nameParts[0] || '';
 
-      // Send webhook with all data (non-blocking)
+      // Send webhook with all data (non-blocking, use server-side items)
       sendInitiatedCheckout({
         sessionId: session.id,
         checkoutUrl: session.url,
@@ -111,7 +130,7 @@ export async function POST(req: NextRequest) {
           currency: currency || 'USD',
         },
         cart: {
-          items: items.map(item => ({
+          items: serverSideItems.map(item => ({
             productName: item.product.title,
             productId: item.product.id,
             metadata: item.product.metadata,
