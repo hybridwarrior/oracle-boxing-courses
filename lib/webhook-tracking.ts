@@ -314,7 +314,7 @@ export async function trackPageView(page: string, referrer: string): Promise<voi
       body: JSON.stringify({
         event_id: pageViewEventId,
         cookie_data: pageViewCookieData,
-        page_url: `https://shop.oracleboxing.com${page}`,
+        page_url: `https://oracleboxing.com${page}`,
         fbclid: fbclid,
       }),
       keepalive: true,
@@ -377,7 +377,7 @@ export async function trackPurchase(
         event_name: 'Purchase',
         event_time: Math.floor(eventTime / 1000),
         event_id: eventId,
-        event_source_url: `https://shop.oracleboxing.com/success`,
+        event_source_url: `https://oracleboxing.com/success`,
         action_source: 'website',
         user_data: {
           client_user_agent: getClientUserAgent(),
@@ -395,7 +395,6 @@ export async function trackPurchase(
       const payload = {
         data: [eventData],
         access_token: FB_ACCESS_TOKEN,
-        test_event_code: 'TEST3801',
       };
 
       const response = await fetch(FB_CONVERSIONS_API_URL, {
@@ -568,7 +567,7 @@ export async function trackInitiateCheckout(
         event_name: 'InitiateCheckout',
         event_time: Math.floor(eventTime / 1000),
         event_id: eventId,
-        event_source_url: `https://shop.oracleboxing.com${page}`,
+        event_source_url: `https://oracleboxing.com${page}`,
         action_source: 'website',
         user_data: {
           em: [hashedEmail], // Hashed email with SHA256
@@ -581,7 +580,6 @@ export async function trackInitiateCheckout(
       const payload = {
         data: [eventData],
         access_token: FB_ACCESS_TOKEN,
-        test_event_code: 'TEST3801',
       };
 
       fetch(FB_CONVERSIONS_API_URL, {

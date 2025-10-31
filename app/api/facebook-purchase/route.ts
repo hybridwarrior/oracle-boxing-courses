@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
       event_name: 'Purchase',
       event_time: eventTime,
       event_id,
-      event_source_url: session_url || 'https://shop.oracleboxing.com/success',
+      event_source_url: session_url || 'https://oracleboxing.com/success',
       action_source: 'website',
       user_data: userData,
       custom_data: customData,
@@ -130,7 +130,6 @@ export async function POST(req: NextRequest) {
     const fbPayload = {
       data: [fbEventData],
       access_token: FB_ACCESS_TOKEN,
-      test_event_code: 'TEST3801',
     };
 
     console.log('📊 Sending Purchase to Facebook CAPI:', {

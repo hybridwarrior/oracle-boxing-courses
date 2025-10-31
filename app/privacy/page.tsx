@@ -21,7 +21,7 @@ export default function PrivacyPolicy() {
 
         <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '32px', marginBottom: '16px' }}>1. Introduction</h2>
         <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
-          Oracle Boxing Ltd ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website shop.oracleboxing.com and purchase our products or services.
+          Oracle Boxing Ltd ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website oracleboxing.com and purchase our products or services.
         </p>
         <p style={{ lineHeight: '1.6', marginBottom: '16px' }}>
           <strong>Oracle Boxing Ltd</strong><br />

@@ -452,14 +452,14 @@ All images served from: `https://media.oracleboxing.com/Website/optimized/produc
 ## Migration Checklist (shop.oracleboxing.com → oracleboxing.com)
 
 When migrating domains:
-- [ ] Update all metadataBase references to oracleboxing.com
-- [ ] Update sitemap.ts base URLs
-- [ ] Update robots.ts sitemap URL
-- [ ] Submit new sitemap to Google Search Console
-- [ ] Set up 301 redirects from shop.oracleboxing.com
-- [ ] Update canonical tags (already set to relative URLs)
-- [ ] Test all social sharing with new domain
-- [ ] Update any hardcoded URLs in codebase
+- [x] Update all metadataBase references to oracleboxing.com
+- [x] Update sitemap.ts base URLs (already set to oracleboxing.com)
+- [x] Update robots.ts sitemap URL (already set to oracleboxing.com)
+- [ ] Submit new sitemap to Google Search Console (manual step)
+- [x] Set up 301 redirects from shop.oracleboxing.com (via middleware.ts)
+- [x] Update canonical tags (already set to relative URLs)
+- [ ] Test all social sharing with new domain (manual testing required)
+- [x] Update any hardcoded URLs in codebase (10 files updated)
 
 ---
 

@@ -65,8 +65,8 @@ export async function POST(req: NextRequest) {
     const session = await createCheckoutSession({
       items,
       hasPhysicalItems,
-      successUrl: 'https://shop.oracleboxing.com/success/{CHECKOUT_SESSION_ID}', // Will be modified by checkout.ts
-      cancelUrl: 'https://shop.oracleboxing.com/',
+      successUrl: 'https://oracleboxing.com/success/{CHECKOUT_SESSION_ID}', // Will be modified by checkout.ts
+      cancelUrl: 'https://oracleboxing.com/',
       customerInfo,
       currency: currency || 'USD',
       trackingParams,

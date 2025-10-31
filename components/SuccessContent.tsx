@@ -178,7 +178,7 @@ export function SuccessContent({ sessionId }: SuccessContentProps) {
             customer_phone: sessionData.customer_details?.phone,
             cookie_data: cookieData,
             fbclid,
-            session_url: `https://shop.oracleboxing.com/success/${sessionId}`,
+            session_url: `https://oracleboxing.com/success/${sessionId}`,
           }),
           keepalive: true,
         }).then(async response => {

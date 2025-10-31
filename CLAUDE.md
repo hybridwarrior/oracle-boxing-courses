@@ -20,7 +20,7 @@ Creates production build with Turbopack
 ```bash
 vercel --prod
 ```
-Deploys to production on shop.oracleboxing.com
+Deploys to production on oracleboxing.com
 
 **Type checking:**
 ```bash

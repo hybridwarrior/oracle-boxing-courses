@@ -310,7 +310,7 @@ export async function POST(req: NextRequest) {
             event_name: 'Purchase',
             event_time: eventTime,
             event_id: `server_upsell_${upsellPaymentIntent.id}`,
-            event_source_url: 'https://shop.oracleboxing.com/success',
+            event_source_url: 'https://oracleboxing.com/success',
             action_source: 'website',
             user_data: {
               em: hashedEmail ? [hashedEmail] : [],
@@ -334,7 +334,6 @@ export async function POST(req: NextRequest) {
           const fbPayload = {
             data: [fbEventData],
             access_token: FB_ACCESS_TOKEN,
-            test_event_code: 'TEST3801',
           };
 
           console.log('📊 Sending upsell Purchase to Facebook CAPI:', {

@@ -172,8 +172,8 @@ export async function createCheckoutSession({
   }
 
   // Hardcode the success URL to avoid any environment variable issues
-  sessionParams.success_url = `https://shop.oracleboxing.com${successPath}?session_id={CHECKOUT_SESSION_ID}`
-  sessionParams.cancel_url = 'https://shop.oracleboxing.com/'
+  sessionParams.success_url = `https://oracleboxing.com${successPath}?session_id={CHECKOUT_SESSION_ID}`
+  sessionParams.cancel_url = 'https://oracleboxing.com/'
 
   console.log('🔍 DEBUG: Success path:', successPath)
   console.log('🔍 DEBUG: Final success_url:', sessionParams.success_url)

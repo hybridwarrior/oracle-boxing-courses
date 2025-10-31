@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
     const response = await fetch(url, {
       signal: controller.signal,
       headers: {
-        'User-Agent': 'shop.oracleboxing.com/1.0',
+        'User-Agent': 'oracleboxing.com/1.0',
       },
     });
 

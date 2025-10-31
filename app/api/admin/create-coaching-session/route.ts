@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
     // Get base URL for redirect - use headers for server-side
     const host = req.headers.get('host')
     const protocol = req.headers.get('x-forwarded-proto') || 'https'
-    const baseUrl = host ? `${protocol}://${host}` : 'https://shop.oracleboxing.com'
+    const baseUrl = host ? `${protocol}://${host}` : 'https://oracleboxing.com'
 
     // Build detailed product description with price breakdown
     const tierName = getTierDisplayName(tier)

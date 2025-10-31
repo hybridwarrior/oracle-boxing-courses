@@ -2,7 +2,7 @@
 
 E-commerce platform for Oracle Boxing courses and products.
 
-**Domain**: `shop.oracleboxing.com`
+**Domain**: `oracleboxing.com` (previously shop.oracleboxing.com)
 
 ## Overview
 
@@ -60,7 +60,7 @@ Deploy to Vercel:
 vercel --prod
 ```
 
-Configure custom domain: `shop.oracleboxing.com`
+Configure custom domain: `oracleboxing.com`
 
 ## Environment Variables
 
